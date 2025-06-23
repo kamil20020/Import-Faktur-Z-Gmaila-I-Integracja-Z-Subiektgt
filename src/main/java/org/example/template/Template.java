@@ -40,11 +40,6 @@ public record Template(
         );
     }
 
-    public static Template load(String templateFilePath){
-
-        return JsonFileLoader.loadFromFileInside(templateFilePath, Template.class);
-    }
-
     public static boolean hasCompany(File gotFile, String company){
 
         PdfLinesDetails pdfLinesDetails = getLines(gotFile);
@@ -62,20 +57,7 @@ public record Template(
         return false;
     }
 
-    public TemplateCombinedData applyTemplate(File gotFile){
-
-        return new TemplateCombinedData(
-            extractPlace(gotFile),
-            extractCreationDate(gotFile),
-            extractReceiveDate(gotFile),
-            extractTitle(gotFile),
-            extractCreator(gotFile),
-            extractInvoiceItems(gotFile),
-            isTaxOriented
-        );
-    }
-
-    private TemplateCreator extractCreator(File gotFile){
+    public TemplateCreator extractCreator(File gotFile){
 
         String[] lines = getLinesForTemplateRow(gotFile, creator);
 
@@ -137,14 +119,14 @@ public record Template(
         );
     }
 
-    private LocalDate extractCreationDate(File gotFile){
+    public LocalDate extractCreationDate(File gotFile){
 
         String[] lines = getLinesForTemplateRow(gotFile, creationDate);
 
         return extractGeneralDate(lines[0].strip());
     }
 
-    private static LocalDate extractGeneralDate(String input){
+    public static LocalDate extractGeneralDate(String input){
 
         LocalDate gotDate = null;
 
@@ -177,7 +159,7 @@ public record Template(
         return null;
     }
 
-    private List<TemplateInvoiceItem> extractInvoiceItems(File gotFile) {
+    public List<TemplateInvoiceItem> extractInvoiceItems(File gotFile) {
 
         List<TemplateInvoiceItem> templateInvoiceItems = new ArrayList<>();
 
@@ -336,21 +318,21 @@ public record Template(
         return new BigDecimal(value);
     }
 
-    private LocalDate extractReceiveDate(File gotFile){
+    public LocalDate extractReceiveDate(File gotFile){
 
         String[] lines = getLinesForTemplateRow(gotFile, receiveDate);
 
         return extractGeneralDate(lines[0].strip());
     }
 
-    private String extractTitle(File gotFile){
+    public String extractTitle(File gotFile){
 
         String[] lines = getLinesForTemplateRow(gotFile, title);
 
         return lines[0].stripIndent();
     }
 
-    private String extractPlace(File gotFile){
+    public String extractPlace(File gotFile){
 
         String[] lines = getLinesForTemplateRow(gotFile, place);
 
@@ -377,6 +359,5 @@ public record Template(
 
         return pdfLinesDetails;
     }
-
 
 }
