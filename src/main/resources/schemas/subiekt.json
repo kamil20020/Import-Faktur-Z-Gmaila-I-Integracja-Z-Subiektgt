@@ -1,0 +1,113 @@
+{
+  "isTaxOriented": true,
+  "place": {
+    "coords": {
+      "leftTop": {
+        "x": 807,
+        "y": 56
+      },
+      "rightDown": {
+        "x": 1200,
+        "y": 98
+      }
+    }
+  },
+  "creationDate": {
+    "coords": {
+      "leftTop": {
+        "x": 805,
+        "y": 125
+      },
+      "rightDown": {
+        "x": 1195,
+        "y": 161
+      }
+    }
+  },
+  "receiveDate": {
+    "coords": {
+      "leftTop": {
+        "x": 807,
+        "y": 193
+      },
+      "rightDown": {
+        "x": 1198,
+        "y": 234
+      }
+    }
+  },
+  "title": {
+    "skipSpace": 2,
+    "coords": {
+      "leftTop": {
+        "x": 69,
+        "y": 473
+      },
+      "rightDown": {
+        "x": 1186,
+        "y": 547
+      }
+    }
+  },
+  "creator": {
+    "maxSize": 5,
+    "coords": {
+      "leftTop": {
+        "x": 69,
+        "y": 338
+      },
+      "rightDown": {
+        "x": 611,
+        "y": 470
+      }
+    },
+    "fields": [
+      {
+        "name": "name"
+      },
+      {
+        "name": "street"
+      },
+      {
+        "name": "city"
+      },
+      {
+        "name": "nip"
+      }
+    ]
+  },
+  "invoiceItems": {
+    "startStr": "netto",
+    "endStr": "według stawki VAT",
+    "minLength": 10,
+    "rowHeight": 32,
+    "startOffset": 0,
+    "fields": [
+      {
+        "name": "code",
+        "xMinCord": 1010,
+        "xMaxCord": 1200
+      },
+      {
+        "name": "name",
+        "xMinCord": 121,
+        "xMaxCord": 401
+      },
+      {
+        "name": "price",
+        "xMinCord": 907,
+        "xMaxCord": 1012
+      },
+      {
+        "name": "quantity",
+        "xMinCord": 397,
+        "xMaxCord": 481
+      },
+      {
+        "name": "tax",
+        "xMinCord": 635,
+        "xMaxCord": 683
+      }
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+# Pobieranie faktur w pdf ze skrzynki pocztowej i integracja z Subiekt GT ze Sferą poprzez tworzenie faktur zakupu
