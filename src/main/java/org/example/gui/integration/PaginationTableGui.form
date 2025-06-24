@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.example.gui.integration.PaginationTableGui">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="75" y="9" width="1154" height="464"/>
+    </constraints>
+    <properties>
+      <alignmentX value="0.0"/>
+      <alignmentY value="0.0"/>
+      <focusable value="false"/>
+      <minimumSize width="600" height="414"/>
+      <opaque value="false"/>
+      <preferredSize width="800" height="600"/>
+      <requestFocusEnabled value="true"/>
+    </properties>
+    <border type="empty" title="            ">
+      <size top="0" left="0" bottom="0" right="0"/>
+    </border>
+    <children>
+      <scrollpane id="2e14" binding="tableScroll">
+        <constraints>
+          <grid row="0" column="0" row-span="2" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="10" left="0" bottom="10" right="0" weightx="10.0" weighty="8.0"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="1a520" class="javax.swing.JTable" binding="table" custom-create="true">
+            <constraints/>
+            <properties>
+              <cellSelectionEnabled value="false"/>
+              <editingColumn value="-1"/>
+              <editingRow value="-1"/>
+              <enabled value="true"/>
+              <fillsViewportHeight value="false"/>
+              <focusable value="false"/>
+              <rowHeight value="33"/>
+              <rowSelectionAllowed value="true"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
+      <toolbar id="9c14a" binding="pagination">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="20"/>
+          </grid>
+          <gridbag weightx="10.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <background color="-1114625"/>
+          <borderPainted value="false"/>
+          <floatable value="false"/>
+          <foreground color="-1"/>
+          <opaque value="false"/>
+          <visible value="true"/>
+        </properties>
+        <border type="empty">
+          <size top="10" left="10" bottom="10" right="10"/>
+        </border>
+        <children>
+          <component id="6ddb8" class="javax.swing.JButton" binding="previousButton">
+            <constraints/>
+            <properties>
+              <text value="&lt;"/>
+            </properties>
+          </component>
+          <component id="ea959" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="ac4ac" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="f2497" class="javax.swing.JButton" binding="currentPageButton">
+            <constraints/>
+            <properties>
+              <text value="1"/>
+            </properties>
+          </component>
+          <component id="4a44e" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="f03e5" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="58dd6" class="javax.swing.JButton" binding="nextButton">
+            <constraints/>
+            <properties>
+              <text value="&gt;"/>
+            </properties>
+          </component>
+        </children>
+      </toolbar>
+      <component id="ce312" class="javax.swing.JLabel" binding="rowsInfo">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="50" bottom="0" right="0" weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <horizontalAlignment value="11"/>
+          <text value="Wiersze 0 - 0 z 0"/>
+        </properties>
+      </component>
+      <toolbar id="5cdee" binding="paginationSize">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="20"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <borderPainted value="false"/>
+          <floatable value="false"/>
+          <opaque value="false"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="65389" class="javax.swing.JLabel">
+            <constraints/>
+            <properties>
+              <text value="Liczba wierszy:"/>
+            </properties>
+          </component>
+          <component id="92b91" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="ee7b0" class="javax.swing.JComboBox" binding="paginationSizeSelector">
+            <constraints/>
+            <properties>
+              <model>
+                <item value="10"/>
+                <item value="25"/>
+                <item value="50"/>
+                <item value="100"/>
+              </model>
+            </properties>
+          </component>
+        </children>
+      </toolbar>
+    </children>
+  </grid>
+</form>

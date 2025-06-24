@@ -1,4 +1,4 @@
-package org.example.gui;
+package org.example.gui.manage_pdf;
 
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.example.exception.FileReadException;

@@ -1,31 +1,88 @@
 package org.example.gui;
 
+import org.example.gui.integration.InvoicesGui;
+import org.example.gui.integration.LoginGui;
+import org.example.gui.manage_pdf.PdfViewerGui;
+import org.example.service.auth.AuthService;
+
 import javax.swing.*;
 import java.awt.*;
 
+@org.springframework.stereotype.Component
 public class Window {
+
+    private final JFrame frame;
 
     private JPanel mainPanel;
 
     private GridBagConstraints mainPanelLayoutConstrains;
 
-    public Window() {
+    private final LoginGui loginGui;
+    private final InvoicesGui invoicesGui;
+
+    private final AuthService authService;
+
+    public Window(LoginGui loginGui, InvoicesGui invoicesGui, AuthService authService) {
+
+        this.loginGui = loginGui;
+        this.invoicesGui = invoicesGui;
+
+        invoicesGui.setHandleLogout(this::handleLogout);
+
+        this.authService = authService;
 
         loadMainPanelLayoutConstraints();
 
-        JFrame frame = new JFrame("Faktury");
+        frame = new JFrame("Integracja faktur zakupu z Gmaila i Subiekt GT");
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(1274, 1000);
+        frame.setSize(1000, 800);
         frame.setLocationRelativeTo(null);
 
-        PdfViewerGui pdfViewerGui = new PdfViewerGui();
+        loginGui.setHandleSuccessAuth(this::handleSuccessAuth);
+
+        handleAuth();
 
         frame.add(mainPanel);
 
-        changeMainPanelContent(pdfViewerGui.getMainPanel());
-
         frame.setVisible(true);
+    }
+
+    private void handleAuth() {
+
+        if (authService.doesUserPassedFirstLoginToApp() && authService.isUserLogged()) {
+
+            handleSuccessAuth();
+        }
+        else {
+
+            changeMainPanelContent(loginGui);
+        }
+    }
+
+    public void handleSuccessAuth() {
+
+        loadMenu();
+
+        invoicesGui.load();
+
+        changeMainPanelContent(invoicesGui);
+    }
+
+    private void loadMenu() {
+
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu accountMenu = new JMenu("Konto");
+
+        JMenuItem accountMenuItem = new JMenuItem("Wyloguj");
+        accountMenuItem.addActionListener(e -> handleLogout());
+
+        accountMenu.add(accountMenuItem);
+
+        menuBar.add(accountMenu);
+
+        frame.setJMenuBar(menuBar);
     }
 
     private void loadMainPanelLayoutConstraints() {
@@ -39,13 +96,23 @@ public class Window {
         mainPanelLayoutConstrains.weighty = 1;
     }
 
-    private void changeMainPanelContent(Component component) {
+    private void changeMainPanelContent(ChangeableGui changeableGui) {
 
         mainPanel.removeAll();
-        mainPanel.add(component, mainPanelLayoutConstrains);
+        mainPanel.add(changeableGui.getMainPanel(), mainPanelLayoutConstrains);
 
         mainPanel.revalidate();
         mainPanel.repaint();
+    }
+
+    private void handleLogout() {
+
+        frame.setJMenuBar(new JMenuBar());
+
+        authService.logout();
+
+        loginGui.handleLogout();
+        changeMainPanelContent(loginGui);
     }
 
     {

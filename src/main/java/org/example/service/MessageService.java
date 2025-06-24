@@ -7,6 +7,7 @@ import org.example.api.gmail.response.MessageDetails;
 import org.example.api.gmail.response.MessagesPageResponse;
 import org.example.external.gmail.Message;
 import org.example.external.gmail.MessageContentPartBody;
+import org.example.external.gmail.MessageHeader;
 import org.example.external.gmail.MessageSummary;
 import org.example.mapper.Base64Mapper;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,9 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.Locale;
 
 @Service
@@ -25,9 +28,9 @@ public class MessageService {
 
     private final GmailMessageApi gmailMessageApi;
 
-    public MessagesPageResponse getPage(int pageSize) throws IllegalStateException{
+    public MessagesPageResponse getPage(int pageSize, String pageToken) throws IllegalStateException{
 
-        HttpResponse<String> gotResponse = gmailMessageApi.getPage(pageSize);
+        HttpResponse<String> gotResponse = gmailMessageApi.getPage(pageSize, pageToken);
 
         if(gotResponse.statusCode() != 200){
 
@@ -35,6 +38,22 @@ public class MessageService {
         }
 
         return Api.extractBody(gotResponse, MessagesPageResponse.class);
+    }
+
+    public List<Message> extractMessages(List<MessageHeader> messageHeaders){
+
+        List<Message> messages = new ArrayList<>();
+
+        for(MessageHeader messageHeader : messageHeaders){
+
+            String messageId = messageHeader.id();
+
+            Message message = getMessageById(messageId);
+
+            messages.add(message);
+        }
+
+        return messages;
     }
 
     public Message getMessageById(String messageId) throws IllegalStateException{

@@ -5,6 +5,7 @@ import org.example.api.LoginTokenApi;
 import org.example.api.gmail.general.GmailBasicAuthApi;
 import org.example.api.gmail.general.GmailBearerAuthApi;
 import org.example.exception.UnloggedException;
+import org.example.gui.Window;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,8 @@ public class GmailAuthService extends AuthService{
     public GmailAuthService(LoginCodeApi loginCodeApi, LoginTokenApi loginTokenApi) {
 
         super(loginCodeApi, loginTokenApi, GmailBasicAuthApi.getSecretKeyPropertyName());
+
+        GmailBearerAuthApi.init(loginTokenApi::refreshAccessToken);
     }
 
     @Override

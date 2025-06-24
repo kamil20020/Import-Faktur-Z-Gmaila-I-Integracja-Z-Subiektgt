@@ -2,6 +2,7 @@ package org.example.api.own;
 
 import org.example.api.LoginTokenApi;
 import org.example.api.gmail.login.GmailLoginTokenApi;
+import org.example.gui.Window;
 import org.example.service.auth.GmailAuthService;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,17 +12,23 @@ public class AuthController {
 
     private final GmailAuthService gmailAuthService;
 
-    public AuthController(){
+    private final Window window;
+
+    public AuthController(Window window){
 
         LoginTokenApi loginTokenApi = new GmailLoginTokenApi();
 
         gmailAuthService = new GmailAuthService(null, loginTokenApi);
+
+        this.window = window;
     }
 
     @GetMapping()
     public String handleAuthorizationCode(@RequestParam("code") String code){
 
         gmailAuthService.login(code);
+
+        window.handleSuccessAuth();
 
         return "Proszę o powrót do aplikacji Integracja maili z Subiekt GT";
     }

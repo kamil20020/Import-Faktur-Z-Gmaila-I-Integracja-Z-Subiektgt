@@ -30,30 +30,28 @@ public class StartupConfiguration implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        GmailBearerAuthApi.init(gmailLoginTokenApi::refreshAccessToken);
-
-        if(!gmailAuthService.isUserLogged()){
-
-            gmailAuthService.generateCode();
-        }
-
-        List<MessageHeader> messageHeaders = messageService.getPage(2).messageHeaders();
-
-        List<Message> messages = new ArrayList<>();
-
-        for(MessageHeader messageHeader : messageHeaders){
-
-            String messageId = messageHeader.id();
-
-            Message message = messageService.getMessageById(messageId);
-
-            messages.add(message);
-        }
-
-        for(Message message : messages){
-
-            System.out.println(message);
-        }
+//        if(!gmailAuthService.isUserLogged()){
+//
+//            gmailAuthService.generateCode();
+//        }
+//
+//        List<MessageHeader> messageHeaders = messageService.getPage(2).messageHeaders();
+//
+//        List<Message> messages = new ArrayList<>();
+//
+//        for(MessageHeader messageHeader : messageHeaders){
+//
+//            String messageId = messageHeader.id();
+//
+//            Message message = messageService.getMessageById(messageId);
+//
+//            messages.add(message);
+//        }
+//
+//        for(Message message : messages){
+//
+//            System.out.println(message);
+//        }
     }
 
 }

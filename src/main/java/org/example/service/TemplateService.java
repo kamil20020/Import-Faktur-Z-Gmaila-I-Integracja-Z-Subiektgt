@@ -3,9 +3,11 @@ package org.example.service;
 import org.example.loader.JsonFileLoader;
 import org.example.template.Template;
 import org.example.template.data.TemplateCombinedData;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 
+@Service
 public class TemplateService {
 
     public TemplateCombinedData applyTemplate(String templateFilePath, File gotFile) {
