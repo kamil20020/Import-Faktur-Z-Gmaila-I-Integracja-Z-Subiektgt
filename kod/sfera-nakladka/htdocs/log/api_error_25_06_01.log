@@ -1,0 +1,129 @@
+2025-06-01 14:05:53 Line: 46, APISubiektGT\Config->load: Nie moÅ¼na zaÅ‚adowaÄ‡ konfiguracji z pliku:D:\XAMPP\htdocs\api-subiektgt\public/../config/api-subiekt-gt.ini
+2025-06-01 14:43:58 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [2].
+2025-06-01 14:44:01 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [2].
+2025-06-01 14:44:29 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [2].
+2025-06-01 14:45:42 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [2].
+2025-06-01 14:45:54 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [2].
+2025-06-01 14:47:37 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'LAPTOP-K8OKT2OK\Kamil'.
+2025-06-01 14:48:02 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'LAPTOP-K8OKT2OK\Kamil'.
+2025-06-01 14:49:15 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'.
+2025-06-01 14:49:40 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'.
+2025-06-01 14:49:56 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'.
+2025-06-01 14:52:38 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'.
+2025-06-01 14:54:46 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'.
+2025-06-01 14:57:03 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [67].
+2025-06-01 14:57:07 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [67].
+2025-06-01 14:57:22 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [67].
+2025-06-01 14:57:23 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [67].
+2025-06-01 14:57:35 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [67].
+2025-06-01 14:57:49 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [67].
+2025-06-01 14:57:59 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'.
+2025-06-01 14:59:08 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'.
+2025-06-01 14:59:13 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'.
+2025-06-01 14:59:21 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'.
+2025-06-01 15:00:32 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'.
+2025-06-01 15:03:45 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'.
+2025-06-01 15:05:03 Line: 56, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\subiektgt.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 15:05:04 Line: 56, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\subiektgt.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 15:05:11 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user 'sa'.
+2025-06-01 15:05:52 Line: 58, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\subiektgt.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Brak wa?nej licencji Sfery i/lub stowarzyszonego produktu w podmiocie.
+2025-06-01 15:06:42 Line: 58, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\subiektgt.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Brak wa?nej licencji Sfery i/lub stowarzyszonego produktu w podmiocie.
+2025-06-01 15:07:01 Line: 58, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\subiektgt.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Brak wa?nej licencji Sfery i/lub stowarzyszonego produktu w podmiocie.
+2025-06-01 15:07:01 Line: 58, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\subiektgt.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Brak wa?nej licencji Sfery i/lub stowarzyszonego produktu w podmiocie.
+2025-06-01 15:07:09 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]SQL Server Network Interfaces: Error Locating Server/Instance Specified [xFFFFFFFF].
+2025-06-01 15:07:10 Line: 17, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\mssql.php: Could not connect. [Microsoft][ODBC Driver 17 for SQL Server]SQL Server Network Interfaces: Error Locating Server/Instance Specified [xFFFFFFFF].
+2025-06-01 15:08:06 Line: 58, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\subiektgt.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Brak wa?nej licencji Sfery i/lub stowarzyszonego produktu w podmiocie.
+2025-06-01 15:08:33 Line: 58, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\subiektgt.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Brak wa?nej licencji Sfery i/lub stowarzyszonego produktu w podmiocie.
+2025-06-01 15:08:42 Line: 58, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\subiektgt.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Brak wa?nej licencji Sfery i/lub stowarzyszonego produktu w podmiocie.
+2025-06-01 15:09:05 Line: 58, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\subiektgt.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Brak wa?nej licencji Sfery i/lub stowarzyszonego produktu w podmiocie.
+2025-06-01 15:09:08 Line: 58, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\subiektgt.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Brak wa?nej licencji Sfery i/lub stowarzyszonego produktu w podmiocie.
+2025-06-01 15:10:01 Line: 58, D:\XAMPP\htdocs\api-subiektgt\src\apisubiektgt\subiektgt.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Brak wa?nej licencji Sfery i/lub stowarzyszonego produktu w podmiocie.
+2025-06-01 15:14:22 Line: 74, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 15:14:56 Line: 74, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 15:15:43 Line: 76, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Microsoft Cursor Engine<br/><b>Description:</b> Wielokrokowa operacja wygenerowa?a b??dy. Sprawd? wszystkie warto?ci stanu.
+2025-06-01 15:18:08 Line: 116, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Nie mo¿na utworzyæ dokumentu sprzeda¿y. 0 wartoœæ dokumentu.
+2025-06-01 15:31:00 Line: 75, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 15:34:15 Line: 75, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 15:35:25 Line: 75, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 15:38:12 Line: 75, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 15:39:07 Line: 296, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 15:45:31 Line: 141, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\product.php: Unable to lookup `': Nieznana nazwa
+2025-06-01 15:47:59 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 15:48:49 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 15:49:18 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 15:51:08 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 15:51:29 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 15:52:07 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 15:52:58 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 15:54:04 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 15:54:22 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 15:55:22 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 15:56:22 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:06:16 Line: 302, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:08:37 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:09:00 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:12:51 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:13:37 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:14:06 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:15:30 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:16:02 Line: 299, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:18:55 Line: 69, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:23:27 Line: 69, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:24:21 Line: 71, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:24:56 Line: 71, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:25:21 Line: 71, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:26:13 Line: 71, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:30:17 Line: 71, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:36:39 Line: 69, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Unable to lookup `': Nieznana nazwa
+2025-06-01 16:37:19 Line: 298, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:38:23 Line: 69, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Unable to lookup `': Nieznana nazwa
+2025-06-01 16:38:45 Line: 69, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:41:44 Line: 71, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:42:07 Line: 71, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:44:00 Line: 71, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:45:00 Line: 71, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:46:18 Line: 71, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:46:30 Line: 71, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Error [0x8002000e] Nieprawid³owa liczba parametrów
+2025-06-01 16:48:02 Line: 300, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:48:49 Line: 300, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:50:44 Line: 300, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:51:04 Line: 300, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:52:55 Line: 300, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:54:28 Line: 300, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Subiekt.FS.1<br/><b>Description:</b> Brak towaru w magazynie.
+2025-06-01 16:55:26 Line: 62, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Niedopasowanie typu.
+2025-06-01 17:02:08 Line: 62, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Niedopasowanie typu.
+2025-06-01 17:02:35 Line: 62, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> InsERT.GT.1<br/><b>Description:</b> Niedopasowanie typu.
+2025-06-01 17:37:32 Line: 280, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Unable to lookup `': Nieznana nazwa
+2025-06-01 17:38:24 Line: 280, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Unable to lookup `': Nieznana nazwa
+2025-06-01 17:42:09 Line: 284, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 17:43:53 Line: 283, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 17:44:06 Line: 283, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 17:44:35 Line: 285, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 17:46:44 Line: 285, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 17:47:20 Line: 285, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 17:49:40 Line: 284, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 17:50:32 Line: 287, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 17:50:53 Line: 287, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Unable to lookup `': Nieznana nazwa
+2025-06-01 17:51:32 Line: 287, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Unable to lookup `': Nieznana nazwa
+2025-06-01 17:53:26 Line: 310, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 17:55:37 Line: 280, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Unable to lookup `': Nieznana nazwa
+2025-06-01 17:59:13 Line: 282, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Unable to lookup `': Nieznana nazwa
+2025-06-01 18:03:27 Line: 312, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 18:09:32 Line: 283, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 18:10:17 Line: 283, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 18:11:06 Line: 290, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 18:14:07 Line: 290, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 20:54:17 Line: 34, C:\Users\Kamil\Desktop\Nowy folder\htdocs\public\api\index.php: Brak danych w ¿¹daniu!
+2025-06-01 20:54:45 Line: 34, C:\Users\Kamil\Desktop\Nowy folder\htdocs\public\api\index.php: Brak danych w ¿¹daniu!
+2025-06-01 21:01:09 Line: 58, C:\Users\Kamil\Desktop\Nowy folder\htdocs\public\api\index.php: Nie podano klucza API=>api_key
+2025-06-01 21:03:59 Line: 58, C:\Users\Kamil\Desktop\Nowy folder\htdocs\public\api\index.php: Nie podano klucza API=>api_key
+2025-06-01 21:06:20 Line: 58, C:\Users\Kamil\Desktop\Nowy folder\htdocs\public\api\index.php: Nie podano klucza API=>api_key
+2025-06-01 21:07:12 Line: 58, C:\Users\Kamil\Desktop\Nowy folder\htdocs\public\api\index.php: Nie podano klucza API=>api_key
+2025-06-01 21:07:20 Line: 58, C:\Users\Kamil\Desktop\Nowy folder\htdocs\public\api\index.php: Nie podano klucza API=>api_key
+2025-06-01 21:11:12 Line: 58, C:\Users\Kamil\Desktop\Nowy folder\htdocs\public\api\index.php: Nie podano klucza API=>api_key
+2025-06-01 21:11:45 Line: 58, C:\Users\Kamil\Desktop\Nowy folder\htdocs\public\api\index.php: Nie podano klucza API=>api_key
+2025-06-01 21:12:42 Line: 267, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Brak danych "customer" dla zamówienia!
+2025-06-01 21:21:05 Line: 270, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Brak danych "products" dla zamówienia!
+2025-06-01 21:40:43 Line: 267, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: Brak danych "customer" dla zamówienia!
+2025-06-01 22:10:02 Line: 78, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown
+2025-06-01 22:10:27 Line: 78, C:\Users\Kamil\Desktop\Nowy folder\htdocs\src\apisubiektgt\subiektgt\order.php: <b>Source:</b> Unknown<br/><b>Description:</b> Unknown

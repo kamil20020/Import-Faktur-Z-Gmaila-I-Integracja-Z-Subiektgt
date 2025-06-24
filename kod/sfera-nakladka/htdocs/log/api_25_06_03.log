@@ -1,0 +1,344 @@
+2025-06-03 00:00:02 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:00:03 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:00:03 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:00:03 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:00:03 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:00:06 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 173/2025
+2025-06-03 00:00:06 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:00:06 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:00:06 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:00:06 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:00:07 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:00:07 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:00:07 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 174/2025
+2025-06-03 00:00:07 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:00:08 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:00:08 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:00:08 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:00:08 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:00:08 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:00:09 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 175/2025
+2025-06-03 00:00:09 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:00:09 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:00:09 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:00:09 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:00:09 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:00:09 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:00:10 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 176/2025
+2025-06-03 00:00:10 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:00:10 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:00:10 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:00:10 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:00:10 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:00:10 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:00:11 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 177/2025
+2025-06-03 00:00:11 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:00:11 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:00:11 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:00:11 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:00:11 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:00:11 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:00:12 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 178/2025
+2025-06-03 00:00:12 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:00:16 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:00:19 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 173/2025
+2025-06-03 00:00:19 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-03 00:00:19 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:00:22 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 174/2025
+2025-06-03 00:00:22 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-03 00:02:34 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:34 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:02:34 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:34 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:02:34 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:34 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:02:34 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:34 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:02:34 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:34 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:02:34 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:35 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:02:35 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:35 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:02:35 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:35 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:02:35 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:35 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:02:35 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:35 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:02:36 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:36 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:02:37 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:02:37 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:02:37 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:02:37 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 179/2025
+2025-06-03 00:02:37 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:02:37 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:38 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:02:38 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:02:38 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:02:38 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:02:38 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 180/2025
+2025-06-03 00:02:38 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:02:38 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:39 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:02:39 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:02:39 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:02:39 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:02:40 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 181/2025
+2025-06-03 00:02:40 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:02:40 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:40 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:02:40 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:02:40 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:02:40 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:02:41 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 182/2025
+2025-06-03 00:02:41 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:02:41 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:02:41 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 58
+2025-06-03 00:02:41 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 7777917953
+2025-06-03 00:02:41 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:02:41 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:02:42 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 183/2025
+2025-06-03 00:02:42 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:05:22 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:22 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:05:22 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:22 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:05:22 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:22 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:05:22 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:22 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:05:22 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:22 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:05:22 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:22 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:05:22 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:22 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:05:22 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:22 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:05:22 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:22 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:05:22 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:22 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:05:24 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:25 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:05:25 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:05:25 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:05:25 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:05:26 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 184/2025
+2025-06-03 00:05:26 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:05:26 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:26 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:05:26 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:05:26 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:05:26 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:05:27 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 185/2025
+2025-06-03 00:05:27 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:05:27 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:27 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:05:27 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:05:27 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:05:27 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:05:28 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 186/2025
+2025-06-03 00:05:28 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:05:28 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:28 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:05:28 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:05:28 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:05:28 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:05:29 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 187/2025
+2025-06-03 00:05:29 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:05:29 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:29 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:05:29 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:05:29 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:05:29 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:05:30 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 188/2025
+2025-06-03 00:05:30 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:05:30 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:31 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 58
+2025-06-03 00:05:31 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 7777917953
+2025-06-03 00:05:31 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:05:31 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:05:32 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 189/2025
+2025-06-03 00:05:32 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:05:32 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:32 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 58
+2025-06-03 00:05:33 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 7777917953
+2025-06-03 00:05:33 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:05:33 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:05:34 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: PA 91/2025
+2025-06-03 00:05:34 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:05:34 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:05:34 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 58
+2025-06-03 00:05:34 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 7777917953
+2025-06-03 00:05:34 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:05:34 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:05:35 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: PA 92/2025
+2025-06-03 00:05:35 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:06:03 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:06:04 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:06:04 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:06:04 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:06:04 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:06:04 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 190/2025
+2025-06-03 00:06:04 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:06:04 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:06:05 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:06:05 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:06:05 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:06:05 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:06:05 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 191/2025
+2025-06-03 00:06:05 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:06:05 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:06:05 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:06:05 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:06:06 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:06:06 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:06:06 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 192/2025
+2025-06-03 00:06:06 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:06:08 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:06:08 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:06:08 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:06:08 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:06:08 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:06:09 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 193/2025
+2025-06-03 00:06:09 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:06:09 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:06:09 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:06:09 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:06:09 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:06:09 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:06:10 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 194/2025
+2025-06-03 00:06:10 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:06:10 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:06:10 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:06:10 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:06:10 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:06:10 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:06:11 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 195/2025
+2025-06-03 00:06:11 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:06:14 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:06:14 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:06:14 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:06:14 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:06:14 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:06:15 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 196/2025
+2025-06-03 00:06:15 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:06:15 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:06:15 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:06:15 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:06:15 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:06:15 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:06:16 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 197/2025
+2025-06-03 00:06:16 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:06:16 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:06:16 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:06:16 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:06:16 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:06:16 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:06:17 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 198/2025
+2025-06-03 00:06:17 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:06:22 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:06:25 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 196/2025
+2025-06-03 00:06:25 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-03 00:06:26 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:06:29 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 197/2025
+2025-06-03 00:06:29 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-03 00:06:29 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:06:32 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 198/2025
+2025-06-03 00:06:32 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-03 00:12:35 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:36 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:12:36 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:36 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:12:36 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:36 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:12:36 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:36 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:12:36 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:36 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:12:36 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:36 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:12:36 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:36 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:12:36 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:36 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:12:36 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:36 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:12:36 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:36 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-03 00:12:40 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:41 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:12:42 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:12:42 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:12:42 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:12:45 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 199/2025
+2025-06-03 00:12:45 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:12:45 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:46 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:12:46 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:12:46 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:12:46 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:12:47 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 200/2025
+2025-06-03 00:12:47 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:12:47 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:48 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:12:48 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:12:48 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:12:48 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:12:49 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 201/2025
+2025-06-03 00:12:49 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:12:49 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:49 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:12:49 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:12:50 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:12:50 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:12:50 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 202/2025
+2025-06-03 00:12:50 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:12:50 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:51 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 77
+2025-06-03 00:12:51 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-03 00:12:51 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:12:51 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:12:51 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 203/2025
+2025-06-03 00:12:51 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:12:51 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:52 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 58
+2025-06-03 00:12:52 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 7777917953
+2025-06-03 00:12:52 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:12:52 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:12:52 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 204/2025
+2025-06-03 00:12:52 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:12:53 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:12:53 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 58
+2025-06-03 00:12:53 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 7777917953
+2025-06-03 00:12:53 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 59
+2025-06-03 00:12:53 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA
+2025-06-03 00:12:54 Line: 337, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: PA 93/2025
+2025-06-03 00:12:54 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-03 00:12:56 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:13:00 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 199/2025
+2025-06-03 00:13:00 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-03 00:13:00 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:13:03 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 200/2025
+2025-06-03 00:13:03 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-03 00:13:03 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:13:07 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 201/2025
+2025-06-03 00:13:07 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-03 00:13:07 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:13:10 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 202/2025
+2025-06-03 00:13:10 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-03 00:13:10 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:13:13 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 203/2025
+2025-06-03 00:13:13 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-03 00:13:14 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:13:17 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 204/2025
+2025-06-03 00:13:17 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-03 00:13:17 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:13:20 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: PA 93/2025
+2025-06-03 00:13:20 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-03 00:13:25 Line: 11, : Request start: 127.0.0.1
+2025-06-03 00:13:28 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: PA 87/2025
+2025-06-03 00:13:28 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1

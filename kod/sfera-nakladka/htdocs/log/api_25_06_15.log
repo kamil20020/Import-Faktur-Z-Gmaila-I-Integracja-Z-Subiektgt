@@ -1,0 +1,578 @@
+2025-06-15 17:01:43 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:01:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:01:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:01:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:01:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:01:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:01:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:01:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:01:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:01:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:01:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:01:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:01:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:01:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:01:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:01:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:01:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:01:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:01:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:01:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:01:55 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:01:56 Line: 95, APISubiektGT\SubiektGT\product->getSymbolByCodeOrEan: Request finish: 127.0.0.1
+2025-06-15 17:02:13 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:13 Line: 95, APISubiektGT\SubiektGT\product->getSymbolByCodeOrEan: Request finish: 127.0.0.1
+2025-06-15 17:02:19 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:19 Line: 95, APISubiektGT\SubiektGT\product->getSymbolByCodeOrEan: Request finish: 127.0.0.1
+2025-06-15 17:02:57 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:57 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:02:57 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:57 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:02:57 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:57 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:02:57 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:57 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:02:57 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:57 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:02:57 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:57 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:02:57 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:57 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:02:57 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:57 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:02:57 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:57 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:02:57 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:57 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:02:59 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:02:59 Line: 95, APISubiektGT\SubiektGT\product->getSymbolByCodeOrEan: Request finish: 127.0.0.1
+2025-06-15 17:05:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:05:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:05:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:05:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:05:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:05:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:05:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:05:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:05:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:05:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:05:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:05:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:05:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:05:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:05:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:05:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:05:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:05:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:05:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:05:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:05:53 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:05:57 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 10/2025
+2025-06-15 17:05:57 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:13:04 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:04 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:04 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:04 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:04 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:04 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:04 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:04 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:04 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:04 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:04 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:04 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:04 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:04 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:04 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:04 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:04 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:04 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:04 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:04 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:07 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:09 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 10/2025
+2025-06-15 17:13:09 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:13:45 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:45 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:45 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:45 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:45 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:45 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:45 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:45 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:45 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:45 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:45 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:45 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:45 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:45 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:45 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:45 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:45 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:45 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:45 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:45 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:13:48 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:48 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 46
+2025-06-15 17:13:49 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-15 17:13:49 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 45
+2025-06-15 17:13:49 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA123
+2025-06-15 17:13:50 Line: 338, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: PA 10/2025
+2025-06-15 17:13:50 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-15 17:13:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:50 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 46
+2025-06-15 17:13:50 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-15 17:13:51 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 45
+2025-06-15 17:13:51 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA123
+2025-06-15 17:13:51 Line: 338, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 11/2025
+2025-06-15 17:13:51 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-15 17:13:53 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:54 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 10/2025
+2025-06-15 17:13:54 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:13:54 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:55 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: PA 10/2025
+2025-06-15 17:13:55 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:13:55 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:13:57 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 11/2025
+2025-06-15 17:13:57 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:14:11 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:12 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 10/2025
+2025-06-15 17:14:12 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:14:12 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:13 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: PA 10/2025
+2025-06-15 17:14:13 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:14:13 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:14 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 11/2025
+2025-06-15 17:14:14 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:14:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:19 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:19 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:19 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:19 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:19 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:19 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:19 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:19 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:19 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:19 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:19 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:19 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:19 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:19 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:19 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:19 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:19 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:19 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:19 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:19 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:14:25 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:25 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 46
+2025-06-15 17:14:25 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-15 17:14:25 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 45
+2025-06-15 17:14:25 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA123
+2025-06-15 17:14:26 Line: 338, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 12/2025
+2025-06-15 17:14:26 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-15 17:14:26 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:26 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 46
+2025-06-15 17:14:26 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-15 17:14:26 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 45
+2025-06-15 17:14:26 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA123
+2025-06-15 17:14:26 Line: 338, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 13/2025
+2025-06-15 17:14:26 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-15 17:14:32 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:33 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 10/2025
+2025-06-15 17:14:33 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:14:33 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:34 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 11/2025
+2025-06-15 17:14:34 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:14:34 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:35 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 12/2025
+2025-06-15 17:14:35 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:14:35 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:14:36 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 13/2025
+2025-06-15 17:14:36 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:15:34 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:15:34 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 46
+2025-06-15 17:15:35 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-15 17:15:35 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 45
+2025-06-15 17:15:35 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA123
+2025-06-15 17:15:35 Line: 338, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 14/2025
+2025-06-15 17:15:35 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-15 17:15:37 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:15:38 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 14/2025
+2025-06-15 17:15:38 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:15:43 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:15:44 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: PA 10/2025
+2025-06-15 17:15:44 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:15:44 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:15:45 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 11/2025
+2025-06-15 17:15:45 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:15:45 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:15:46 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 12/2025
+2025-06-15 17:15:46 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:18:01 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:18:02 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:18:02 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:18:02 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:18:02 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:18:02 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:18:02 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:18:02 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:18:02 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:18:02 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:18:02 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:18:02 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:18:02 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:18:02 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:18:02 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:18:02 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:18:02 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:18:02 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:18:02 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:18:02 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:19:29 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:19:30 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 10/2025
+2025-06-15 17:19:30 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:20:29 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:20:29 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:20:29 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:20:29 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:20:29 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:20:29 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:20:29 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:20:29 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:20:29 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:20:29 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:20:29 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:20:30 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:20:30 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:20:30 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:20:30 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:20:30 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:20:30 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:20:30 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:20:30 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:20:30 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:12 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:14 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 10/2025
+2025-06-15 17:21:14 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:21:16 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:16 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:16 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:16 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:16 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:16 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:16 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:16 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:16 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:16 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:16 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:16 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:16 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:16 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:16 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:16 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:16 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:16 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:16 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:16 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:32 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:34 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 11/2025
+2025-06-15 17:21:34 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:21:34 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:35 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 13/2025
+2025-06-15 17:21:35 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:21:49 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:50 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 10/2025
+2025-06-15 17:21:50 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:21:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:51 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 11/2025
+2025-06-15 17:21:51 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:21:51 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:52 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 12/2025
+2025-06-15 17:21:52 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:21:58 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:58 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:58 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:58 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:58 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:58 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:58 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:58 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:58 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:59 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:59 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:59 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:59 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:59 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:59 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:59 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:59 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:59 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:21:59 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:21:59 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:06 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:06 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:06 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:06 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:06 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:06 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:06 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:06 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:06 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:06 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:06 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:06 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:06 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:06 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:06 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:06 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:06 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:06 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:06 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:06 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:49 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:50 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 10/2025
+2025-06-15 17:22:50 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:22:53 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:53 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:53 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:53 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:53 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:53 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:53 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:53 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:53 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:53 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:53 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:53 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:53 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:53 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:53 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:53 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:53 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:53 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:53 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:53 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:22:54 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:54 Line: 95, APISubiektGT\SubiektGT\product->getSymbolByCodeOrEan: Request finish: 127.0.0.1
+2025-06-15 17:22:58 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:22:59 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 11/2025
+2025-06-15 17:22:59 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:22:59 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:00 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 12/2025
+2025-06-15 17:23:00 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:23:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:08 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:23:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:08 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:23:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:08 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:23:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:08 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:23:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:08 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:23:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:08 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:23:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:08 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:23:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:08 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:23:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:08 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:23:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:09 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:23:10 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:10 Line: 95, APISubiektGT\SubiektGT\product->getSymbolByCodeOrEan: Request finish: 127.0.0.1
+2025-06-15 17:23:21 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:23:22 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 11/2025
+2025-06-15 17:23:22 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:33:48 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:33:48 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:33:48 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:33:48 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:33:48 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:33:48 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:33:48 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:33:48 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:33:48 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:33:48 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:33:48 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:33:48 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:33:48 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:33:48 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:33:48 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:33:48 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:33:48 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:33:48 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:33:48 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:33:48 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:33:55 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:33:56 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 10/2025
+2025-06-15 17:33:56 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:34:00 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:00 Line: 95, APISubiektGT\SubiektGT\product->getSymbolByCodeOrEan: Request finish: 127.0.0.1
+2025-06-15 17:34:24 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:24 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:34:24 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:24 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:34:24 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:24 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:34:24 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:24 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:34:24 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:24 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:34:24 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:24 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:34:24 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:24 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:34:24 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:24 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:34:24 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:24 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:34:24 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:25 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:34:28 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:29 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 10/2025
+2025-06-15 17:34:29 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:34:36 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:37 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: PA 10/2025
+2025-06-15 17:34:37 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:34:37 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:34:38 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 11/2025
+2025-06-15 17:34:38 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:37:56 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:37:56 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:37:56 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:37:56 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:37:56 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:37:56 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:37:56 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:37:56 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:37:56 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:37:56 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:37:56 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:37:56 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:37:56 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:37:56 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:37:56 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:37:56 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:37:56 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:37:57 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:37:57 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:37:57 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:01 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:02 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 10/2025
+2025-06-15 17:38:02 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:38:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:08 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:08 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:08 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:08 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:09 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:14 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:16 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:18 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:18 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:20 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:20 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 46
+2025-06-15 17:38:20 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-15 17:38:20 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 45
+2025-06-15 17:38:20 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA123
+2025-06-15 17:38:21 Line: 338, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 15/2025
+2025-06-15 17:38:21 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-15 17:38:21 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:21 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 46
+2025-06-15 17:38:21 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: 6902048258341
+2025-06-15 17:38:21 Line: 90, APISubiektGT\SubiektGT\SubiektObj->get: Pobrano dane obiektu id: 45
+2025-06-15 17:38:21 Line: 74, APISubiektGT\SubiektGT\Order->addPosition: Dodaje pozycje o kodzie: DOSTAWA123
+2025-06-15 17:38:22 Line: 338, APISubiektGT\SubiektGT\Order->add: Utworzono zamówienie od klienta: FS 16/2025
+2025-06-15 17:38:22 Line: 95, APISubiektGT\SubiektGT\order->add: Request finish: 127.0.0.1
+2025-06-15 17:38:22 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:22 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:24 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:25 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: PA 10/2025
+2025-06-15 17:38:25 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:38:25 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:26 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 11/2025
+2025-06-15 17:38:26 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:38:26 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:27 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 12/2025
+2025-06-15 17:38:27 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:38:27 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:28 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 13/2025
+2025-06-15 17:38:28 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:38:28 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:29 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 15/2025
+2025-06-15 17:38:29 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:38:29 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:30 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 14/2025
+2025-06-15 17:38:30 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:38:30 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:32 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 16/2025
+2025-06-15 17:38:32 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:38:49 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:49 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:49 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:49 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:50 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:50 Line: 95, APISubiektGT\SubiektGT\order->getNrByExternalId: Request finish: 127.0.0.1
+2025-06-15 17:38:57 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:58 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: PA 10/2025
+2025-06-15 17:38:58 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:38:58 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:38:59 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 11/2025
+2025-06-15 17:38:59 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:38:59 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:39:00 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 12/2025
+2025-06-15 17:39:00 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:39:00 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:39:01 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 13/2025
+2025-06-15 17:39:01 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:39:01 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:39:03 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 15/2025
+2025-06-15 17:39:03 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:39:03 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:39:04 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 14/2025
+2025-06-15 17:39:04 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
+2025-06-15 17:39:04 Line: 11, : Request start: 127.0.0.1
+2025-06-15 17:39:05 Line: 108, APISubiektGT\SubiektGT\Order->getPdf: Wygenerowano pdf dokumentu: FS 16/2025
+2025-06-15 17:39:05 Line: 95, APISubiektGT\SubiektGT\order->getpdf: Request finish: 127.0.0.1
