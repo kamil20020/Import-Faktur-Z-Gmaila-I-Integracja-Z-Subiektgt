@@ -1,4 +1,4 @@
-package org.example.external.sfera;
+package org.example.external.sfera.generated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

@@ -109,5 +109,8 @@
         "xMaxCord": 683
       }
     ]
+  },
+  "totalPrice": {
+    "startStr": "Razem do zapłaty:"
   }
 }

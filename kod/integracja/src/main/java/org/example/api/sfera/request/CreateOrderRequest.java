@@ -1,4 +1,4 @@
-package org.example.external.sfera;
+package org.example.api.sfera.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.external.sfera.generated.Customer;
+import org.example.external.sfera.generated.Product;
 
 import javax.annotation.processing.Generated;
 import java.math.BigDecimal;
@@ -40,6 +42,12 @@ public class CreateOrderRequest{
     @JsonProperty("amount")
     private BigDecimal amount;
 
+    @JsonProperty("is_invoice_required")
+    private boolean isInvoiceRequired = true;
+
+    @JsonProperty("is_receiver_invoice")
+    private boolean isReceiverInvoice = true;
+
     @JsonProperty("customer")
     private Customer customer;
 
@@ -54,4 +62,5 @@ public class CreateOrderRequest{
         this.customer = customer;
         this.products = products;
     }
+
 }

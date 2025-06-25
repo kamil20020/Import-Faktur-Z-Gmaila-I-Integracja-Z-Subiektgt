@@ -25,7 +25,7 @@ public class JsonFileLoader {
         return loadStrFromFile(gotFile, type);
     }
 
-    private static <T> T loadStrFromFile(File file, Class<T> type) throws FileReadException{
+    public static <T> T loadStrFromFile(File file, Class<T> type) throws FileReadException{
 
         try {
             return objectMapper.readValue(file, type);

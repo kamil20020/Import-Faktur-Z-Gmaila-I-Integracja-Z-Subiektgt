@@ -30,7 +30,35 @@ public class FileReader {
         return loadStrFromFile(file, StandardCharsets.UTF_8);
     }
 
+    public static byte[] getDataFromFileInside(String filePath) throws FileReadException{
+
+        Path foundResourcePath = getPathFromInside(filePath);
+
+        return getDataFormPath(foundResourcePath);
+    }
+
+    public static byte[] getDataFormPath(Path path) throws FileReadException{
+
+        try {
+
+            return Files.readAllBytes(path);
+        }
+        catch (IOException e) {
+
+            e.printStackTrace();
+
+            throw new FileReadException(e.getMessage());
+        }
+    }
+
     public static File getFileFromInside(String filePath) throws FileReadException{
+
+        Path foundResourcePath = getPathFromInside(filePath);
+
+        return foundResourcePath.toFile();
+    }
+
+    private static Path getPathFromInside(String filePath) throws FileReadException{
 
         URL foundResourceURL = PdfFileReader.class.getClassLoader().getResource(filePath);
 
@@ -52,14 +80,26 @@ public class FileReader {
             throw new FileReadException(e.getMessage());
         }
 
-        return new File(foundResourceURI);
+        return Path.of(foundResourceURI);
+    }
+
+    public static byte[] getDataFromFileOutside(String filePath) throws FileReadException{
+
+        Path foundResourcePath = getPathFromOutside(filePath);
+
+        return getDataFormPath(foundResourcePath);
     }
 
     public static File getFileFromOutside(String filePath){
 
-        Path foundFilePath = Paths.get(filePath);
+        Path gotPath = getPathFromOutside(filePath);
 
-        return foundFilePath.toFile();
+        return gotPath.toFile();
+    }
+
+    private static Path getPathFromOutside(String filePath){
+
+        return Paths.get(filePath);
     }
 
     public static String loadStrFromFile(File gotFile, Charset charset) throws URISyntaxException{

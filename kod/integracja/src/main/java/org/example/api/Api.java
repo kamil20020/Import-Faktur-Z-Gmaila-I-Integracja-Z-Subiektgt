@@ -1,5 +1,6 @@
 package org.example.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.loader.JsonFileLoader;
@@ -25,18 +26,23 @@ public abstract class Api {
     private static final Logger log = LoggerFactory.getLogger(Api.class);
     protected static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public Api(String subDomain, String laterPrefix, String hostPropertyName){
+    public Api(String subDomain, String laterPrefix, String hostPropertyName, String protocol){
 
         if(subDomain != null && !subDomain.isBlank()){
             subDomain += '.';
         }
 
-        API_PREFIX =  "https://" + subDomain + getEnvApiHost(hostPropertyName) + laterPrefix;
+        API_PREFIX =  protocol + "://" + (subDomain != null ? subDomain : "") + getEnvApiHost(hostPropertyName) + laterPrefix;
     }
 
-    public Api(String laterPrefix, String hostPropertyName){
+    public Api(String subDomain, String laterPrefix, String hostKey){
 
-        API_PREFIX = "https://" + getEnvApiHost(hostPropertyName) + laterPrefix;
+        this(subDomain, laterPrefix, hostKey, "https");
+    }
+
+    public Api(String laterPrefix, String hostKey){
+
+        this(null, laterPrefix, hostKey);
     }
 
     protected static String getQueryParamsPostFix(String... titlesAndParams){
@@ -124,6 +130,20 @@ public abstract class Api {
         log.info(gotConvertedBody.toString());
 
         return gotConvertedBody;
+    }
+
+    protected static String handleMapRequestToString(Object object) throws IllegalStateException{
+
+        try {
+
+            return objectMapper.writeValueAsString(object);
+        }
+        catch (JsonProcessingException e) {
+
+            e.printStackTrace();
+
+            throw new IllegalStateException(e.getMessage());
+        }
     }
 
 }

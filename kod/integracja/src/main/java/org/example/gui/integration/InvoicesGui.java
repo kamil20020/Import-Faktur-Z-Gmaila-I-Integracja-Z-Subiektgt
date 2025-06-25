@@ -3,9 +3,9 @@ package org.example.gui.integration;
 import org.example.api.gmail.response.MessagesPageResponse;
 import org.example.exception.UnloggedException;
 import org.example.external.gmail.Message;
-import org.example.gui.BooleanSelectOptions;
 import org.example.gui.ChangeableGui;
-import org.example.service.MessageService;
+import org.example.service.GmailMessageService;
+import org.example.service.InvoiceService;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -18,8 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Component
@@ -40,7 +38,8 @@ public class InvoicesGui extends ChangeableGui {
     private String actualPageToken = "";
     private String nextPageToken = "";
 
-    private final MessageService messageService;
+    private final GmailMessageService gmailMessageService;
+    private final InvoiceService invoiceService;
 
     private Runnable handleLogout;
 
@@ -50,9 +49,10 @@ public class InvoicesGui extends ChangeableGui {
 
     private static final String NOT_GIVEN_VALUE = "Brak";
 
-    public InvoicesGui(MessageService messageService) {
+    public InvoicesGui(GmailMessageService gmailMessageService, InvoiceService invoiceService) {
 
-        this.messageService = messageService;
+        this.gmailMessageService = gmailMessageService;
+        this.invoiceService = invoiceService;
 
         $$$setupUI$$$();
 
@@ -82,7 +82,7 @@ public class InvoicesGui extends ChangeableGui {
 
         try {
 
-            messagesPageResponse = messageService.getPage(limit, actualPageToken);
+            messagesPageResponse = gmailMessageService.getPage(limit, actualPageToken);
         } catch (UnloggedException e) {
 
             handleLogout.run();
@@ -92,7 +92,7 @@ public class InvoicesGui extends ChangeableGui {
 
         nextPageToken = messagesPageResponse.nextPageToken();
 
-        messagesPage = messageService.extractMessages(messagesPageResponse.messageHeaders());
+        messagesPage = gmailMessageService.extractMessages(messagesPageResponse.messageHeaders());
 
         int totalNumberOfRows = messagesPageResponse.totalNumberOfElements();
 
@@ -172,13 +172,13 @@ public class InvoicesGui extends ChangeableGui {
             return;
         }
 //
-//        mainPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        mainPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 //
-//        new Thread(() -> {
+        new Thread(() -> {
 //
-//            int numberOfSavedOrders = sferaOrderService.create(selectedOrders);
+            invoiceService.createInvoices(null, selectedMessages.get(0)); //int numberOfSavedOrders =
 //
-//            SwingUtilities.invokeLater(() -> {
+            SwingUtilities.invokeLater(() -> {
 //
 //                for (int i = 0; i < selectedOrders.size(); i++) {
 //
@@ -195,17 +195,17 @@ public class InvoicesGui extends ChangeableGui {
 //                    updateTableRowCol(rowIndex, SUBIEKT_ID_SENT_COL_INDEX, orderId, selectedOrder.getExternalId());
 //                }
 //
-//                mainPanel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                mainPanel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 //
-//                JOptionPane.showMessageDialog(
-//                        mainPanel,
-//                        "Zapisano " + numberOfSavedOrders + " zamówień w Subiekcie",
-//                        "Powiadomienie",
-//                        JOptionPane.INFORMATION_MESSAGE
-//                );
-//            });
+                JOptionPane.showMessageDialog(
+                        mainPanel,
+                        "Zapisano " + 0 + " zamówień w Subiekcie", //numberOfSavedOrders
+                        "Powiadomienie",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            });
 //
-//        }).start();
+        }).start();
     }
 
     @Override

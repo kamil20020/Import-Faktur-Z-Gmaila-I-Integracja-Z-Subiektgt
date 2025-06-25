@@ -2,19 +2,12 @@ package org.example.api.own;
 
 import lombok.RequiredArgsConstructor;
 import org.example.api.gmail.*;
-import org.example.api.gmail.general.GmailBearerAuthApi;
 import org.example.api.gmail.login.GmailLoginCodeApi;
 import org.example.api.gmail.login.GmailLoginTokenApi;
-import org.example.api.gmail.response.MessageDetails;
-import org.example.external.gmail.Message;
-import org.example.external.gmail.MessageHeader;
-import org.example.service.MessageService;
+import org.example.service.GmailMessageService;
 import org.example.service.auth.GmailAuthService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -25,7 +18,7 @@ public class StartupConfiguration implements CommandLineRunner {
     private final GmailMessageApi gmailMessageApi;
 
     private final GmailAuthService gmailAuthService;
-    private final MessageService messageService;
+    private final GmailMessageService gmailMessageService;
 
     @Override
     public void run(String... args) throws Exception {

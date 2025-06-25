@@ -274,7 +274,7 @@ class Order extends SubiektObj {
 	}
 
 
-	public function add(){	
+	public function add(){
 		$this->customer = isset($this->orderDetail['customer'])?$this->orderDetail['customer']:false;
 		if(!$this->customer){
 			throw new Exception('Brak danych "customer" dla zamówienia!',1);
@@ -283,9 +283,16 @@ class Order extends SubiektObj {
 			throw new Exception('Brak danych "products" dla zamówienia!',1);
 		}
 
-		if($this->customer['is_invoice_required'] == true){
+		if($this->orderDetail['is_invoice_required'] == true){
 
-			$this->orderGt = $this->subiektGt->SuDokumentyManager->DodajFS();
+			if($this->orderDetail['is_receiver_invoice'] == true){
+
+				$this->orderGt = $this->subiektGt->SuDokumentyManager->DodajFZ();
+			}
+			else{
+
+				$this->orderGt = $this->subiektGt->SuDokumentyManager->DodajFS();
+			}
 
 			$oneTimeCustomer = $this->subiektGt->KontrahenciManager->DodajKontrahentaJednorazowego();
 

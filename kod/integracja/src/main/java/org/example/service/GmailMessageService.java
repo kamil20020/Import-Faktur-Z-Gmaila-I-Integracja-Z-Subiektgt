@@ -9,11 +9,9 @@ import org.example.external.gmail.Message;
 import org.example.external.gmail.MessageContentPartBody;
 import org.example.external.gmail.MessageHeader;
 import org.example.external.gmail.MessageSummary;
-import org.example.mapper.Base64Mapper;
 import org.springframework.stereotype.Service;
 
 import java.net.http.HttpResponse;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -24,7 +22,7 @@ import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
-public class MessageService {
+public class GmailMessageService {
 
     private final GmailMessageApi gmailMessageApi;
 

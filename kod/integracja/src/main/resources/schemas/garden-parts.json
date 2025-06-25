@@ -86,7 +86,7 @@
       {
         "name": "code",
         "xMinCord": 98,
-        "xMaxCord": 159
+        "xMaxCord": 158
       },
       {
         "name": "name",
@@ -109,5 +109,8 @@
         "xMaxCord": 1154
       }
     ]
+  },
+  "totalPrice": {
+    "startStr": "Do zapłaty :"
   }
 }

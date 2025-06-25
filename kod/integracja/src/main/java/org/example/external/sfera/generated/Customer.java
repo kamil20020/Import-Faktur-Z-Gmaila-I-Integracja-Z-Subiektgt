@@ -1,4 +1,4 @@
-package org.example.external.sfera;
+package org.example.external.sfera.generated;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -41,8 +41,5 @@ public class Customer{
 
     @JsonProperty("post_code")
     private String postCode;
-
-    @JsonProperty("is_invoice_required")
-    private boolean isInvoiceRequired;
 
 }

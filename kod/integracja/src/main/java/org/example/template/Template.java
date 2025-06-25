@@ -4,6 +4,7 @@ import org.example.loader.JsonFileLoader;
 import org.example.loader.pdf.PdfFileReader;
 import org.example.loader.pdf.PdfLinesDetails;
 import org.example.template.data.TemplateCombinedData;
+import org.example.template.data.TemplateConverter;
 import org.example.template.data.TemplateCreator;
 import org.example.template.data.TemplateInvoiceItem;
 
@@ -23,7 +24,8 @@ public record Template(
     TemplateRow receiveDate,
     TemplateRow title,
     TemplateRow creator,
-    TemplateRow invoiceItems
+    TemplateRow invoiceItems,
+    TemplateRow totalPrice
 ){
 
     private static final List<String> toCheckDateFormats;
@@ -40,9 +42,9 @@ public record Template(
         );
     }
 
-    public static boolean hasCompany(File gotFile, String company){
+    public static boolean hasCompany(byte[] data, String company){
 
-        PdfLinesDetails pdfLinesDetails = getLines(gotFile);
+        PdfLinesDetails pdfLinesDetails = getLines(data);
 
         List<String> lines = pdfLinesDetails.lines().get(0);
 
@@ -57,9 +59,9 @@ public record Template(
         return false;
     }
 
-    public TemplateCreator extractCreator(File gotFile){
+    public TemplateCreator extractCreator(byte[] data){
 
-        String[] lines = getLinesForTemplateRow(gotFile, creator);
+        String[] lines = getLinesForTemplateRow(data, creator);
 
         Map<String, Integer> templateRowFieldsSkipSpaceMappings = new HashMap<>();
 
@@ -69,59 +71,14 @@ public record Template(
                 templateRowFieldsSkipSpaceMappings.put(templateRowField.name(), templateRowField.skipSpace());
             });
 
-        Integer nameSkipSpace = templateRowFieldsSkipSpaceMappings.get("name");
-        Integer streetSkipSpace = templateRowFieldsSkipSpaceMappings.get("street");
-        Integer citySkipSpace = templateRowFieldsSkipSpaceMappings.get("city");
-        Integer nipSkipSpace = templateRowFieldsSkipSpaceMappings.get("nip");
+        Integer creatorMaxSize = creator.maxSize();
 
-        String name = null;
-
-        int nextIndex = 1;
-
-        if(lines.length == creator().maxSize()){
-
-            name = lines[0] + lines[1];
-
-            nextIndex = 2;
-        }
-        else{
-
-            name = lines[0];
-        }
-
-        name = name
-            .stripIndent();
-
-        String street = lines[nextIndex]
-            .stripIndent()
-            .replaceAll("ul. ", "");
-
-        String city = lines[nextIndex + 1]
-            .stripIndent();
-
-        if(nipSkipSpace != null){
-
-            nextIndex += nipSkipSpace;
-        }
-
-        String rawNip = lines[nextIndex + 2];
-
-        rawNip = rawNip
-            .strip()
-            .replaceAll("NIP: ", "")
-            .replaceAll("PL", "");
-
-        return new TemplateCreator(
-            name,
-            street,
-            city,
-            rawNip
-        );
+        return TemplateCreator.extract(lines, templateRowFieldsSkipSpaceMappings, creatorMaxSize);
     }
 
-    public LocalDate extractCreationDate(File gotFile){
+    public LocalDate extractCreationDate(byte[] data){
 
-        String[] lines = getLinesForTemplateRow(gotFile, creationDate);
+        String[] lines = getLinesForTemplateRow(data, creationDate);
 
         return extractGeneralDate(lines[0].strip());
     }
@@ -132,7 +89,7 @@ public record Template(
 
         for (String format : toCheckDateFormats){
 
-            gotDate = tryToParseLocalDate(format, input);
+            gotDate = TemplateConverter.tryToParseLocalDate(format, input);
 
             if(gotDate != null){
 
@@ -143,44 +100,28 @@ public record Template(
         return gotDate;
     }
 
-    private static LocalDate tryToParseLocalDate(String format, String input) throws DateTimeParseException {
-
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);
-
-        try{
-
-            return LocalDate.parse(input, dateTimeFormatter);
-        }
-        catch (DateTimeParseException e){
-
-            //:D
-        }
-
-        return null;
-    }
-
-    public List<TemplateInvoiceItem> extractInvoiceItems(File gotFile) {
+    public List<TemplateInvoiceItem> extractInvoiceItems(byte[] data) {
 
         List<TemplateInvoiceItem> templateInvoiceItems = new ArrayList<>();
 
-        PdfLinesDetails pdfLinesDetails = getLines(gotFile);
+        PdfLinesDetails pdfLinesDetails = getLines(data);
 
         int numberOfPages = pdfLinesDetails.numberOfPages();
 
         for(int pageIndex = 0; pageIndex < numberOfPages; pageIndex++){
 
-            extractInvoiceLinesForPage(gotFile, pdfLinesDetails, pageIndex, templateInvoiceItems);
+            extractInvoiceLinesForPage(data, pdfLinesDetails, pageIndex, templateInvoiceItems);
         }
 
         return templateInvoiceItems;
     }
 
-    private void extractInvoiceLinesForPage(File gotFile, PdfLinesDetails pdfLinesDetails, int pageIndex, List<TemplateInvoiceItem> templateInvoiceItems){
+    private void extractInvoiceLinesForPage(byte[] data, PdfLinesDetails pdfLinesDetails, int pageIndex, List<TemplateInvoiceItem> templateInvoiceItems){
 
         List<String> gotLines = pdfLinesDetails.lines().get(pageIndex);
         List<Float> linesYCords = pdfLinesDetails.linesYCords().get(pageIndex);
 
-        int invoiceItemsStartIndex = getInvoiceLinesStartIndex(gotLines);
+        int invoiceItemsStartIndex = getLineStartIndex(gotLines, invoiceItems.startStr(), true);
 
         for(int i = invoiceItemsStartIndex; i < gotLines.size(); i++){
 
@@ -192,56 +133,40 @@ public record Template(
 
             String[] words = line.split("\\s");
 
-            if(!isRowValidInvoiceLine(words)){
+            if(!TemplateInvoiceItem.isRowValid(words, invoiceItems.minLength())){
                 continue;
             }
 
             double lineYCord = linesYCords.get(i) + invoiceItems.startOffset();
 
-            TemplateInvoiceItem templateInvoiceItem = extractTemplateInvoiceItem(gotFile, pageIndex, lineYCord);
+            TemplateInvoiceItem templateInvoiceItem = extractTemplateInvoiceItem(data, pageIndex, lineYCord);
 
             templateInvoiceItems.add(templateInvoiceItem);
         }
     }
 
-    private int getInvoiceLinesStartIndex(List<String> gotLines){
+    private int getLineStartIndex(List<String> gotLines, String searchText, boolean shouldAppendOne){
 
         int invoiceItemsStartIndex = 0;
 
         for (String line : gotLines){
 
-            if(line.startsWith(invoiceItems.startStr())){
+            if(line.startsWith(searchText)){
                 break;
             }
 
             invoiceItemsStartIndex++;
         }
 
-        invoiceItemsStartIndex++;
+        if(shouldAppendOne){
+
+            invoiceItemsStartIndex++;
+        }
 
         return invoiceItemsStartIndex;
     }
 
-    private boolean isRowValidInvoiceLine(String[] words){
-
-        if(words.length < invoiceItems.minLength()){
-
-            return false;
-        }
-
-        try{
-
-            Integer.valueOf(words[0]);
-        }
-        catch(NumberFormatException e){
-
-            return false;
-        }
-
-        return true;
-    }
-
-    private TemplateInvoiceItem extractTemplateInvoiceItem(File gotFile, int pageIndex, double lineYCord){
+    private TemplateInvoiceItem extractTemplateInvoiceItem(byte[] data, int pageIndex, double lineYCord){
 
         Map<String, String> gotValues = new HashMap<>();
 
@@ -249,34 +174,22 @@ public record Template(
 
             String fieldName = templateRowField.name();
 
-            String value = extractWordFromLine(gotFile, pageIndex, lineYCord, templateRowField);
+            String value = extractWordFromLine(data, pageIndex, lineYCord, templateRowField);
 
             gotValues.put(fieldName, value);
         }
 
-        String name = gotValues.get("name").stripIndent();
-        String code = gotValues.get("code").stripIndent();
-        BigDecimal price = convertToBigDecimal(gotValues.get("price"));
-        Integer quantity = convertToInteger(gotValues.get("quantity"));
-        BigDecimal tax = convertToBigDecimal(gotValues.get("tax"));
-
-        return TemplateInvoiceItem.builder()
-            .name(name)
-            .code(code)
-            .price(price)
-            .quantity(quantity)
-            .tax(tax)
-            .build();
+        return TemplateInvoiceItem.extract(gotValues);
     }
 
-    private String extractWordFromLine(File gotFile, int pageIndex, double lineYCord, TemplateRowField templateRowField){
+    public String extractWordFromLine(byte[] data, int pageIndex, double lineYCord, TemplateRowField templateRowField){
 
         float minXCord = templateRowField.xMinCord();
         float maxXCord = templateRowField.xMaxCord();
 
         float width = maxXCord - minXCord;
 
-        String[] lines = extractWordsForField(gotFile, pageIndex, minXCord, lineYCord - 1, width, invoiceItems.rowHeight());
+        String[] lines = extractWordsForField(data, pageIndex, minXCord, lineYCord - 1, width, invoiceItems.rowHeight());
 
         if(lines.length == 0){
 
@@ -286,7 +199,7 @@ public record Template(
         return lines[0];
     }
 
-    private static String[] extractWordsForField(File gotFile, int pageIndex, double x, double yPt, double width, double height){
+    private static String[] extractWordsForField(byte[] data, int pageIndex, double x, double yPt, double width, double height){
 
         Rectangle2D.Double rect = new Rectangle2D.Double(
             TemplateCords.convertPxToPt(x),
@@ -295,51 +208,52 @@ public record Template(
             TemplateCords.convertPxToPt(height)
         );
 
-        return PdfFileReader.getLinesInRectFromFile(gotFile, pageIndex, rect, true);
+        return PdfFileReader.getLinesInRectFromFile(data, pageIndex, rect, true);
     }
 
-    private Integer convertToInteger(String value){
+    public LocalDate extractReceiveDate(byte[] data){
 
-        value = value.replaceAll(",", "\\.")
-            .replaceAll("\\s", "")
-            .split("\\.")[0];
-
-        return Integer.valueOf(value);
-    }
-
-    private BigDecimal convertToBigDecimal(String value){
-
-        value = value
-            .replaceAll("\\s", "")
-            .replaceAll(",", "\\.")
-            .replaceAll("%", "")
-            .replaceAll("PLN", "");
-
-        return new BigDecimal(value);
-    }
-
-    public LocalDate extractReceiveDate(File gotFile){
-
-        String[] lines = getLinesForTemplateRow(gotFile, receiveDate);
+        String[] lines = getLinesForTemplateRow(data, receiveDate);
 
         return extractGeneralDate(lines[0].strip());
     }
 
-    public String extractTitle(File gotFile){
+    public String extractTitle(byte[] data){
 
-        String[] lines = getLinesForTemplateRow(gotFile, title);
-
-        return lines[0].stripIndent();
-    }
-
-    public String extractPlace(File gotFile){
-
-        String[] lines = getLinesForTemplateRow(gotFile, place);
+        String[] lines = getLinesForTemplateRow(data, title);
 
         return lines[0].stripIndent();
     }
 
-    private static String[] getLinesForTemplateRow(File gotFile, TemplateRow templateRow){
+    public String extractPlace(byte[] data){
+
+        String[] lines = getLinesForTemplateRow(data, place);
+
+        return lines[0].stripIndent();
+    }
+
+    public BigDecimal extractTotalPrice(byte[] data){
+
+        String totalPriceSearchStr = totalPrice.startStr();
+
+        PdfLinesDetails pdfLinesDetails = getLines(data);
+
+        int numberOfPages = pdfLinesDetails.numberOfPages();
+
+        int lastPageIndex = numberOfPages - 1;
+
+        List<String> lines = pdfLinesDetails.lines().get(lastPageIndex);
+
+        int totalPriceLineIndex = getLineStartIndex(lines, totalPriceSearchStr, false);
+
+        String gotLine = lines.get(totalPriceLineIndex);
+
+        String gotRawTotalPrice = gotLine.split(totalPriceSearchStr)[1];
+
+        return TemplateConverter.convertToBigDecimal(gotRawTotalPrice);
+    }
+
+    private static String[] getLinesForTemplateRow(byte[] data, TemplateRow templateRow){
 
         if(templateRow == null){
 
@@ -348,14 +262,14 @@ public record Template(
 
         Rectangle2D.Double rect = templateRow.coords().getRect();
 
-        String[] gotLines = PdfFileReader.getLinesInRectFromFile(gotFile, 0, rect, true);
+        String[] gotLines = PdfFileReader.getLinesInRectFromFile(data, 0, rect, true);
 
         return gotLines;
     }
 
-    private static PdfLinesDetails getLines(File gotFile){
+    private static PdfLinesDetails getLines(byte[] data){
 
-        PdfLinesDetails pdfLinesDetails = PdfFileReader.getLinesFromFile(gotFile,true);
+        PdfLinesDetails pdfLinesDetails = PdfFileReader.getLinesFromFile(data, true);
 
         return pdfLinesDetails;
     }

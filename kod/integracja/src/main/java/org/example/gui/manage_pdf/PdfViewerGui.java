@@ -1,5 +1,7 @@
 package org.example.gui.manage_pdf;
 
+import org.example.gui.ChangeableGui;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Optional;
 
-public class PdfViewerGui implements KeyListener {
+public class PdfViewerGui extends ChangeableGui implements KeyListener {
 
     private JPanel mainPanel;
     private JLabel pdfFileContent;
@@ -152,6 +154,19 @@ public class PdfViewerGui implements KeyListener {
         //TODO: place custom component creation code here
 
         drawPanel = new PdfDrawerGui();
+    }
+
+    public static void main(String[] args) {
+
+        JFrame frame = new JFrame("Przeglądanie pdf");
+
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setSize(1274, 1000);
+        frame.setLocationRelativeTo(null);
+
+        frame.add(new PdfViewerGui().getMainPanel());
+
+        frame.setVisible(true);
     }
 
     /**

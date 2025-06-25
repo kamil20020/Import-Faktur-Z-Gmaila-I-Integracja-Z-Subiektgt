@@ -17,9 +17,9 @@ import java.util.function.Consumer;
 
 public class PdfFileReader {
 
-    public static void handlePdfFileDocument(File pdfFile, Consumer<PDDocument> handlePdDocument) throws FileReadException {
+    public static void handlePdfFileDocument(File gotFile, Consumer<PDDocument> handlePdDocument) throws FileReadException {
 
-        try (PDDocument document = Loader.loadPDF(pdfFile)){
+        try (PDDocument document = Loader.loadPDF(gotFile)){
 
             handlePdDocument.accept(document);
         }
@@ -29,13 +29,25 @@ public class PdfFileReader {
         }
     }
 
-    public static PdfLinesDetails getLinesFromFile(File gotFile, boolean shouldGetRealNewLines) throws FileReadException {
+    public static void handlePdfFileDocument(byte[] data, Consumer<PDDocument> handlePdDocument) throws FileReadException {
+
+        try (PDDocument document = Loader.loadPDF(data)){
+
+            handlePdDocument.accept(document);
+        }
+        catch(IOException e){
+
+            throw new FileReadException(e.getMessage());
+        }
+    }
+
+    public static PdfLinesDetails getLinesFromFile(byte[] data, boolean shouldGetRealNewLines) throws FileReadException {
 
         AtomicReference<List<List<Float>>> linesYCords = new AtomicReference<>();
         AtomicReference<List<List<String>>> linesAtomic = new AtomicReference<>();
         AtomicInteger numberOfPagesAtomic = new AtomicInteger(0);
 
-        handlePdfFileDocument(gotFile, pdDocument -> {
+        handlePdfFileDocument(data, pdDocument -> {
 
             PosYTextPdfStripper textStripper = new PosYTextPdfStripper();
 
@@ -66,11 +78,11 @@ public class PdfFileReader {
         );
     }
 
-    public static String[] getLinesInRectFromFile(File gotFile, Integer pageIndex, Rectangle2D.Double rect, boolean shouldGetRealNewLines) throws FileReadException {
+    public static String[] getLinesInRectFromFile(byte[] data, Integer pageIndex, Rectangle2D.Double rect, boolean shouldGetRealNewLines) throws FileReadException {
 
         AtomicReference<String> gotTextAtomic = new AtomicReference<>();
 
-        handlePdfFileDocument(gotFile, pdDocument -> {
+        handlePdfFileDocument(data, pdDocument -> {
 
             PDPage page = pdDocument.getPage(pageIndex);
 
@@ -98,25 +110,6 @@ public class PdfFileReader {
         });
 
         return gotTextAtomic.get().split("\\r?\\n");
-    }
-
-    public static Dimension getFilePageSize(File gotFile, Integer pageIndex) throws FileReadException {
-
-        AtomicReference<Dimension> result = new AtomicReference<>();
-
-        handlePdfFileDocument(gotFile, pdDocument -> {
-
-            PDPage page = pdDocument.getPage(pageIndex);
-
-            int pageWidth = (int) page.getMediaBox().getWidth();
-            int pageHeight = (int) page.getMediaBox().getHeight();
-
-            Dimension gotSize = new Dimension(pageWidth, pageHeight);
-
-            result.set(gotSize);
-        });
-
-        return result.get();
     }
 
 }

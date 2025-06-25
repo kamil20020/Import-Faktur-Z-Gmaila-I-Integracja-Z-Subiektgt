@@ -1,5 +1,6 @@
 package org.example.template.data;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,5 +12,6 @@ public record TemplateCombinedData(
     String title,
     TemplateCreator creator,
     List<TemplateInvoiceItem> invoiceItems,
-    boolean isTaxOriented
+    boolean isTaxOriented,
+    BigDecimal totalPrice
 ){}
