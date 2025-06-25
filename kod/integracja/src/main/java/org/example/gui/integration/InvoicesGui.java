@@ -72,7 +72,8 @@ public class InvoicesGui extends ChangeableGui {
 
             nextPageToken = actualPageToken;
             actualPageToken = prevPageToken;
-        } else if (offset > paginationTableGui.getOffset()) {
+        }
+        else if (offset > paginationTableGui.getOffset()) {
 
             prevPageToken = actualPageToken;
             actualPageToken = nextPageToken;
@@ -83,7 +84,8 @@ public class InvoicesGui extends ChangeableGui {
         try {
 
             messagesPageResponse = gmailMessageService.getPage(limit, actualPageToken);
-        } catch (UnloggedException e) {
+        }
+        catch (UnloggedException e) {
 
             handleLogout.run();
 
@@ -97,8 +99,8 @@ public class InvoicesGui extends ChangeableGui {
         int totalNumberOfRows = messagesPageResponse.totalNumberOfElements();
 
         PaginationTableGui.PaginationTableData<Object> data = new PaginationTableGui.PaginationTableData(
-                messagesPage,
-                totalNumberOfRows
+            messagesPage,
+            totalNumberOfRows
         );
 
         return data;
@@ -113,10 +115,10 @@ public class InvoicesGui extends ChangeableGui {
         LocalDate date = message.getDate().toLocalDate();
 
         return new Object[]{
-                message.getId(),
-                message.getFrom(),
-                message.getSubject(),
-                dateTimeFormatter.format(date)
+            message.getId(),
+            message.getFrom(),
+            message.getSubject(),
+            dateTimeFormatter.format(date)
         };
     }
 
@@ -140,12 +142,12 @@ public class InvoicesGui extends ChangeableGui {
         }
 
         List<String> selectedOrdersIds = selectedMessagesData.stream()
-                .map(selectedOrderData -> selectedOrderData[0].toString())
-                .collect(Collectors.toList());
+            .map(selectedOrderData -> selectedOrderData[0].toString())
+            .collect(Collectors.toList());
 
         return messagesPage.stream()
-                .filter(order -> selectedOrdersIds.contains(order.getId()))
-                .collect(Collectors.toList());
+            .filter(order -> selectedOrdersIds.contains(order.getId()))
+            .collect(Collectors.toList());
 
     }
 
@@ -163,10 +165,10 @@ public class InvoicesGui extends ChangeableGui {
         if (selectedMessages.isEmpty()) {
 
             JOptionPane.showMessageDialog(
-                    mainPanel,
-                    "Nie wybrano wiadomości email z Gmaila",
-                    "Powiadomienie",
-                    JOptionPane.INFORMATION_MESSAGE
+                mainPanel,
+                "Nie wybrano wiadomości email z Gmaila",
+                "Powiadomienie",
+                JOptionPane.INFORMATION_MESSAGE
             );
 
             return;
@@ -176,7 +178,7 @@ public class InvoicesGui extends ChangeableGui {
 //
         new Thread(() -> {
 //
-            invoiceService.createInvoices(null, selectedMessages.get(0)); //int numberOfSavedOrders =
+            invoiceService.createInvoices(selectedMessages); //int numberOfSavedOrders =
 //
             SwingUtilities.invokeLater(() -> {
 //
@@ -199,7 +201,7 @@ public class InvoicesGui extends ChangeableGui {
 //
                 JOptionPane.showMessageDialog(
                         mainPanel,
-                        "Zapisano " + 0 + " zamówień w Subiekcie", //numberOfSavedOrders
+                        "Zapisano " + 0 + " faktur zakupu w Subiekcie", //numberOfSavedOrders
                         "Powiadomienie",
                         JOptionPane.INFORMATION_MESSAGE
                 );

@@ -1,19 +1,14 @@
 package org.example.template;
 
-import org.example.loader.JsonFileLoader;
 import org.example.loader.pdf.PdfFileReader;
 import org.example.loader.pdf.PdfLinesDetails;
-import org.example.template.data.TemplateCombinedData;
 import org.example.template.data.TemplateConverter;
 import org.example.template.data.TemplateCreator;
 import org.example.template.data.TemplateInvoiceItem;
 
 import java.awt.geom.Rectangle2D;
-import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public record Template(
@@ -49,6 +44,9 @@ public record Template(
         List<String> lines = pdfLinesDetails.lines().get(0);
 
         for(String line : lines) {
+
+            line = line
+                .toLowerCase();
 
             if (line.contains(company)) {
 

@@ -15,17 +15,17 @@ public class JsonFileLoader {
 
         File gotFile = FileReader.getFileFromInside(filePath);
 
-        return loadStrFromFile(gotFile, type);
+        return loadFromFile(gotFile, type);
     }
 
     public static <T> T loadFromFileOutside(String filePath, Class<T> type) throws FileReadException {
 
         File gotFile = FileReader.getFileFromOutside(filePath);
 
-        return loadStrFromFile(gotFile, type);
+        return loadFromFile(gotFile, type);
     }
 
-    public static <T> T loadStrFromFile(File file, Class<T> type) throws FileReadException{
+    public static <T> T loadFromFile(File file, Class<T> type) throws FileReadException{
 
         try {
             return objectMapper.readValue(file, type);

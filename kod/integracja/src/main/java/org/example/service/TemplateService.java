@@ -1,10 +1,13 @@
 package org.example.service;
 
+import org.example.api.Api;
 import org.example.exception.FileReadException;
 import org.example.loader.FileReader;
 import org.example.loader.JsonFileLoader;
 import org.example.template.Template;
-import org.example.template.data.TemplateCombinedData;
+import org.example.template.data.DataExtractedFromTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -13,7 +16,9 @@ import java.util.*;
 @Service
 public class TemplateService {
 
-    private static final Map<String, Template> templateSchemas = new HashMap<>();
+    private static final Map<String, Template> companyTemplateMappings = new HashMap<>();
+
+    private static final Logger log = LoggerFactory.getLogger(Api.class);
 
     private static final String TEMPLATES_SCHEMA_PATH = "schemas/";
 
@@ -24,7 +29,9 @@ public class TemplateService {
 
     private static void loadTemplatesSchemas() throws FileReadException {
 
-        File templatesSchemasLocation = FileReader.getFileFromInside(TEMPLATES_SCHEMA_PATH);
+        log.info("Loading templates");
+
+        File templatesSchemasLocation = FileReader.getFileFromOutside(TEMPLATES_SCHEMA_PATH);
 
         File[] schemaFiles = templatesSchemasLocation.listFiles();
 
@@ -36,29 +43,66 @@ public class TemplateService {
         for(File schemaFile : schemaFiles){
 
             String schemaFileName = schemaFile.getName()
-                .replaceAll("\\.pdf", "");
+                .replaceAll("\\.json", "");
 
-            Template template = loadTemplate(schemaFile);
+            Template template = loadTemplateSchema(schemaFile);
 
-            templateSchemas.put(schemaFileName, template);
+            companyTemplateMappings.put(schemaFileName, template);
+
+            log.info("Loaded template {}", schemaFileName);
         }
+
+        log.info("Loaded {} templates", companyTemplateMappings.size());
     }
 
-    public static Template loadTemplate(File file) throws FileReadException {
+    private static Template loadTemplateSchema(File file) throws FileReadException {
 
-        return JsonFileLoader.loadStrFromFile(file, Template.class);
+        return JsonFileLoader.loadFromFile(file, Template.class);
     }
 
-    public TemplateCombinedData applyTemplate(String templateFilePath, byte[] data) {
+    private Template loadTemplateSchema(String templateFilePath) throws FileReadException {
 
-        Template template = loadTemplate(templateFilePath);
-
-        return applyTemplate(template, data);
+        return JsonFileLoader.loadFromFileOutside(templateFilePath, Template.class);
     }
 
-    public TemplateCombinedData applyTemplate(Template template, byte[] data) {
+    public DataExtractedFromTemplate applyGoodTemplateForData(byte[] data) throws FileReadException{
 
-        return new TemplateCombinedData(
+        Optional<Template> foundTemplateOpt = findTemplateForData(data);
+
+        if(foundTemplateOpt.isEmpty()){
+
+            throw new FileReadException("Could not find good template");
+        }
+
+        Template foundTemplate = foundTemplateOpt.get();
+
+        return applyTemplate(foundTemplate, data);
+    }
+
+    private Optional<Template> findTemplateForData(byte[] data){
+
+        for(Map.Entry<String, Template> companyTemplateMapping : companyTemplateMappings.entrySet()){
+
+            String templateCompany = companyTemplateMapping.getKey();
+
+            boolean isGoodTemplate = Template.hasCompany(data, templateCompany);
+
+            if(isGoodTemplate){
+
+                log.info("Template {} was selected", templateCompany);
+
+                Template template = companyTemplateMapping.getValue();
+
+                return Optional.of(template);
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    private DataExtractedFromTemplate applyTemplate(Template template, byte[] data) {
+
+        return new DataExtractedFromTemplate(
             template.extractPlace(data),
             template.extractCreationDate(data),
             template.extractReceiveDate(data),
@@ -70,33 +114,23 @@ public class TemplateService {
         );
     }
 
-    public Template loadTemplate(String templateFilePath) throws FileReadException {
-
-        return JsonFileLoader.loadFromFileInside(templateFilePath, Template.class);
-    }
-
     public static void main(String[] args){
 
         TemplateService templateService = new TemplateService();
 
-        Map<String, Map.Entry<String, String>> templatesAndInvoicesMappings = new HashMap<>();
+        List<String> invoices = List.of(
+            "invoices/fra z nr.pdf",
+            "invoices/329157-2025.pdf",
+            "invoices/FS015302025B26A.pdf"
+        );
 
-        templatesAndInvoicesMappings.put("techpil", new AbstractMap.SimpleEntry<>("schemas/techpil.json", "invoices/fra z nr.pdf"));
-        templatesAndInvoicesMappings.put("garden-parts", new AbstractMap.SimpleEntry<>("schemas/garden-parts.json", "invoices/329157-2025.pdf"));
-        templatesAndInvoicesMappings.put("rozkwit", new AbstractMap.SimpleEntry<>("schemas/rozkwit.json", "invoices/FS015302025B26A.pdf"));
+        String invoiceName = invoices.get(0);
 
-        Map.Entry<String, String> gotTemplateAndInvoiceMapping = templatesAndInvoicesMappings.get("garden-parts");
+        byte[] invoiceData = FileReader.getDataFromFileInside(invoiceName);
 
-        String schemaFilePath = gotTemplateAndInvoiceMapping.getKey();
-        String invoiceFilePath = gotTemplateAndInvoiceMapping.getValue();
+        DataExtractedFromTemplate dataExtractedFromTemplate = templateService.applyGoodTemplateForData(invoiceData);
 
-        Template pdfFileTemplate = templateService.loadTemplate(schemaFilePath);
-
-        byte[] data = FileReader.getDataFromFileInside(invoiceFilePath);
-
-        TemplateCombinedData templateCombinedData = templateService.applyTemplate(pdfFileTemplate, data);
-
-        System.out.println(templateCombinedData);
+        System.out.println(dataExtractedFromTemplate);
     }
 
 }

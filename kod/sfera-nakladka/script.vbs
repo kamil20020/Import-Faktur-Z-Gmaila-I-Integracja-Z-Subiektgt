@@ -7,7 +7,7 @@ WshShell.Run "php\php.exe -c php\php.ini-production -S 127.0.0.1:80 -t htdocs", 
 WScript.Sleep 1000
 
 ' Uruchom Javę bez konsoli
-WshShell.Run "javaw -jar aplikacja-allegro_subiekt-integracja.jar", 0, False
+WshShell.Run "javaw -jar aplikacja-gmail_subiekt-integracja.jar", 0, False
 
 ' Funkcja sprawdzająca, czy javaw działa
 Function IsJavaRunning()

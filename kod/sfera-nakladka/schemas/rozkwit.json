@@ -1,0 +1,117 @@
+{
+  "isTaxOriented": false,
+  "place": {
+    "coords": {
+      "leftTop": {
+        "x": 111,
+        "y": 155
+      },
+      "rightDown": {
+        "x": 176,
+        "y": 182
+      }
+    }
+  },
+  "creationDate": {
+    "coords": {
+      "leftTop": {
+        "x": 1088,
+        "y": 130
+      },
+      "rightDown": {
+        "x": 1188,
+        "y": 157
+      }
+    }
+  },
+  "receiveDate": {
+    "coords": {
+      "leftTop": {
+        "x": 1086,
+        "y": 163
+      },
+      "rightDown": {
+        "x": 1189,
+        "y": 188
+      }
+    }
+  },
+  "title": {
+    "skipSpace": 0,
+    "coords": {
+      "leftTop": {
+        "x": 810,
+        "y": 99
+      },
+      "rightDown": {
+        "x": 1000,
+        "y": 134
+      }
+    }
+  },
+  "creator": {
+    "maxSize": 6,
+    "coords": {
+      "leftTop": {
+        "x": 52,
+        "y": 80
+      },
+      "rightDown": {
+        "x": 384,
+        "y": 232
+      }
+    },
+    "fields": [
+      {
+        "name": "name"
+      },
+      {
+        "name": "street"
+      },
+      {
+        "name": "city"
+      },
+      {
+        "name": "nip",
+        "skipSpace": 1
+      }
+    ]
+  },
+  "invoiceItems": {
+    "startStr": "Lp.",
+    "endStr": "Stawka",
+    "minLength": 7,
+    "rowHeight": 20,
+    "startOffset": 0,
+    "fields": [
+      {
+        "name": "code",
+        "xMinCord": 80,
+        "xMaxCord": 306
+      },
+      {
+        "name": "name",
+        "xMinCord": 322,
+        "xMaxCord": 665
+      },
+      {
+        "name": "price",
+        "xMinCord": 1061,
+        "xMaxCord": 1159
+      },
+      {
+        "name": "quantity",
+        "xMinCord": 673,
+        "xMaxCord": 785
+      },
+      {
+        "name": "tax",
+        "xMinCord": 870,
+        "xMaxCord": 892
+      }
+    ]
+  },
+  "totalPrice": {
+    "startStr": "Razem do zapłaty:"
+  }
+}
