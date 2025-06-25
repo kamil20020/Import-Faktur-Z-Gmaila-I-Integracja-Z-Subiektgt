@@ -14,6 +14,7 @@ Source: "php\*"; DestDir: "{app}\php"; Flags: recursesubdirs
 Source: "htdocs\*"; DestDir: "{app}\htdocs"; Flags: recursesubdirs
 
 Source: "start.bat"; DestDir: "{app}"
+Source: "script.vbs"; DestDir: "{app}"
 
 [Icons]
-Name: "{commondesktop}\Uruchom Integracja Gmail i Subiekt GT ze Sferą"; Filename: "{app}\start.bat"
+Name: "{commondesktop}\Uruchom Integracja Gmail i Subiekt GT ze Sferą"; Filename: "{app}\script.vbs"
