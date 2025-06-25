@@ -4,6 +4,8 @@ import org.example.api.sfera.request.CreateOrderRequest;
 import org.example.api.sfera.request.GeneralRequest;
 import org.example.api.sfera.request.GetDocumentByExternalIdRequest;
 import org.example.api.sfera.request.GetOrderRequest;
+import org.example.service.PropertiesService;
+import org.example.service.SecureStorageService;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
@@ -13,9 +15,11 @@ import java.net.http.HttpResponse;
 @Component
 public class SferaOrderApi extends SferaApi{
 
-    public SferaOrderApi() {
+    public SferaOrderApi(SecureStorageService secureStorageService, PropertiesService propertiesService) {
 
-        super("order");
+        super("order", propertiesService);
+
+        SferaApi.init(secureStorageService);
     }
 
     public HttpResponse<String> create(CreateOrderRequest createOrderRequest)  {

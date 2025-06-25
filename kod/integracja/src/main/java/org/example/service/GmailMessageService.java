@@ -40,6 +40,11 @@ public class GmailMessageService {
 
     public List<Message> extractMessages(List<MessageHeader> messageHeaders){
 
+        if(messageHeaders == null){
+
+            return new ArrayList<>();
+        }
+
         List<Message> messages = new ArrayList<>();
 
         for(MessageHeader messageHeader : messageHeaders){

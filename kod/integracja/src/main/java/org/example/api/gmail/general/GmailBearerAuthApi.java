@@ -2,37 +2,58 @@ package org.example.api.gmail.general;
 
 import org.example.api.BearerAuthApi;
 import org.example.api.response.BearerAuthData;
-import org.example.service.SecureStorage;
+import org.example.service.PropertiesService;
+import org.example.service.SecureStorageService;
 
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Optional;
 import java.util.function.Function;
 
-public class GmailBearerAuthApi extends BearerAuthApi {
+public abstract class GmailBearerAuthApi extends BearerAuthApi {
+
+    private final SecureStorageService secureStorageService;
+
+    private static boolean isInitialized = false;
 
     private static BearerAuthData bearerAuthData = new BearerAuthData(null, null, "");
 
-    private static final String secretPrePostfix = "gmail.";
-
     private static Function<String, HttpResponse<String>> refreshAccessToken;
 
+    private static final String secretPrePostfix = "gmail.";
     private static final String HOST_PROPERTY_NAME = "gmail.mail.host";
 
-    public GmailBearerAuthApi(String subDomain, String laterPrefix) {
+    public GmailBearerAuthApi(String subDomain, String laterPrefix, PropertiesService propertiesService, SecureStorageService secureStorageService) {
 
-        super(subDomain, laterPrefix, HOST_PROPERTY_NAME);
+        super(subDomain, laterPrefix, HOST_PROPERTY_NAME, propertiesService, secureStorageService);
+
+        this.secureStorageService = secureStorageService;
     }
 
-    public GmailBearerAuthApi(String laterPrefix) {
+    public GmailBearerAuthApi(String laterPrefix, PropertiesService propertiesService, SecureStorageService secureStorageService) {
 
-        super(laterPrefix, HOST_PROPERTY_NAME);
+        super(laterPrefix, HOST_PROPERTY_NAME, propertiesService, secureStorageService);
+
+        this.secureStorageService = secureStorageService;
     }
 
-    public static void init(Function<String, HttpResponse<String>> refreshAccessToken1){
+    protected static synchronized void init(Function<String, HttpResponse<String>> refreshAccessToken1, SecureStorageService secureStorageService){
 
-        bearerAuthData = BearerAuthApi.init(secretPrePostfix);
+        if(isInitialized){
+            return;
+        }
+
+        Optional<BearerAuthData> bearerAuthDataOpt = BearerAuthApi.init(secretPrePostfix, secureStorageService);
+
+        if(bearerAuthDataOpt.isEmpty()){
+            return;
+        }
+
+        bearerAuthData = bearerAuthDataOpt.get();
 
         refreshAccessToken = refreshAccessToken1;
+
+        isInitialized = true;
     }
 
     @Override
@@ -41,14 +62,14 @@ public class GmailBearerAuthApi extends BearerAuthApi {
         return super.send(httpRequestBuilder, bearerAuthData, refreshAccessToken, secretPrePostfix);
     }
 
-    public static void saveAuthData(String accessToken, String refreshToken){
+    public void saveAuthData(String accessToken, String refreshToken){
 
-        bearerAuthData = BearerAuthApi.saveAuthData(accessToken, refreshToken, secretPrePostfix);
+        bearerAuthData = super.saveAuthData(accessToken, refreshToken, secretPrePostfix);
     }
 
-    public static void logout(){
+    public void logout(){
 
-        bearerAuthData = BearerAuthApi.logout(secretPrePostfix);
+        bearerAuthData = super.logout(secretPrePostfix);
     }
 
     public static boolean isUserLogged(){

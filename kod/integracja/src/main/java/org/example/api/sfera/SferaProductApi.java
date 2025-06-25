@@ -2,6 +2,8 @@ package org.example.api.sfera;
 
 import org.example.api.sfera.request.GeneralRequest;
 import org.example.api.sfera.request.GetProductByCodeAndEanRequest;
+import org.example.service.PropertiesService;
+import org.example.service.SecureStorageService;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
@@ -11,9 +13,11 @@ import java.net.http.HttpResponse;
 @Component
 public class SferaProductApi extends SferaApi{
 
-    public SferaProductApi() {
+    public SferaProductApi(SecureStorageService secureStorageService, PropertiesService propertiesService) {
 
-        super("product");
+        super("product", propertiesService);
+
+        SferaApi.init(secureStorageService);
     }
 
     public HttpResponse<String> getSubiektIdByCodeAndEan(GetProductByCodeAndEanRequest request){

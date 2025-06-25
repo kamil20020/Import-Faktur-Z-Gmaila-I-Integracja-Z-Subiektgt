@@ -6,22 +6,32 @@ import org.example.api.gmail.general.GmailBasicAuthApi;
 import org.example.api.gmail.general.GmailBearerAuthApi;
 import org.example.exception.UnloggedException;
 import org.example.gui.Window;
+import org.example.service.PropertiesService;
+import org.example.service.SecureStorageService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GmailAuthService extends AuthService{
 
-    public GmailAuthService(LoginCodeApi loginCodeApi, LoginTokenApi loginTokenApi) {
+    private final SecureStorageService secureStorageService;
+    private final PropertiesService propertiesService;
+    private final GmailBearerAuthApi gmailBearerAuthApi;
 
-        super(loginCodeApi, loginTokenApi, GmailBasicAuthApi.getSecretKeyPropertyName());
+    public GmailAuthService(LoginCodeApi loginCodeApi, LoginTokenApi loginTokenApi, SecureStorageService secureStorageService, PropertiesService propertiesService, GmailBearerAuthApi gmailBearerAuthApi) {
 
-        GmailBearerAuthApi.init(loginTokenApi::refreshAccessToken);
+        super(loginCodeApi, loginTokenApi, GmailBasicAuthApi.getSecretKeyPropertyName(), secureStorageService);
+
+        this.secureStorageService = secureStorageService;
+        this.propertiesService = propertiesService;
+        this.gmailBearerAuthApi = gmailBearerAuthApi;
+
+        super.init("./auth-data.json");
     }
 
     @Override
     public void initSecret(String gotPassword) throws IllegalStateException, UnloggedException {
 
-        super.initSecret(gotPassword, () -> GmailBasicAuthApi.init());
+        super.initSecret(gotPassword, () -> GmailBasicAuthApi.init(secureStorageService, propertiesService));
     }
 
     @Override
@@ -29,7 +39,7 @@ public class GmailAuthService extends AuthService{
 
          super.login(deviceCode, (accessToken, refreshToken) -> {
 
-            GmailBearerAuthApi.saveAuthData(accessToken, refreshToken);
+             gmailBearerAuthApi.saveAuthData(accessToken, refreshToken);
         });
     }
 
@@ -42,7 +52,7 @@ public class GmailAuthService extends AuthService{
     @Override
     public void logout() {
 
-        GmailBearerAuthApi.logout();
+        gmailBearerAuthApi.logout();
     }
 
 }

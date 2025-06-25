@@ -211,10 +211,6 @@ public class InvoicesGui extends ChangeableGui {
     @Override
     public void load() {
 
-        if (isLoaded()) {
-            return;
-        }
-
         super.load();
 
         paginationTableGui.handleLoadTableExceptions();

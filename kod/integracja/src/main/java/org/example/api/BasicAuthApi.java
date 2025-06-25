@@ -1,43 +1,54 @@
 package org.example.api;
 
 import org.example.api.response.BasicAuthData;
-import org.example.mapper.Base64Mapper;
 import org.example.service.PropertiesService;
-import org.example.service.SecureStorage;
+import org.example.service.SecureStorageService;
 
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.util.Optional;
 
 public abstract class BasicAuthApi extends Api {
 
+    private static boolean isInitialized = false;
+
+    private static BasicAuthData cachedBasicAuthData;
+
     protected static final String SECRET_POSTFIX = "secret";
 
-    public BasicAuthApi(String subDomain, String laterPrefix, String hostPropertyName) {
+    public BasicAuthApi(String subDomain, String laterPrefix, String hostPropertyName, PropertiesService propertiesService) {
 
-        super(subDomain, laterPrefix, hostPropertyName);
+        super(subDomain, laterPrefix, hostPropertyName, propertiesService);
     }
 
-    public BasicAuthApi(String laterPrefix, String hostPropertyName) {
+    public BasicAuthApi(String laterPrefix, String hostPropertyName, PropertiesService propertiesService) {
 
-        super(laterPrefix, hostPropertyName);
+        super(laterPrefix, hostPropertyName, propertiesService);
     }
 
-    protected static BasicAuthData init(String clientIdPropertyName, String secretPrePostfix){
+    protected static synchronized Optional<BasicAuthData> init(String clientIdPropertyName, String secretPrePostfix, SecureStorageService secureStorageService, PropertiesService propertiesService){
+
+        if(isInitialized){
+
+            return Optional.of(cachedBasicAuthData);
+        }
 
         String key = getSecretKeyPropertyName(secretPrePostfix);
 
-        if(!SecureStorage.doesExist(key)){
+        if(!secureStorageService.doesExist(key)){
 
-            return new BasicAuthData(null, "");
+            return Optional.empty();
         }
 
-        String clientId = PropertiesService.getProperty(clientIdPropertyName);
-        String secret = SecureStorage.getCredentialsPassword(key);
+        String clientId = propertiesService.getProperty(clientIdPropertyName);
+        String secret = secureStorageService.getCredentialsPassword(key);
 
-        return new BasicAuthData(
+        isInitialized = true;
+
+        cachedBasicAuthData = new BasicAuthData(
             clientId,
             secret
         );
+
+        return Optional.of(cachedBasicAuthData);
     }
 
     protected static String getSecretKeyPropertyName(String secretPrePostfix){

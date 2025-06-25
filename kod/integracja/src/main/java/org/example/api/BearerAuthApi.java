@@ -1,17 +1,25 @@
 package org.example.api;
 
 import org.example.api.response.AccessTokenResponse;
+import org.example.api.response.BasicAuthData;
 import org.example.api.response.BearerAuthData;
 import org.example.exception.UnloggedException;
-import org.example.service.SecureStorage;
+import org.example.service.PropertiesService;
+import org.example.service.SecureStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Optional;
 import java.util.function.Function;
 
 public abstract class BearerAuthApi extends Api{
+
+    private final SecureStorageService secureStorageService;
+
+    private static boolean isInitialized = false;
+    private static BearerAuthData cachedBearerAuthData;
 
     private static Integer refreshTokenExpiresIn;
 
@@ -20,37 +28,48 @@ public abstract class BearerAuthApi extends Api{
 
     private static final Logger log = LoggerFactory.getLogger(Api.class);
 
-    public BearerAuthApi(String subDomain, String laterPrefix, String hostPropertyName){
+    public BearerAuthApi(String subDomain, String laterPrefix, String hostPropertyName, PropertiesService propertiesService, SecureStorageService secureStorageService){
 
-        super(subDomain, laterPrefix, hostPropertyName);
+        super(subDomain, laterPrefix, hostPropertyName, propertiesService);
+
+        this.secureStorageService = secureStorageService;
     }
 
-    public BearerAuthApi(String laterPrefix, String hostPropertyName){
+    public BearerAuthApi(String laterPrefix, String hostPropertyName, PropertiesService propertiesService, SecureStorageService secureStorageService){
 
-        super(laterPrefix, hostPropertyName);
+        super(laterPrefix, hostPropertyName, propertiesService);
+
+        this.secureStorageService = secureStorageService;
     }
 
-    protected static BearerAuthData init(String keysPrePostfix){
+    protected static synchronized Optional<BearerAuthData> init(String keysPrePostfix, SecureStorageService secureStorageService){
+
+        if(isInitialized){
+
+            return Optional.of(cachedBearerAuthData);
+        }
 
         String accessTokenKey = getAccessTokenKey(keysPrePostfix);
         String refreshTokenKey = getRefreshTokenKey(keysPrePostfix);
 
-        String accessToken = null;
-        String refreshToken = null;
-        String bearerAuthContent = null;
+        if(!secureStorageService.doesExist(accessTokenKey)){
 
-        if(SecureStorage.doesExist(accessTokenKey)){
-
-            accessToken = SecureStorage.getCredentialsPassword(accessTokenKey);
-            refreshToken = SecureStorage.getCredentialsPassword(refreshTokenKey);
-            bearerAuthContent = getBearerAuthContent(accessToken);
+            return Optional.empty();
         }
 
-        return new BearerAuthData(
+        String accessToken = secureStorageService.getCredentialsPassword(accessTokenKey);
+        String refreshToken = secureStorageService.getCredentialsPassword(refreshTokenKey);
+        String bearerAuthContent = getBearerAuthContent(accessToken);
+
+        isInitialized = true;
+
+        cachedBearerAuthData = new BearerAuthData(
             accessToken,
             refreshToken,
             bearerAuthContent
         );
+
+        return Optional.of(cachedBearerAuthData);
     }
 
     protected HttpResponse<String> send(HttpRequest.Builder httpRequestBuilder, BearerAuthData bearerAuthData, Function<String, HttpResponse<String>> refreshAccessToken, String keysPrePostfix) throws IllegalStateException, UnloggedException {
@@ -104,15 +123,19 @@ public abstract class BearerAuthApi extends Api{
         return true;
     }
 
-    protected static BearerAuthData saveAuthData(String accessToken, String refreshToken, String keysPrePostfix){
+    protected BearerAuthData saveAuthData(String accessToken, String refreshToken, String keysPrePostfix){
 
         String accessTokenKey = getAccessTokenKey(keysPrePostfix);
         String refreshTokenKey = getRefreshTokenKey(keysPrePostfix);
 
         String bearerAuthContent = getBearerAuthContent(accessToken);
 
-        SecureStorage.saveCredentials(accessTokenKey, accessToken);
-        SecureStorage.saveCredentials(refreshTokenKey, refreshToken);
+        secureStorageService.saveCredentials(accessTokenKey, accessToken);
+
+        if(refreshToken != null){
+
+            secureStorageService.saveCredentials(refreshTokenKey, refreshToken);
+        }
 
         return new BearerAuthData(
             accessToken,
@@ -121,13 +144,13 @@ public abstract class BearerAuthApi extends Api{
         );
     }
 
-    protected static BearerAuthData logout(String keysPrePostfix){
+    protected BearerAuthData logout(String keysPrePostfix){
 
         String accessTokenKey = getAccessTokenKey(keysPrePostfix);
         String refreshTokenKey = getRefreshTokenKey(keysPrePostfix);
 
-        SecureStorage.delete(accessTokenKey);
-        SecureStorage.delete(refreshTokenKey);
+        secureStorageService.delete(accessTokenKey);
+        secureStorageService.delete(refreshTokenKey);
 
         return new BearerAuthData(
             null,

@@ -1,11 +1,8 @@
 package org.example;
 
 import jakarta.mail.MessagingException;
-import org.example.api.BasicAuthApi;
 import org.example.api.gmail.general.GmailBasicAuthApi;
 import org.example.api.sfera.SferaApi;
-import org.example.service.PropertiesService;
-import org.example.service.SecureStorage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
@@ -16,12 +13,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 public class App {
 
     public static void main(String[] args) throws MessagingException {
-
-        PropertiesService.init();
-        SecureStorage.load();
-
-        GmailBasicAuthApi.init();
-        SferaApi.init();
 
         SpringApplicationBuilder builder = new SpringApplicationBuilder(App.class);
 

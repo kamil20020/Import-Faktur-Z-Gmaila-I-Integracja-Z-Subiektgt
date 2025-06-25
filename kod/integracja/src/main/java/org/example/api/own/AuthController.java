@@ -1,5 +1,6 @@
 package org.example.api.own;
 
+import lombok.RequiredArgsConstructor;
 import org.example.api.LoginTokenApi;
 import org.example.api.gmail.login.GmailLoginTokenApi;
 import org.example.gui.Window;
@@ -8,20 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("https://accounts.google.com/")
 @RestController
+@RequiredArgsConstructor
 public class AuthController {
 
     private final GmailAuthService gmailAuthService;
-
     private final Window window;
-
-    public AuthController(Window window){
-
-        LoginTokenApi loginTokenApi = new GmailLoginTokenApi();
-
-        gmailAuthService = new GmailAuthService(null, loginTokenApi);
-
-        this.window = window;
-    }
 
     @GetMapping()
     public String handleAuthorizationCode(@RequestParam("code") String code){

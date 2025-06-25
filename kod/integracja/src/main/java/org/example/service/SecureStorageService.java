@@ -3,36 +3,33 @@ package org.example.service;
 import com.microsoft.credentialstorage.SecretStore;
 import com.microsoft.credentialstorage.StorageProvider;
 import com.microsoft.credentialstorage.model.StoredCredential;
+import org.springframework.stereotype.Service;
 
-public class SecureStorage {
+@Service
+public class SecureStorageService {
 
     private static final SecretStore<StoredCredential> store = StorageProvider.getCredentialStorage(true, StorageProvider.SecureOption.REQUIRED);
 
-    private static String CREDENTIALS_KEY_PREFIX;
+    private final String CREDENTIALS_KEY_PREFIX;
 
-    private SecureStorage() {
+    public SecureStorageService(PropertiesService propertiesService) {
 
-
+        CREDENTIALS_KEY_PREFIX = propertiesService.getProperty("secure-store.credentials-key") + "-";
     }
 
-    public static void load() {
-
-        CREDENTIALS_KEY_PREFIX = PropertiesService.getProperty("secure-store.credentials-key") + "-";
-    }
-
-    public static boolean doesExist(String credentialsKeyPostfix) {
+    public boolean doesExist(String credentialsKeyPostfix) {
 
         String credentialsKey = getCredentialsKey(credentialsKeyPostfix);
 
         return store.get(credentialsKey) != null;
     }
 
-    public static void saveCredentials(String credentialsKeyPostfix, String password) {
+    public void saveCredentials(String credentialsKeyPostfix, String password) {
 
         saveCredentials(credentialsKeyPostfix, credentialsKeyPostfix, password);
     }
 
-    public static void saveCredentials(String credentialsKeyPostfix, String username, String password) {
+    public void saveCredentials(String credentialsKeyPostfix, String username, String password) {
 
         StoredCredential storedCredential = new StoredCredential(username, password.toCharArray());
 
@@ -41,7 +38,7 @@ public class SecureStorage {
         store.add(credentialsKey, storedCredential);
     }
 
-    public static String getCredentialsPassword(String credentialsKeyPostfix) throws IllegalArgumentException {
+    public String getCredentialsPassword(String credentialsKeyPostfix) throws IllegalArgumentException {
 
         String credentialsKey = getCredentialsKey(credentialsKeyPostfix);
 
@@ -56,7 +53,7 @@ public class SecureStorage {
         return new String(storedPassword);
     }
 
-    public static boolean delete(String credentialsKeyPostfix) {
+    public boolean delete(String credentialsKeyPostfix) {
 
         if (!doesExist(credentialsKeyPostfix)) {
 
@@ -68,7 +65,7 @@ public class SecureStorage {
         return store.delete(credentialsKey);
     }
 
-    private static String getCredentialsKey(String credentialsKeyPostfix) {
+    private String getCredentialsKey(String credentialsKeyPostfix) {
 
         return CREDENTIALS_KEY_PREFIX + credentialsKeyPostfix;
     }

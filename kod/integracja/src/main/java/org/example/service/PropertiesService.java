@@ -1,23 +1,20 @@
 package org.example.service;
 
 import com.sun.jna.platform.unix.solaris.LibKstat;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+@Service
 public class PropertiesService {
 
-    private static final Properties properties = new Properties();
+    private final Properties properties = new Properties();
 
     private static final String PROPERTIES_FILE_NAME = "application.properties";
 
     private PropertiesService(){
-
-
-    }
-
-    public static void init(){
 
         InputStream inputStream = PropertiesService.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME);
 
@@ -31,18 +28,19 @@ public class PropertiesService {
         }
     }
 
-    public static  <T> T getProperty(String propertyName, Class<T> type){
+    public  <T> T getProperty(String propertyName, Class<T> type){
 
         return (T) getProperty(propertyName);
     }
 
-    public static String getProperty(String propertyName){
+    public String getProperty(String propertyName){
 
         return properties.getProperty(propertyName);
     }
 
-    public static Properties getProperties(){
+    public Properties getProperties(){
 
         return properties;
     }
+
 }

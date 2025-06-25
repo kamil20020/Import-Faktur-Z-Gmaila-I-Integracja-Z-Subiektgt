@@ -7,6 +7,8 @@ import org.example.loader.JsonFileLoader;
 import org.example.service.PropertiesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.awt.*;
 import java.io.IOException;
@@ -21,12 +23,16 @@ public abstract class Api {
 
     protected String API_PREFIX;
 
-    private static final HttpClient httpClient = HttpClient.newHttpClient();
+    private final PropertiesService propertiesService;
 
-    private static final Logger log = LoggerFactory.getLogger(Api.class);
     protected static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public Api(String subDomain, String laterPrefix, String hostPropertyName, String protocol){
+    private static final HttpClient httpClient = HttpClient.newHttpClient();
+    private static final Logger log = LoggerFactory.getLogger(Api.class);
+
+    public Api(String subDomain, String laterPrefix, String hostPropertyName, String protocol, PropertiesService propertiesService){
+
+        this.propertiesService = propertiesService;
 
         if(subDomain != null && !subDomain.isBlank()){
             subDomain += '.';
@@ -35,14 +41,14 @@ public abstract class Api {
         API_PREFIX =  protocol + "://" + (subDomain != null ? subDomain : "") + getEnvApiHost(hostPropertyName) + laterPrefix;
     }
 
-    public Api(String subDomain, String laterPrefix, String hostKey){
+    public Api(String subDomain, String laterPrefix, String hostKey, PropertiesService propertiesService){
 
-        this(subDomain, laterPrefix, hostKey, "https");
+        this(subDomain, laterPrefix, hostKey, "https", propertiesService);
     }
 
-    public Api(String laterPrefix, String hostKey){
+    public Api(String laterPrefix, String hostKey, PropertiesService propertiesService){
 
-        this(null, laterPrefix, hostKey);
+        this(null, laterPrefix, hostKey, propertiesService);
     }
 
     protected static String getQueryParamsPostFix(String... titlesAndParams){
@@ -73,7 +79,7 @@ public abstract class Api {
 
     private String getEnvApiHost(String hostPropertyName){
 
-        return PropertiesService.getProperty(hostPropertyName, String.class);
+        return propertiesService.getProperty(hostPropertyName, String.class);
     }
 
     public HttpResponse<String> send(HttpRequest.Builder httpRequestBuilder) throws IllegalStateException{
@@ -81,7 +87,8 @@ public abstract class Api {
         HttpRequest httpRequest = httpRequestBuilder.build();
 
         log.info("Request: ");
-        log.info("Url: " + httpRequest.toString());
+        log.info("Url: " + httpRequest.uri());
+        log.info("Authorization: " + httpRequest.headers().firstValue("Authorization").orElse("") + "\n");
 
         try {
             HttpResponse<String> gotResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());

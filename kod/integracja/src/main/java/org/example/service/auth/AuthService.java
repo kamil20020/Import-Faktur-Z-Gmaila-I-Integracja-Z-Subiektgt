@@ -7,7 +7,7 @@ import org.example.api.response.AccessTokenResponse;
 import org.example.api.response.EncryptedLoginDetails;
 import org.example.exception.UnloggedException;
 import org.example.loader.JsonFileLoader;
-import org.example.service.SecureStorage;
+import org.example.service.SecureStorageService;
 import org.example.service.SecurityService;
 
 import javax.crypto.BadPaddingException;
@@ -19,35 +19,47 @@ import java.util.function.BiConsumer;
 
 public abstract class AuthService {
 
-    private final LoginCodeApi loginCodeApi;
-    private final LoginTokenApi loginTokenApi;
+    private EncryptedLoginDetails encryptedLoginDetails = new EncryptedLoginDetails("", "", "");
+
+    private boolean isInitialized = false;
 
     private final String secretKeyPostfix;
 
-    private EncryptedLoginDetails encryptedLoginDetails = new EncryptedLoginDetails("", "", "");
+    private final LoginCodeApi loginCodeApi;
+    private final LoginTokenApi loginTokenApi;
 
-    public AuthService(LoginCodeApi loginCodeApi, LoginTokenApi loginTokenApi, String secretKeyPostfix){
+    private final SecureStorageService secureStorageService;
+
+    public AuthService(LoginCodeApi loginCodeApi, LoginTokenApi loginTokenApi, String secretKeyPostfix, SecureStorageService secureStorageService){
 
         this.loginCodeApi = loginCodeApi;
         this.loginTokenApi = loginTokenApi;
+
+        this.secureStorageService = secureStorageService;
+
         this.secretKeyPostfix = secretKeyPostfix;
     }
 
     public boolean doesUserPassedFirstLoginToApp(){
 
-        return SecureStorage.doesExist(secretKeyPostfix);
+        return secureStorageService.doesExist(secretKeyPostfix);
     }
 
-    public void init(String authDataFilePath) throws IllegalStateException{
+    protected void init(String authDataFilePath) throws IllegalStateException{
+
+        if(isInitialized){
+            return;
+        }
 
         if(doesUserPassedFirstLoginToApp()){
-
             return;
         }
 
         encryptedLoginDetails = JsonFileLoader.loadFromFileOutside(authDataFilePath, EncryptedLoginDetails.class);
 
         new File(authDataFilePath).delete();
+
+        isInitialized = true;
     }
 
     public void initSecret(String gotPassword, Runnable initAuthApi) throws IllegalStateException, UnloggedException{
@@ -77,7 +89,7 @@ public abstract class AuthService {
 
         byte[] gotAllegroSecret = decryptAllegroSecret(gotDecryptedAes, base64EncryptedSecret);
 
-        SecureStorage.saveCredentials(secretKeyPostfix, new String(gotAllegroSecret));
+        secureStorageService.saveCredentials(secretKeyPostfix, new String(gotAllegroSecret));
 
         initAuthApi.run();
     }

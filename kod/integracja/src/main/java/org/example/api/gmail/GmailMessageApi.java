@@ -1,7 +1,10 @@
 package org.example.api.gmail;
 
+import org.example.api.LoginTokenApi;
 import org.example.api.gmail.general.GmailBearerAuthApi;
 import org.example.exception.UnloggedException;
+import org.example.service.PropertiesService;
+import org.example.service.SecureStorageService;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -11,9 +14,11 @@ import java.net.http.HttpResponse;
 @Service
 public class GmailMessageApi extends GmailBearerAuthApi {
 
-    public GmailMessageApi() {
+    public GmailMessageApi(LoginTokenApi loginTokenApi, PropertiesService propertiesService, SecureStorageService secureStorageService) {
 
-        super("/gmail/v1/users/me/messages");
+        super("/gmail/v1/users/me/messages", propertiesService, secureStorageService);
+
+        GmailBearerAuthApi.init(loginTokenApi::refreshAccessToken, secureStorageService);
     }
 
     public HttpResponse<String> getPage(Integer pageSize, String pageToken) throws IllegalStateException, UnloggedException {
