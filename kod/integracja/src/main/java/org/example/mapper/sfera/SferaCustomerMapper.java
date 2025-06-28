@@ -7,6 +7,11 @@ public interface SferaCustomerMapper {
 
     public static Customer map(TemplateCreator templateCreator){
 
+        if(templateCreator == null){
+
+            return null;
+        }
+
         return Customer.builder()
             .name(templateCreator.name())
             .nip(templateCreator.nip())

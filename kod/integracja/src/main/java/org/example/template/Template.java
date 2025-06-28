@@ -23,20 +23,6 @@ public record Template(
     TemplateRow totalPrice
 ){
 
-    private static final List<String> toCheckDateFormats;
-
-    static {
-
-        toCheckDateFormats = List.of(
-            "yyy-MM-dd",
-            "yyy.MM.dd",
-            "yyy/MM/dd",
-            "dd-MM-yyyy",
-            "dd.MM.yyyy",
-            "dd/MM/yyyy"
-        );
-    }
-
     public static boolean hasCompany(byte[] data, String company){
 
         PdfLinesDetails pdfLinesDetails = getLines(data);
@@ -78,24 +64,7 @@ public record Template(
 
         String[] lines = getLinesForTemplateRow(data, creationDate);
 
-        return extractGeneralDate(lines[0].strip());
-    }
-
-    public static LocalDate extractGeneralDate(String input){
-
-        LocalDate gotDate = null;
-
-        for (String format : toCheckDateFormats){
-
-            gotDate = TemplateConverter.tryToParseLocalDate(format, input);
-
-            if(gotDate != null){
-
-                break;
-            }
-        }
-
-        return gotDate;
+        return TemplateConverter.tryToParseLocalDate(lines[0].strip());
     }
 
     public List<TemplateInvoiceItem> extractInvoiceItems(byte[] data) {
@@ -213,7 +182,7 @@ public record Template(
 
         String[] lines = getLinesForTemplateRow(data, receiveDate);
 
-        return extractGeneralDate(lines[0].strip());
+        return TemplateConverter.tryToParseLocalDate(lines[0].strip());
     }
 
     public String extractTitle(byte[] data){

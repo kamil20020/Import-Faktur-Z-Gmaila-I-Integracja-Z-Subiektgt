@@ -60,14 +60,14 @@ public record TemplateCreator(
         }
 
         return gotName
-                .stripIndent();
+            .stripIndent();
     }
 
     private static String extractCreatorStreet(String[] creatorLines, int index){
 
         return creatorLines[index]
-                .stripIndent()
-                .replaceAll("ul. ", "");
+            .stripIndent()
+            .replaceAll("ul. ", "");
     }
 
     private static String extractCreatorCity(String[] creatorLines, int index){
@@ -75,9 +75,9 @@ public record TemplateCreator(
         StringBuilder stringBuilder = new StringBuilder();
 
         String[] gotWords = creatorLines[index]
-                .stripIndent()
-                .replaceAll("ul. ", "")
-                .split("\\s");
+            .stripIndent()
+            .replaceAll("ul. ", "")
+            .split("\\s");
 
         for(int i = 1; i < gotWords.length; i++){
 
@@ -87,15 +87,15 @@ public record TemplateCreator(
         }
 
         return stringBuilder.toString()
-                .stripIndent();
+            .stripIndent();
     }
 
     private static String extractCreatorPostCode(String[] creatorLines, int index){
 
         return creatorLines[index]
-                .stripIndent()
-                .replaceAll("ul. ", "")
-                .split("\\s")[1];
+            .stripIndent()
+            .replaceAll("ul. ", "")
+            .split("\\s")[1];
     }
 
     public static String extractCreatorNip(String[] creatorLines, int index, Integer skipSpace){
@@ -106,9 +106,9 @@ public record TemplateCreator(
         }
 
         return creatorLines[index]
-                .strip()
-                .replaceAll("NIP: ", "")
-                .replaceAll("PL", "");
+            .strip()
+            .replaceAll("NIP: ", "")
+            .replaceAll("PL", "");
     }
 
 }

@@ -12,6 +12,7 @@ import java.util.Map;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class TemplateInvoiceItem {
@@ -65,6 +66,31 @@ public class TemplateInvoiceItem {
             .quantity(quantity)
             .tax(tax)
             .build();
+    }
+
+    public BigDecimal getTotalPriceWithTax(boolean isInvoiceTaxOriented){
+
+        BigDecimal unitPriceWithTax = getUnitPriceWithTax(isInvoiceTaxOriented);
+
+        BigDecimal quantityConverted = BigDecimal.valueOf(quantity);
+
+        return quantityConverted.multiply(unitPriceWithTax);
+    }
+
+    public BigDecimal getUnitPriceWithTax(boolean isInvoiceTaxOriented){
+
+        if(isInvoiceTaxOriented){
+
+            return price;
+        }
+
+        BigDecimal hundred = BigDecimal.valueOf(100);
+
+        BigDecimal taxFraction = tax.divide(hundred);
+
+        BigDecimal taxValue = price.multiply(taxFraction);
+
+        return price.add(taxValue);
     }
 
 }

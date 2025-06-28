@@ -27,7 +27,16 @@ public class InvoiceService {
 
         for(Message message : messages){
 
-            createInvoice(message);
+            try{
+
+                createInvoice(message);
+            }
+            catch (FileReadException | IllegalStateException e){
+
+                e.printStackTrace();
+
+                log.error(e.getMessage());
+            }
         }
     }
 
@@ -37,16 +46,7 @@ public class InvoiceService {
 
         DataExtractedFromTemplate dataExtractedFromTemplate;
 
-        try{
-
-            dataExtractedFromTemplate = templateService.applyGoodTemplateForData(messageData);
-        }
-        catch (FileReadException e){
-
-            log.error(e.getMessage());
-
-            return;
-        }
+        dataExtractedFromTemplate = templateService.applyGoodTemplateForData(messageData);
 
         CreateOrderRequest request = SferaOrderMapper.map(dataExtractedFromTemplate);
 
