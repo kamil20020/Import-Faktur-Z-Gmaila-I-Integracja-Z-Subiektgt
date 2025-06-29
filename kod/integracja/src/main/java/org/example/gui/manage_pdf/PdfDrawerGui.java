@@ -39,7 +39,7 @@ public class PdfDrawerGui extends JPanel implements MouseListener, MouseMotionLi
     @Override
     public void mouseClicked(MouseEvent e) {
 
-//        System.out.println(e.getX() + " " + e.getY());
+
     }
 
     @Override
@@ -105,4 +105,5 @@ public class PdfDrawerGui extends JPanel implements MouseListener, MouseMotionLi
             repaint();
         }
     }
+
 }

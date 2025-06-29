@@ -124,7 +124,8 @@ public class PdfViewerGui extends ChangeableGui implements KeyListener {
                 loadPage(page + 1);
             }
 
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
             if (page > 0) {
 

@@ -14,15 +14,17 @@ class TemplateInvoiceItemTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-        "2, true, 1, bb, cc",
-        "3, false, 1, bb",
+        "2, true",
+        "3, false",
     })
-    void shouldGetIsRowValid(int minLength, boolean expectedResult, String... values) {
+    void shouldGetIsRowValid(int minLength, boolean expectedResult) {
 
         //given
 
         //when
-        boolean gotResult = TemplateInvoiceItem.isRowValid(values, minLength);
+        String[] row = new String[]{"1", "bb"};
+
+        boolean gotResult = TemplateInvoiceItem.isRowValid(row, minLength);
 
         //then
         assertEquals(expectedResult, gotResult);

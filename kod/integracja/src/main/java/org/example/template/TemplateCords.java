@@ -13,4 +13,5 @@ public record TemplateCords(
 
         return px * SCALE;
     }
+
 }

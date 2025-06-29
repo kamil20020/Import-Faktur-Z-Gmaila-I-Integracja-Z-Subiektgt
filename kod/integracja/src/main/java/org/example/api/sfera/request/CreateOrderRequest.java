@@ -13,6 +13,8 @@ import org.example.external.sfera.generated.Product;
 
 import javax.annotation.processing.Generated;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -54,13 +56,25 @@ public class CreateOrderRequest{
     @JsonProperty("products")
     private List<Product> products;
 
-    public CreateOrderRequest(String reference, String externalId, BigDecimal amount, Customer customer, List<Product> products) {
+    @JsonProperty("creation_date")
+    private LocalDate creationDate;
+
+    @JsonProperty("delivery_date")
+    private LocalDate deliveryDate;
+
+    @JsonProperty("creation_place")
+    private String creationPlace;
+
+    public CreateOrderRequest(String reference, String externalId, BigDecimal amount, Customer customer, List<Product> products, LocalDate creationDate, LocalDate deliveryDate, String creationPlace) {
 
         this.reference = reference;
         this.externalId = externalId;
         this.amount = amount;
         this.customer = customer;
         this.products = products;
+        this.creationDate = creationDate;
+        this.deliveryDate = deliveryDate;
+        this.creationPlace = creationPlace;
     }
 
 }

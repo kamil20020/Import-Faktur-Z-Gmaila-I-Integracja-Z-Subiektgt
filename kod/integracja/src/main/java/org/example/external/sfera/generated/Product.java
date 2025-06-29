@@ -39,4 +39,7 @@ public class Product {
     @JsonProperty("qty")
     private Integer quantity;
 
+    @JsonProperty("tax")
+    private BigDecimal tax;
+
 }

@@ -97,6 +97,17 @@ class Order extends SubiektObj {
 		}
 		$this->orderGt->LiczonyOdCenBrutto = true;	
 
+		if($this->orderDetail['creation_date'] != null){
+
+			$this->orderGt->DataWystawienia = $this->orderDetail['creation_date'];
+		}
+
+		if($this->orderDetail['delivery_date'] != null){
+
+			$this->orderGt->DataZakonczeniaDostawy = $this->orderDetail['delivery_date'];
+		}
+
+
 	}
 
 	public function getPdf(){

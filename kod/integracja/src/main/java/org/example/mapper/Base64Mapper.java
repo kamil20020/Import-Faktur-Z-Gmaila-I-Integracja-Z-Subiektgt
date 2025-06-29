@@ -8,6 +8,7 @@ public interface Base64Mapper {
     static String mapToBase64(String content){
 
         if(content == null){
+
             return null;
         }
 
@@ -20,6 +21,7 @@ public interface Base64Mapper {
     static String mapFromBase64(String base64Content){
 
         if(base64Content == null){
+
             return null;
         }
 
@@ -28,4 +30,5 @@ public interface Base64Mapper {
 
         return new String(content, StandardCharsets.UTF_8);
     }
+
 }

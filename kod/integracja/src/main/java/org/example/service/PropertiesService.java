@@ -14,7 +14,7 @@ public class PropertiesService {
 
     private static final String PROPERTIES_FILE_NAME = "application.properties";
 
-    private PropertiesService(){
+    public PropertiesService(){
 
         InputStream inputStream = PropertiesService.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME);
 

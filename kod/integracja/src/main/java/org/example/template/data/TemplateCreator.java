@@ -1,6 +1,5 @@
 package org.example.template.data;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public record TemplateCreator(
@@ -46,7 +45,7 @@ public record TemplateCreator(
         return creatorLines.length == creatorMaxSize;
     }
 
-    private static String extractCreatorName(String[] creatorLines, Integer creatorMaxSize){
+    public static String extractCreatorName(String[] creatorLines, Integer creatorMaxSize){
 
         String gotName = null;
 
@@ -63,14 +62,14 @@ public record TemplateCreator(
             .stripIndent();
     }
 
-    private static String extractCreatorStreet(String[] creatorLines, int index){
+    public static String extractCreatorStreet(String[] creatorLines, int index){
 
         return creatorLines[index]
             .stripIndent()
             .replaceAll("ul. ", "");
     }
 
-    private static String extractCreatorCity(String[] creatorLines, int index){
+    public static String extractCreatorCity(String[] creatorLines, int index){
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -90,7 +89,7 @@ public record TemplateCreator(
             .stripIndent();
     }
 
-    private static String extractCreatorPostCode(String[] creatorLines, int index){
+    public static String extractCreatorPostCode(String[] creatorLines, int index){
 
         return creatorLines[index]
             .stripIndent()

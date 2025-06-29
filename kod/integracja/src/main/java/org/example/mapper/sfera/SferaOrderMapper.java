@@ -27,11 +27,14 @@ public interface SferaOrderMapper {
         Customer customer = SferaCustomerMapper.map(templateCreator);
 
         return new CreateOrderRequest(
-            "Faktura zakupu",
+            dataExtractedFromTemplate.title(),
             dataExtractedFromTemplate.title(),
             dataExtractedFromTemplate.totalPrice(),
             customer,
-            products
+            products,
+            dataExtractedFromTemplate.creationDate(),
+            dataExtractedFromTemplate.receiveDate(),
+            dataExtractedFromTemplate.place()
         );
     }
 
