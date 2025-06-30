@@ -130,15 +130,6 @@ public abstract class Api {
         return gotConvertedBody;
     }
 
-    public static <T> T extractBody(HttpResponse<String> httpResponse, TypeReference<T> typeReference){
-
-        T gotConvertedBody = JsonFileLoader.loadFromStr(httpResponse.body(), typeReference);
-
-        log.info(gotConvertedBody.toString());
-
-        return gotConvertedBody;
-    }
-
     protected static String handleMapRequestToString(Object object) throws IllegalStateException{
 
         try {

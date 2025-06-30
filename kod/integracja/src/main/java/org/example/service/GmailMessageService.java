@@ -159,28 +159,4 @@ public class GmailMessageService {
         return Base64.getUrlDecoder().decode(rawData);
     }
 
-    public static void main(String[] args){
-
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-            .optionalStart()
-                .appendPattern("EEE, ")
-            .optionalEnd()
-            .appendPattern("d MMM yyyy HH:mm:ss Z")
-            .optionalStart()
-                .appendLiteral(" (")
-                .appendZoneText(TextStyle.SHORT)
-                .appendLiteral(")")
-            .optionalEnd()
-                .toFormatter(Locale.ENGLISH);
-
-        String rawDate = "Fri, 27 Jun 2025 09:22:32 +0200 (CEST)";
-        String rawDate1 = "Fri, 27 Jun 2025 09:22:32 +0200";
-        String rawDate2 = "Mon, 9 Jun 2025 17:10:08 +0200";
-
-        OffsetDateTime date = OffsetDateTime.parse(rawDate2, formatter);
-
-        System.out.println(date);
-
-    }
-
 }

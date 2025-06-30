@@ -1,8 +1,6 @@
 package org.example.api.own;
 
 import lombok.RequiredArgsConstructor;
-import org.example.api.LoginTokenApi;
-import org.example.api.gmail.login.GmailLoginTokenApi;
 import org.example.gui.Window;
 import org.example.service.auth.GmailAuthService;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +21,6 @@ public class AuthController {
         window.handleSuccessAuth();
 
         return "Proszę o powrót do aplikacji Integracja maili z Subiekt GT";
-    }
-
-    @GetMapping("/token")
-    public String handleToken(){
-
-        return "123";
     }
 
 }

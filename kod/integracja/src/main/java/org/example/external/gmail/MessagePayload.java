@@ -57,7 +57,6 @@ public record MessagePayload(
             return attachmentId;
         }
 
-
         return null;
     }
 

@@ -13,9 +13,9 @@ public record TemplateCreator(
 
     public static TemplateCreator extract(String[] creatorLines, Map<String, Integer> fieldsSkipSpaceMappings, Integer creatorMaxSize){
 
-        Integer nameSkipSpace = fieldsSkipSpaceMappings.get("name");
-        Integer streetSkipSpace = fieldsSkipSpaceMappings.get("street");
-        Integer citySkipSpace = fieldsSkipSpaceMappings.get("city");
+//        Integer nameSkipSpace = fieldsSkipSpaceMappings.get("name");
+//        Integer streetSkipSpace = fieldsSkipSpaceMappings.get("street");
+//        Integer citySkipSpace = fieldsSkipSpaceMappings.get("city");
         Integer nipSkipSpace = fieldsSkipSpaceMappings.get("nip");
 
         int nextIndex = 1;
@@ -83,18 +83,21 @@ public record TemplateCreator(
             String value = gotWords[i];
 
             stringBuilder.append(value);
+
+            if(i < gotWords.length - 1){
+
+                stringBuilder.append(" ");
+            }
         }
 
-        return stringBuilder.toString()
-            .stripIndent();
+        return stringBuilder.toString();
     }
 
     public static String extractCreatorPostCode(String[] creatorLines, int index){
 
         return creatorLines[index]
             .stripIndent()
-            .replaceAll("ul. ", "")
-            .split("\\s")[1];
+            .split("\\s")[0];
     }
 
     public static String extractCreatorNip(String[] creatorLines, int index, Integer skipSpace){
@@ -105,9 +108,9 @@ public record TemplateCreator(
         }
 
         return creatorLines[index]
-            .strip()
-            .replaceAll("NIP: ", "")
-            .replaceAll("PL", "");
+            .replaceAll("NIP:", "")
+            .replaceAll("PL", "")
+            .stripIndent();
     }
 
 }

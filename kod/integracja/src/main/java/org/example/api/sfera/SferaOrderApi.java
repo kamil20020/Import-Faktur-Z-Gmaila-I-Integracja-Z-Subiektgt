@@ -52,19 +52,4 @@ public class SferaOrderApi extends SferaApi{
         return send(httpRequestBuilder);
     }
 
-    public HttpResponse<String> getDocumentContent(GetOrderRequest getOrderRequest)  {
-
-        GeneralRequest generalRequest = createGeneralRequest(getOrderRequest);
-
-        String requestStr = handleMapRequestToString(generalRequest);
-
-        HttpRequest.Builder httpRequestBuilder = HttpRequest.newBuilder()
-            .POST(HttpRequest.BodyPublishers.ofString(requestStr))
-            .uri(URI.create(API_PREFIX + "/getpdf"))
-            .header("Content-Type", "application/json")
-            .header("Accept", "application/pdf");
-
-        return send(httpRequestBuilder);
-    }
-
 }
