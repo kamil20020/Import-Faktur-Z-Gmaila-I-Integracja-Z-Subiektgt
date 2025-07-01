@@ -1,5 +1,5 @@
 {
-  "isTaxOriented": true,
+  "isTaxOriented": false,
   "place": {
     "coords": {
       "leftTop": {
@@ -95,8 +95,8 @@
       },
       {
         "name": "price",
-        "xMinCord": 907,
-        "xMaxCord": 1012
+        "xMinCord": 523,
+        "xMaxCord": 633
       },
       {
         "name": "quantity",

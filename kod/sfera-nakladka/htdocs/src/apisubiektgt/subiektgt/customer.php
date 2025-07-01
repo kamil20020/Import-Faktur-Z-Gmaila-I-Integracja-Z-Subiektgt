@@ -13,17 +13,16 @@ class Customer extends SubiektObj{
 	protected $email;
 	protected $ref_id = false;
 	protected $firstname;
-	protected $lastname;
+	protected $surname;
 	protected $post_code;
 	protected $city;
-	protected $tax_id = '';
+	public $nip = '';
 	protected $company_name = '';
 	protected $address;
 	protected $address_no = '';
 	protected $phone = false;
 	protected $is_company = false;
 
-	protected $nip;
 	protected $name;
 	protected $house_nr;
 	protected $street;
@@ -35,10 +34,8 @@ class Customer extends SubiektObj{
 		parent::__construct($subiektGt, $customerDetail);
 		$this->excludeAttr('customerGt');
 
-		return;
-
 		// NIP-e spacji "- "	
-		$this->tax_id = preg_replace('/([ ])/','', $this->tax_id);
+		$this->nip = preg_replace('/([ ])/','', $this->nip);
 	
 		//Wyszukanie po symbolu
 		if($this->ref_id && $subiektGt->Kontrahenci->Istnieje($this->ref_id)){
@@ -48,18 +45,18 @@ class Customer extends SubiektObj{
 		}	
 
 		//Wyszukanie po wprowadzonym NIP-e	
-		if(!$this->customerGt && $this->is_company && $subiektGt->Kontrahenci->Istnieje($this->tax_id)){
-			$this->customerGt = $subiektGt->Kontrahenci->Wczytaj($this->tax_id);
+		if(!$this->customerGt && $this->is_company && $subiektGt->Kontrahenci->Istnieje($this->nip)){
+			$this->customerGt = $subiektGt->Kontrahenci->Wczytaj($this->nip);
 			$this->getGtObject();
 			$this->is_exists = true;				
 		}	
 		
 		//Wyszukanie po NIP-e wycięcie znaków "-"	
-		$this->tax_id = preg_replace('/([\-])/','', $this->tax_id);
+		$this->nip = preg_replace('/([\-])/','', $this->nip);
 
-		if(!$this->customerGt && $this->is_company && $this->tax_id!=''){
-			if( $subiektGt->Kontrahenci->Istnieje($this->tax_id)){
-				$this->customerGt = $subiektGt->Kontrahenci->Wczytaj($this->tax_id);
+		if(!$this->customerGt && $this->is_company && $this->nip!=''){
+			if( $subiektGt->Kontrahenci->Istnieje($this->nip)){
+				$this->customerGt = $subiektGt->Kontrahenci->Wczytaj($this->nip);
 				$this->getGtObject();
 				$this->is_exists = true;				
 			}		
@@ -67,40 +64,51 @@ class Customer extends SubiektObj{
 	}
 
 	protected function setGtObject(){			
-		$this->customerGt->Symbol = substr($this->ref_id,0,20);		
-		if($this->is_company && strlen($this->tax_id)>=10){
-			if(strlen($this->company_name)==0){
+
+		if($this->is_company && strlen($this->nip) >= 10){
+
+			if(strlen($this->company_name) == 0){
+
 				throw new Exception('Nie można utworzyć klienta brak jego nazwy!');
 			}			
-			$this->customerGt->NazwaPelna = $this->company_name;
-			$this->customerGt->Nazwa = mb_substr($this->company_name,0,40);
-			$this->customerGt->Osoba = 0;
-			$this->customerGt->NIP =  substr(sprintf('%s',$this->tax_id),0,17);
-			$this->customerGt->Symbol = $this->customerGt->NIP;	
 
-		}else{
+			$this->customerGt->NazwaPelna = $this->company_name;
+			$this->customerGt->Nazwa = mb_substr($this->company_name, 0, 40);
+			$this->customerGt->Osoba = 0;
+			$this->customerGt->NIP = substr(sprintf('%s', $this->nip), 0, 17);
+			$this->customerGt->Symbol = $this->nip;	
+		}
+		else{
+
 			$this->customerGt->Osoba = 1;
-			$this->customerGt->OsobaImie = substr($this->firstname,0,20);			
-			$this->customerGt->OsobaNazwisko = substr($this->lastname,0,50);
-			$this->customerGt->NazwaPelna = $this->firstname.' '.$this->lastname;
+			$this->customerGt->OsobaImie = substr($this->firstname, 0, 20);			
+			$this->customerGt->OsobaNazwisko = substr($this->surname, 0, 50);
+			$this->customerGt->NazwaPelna = $this->firstname.' '.$this->surname;
+			$this->Symbol = substr($this->customerGt->NazwaPelna, 0, 20);
 		}		
-		$this->customerGt->Email = $this->email;
+
+		#$this->customerGt->Email = $this->email;
 		$this->customerGt->Miejscowosc = $this->city;
-		$this->customerGt->KodPocztowy = substr($this->post_code,0,6);
-		$this->customerGt->Ulica = substr($this->address,0,60);
-		$this->customerGt->NrDomu = substr($this->address_no,0,10);
+		$this->customerGt->KodPocztowy = substr($this->post_code, 0, 6);
+		$this->customerGt->Ulica = substr($this->street, 0, 60);
+		#$this->customerGt->NrDomu = substr($this->address_no, 0, 10);
 
 		if($this->phone){
-			if($this->customerGt->Telefony->Liczba==0){
-				$phoneGt = $this->customerGt->Telefony->Dodaj($this->phone);	
-			}else{
-				$phoneGt = $this->customerGt->Telefony->Element(1);
 
+			if($this->customerGt->Telefony->Liczba == 0){
+
+				$phoneGt = $this->customerGt->Telefony->Dodaj($this->phone);	
 			}
+			else{
+
+				$phoneGt = $this->customerGt->Telefony->Element(1);
+			}
+
 			$phoneGt->Nazwa = 'Primary';
 			$phoneGt->Numer = $this->phone;
 			$phoneGt->Typ = 3;
 		}
+
 		return true;
 	}
 
@@ -109,9 +117,9 @@ class Customer extends SubiektObj{
 		$this->gt_id = $this->customerGt->Identyfikator;
 		$this->ref_id = $this->customerGt->Symbol;		
 		$this->company_name = $this->customerGt->NazwaPelna;
-		$this->tax_id = $this->customerGt->NIP;
+		$this->nip = $this->customerGt->NIP;
 		$this->firstname = $this->customerGt->OsobaImie;		
-		$this->lastname = $this->customerGt->OsobaNazwisko;						
+		$this->surname = $this->customerGt->OsobaNazwisko;						
 		$this->email = $this->customerGt->Email;
 		$this->city = $this->customerGt->Miejscowosc;
 		$this->post_code = $this->customerGt->KodPocztowy;
@@ -135,7 +143,7 @@ class Customer extends SubiektObj{
 		$ret_data  = array(
 			'ref_id' => $data['kh_Symbol'],
 			'company_name' => $data['Firma'],
-			'tax_id' => $data['adr_NIP'],
+			'nip' => $data['adr_NIP'],
 			'fullname' => $data['adr_NazwaPelna'],			
 			'email' => $data['kh_EMail'],
 			'city' => $data['adr_Miejscowosc'],
@@ -149,7 +157,7 @@ class Customer extends SubiektObj{
 
 	public function add(){
 		$this->customerGt = $this->subiektGt->Kontrahenci->Dodaj();
-		$this->setGtObject();		
+		$this->setGtObject();
 		$this->customerGt->Zapisz();		
 		Logger::getInstance()->log('api','Utworzono klienta od klienta: '.$this->customerGt->Symbol,__CLASS__.'->'.__FUNCTION__,__LINE__);
 		$this->gt_id = $this->customerGt->Identyfikator;		

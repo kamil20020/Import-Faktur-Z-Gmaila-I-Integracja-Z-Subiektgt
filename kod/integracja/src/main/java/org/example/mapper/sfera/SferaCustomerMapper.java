@@ -13,11 +13,12 @@ public interface SferaCustomerMapper {
         }
 
         return Customer.builder()
-            .name(templateCreator.name())
+            .companyName(templateCreator.name())
             .nip(templateCreator.nip())
             .street(templateCreator.street())
             .postCode(templateCreator.postCode())
             .city(templateCreator.city())
+            .isCompany(true)
             .build();
     }
 

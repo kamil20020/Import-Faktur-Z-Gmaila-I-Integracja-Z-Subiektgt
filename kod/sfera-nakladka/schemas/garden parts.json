@@ -95,8 +95,8 @@
       },
       {
         "name": "price",
-        "xMinCord": 1010,
-        "xMaxCord": 1091
+        "xMinCord": 910,
+        "xMaxCord": 1012
       },
       {
         "name": "quantity",

@@ -105,9 +105,8 @@ class Order extends SubiektObj {
 		if($this->orderDetail['delivery_date'] != null){
 
 			$this->orderGt->DataZakonczeniaDostawy = $this->orderDetail['delivery_date'];
+			$this->orderGt->DataOtrzymania = $this->orderGt->DataZakonczeniaDostawy;
 		}
-
-
 	}
 
 	public function getPdf(){
@@ -284,25 +283,59 @@ class Order extends SubiektObj {
 				);
 	}
 
+	private function addStandardCustomerToOrder(){
+	
+		$customer = new Customer($this->subiektGt, $this->customer);
+
+		$customer_id = null;
+
+		if(!$customer->is_exists){
+
+			$customer_id = $customer->add()['gt_id'];
+		}
+		else{
+
+			$customer_id = $customer->nip;
+		}
+
+		$this->orderGt->KontrahentId = $customer_id;
+	}
+
 	private function addOneTimeCustomerToOrder(){
 	
-		
+		$oneTimeCustomer = $this->subiektGt->KontrahenciManager->DodajKontrahentaJednorazowego();
 
+		$oneTimeCustomer->Nazwa = Helper::toWin(substr($this->customer['name'], 0, 50));
+		//$oneTimeCustomer->NrDomu = Helper::toWin($this->customer['house_nr']);
+		//$oneTimeCustomer->NrLokalu = Helper::toWin($this->customer['flat_nr']);
+
+		if(isset($this->customer['nip'])){
+
+			$oneTimeCustomer->NIP = Helper::toWin($this->customer['nip']);
+		}
+
+		$oneTimeCustomer->Ulica = Helper::toWin($this->customer['street']);
+		$oneTimeCustomer->KodPocztowy = Helper::toWin($this->customer['post_code']);
+		$oneTimeCustomer->Miejscowosc = Helper::toWin($this->customer['city']);
+		//$oneTimeCustomer->Wojewodztwo = Helper::toWin($this->customer['disctrict']);
+		//$oneTimeCustomer->Panstwo = Helper::toWin($this->customer['country']);
+
+		$oneTimeCustomer->Zapisz();
+
+		$this->orderGt->KontrahentId = $oneTimeCustomer->Identyfikator;
 	}
-
-	private function addExistingCustomerToOrder(){
-	
-		
-
-	}
-
 
 	public function add(){
-		$this->customer = isset($this->orderDetail['customer'])?$this->orderDetail['customer']:false;
+
+		$this->customer = isset($this->orderDetail['customer']) ? $this->orderDetail['customer'] : false;
+
 		if(!$this->customer){
+
 			throw new Exception('Brak danych "customer" dla zamówienia!',1);
 		}
+
 		if(!$this->products){
+
 			throw new Exception('Brak danych "products" dla zamówienia!',1);
 		}
 
@@ -311,51 +344,42 @@ class Order extends SubiektObj {
 			if($this->orderDetail['is_receiver_invoice'] == true){
 
 				$this->orderGt = $this->subiektGt->SuDokumentyManager->DodajFZ();
+
+				$this->addStandardCustomerToOrder();
 			}
 			else{
 
 				$this->orderGt = $this->subiektGt->SuDokumentyManager->DodajFS();
+
+				$this->addOneTimeCustomerToOrder();
 			}
-
-			$oneTimeCustomer = $this->subiektGt->KontrahenciManager->DodajKontrahentaJednorazowego();
-
-			$oneTimeCustomer->Nazwa = Helper::toWin(substr($this->customer['name'], 0, 50));
-			//$oneTimeCustomer->NrDomu = Helper::toWin($this->customer['house_nr']);
-			//$oneTimeCustomer->NrLokalu = Helper::toWin($this->customer['flat_nr']);
-
-			if(isset($this->customer['nip'])){
-
-				$oneTimeCustomer->NIP = Helper::toWin($this->customer['nip']);
-			}
-
-			$oneTimeCustomer->Ulica = Helper::toWin($this->customer['street']);
-			$oneTimeCustomer->KodPocztowy = Helper::toWin($this->customer['post_code']);
-			$oneTimeCustomer->Miejscowosc = Helper::toWin($this->customer['city']);
-			//$oneTimeCustomer->Wojewodztwo = Helper::toWin($this->customer['disctrict']);
-			//$oneTimeCustomer->Panstwo = Helper::toWin($this->customer['country']);
-
-			$oneTimeCustomer->Zapisz();
-
-			$this->orderGt->KontrahentId =  $oneTimeCustomer->Identyfikator;
 		}
 		else{
+
 			$this->orderGt = $this->subiektGt->SuDokumentyManager->DodajPA();
 		}
 
-		$this->orderGt->Uwagi = $this->orderDetail['external_id'];
+		$this->orderGt->Uwagi = Helper::toWin($this->orderDetail['external_id']);
 		
 		foreach($this->products as $p){
 
 			//var_dump($p);
 
 			$add_postition = false;
-			if(!($add_postition = $this->addPosition($p))
-				&& $this->create_product_if_not_exists == false){					
-					throw new Exception('Nie odnaleziono towaru o podanym kodzie: '.$p['code'],1);												
+
+			if(!($add_postition = $this->addPosition($p)) && 
+				 $this->create_product_if_not_exists == false
+			){		
+				
+				throw new Exception('Nie odnaleziono towaru o podanym kodzie: '.$p['code'],1);												
 			}
+
 			if(!$add_postition && $this->create_product_if_not_exists == true){
-				$p_obj = new Product($this->subiektGt,$p);
-				$p_obj->add();				
+
+				$p_obj = new Product($this->subiektGt, $p);
+
+				$p_obj->add();
+
 				$this->addPosition($p);				
 			}
 		}

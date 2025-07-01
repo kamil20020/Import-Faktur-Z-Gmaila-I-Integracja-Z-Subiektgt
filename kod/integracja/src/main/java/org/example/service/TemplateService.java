@@ -71,7 +71,7 @@ public class TemplateService {
 
         if(foundTemplateOpt.isEmpty()){
 
-            throw new FileReadException("Could not find good template");
+            throw new FileReadException("Nie udało się odnaleźć odpowiedniego szablonu faktury");
         }
 
         Template foundTemplate = foundTemplateOpt.get();
@@ -119,9 +119,9 @@ public class TemplateService {
         TemplateService templateService = new TemplateService();
 
         List<String> invoices = List.of(
-            "invoices/fra z nr.pdf",
-            "invoices/329157-2025.pdf",
-            "invoices/FS015302025B26A.pdf"
+                "invoices/techpil.pdf",
+                "invoices/garden parts.pdf",
+                "invoices/rozkwit.pdf"
         );
 
         String invoiceName = invoices.get(0);

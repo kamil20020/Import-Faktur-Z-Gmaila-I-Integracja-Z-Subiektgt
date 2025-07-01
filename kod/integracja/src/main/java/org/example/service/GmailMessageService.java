@@ -159,4 +159,9 @@ public class GmailMessageService {
         return Base64.getUrlDecoder().decode(rawData);
     }
 
+    public void redirectToMessage(String messageId){
+
+        gmailMessageApi.redirectToMessage(messageId);
+    }
+
 }

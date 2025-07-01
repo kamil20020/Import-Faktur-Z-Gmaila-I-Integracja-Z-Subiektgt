@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public interface SferaOrderMapper {
 
-    public static CreateOrderRequest map(DataExtractedFromTemplate dataExtractedFromTemplate){
+    public static CreateOrderRequest map(DataExtractedFromTemplate dataExtractedFromTemplate, String externalId){
 
         boolean isInvoiceTaxOriented = dataExtractedFromTemplate.isTaxOriented();
 
@@ -28,7 +28,7 @@ public interface SferaOrderMapper {
 
         return new CreateOrderRequest(
             dataExtractedFromTemplate.title(),
-            dataExtractedFromTemplate.title(),
+            externalId,
             dataExtractedFromTemplate.totalPrice(),
             customer,
             products,

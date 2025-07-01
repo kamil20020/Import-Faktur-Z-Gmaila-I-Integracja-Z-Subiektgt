@@ -8,13 +8,11 @@ import org.example.api.sfera.request.GetDocumentByExternalIdRequest;
 import org.example.api.sfera.response.CreatedDocumentResponse;
 import org.example.api.sfera.response.ErrorResponse;
 import org.example.api.sfera.response.GeneralResponse;
-import org.example.external.sfera.generated.ResponseStatus;
+import org.example.external.sfera.own.ResponseStatus;
 import org.example.loader.JsonFileLoader;
 import org.springframework.stereotype.Service;
 
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -43,10 +41,6 @@ public class SferaOrderService {
 
         for (CreateOrderRequest request : requests) {
 
-//            if ((selectedOrder.getExternalId() != null && !selectedOrder.getExternalId().isEmpty()) || selectedOrder.isHasDocument()) {
-//                continue;
-//            }
-
             try {
 
                 create(request);
@@ -63,9 +57,7 @@ public class SferaOrderService {
         return numberOfSavedOrders;
     }
 
-    public void create(CreateOrderRequest createOrderRequest) throws IllegalStateException {
-
-//        CreateOrderRequest createOrderRequest = SferaOrderMapper.map(order);
+    public String create(CreateOrderRequest createOrderRequest) throws IllegalStateException {
 
         HttpResponse<String> gotResponse = sferaOrderApi.create(createOrderRequest);
 
@@ -73,9 +65,7 @@ public class SferaOrderService {
 
         CreatedDocumentResponse createdDocumentResponse = JsonFileLoader.loadFromStr(gotGeneralResponse.getData(), CreatedDocumentResponse.class);
 
-        String gotOrderExternalId = createdDocumentResponse.getOrderExternalId();
-
-//        order.setExternalId(gotOrderExternalId);
+        return createdDocumentResponse.getOrderExternalId();
     }
 
     public String getSubiektIdByExternalId(String orderExternalId) throws IllegalStateException{

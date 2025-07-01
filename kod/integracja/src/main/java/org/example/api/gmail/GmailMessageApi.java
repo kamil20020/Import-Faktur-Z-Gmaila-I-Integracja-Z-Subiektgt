@@ -1,5 +1,7 @@
 package org.example.api.gmail;
 
+import org.example.App;
+import org.example.api.Api;
 import org.example.api.LoginTokenApi;
 import org.example.api.gmail.general.GmailBearerAuthApi;
 import org.example.exception.UnloggedException;
@@ -8,8 +10,10 @@ import org.example.service.SecureStorageService;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class GmailMessageApi extends GmailBearerAuthApi {
@@ -53,6 +57,15 @@ public class GmailMessageApi extends GmailBearerAuthApi {
             .header("Content-Type", "application/json");
 
         return super.send(httpRequestBuilder);
+    }
+
+    public void redirectToMessage(String rawMessageId){
+
+        String encodedMessageId = URLEncoder.encode(rawMessageId, StandardCharsets.UTF_8);
+
+        Api.redirect(
+            "https://mail.google.com/mail/u/0/#inbox/" + encodedMessageId
+        );
     }
 
 }

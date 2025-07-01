@@ -17,7 +17,7 @@ class SferaProductMapperTest {
         "true, 89.52",
         "false, 110.1096",
     })
-    void shouldMapWithInvoiceTax(boolean invoiceIsTax, BigDecimal expectedTotalPriceWithTax) {
+    void shouldMap(boolean invoiceIsTax, BigDecimal expectedTotalPriceWithTax) {
 
         //given
         TemplateInvoiceItem templateInvoiceItem = TemplateInvoiceItem.builder()

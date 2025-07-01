@@ -25,7 +25,7 @@ class SferaCustomerMapperTest {
 
         //then
         assertNotNull(gotCustomer);
-        assertEquals(templateCreator.name(), gotCustomer.getName());
+        assertEquals(templateCreator.name(), gotCustomer.getCompanyName());
         assertEquals(templateCreator.street(), gotCustomer.getStreet());
         assertEquals(templateCreator.city(), gotCustomer.getCity());
         assertEquals(templateCreator.postCode(), gotCustomer.getPostCode());

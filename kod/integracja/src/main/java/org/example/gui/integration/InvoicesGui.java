@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
@@ -38,20 +39,17 @@ public class InvoicesGui extends ChangeableGui {
     private String actualPageToken = "";
     private String nextPageToken = "";
 
-    private final GmailMessageService gmailMessageService;
     private final InvoiceService invoiceService;
 
     private Runnable handleLogout;
 
-    private static final int SUBIEKT_ID_SENT_COL_INDEX = 1;
-    private static final int ALLEGRO_IS_INVOICE_COL_INDEX = 6;
-    private static final int ALLEGRO_DOCUMENT_SENT_COL_INDEX = 7;
+    private static final int GMAIL_ID_COL_INDEX = 0;
+    private static final int SUBIEKT_ID_COL_INDEX = 1;
 
     private static final String NOT_GIVEN_VALUE = "Brak";
 
-    public InvoicesGui(GmailMessageService gmailMessageService, InvoiceService invoiceService) {
+    public InvoicesGui(InvoiceService invoiceService) {
 
-        this.gmailMessageService = gmailMessageService;
         this.invoiceService = invoiceService;
 
         $$$setupUI$$$();
@@ -74,7 +72,7 @@ public class InvoicesGui extends ChangeableGui {
 
         try {
 
-            messagesPageResponse = gmailMessageService.getPage(limit, actualPageToken);
+            messagesPageResponse = invoiceService.getMessagesPage(limit, actualPageToken);
         } catch (UnloggedException e) {
 
             handleLogout.run();
@@ -84,7 +82,7 @@ public class InvoicesGui extends ChangeableGui {
 
         nextPageToken = messagesPageResponse.nextPageToken();
 
-        messagesPage = gmailMessageService.extractMessages(messagesPageResponse.messageHeaders());
+        messagesPage = invoiceService.loadInvoicesDetails(messagesPageResponse.messageHeaders());
 
         int totalNumberOfRows = messagesPageResponse.totalNumberOfElements();
 
@@ -119,6 +117,7 @@ public class InvoicesGui extends ChangeableGui {
 
         return new Object[]{
                 message.getId(),
+                message.getExternalId() != null ? message.getExternalId() : NOT_GIVEN_VALUE,
                 message.getFrom(),
                 message.getSubject(),
                 dateTimeFormatter.format(date)
@@ -176,41 +175,111 @@ public class InvoicesGui extends ChangeableGui {
 
             return;
         }
-//
+
         mainPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//
+
         new Thread(() -> {
-//
-            invoiceService.createInvoices(selectedMessages); //int numberOfSavedOrders =
-//
+
+            Map<String, String> errors = invoiceService.createInvoices(selectedMessages);
+
             SwingUtilities.invokeLater(() -> {
-//
-//                for (int i = 0; i < selectedOrders.size(); i++) {
-//
-//                    Order selectedOrder = selectedOrders.get(i);
-//
-//                    int rowIndex = selectedRowsIndices[i];
-//
-//                    if (selectedOrder.getExternalId() == null) {
-//                        continue;
-//                    }
-//
-//                    String orderId = selectedOrder.getId().toString();
-//
-//                    updateTableRowCol(rowIndex, SUBIEKT_ID_SENT_COL_INDEX, orderId, selectedOrder.getExternalId());
-//                }
-//
+
+                for (int i = 0; i < selectedMessages.size(); i++) {
+
+                    Message selectedMessage = selectedMessages.get(i);
+
+                    int rowIndex = selectedRowsIndices[i];
+
+                    String invoiceId = selectedMessage.getId();
+                    String invoiceExternalId = selectedMessage.getExternalId();
+
+                    if (invoiceExternalId == null) {
+                        continue;
+                    }
+
+                    updateTableRowCol(rowIndex, SUBIEKT_ID_COL_INDEX, invoiceId, invoiceExternalId);
+                }
+
                 mainPanel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-//
+
                 JOptionPane.showMessageDialog(
                         mainPanel,
-                        "Zapisano " + 0 + " faktur zakupu w Subiekcie", //numberOfSavedOrders
+                        "Zapisano " + (selectedMessages.size() - errors.size()) + " faktur zakupu w Subiekcie",
                         "Powiadomienie",
                         JOptionPane.INFORMATION_MESSAGE
                 );
+
+                displayInvoicesErrors(errors, "Powiadomienia o błędach przy tworzeniu faktur zakupu w Subiekcie");
             });
-//
+
         }).start();
+    }
+
+    private void displayInvoicesErrors(Map<String, String> errors, String dialogTitle) {
+
+        if (errors.isEmpty()) {
+            return;
+        }
+
+        GridBagLayout layout = new GridBagLayout();
+
+        JPanel panel = new JPanel(layout);
+
+        panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.fill = GridBagConstraints.NONE;
+
+        int row = 0;
+
+        for (Map.Entry<String, String> error : errors.entrySet()) {
+
+            String orderIdStr = error.getKey();
+            String errorMessage = error.getValue();
+
+            JLabel orderIdLabel = new JLabel(orderIdStr);
+            JLabel orderErrorMessageLabel = new JLabel(errorMessage);
+
+            int weightY = 0;
+
+            if (row == errors.size() - 1) {
+
+                weightY = 1;
+            }
+
+            gbc.gridx = 0;
+            gbc.gridy = row;
+            gbc.weightx = 0;
+            gbc.weighty = weightY;
+            panel.add(orderIdLabel, gbc);
+
+            gbc.gridx = 1;
+            gbc.gridy = row;
+            gbc.weightx = 1;
+            gbc.weighty = weightY;
+            orderErrorMessageLabel.setHorizontalAlignment(SwingConstants.LEFT);
+            panel.add(orderErrorMessageLabel, gbc);
+
+            row++;
+        }
+
+        JScrollPane scrollPane = new JScrollPane(panel);
+
+        JDialog dialog = new JDialog((Frame) null, dialogTitle, false);
+
+        dialog.setSize(680, 400);
+        dialog.setLocationRelativeTo(panel);
+
+        dialog.add(scrollPane);
+
+        dialog.setVisible(true);
+    }
+
+    private void handleRedirectToMessage(String messageId) {
+
+        invoiceService.redirectToMessage(messageId);
     }
 
     @Override
@@ -229,9 +298,11 @@ public class InvoicesGui extends ChangeableGui {
     private void createUIComponents() {
         // TODO: place custom component creation code here
 
-        String[] tableHeaders = {"Id wiadomości email", "Adres email nadawcy", "Temat wiadomości", "Data"};
+        String[] tableHeaders = {"Id wiadomości email", "Subiekt Id", "Adres email nadawcy", "Temat wiadomości", "Data"};
 
         paginationTableGui = new PaginationTableGui(tableHeaders, this::loadData, this::convertToRow);
+
+        paginationTableGui.setOnClickColumn(GMAIL_ID_COL_INDEX, this::handleRedirectToMessage);
 
         ordersPanelPlaceholder = paginationTableGui.getMainPanel();
     }

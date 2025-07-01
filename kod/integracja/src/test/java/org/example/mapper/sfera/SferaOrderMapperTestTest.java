@@ -27,6 +27,8 @@ class SferaOrderMapperTestTest {
     void shouldMap() {
 
         //given
+        String expectedExternalId = "external-id";
+
         TemplateCreator templateCreator = new TemplateCreator(
             null,
             null,
@@ -68,7 +70,7 @@ class SferaOrderMapperTestTest {
                 sferaProductMapperMock.when(() -> SferaProductMapper.map(eq(templateInvoiceItem), anyBoolean())).thenReturn(expectedProduct);
             }
 
-            CreateOrderRequest request = SferaOrderMapper.map(dataExtractedFromTemplate);
+            CreateOrderRequest request = SferaOrderMapper.map(dataExtractedFromTemplate, expectedExternalId);
 
             //then
             assertNotNull(request);
@@ -76,7 +78,7 @@ class SferaOrderMapperTestTest {
             assertEquals(dataExtractedFromTemplate.creationDate(), request.getCreationDate());
             assertEquals(dataExtractedFromTemplate.receiveDate(), request.getDeliveryDate());
             assertEquals(dataExtractedFromTemplate.title(), request.getReference());
-            assertEquals(dataExtractedFromTemplate.title(), request.getExternalId());
+            assertEquals(expectedExternalId, request.getExternalId());
             assertEquals(expectedCustomer, request.getCustomer());
             assertTrue(request.getProducts().containsAll(expectedProducts));
             assertEquals(dataExtractedFromTemplate.isTaxOriented(), request.isInvoiceRequired());

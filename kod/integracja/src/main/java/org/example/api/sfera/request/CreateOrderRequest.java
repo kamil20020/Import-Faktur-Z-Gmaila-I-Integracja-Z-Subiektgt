@@ -65,6 +65,9 @@ public class CreateOrderRequest{
     @JsonProperty("creation_place")
     private String creationPlace;
 
+    @JsonProperty("create_product_if_not_exists")
+    private Boolean shouldCreateProductIfNotExists = true;
+
     public CreateOrderRequest(String reference, String externalId, BigDecimal amount, Customer customer, List<Product> products, LocalDate creationDate, LocalDate deliveryDate, String creationPlace) {
 
         this.reference = reference;

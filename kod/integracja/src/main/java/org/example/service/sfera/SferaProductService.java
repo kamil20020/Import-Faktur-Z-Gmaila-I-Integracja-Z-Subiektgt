@@ -6,12 +6,10 @@ import org.example.api.sfera.SferaProductApi;
 import org.example.api.sfera.request.GetProductByCodeAndEanRequest;
 import org.example.api.sfera.response.ErrorResponse;
 import org.example.api.sfera.response.GeneralResponse;
-import org.example.external.sfera.generated.ResponseStatus;
+import org.example.external.sfera.own.ResponseStatus;
 import org.springframework.stereotype.Service;
 
 import java.net.http.HttpResponse;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

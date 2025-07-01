@@ -1,5 +1,6 @@
 package org.example.external.gmail;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -20,5 +21,21 @@ public class Message {
 
     @ToString.Exclude
     private byte[] attachmentData;
+
+    @JsonIgnore
+    private String externalId;
+
+    public void setExternalId(String externalId){
+
+        this.externalId = externalId;
+
+        if(externalId == null){
+            return;
+        }
+
+        this.externalId = this.externalId
+            .replaceAll("\"", "");
+    }
+
 
 }

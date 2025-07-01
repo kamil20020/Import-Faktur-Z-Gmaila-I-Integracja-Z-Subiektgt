@@ -3,6 +3,7 @@ package org.example.api;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.external.sfera.own.JavaTimeObjectMapper;
 import org.example.loader.JsonFileLoader;
 import org.example.service.PropertiesService;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public abstract class Api {
 
     private final PropertiesService propertiesService;
 
-    protected static final ObjectMapper objectMapper = new ObjectMapper();
+    protected static final ObjectMapper objectMapper = new JavaTimeObjectMapper();
 
     private static final HttpClient httpClient = HttpClient.newHttpClient();
     private static final Logger log = LoggerFactory.getLogger(Api.class);

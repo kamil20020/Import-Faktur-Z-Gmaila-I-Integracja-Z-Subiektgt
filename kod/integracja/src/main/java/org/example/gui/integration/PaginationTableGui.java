@@ -303,6 +303,18 @@ public class PaginationTableGui extends JPanel {
         tableModel.setValueAt(newValue, rowIndex, colIndex);
     }
 
+    public void setOnClickColumn(int columnIndex, Consumer<String> handleClick) {
+
+        table.getSelectionModel().addListSelectionListener(e -> {
+
+            int selectedRowIndex = table.getSelectedRow();
+
+            String gotValue = (String) tableModel.getValueAt(selectedRowIndex, columnIndex);
+
+            handleClick.accept(gotValue);
+        });
+    }
+
     private void createUIComponents() {
         // TODO: place custom component creation code here
 
