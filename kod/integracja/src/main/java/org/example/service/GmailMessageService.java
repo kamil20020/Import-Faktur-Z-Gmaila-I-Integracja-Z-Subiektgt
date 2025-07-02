@@ -114,7 +114,7 @@ public class GmailMessageService {
         return getCompleteMessage(messageSummary);
     }
 
-    private Message getCompleteMessage(MessageSummary messageSummary){
+    public Message getCompleteMessage(MessageSummary messageSummary){
 
         String messageId = messageSummary.id();
         String attachmentId = messageSummary.attachmentId();
