@@ -40,15 +40,17 @@ public class InvoiceService {
         List<Message> gotMessages = gmailMessageService.extractMessages(messagesHeaders);
 
         gotMessages
-            .forEach(message -> {
-
-                String messageId = message.getId();
-                String messageExternalId = sferaOrderService.getSubiektIdByExternalId(messageId);
-
-                message.setExternalId(messageExternalId);
-            });
+            .forEach(this::loadInvoiceDetailsAfterGeneralLoad);
 
         return gotMessages;
+    }
+
+    public void loadInvoiceDetailsAfterGeneralLoad(Message message){
+
+        String messageId = message.getId();
+        String messageExternalId = sferaOrderService.getSubiektIdByExternalId(messageId);
+
+        message.setExternalId(messageExternalId);
     }
 
     public Map<String, String> createInvoices(List<Message> messages){
@@ -62,7 +64,8 @@ public class InvoiceService {
             try {
 
                 createInvoice(message);
-            } catch (IllegalStateException | ConflictException e) {
+            }
+            catch (IllegalStateException | ConflictException e) {
 
                 e.printStackTrace();
 
@@ -75,7 +78,7 @@ public class InvoiceService {
         return errors;
     }
 
-    private void createInvoice(Message message) throws ConflictException, IllegalStateException {
+    public void createInvoice(Message message) throws ConflictException, IllegalStateException {
 
         if(message.getExternalId() != null){
 

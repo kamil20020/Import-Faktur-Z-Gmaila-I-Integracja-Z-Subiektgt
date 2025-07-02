@@ -30,6 +30,7 @@ class SferaCustomerMapperTest {
         assertEquals(templateCreator.city(), gotCustomer.getCity());
         assertEquals(templateCreator.postCode(), gotCustomer.getPostCode());
         assertEquals(templateCreator.nip(), gotCustomer.getNip());
+        assertTrue(gotCustomer.getIsCompany());
     }
 
     @Test

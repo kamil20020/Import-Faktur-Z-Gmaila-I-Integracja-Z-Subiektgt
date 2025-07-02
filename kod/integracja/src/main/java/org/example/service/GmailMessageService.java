@@ -134,7 +134,7 @@ public class GmailMessageService {
             .build();
     }
 
-    private byte[] getMessageAttachment(String messageId, String attachmentId){
+    public byte[] getMessageAttachment(String messageId, String attachmentId){
 
         HttpResponse<String> gotResponse = gmailMessageApi.getMessageAttachment(messageId, attachmentId);
 

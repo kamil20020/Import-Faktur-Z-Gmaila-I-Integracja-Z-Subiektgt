@@ -39,8 +39,6 @@ public class Window {
         frame.setSize(1000, 800);
         frame.setLocationRelativeTo(null);
 
-        loginGui.setHandleSuccessAuth(this::handleSuccessAuth);
-
         handleAuth();
 
         frame.add(mainPanel);

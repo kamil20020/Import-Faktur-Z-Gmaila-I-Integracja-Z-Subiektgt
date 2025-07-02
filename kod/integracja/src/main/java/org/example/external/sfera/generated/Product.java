@@ -17,9 +17,10 @@ import java.math.BigDecimal;
 @JsonPropertyOrder({
     "code",
     "ean",
-    "qty",
-    "price",
     "name",
+    "price",
+    "qty",
+    "vat",
 })
 @Generated("jsonschema2pojo")
 public class Product {
@@ -39,7 +40,7 @@ public class Product {
     @JsonProperty("qty")
     private Integer quantity;
 
-    @JsonProperty("tax")
+    @JsonProperty("vat")
     private BigDecimal tax;
 
 }

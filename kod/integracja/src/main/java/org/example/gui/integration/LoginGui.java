@@ -25,7 +25,6 @@ public class LoginGui extends ChangeableGui {
     private String deviceCode;
 
     private final AuthService authService;
-    private Runnable handleSuccessAuth;
 
     public LoginGui(AuthService authService) {
 
@@ -41,16 +40,7 @@ public class LoginGui extends ChangeableGui {
 
                 handleGenerateCode();
             }
-            else {
-
-                handleLogin();
-            }
         });
-    }
-
-    public void setHandleSuccessAuth(Runnable handleSuccessAuth) {
-
-        this.handleSuccessAuth = handleSuccessAuth;
     }
 
     public void handleLogout() {
@@ -111,8 +101,6 @@ public class LoginGui extends ChangeableGui {
 
     private void handleGenerateCode() {
 
-//        GenerateDeviceCodeResponse generateDeviceCodeResponse;
-
         try {
             authService.generateCode();
         } catch (IllegalStateException e) {
@@ -126,64 +114,6 @@ public class LoginGui extends ChangeableGui {
 
             return;
         }
-
-//        String verificationUrlComplete = generateDeviceCodeResponse.getVerificationUriComplete();
-//        deviceCode = generateDeviceCodeResponse.getDeviceCode();
-//
-//        handleVerificationUriComplete(verificationUrlComplete);
-    }
-
-    private void handleVerificationUriComplete(String verificationUrlComplete) {
-
-        JOptionPane.showMessageDialog(
-                mainPanel,
-                """
-                            Proszę o zaakceptowanie przyznania uprawnień aplikacji
-                            do niektórych własnych danych w Allegro. Aplikacja
-                            przekieruje do strony Allegro po naciśnięciu
-                            przycisku OK
-                        """,
-                "Powiadomienie",
-                JOptionPane.INFORMATION_MESSAGE
-        );
-
-        URI verificationUriComplete = URI.create(verificationUrlComplete);
-
-        try {
-            Desktop.getDesktop().browse(verificationUriComplete);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        loginButton.setText("Gotowe");
-    }
-
-    private void handleLogin() {
-
-//        try {
-//            authService.loginToAllegro(deviceCode);
-//        } catch (IllegalStateException e) {
-//
-//            e.printStackTrace();
-//
-//            JOptionPane.showMessageDialog(
-//                    mainPanel,
-//                    "Prawdopodobnie nie zezwolono dostępu aplikacji do Allegro",
-//                    "Powiadomienie o błędzie",
-//                    JOptionPane.ERROR_MESSAGE
-//            );
-//
-//            return;
-//        }
-//
-//        handleSuccessAuth.run();
-//
-//        JOptionPane.showMessageDialog(
-//                mainPanel,
-//                "Pomyślnie połączono aplikację z Allegro",
-//                "Powiadomienie",
-//                JOptionPane.INFORMATION_MESSAGE
-//        );
     }
 
     public JPanel getMainPanel() {

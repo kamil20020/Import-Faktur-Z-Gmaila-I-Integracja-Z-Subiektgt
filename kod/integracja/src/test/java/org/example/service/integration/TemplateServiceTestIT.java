@@ -191,7 +191,7 @@ class TemplateServiceTestIT {
         test("invoices/rozkwit.pdf", expectedFirstSecondLastItems, expectedData, expectedNumberOfItems);
     }
 
-    void test(String invoiceFilePath, List<TemplateInvoiceItem> expectedFirstSecondLastItems, DataExtractedFromTemplate expectedData, Integer expectedNumberOfItems) {
+    private void test(String invoiceFilePath, List<TemplateInvoiceItem> expectedFirstSecondLastItems, DataExtractedFromTemplate expectedData, Integer expectedNumberOfItems) {
 
         //given
         byte[] data = FileReader.getDataFromFileInside(invoiceFilePath);
