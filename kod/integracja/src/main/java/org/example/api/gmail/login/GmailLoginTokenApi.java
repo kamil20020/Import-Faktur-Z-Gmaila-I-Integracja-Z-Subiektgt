@@ -2,6 +2,7 @@ package org.example.api.gmail.login;
 
 import org.example.api.LoginTokenApi;
 import org.example.api.gmail.general.GmailBasicAuthApi;
+import org.example.api.gmail.general.GmailBearerAuthApi;
 import org.example.service.PropertiesService;
 import org.example.service.SecureStorageService;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class GmailLoginTokenApi extends GmailBasicAuthApi implements LoginTokenA
         super("/token", HOST_PROPERTY_NAME, propertiesService);
 
         GmailBasicAuthApi.init(secureStorageService, propertiesService);
+        GmailBearerAuthApi.init(this::refreshAccessToken, secureStorageService);
     }
 
     @Override

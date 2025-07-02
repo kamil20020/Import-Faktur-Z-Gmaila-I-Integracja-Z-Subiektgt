@@ -21,8 +21,6 @@ public class GmailMessageApi extends GmailBearerAuthApi {
     public GmailMessageApi(LoginTokenApi loginTokenApi, PropertiesService propertiesService, SecureStorageService secureStorageService) {
 
         super("/gmail/v1/users/me/messages", propertiesService, secureStorageService);
-
-        GmailBearerAuthApi.init(loginTokenApi::refreshAccessToken, secureStorageService);
     }
 
     public HttpResponse<String> getPage(Integer pageSize, String pageToken) throws IllegalStateException, UnloggedException {

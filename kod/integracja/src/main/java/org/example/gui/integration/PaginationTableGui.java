@@ -6,6 +6,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -288,8 +290,8 @@ public class PaginationTableGui extends JPanel {
     public void updateRowCol(int rowIndex, int colIndex, String firstFieldId, Object newValue) throws IllegalStateException {
 
         Optional<Object[]> foundRowOpt = data.stream()
-                .filter(dataRow -> Objects.equals(dataRow[0], firstFieldId))
-                .findFirst();
+            .filter(dataRow -> Objects.equals(dataRow[0], firstFieldId))
+            .findFirst();
 
         if (foundRowOpt.isEmpty()) {
 
@@ -305,13 +307,31 @@ public class PaginationTableGui extends JPanel {
 
     public void setOnClickColumn(int columnIndex, Consumer<String> handleClick) {
 
-        table.getSelectionModel().addListSelectionListener(e -> {
+        table.addMouseListener(new MouseAdapter() {
 
-            int selectedRowIndex = table.getSelectedRow();
+            @Override
+            public void mouseClicked(MouseEvent e) {
 
-            String gotValue = (String) tableModel.getValueAt(selectedRowIndex, columnIndex);
+                if (e.getButton() != 3) { //other than right mouse button
 
-            handleClick.accept(gotValue);
+                    return;
+                }
+
+                Point point = e.getPoint();
+
+                int clickedRow = table.rowAtPoint(point);
+
+                int selectedRowIndex = table.getSelectedRow();
+
+                if (clickedRow == -1 || selectedRowIndex == -1 || clickedRow != selectedRowIndex) {
+
+                    return;
+                }
+
+                String gotValue = (String) tableModel.getValueAt(selectedRowIndex, columnIndex);
+
+                handleClick.accept(gotValue);
+            }
         });
     }
 

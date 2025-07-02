@@ -74,6 +74,8 @@ public abstract class BearerAuthApi extends Api{
 
     protected HttpResponse<String> send(HttpRequest.Builder httpRequestBuilder, BearerAuthData bearerAuthData, Function<String, HttpResponse<String>> refreshAccessToken, String keysPrePostfix) throws IllegalStateException, UnloggedException {
 
+        HttpRequest.Builder oldBuilder = httpRequestBuilder.copy();
+
         httpRequestBuilder
             .header("Authorization", bearerAuthData.headerContent());
 
@@ -85,7 +87,13 @@ public abstract class BearerAuthApi extends Api{
 
             log.info("Refreshing access token");
 
-            if(!handleRefreshAccessToken(bearerAuthData.refreshToken(), refreshAccessToken, keysPrePostfix)){
+            Optional<BearerAuthData> gotBearerAuthDataAfterRefreshTokenOpt = handleRefreshAccessToken(
+                bearerAuthData.refreshToken(),
+                refreshAccessToken,
+                keysPrePostfix
+            );
+
+            if(gotBearerAuthDataAfterRefreshTokenOpt.isEmpty()){
 
                 log.info("401 - Expired refresh token");
 
@@ -95,17 +103,21 @@ public abstract class BearerAuthApi extends Api{
 
                 log.info("Refreshed access token");
 
-                httpRequestBuilder
-                    .header("Authorization", bearerAuthData.headerContent());
+                BearerAuthData gotBearerAuthDataAfterRefreshToken = gotBearerAuthDataAfterRefreshTokenOpt.get();
 
-                gotResponse = super.send(httpRequestBuilder);
+                handleRefreshedAccessToken(gotBearerAuthDataAfterRefreshToken);
+
+                oldBuilder
+                    .header("Authorization", gotBearerAuthDataAfterRefreshToken.headerContent());
+
+                gotResponse = super.send(oldBuilder);
             }
         }
 
         return gotResponse;
     }
 
-    private boolean handleRefreshAccessToken(String refreshToken, Function<String, HttpResponse<String>> refreshAccessToken, String keysPrePostfix) throws IllegalStateException{
+    private Optional<BearerAuthData> handleRefreshAccessToken(String refreshToken, Function<String, HttpResponse<String>> refreshAccessToken, String keysPrePostfix) throws IllegalStateException{
 
         HttpResponse<String> gotResponse = refreshAccessToken.apply(refreshToken);
 
@@ -113,14 +125,16 @@ public abstract class BearerAuthApi extends Api{
 
             logout(keysPrePostfix);
 
-            return false;
+            return Optional.empty();
         }
 
         AccessTokenResponse accessTokenResponse = Api.extractBody(gotResponse, AccessTokenResponse.class);
 
-        saveAuthData(accessTokenResponse.accessToken(), accessTokenResponse.refreshToken(), keysPrePostfix);
+        String newAccessToken = accessTokenResponse.accessToken();
 
-        return true;
+        BearerAuthData newBearerAuthData = saveAuthData(newAccessToken, refreshToken, keysPrePostfix);
+
+        return Optional.of(newBearerAuthData);
     }
 
     protected BearerAuthData saveAuthData(String accessToken, String refreshToken, String keysPrePostfix){
@@ -131,11 +145,7 @@ public abstract class BearerAuthApi extends Api{
         String bearerAuthContent = getBearerAuthContent(accessToken);
 
         secureStorageService.saveCredentials(accessTokenKey, accessToken);
-
-        if(refreshToken != null){
-
-            secureStorageService.saveCredentials(refreshTokenKey, refreshToken);
-        }
+        secureStorageService.saveCredentials(refreshTokenKey, refreshToken);
 
         return new BearerAuthData(
             accessToken,
@@ -178,5 +188,7 @@ public abstract class BearerAuthApi extends Api{
 
         return bearerAuthData.accessToken() != null;
     }
+
+    protected abstract void handleRefreshedAccessToken(BearerAuthData newBearerAuthData);
 
 }

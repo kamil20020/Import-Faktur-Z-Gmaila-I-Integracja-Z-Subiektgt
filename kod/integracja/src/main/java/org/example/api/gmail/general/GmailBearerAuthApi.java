@@ -37,7 +37,7 @@ public abstract class GmailBearerAuthApi extends BearerAuthApi {
         this.secureStorageService = secureStorageService;
     }
 
-    protected static synchronized void init(Function<String, HttpResponse<String>> refreshAccessToken1, SecureStorageService secureStorageService){
+    public static synchronized void init(Function<String, HttpResponse<String>> refreshAccessToken1, SecureStorageService secureStorageService){
 
         if(isInitialized){
             return;
@@ -60,6 +60,12 @@ public abstract class GmailBearerAuthApi extends BearerAuthApi {
     public HttpResponse<String> send(HttpRequest.Builder httpRequestBuilder) throws IllegalStateException {
 
         return super.send(httpRequestBuilder, bearerAuthData, refreshAccessToken, secretPrePostfix);
+    }
+
+    @Override
+    protected void handleRefreshedAccessToken(BearerAuthData newBearerAuthData){
+
+        bearerAuthData = newBearerAuthData;
     }
 
     public void saveAuthData(String accessToken, String refreshToken){
