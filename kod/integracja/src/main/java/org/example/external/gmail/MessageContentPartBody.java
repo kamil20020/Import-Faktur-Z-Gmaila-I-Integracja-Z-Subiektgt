@@ -1,19 +1,29 @@
 package org.example.external.gmail;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
     "attachmentId",
     "data"
 })
-public record MessageContentPartBody(
+public class MessageContentPartBody{
 
     @JsonProperty("attachmentId")
-    String attachmentId,
+    private String attachmentId;
 
+    @ToString.Exclude
     @JsonProperty("data")
-    String data
-){}
+    private String data;
+
+}

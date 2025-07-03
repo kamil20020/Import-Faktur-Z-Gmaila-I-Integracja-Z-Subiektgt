@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -39,18 +40,24 @@ public record MessagePayload(
 
     public String getAttachmentId(String fileExtension){
 
+        Integer fileExtensionLength = fileExtension.length();
+
         for(MessageContentPart messageContentPart : messageContentParts){
 
             String filename = messageContentPart.filename();
             MessageContentPartBody body = messageContentPart.body();
 
-            if(filename == null || body == null){
+            if(filename == null || filename.length() < fileExtensionLength || body == null){
                 continue;
             }
 
-            String attachmentId = body.attachmentId();
+            String attachmentId = body.getAttachmentId();
 
-            if(!filename.endsWith(fileExtension) || attachmentId == null){
+            String gotFileExtension = filename
+                .substring(filename.length() - fileExtensionLength)
+                .toLowerCase();
+
+            if(!gotFileExtension.equals(fileExtension) || attachmentId == null){
                 continue;
             }
 

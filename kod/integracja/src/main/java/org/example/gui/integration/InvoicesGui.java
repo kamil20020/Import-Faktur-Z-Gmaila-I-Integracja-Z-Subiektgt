@@ -4,7 +4,6 @@ import org.example.api.gmail.response.MessagesPageResponse;
 import org.example.exception.UnloggedException;
 import org.example.external.gmail.Message;
 import org.example.gui.ChangeableGui;
-import org.example.service.GmailMessageService;
 import org.example.service.InvoiceService;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +32,9 @@ public class InvoicesGui extends ChangeableGui {
     private JButton selectAllButton;
     private JButton unselectAllButton;
 
+    private JTextField searchInput;
+    private JButton searchButton;
+
     private List<Message> messagesPage = new ArrayList<>();
 
     private String prevPageToken = "";
@@ -54,6 +56,9 @@ public class InvoicesGui extends ChangeableGui {
 
         $$$setupUI$$$();
 
+        searchInput.setText("Faktura");
+
+        searchButton.addActionListener(e -> handleSearch());
         selectAllButton.addActionListener(e -> selectAll());
         unselectAllButton.addActionListener(e -> unselectAll());
         saveOrdersButton.addActionListener(e -> saveMessages());
@@ -66,13 +71,15 @@ public class InvoicesGui extends ChangeableGui {
 
     private PaginationTableGui.PaginationTableData loadData(int offset, int limit) {
 
+        String subject = searchInput.getText();
+
         updatePagination(offset);
 
         MessagesPageResponse messagesPageResponse;
 
         try {
 
-            messagesPageResponse = invoiceService.getMessagesPage(limit, actualPageToken);
+            messagesPageResponse = invoiceService.getMessagesPage(limit, actualPageToken, subject);
         } catch (UnloggedException e) {
 
             handleLogout.run();
@@ -96,15 +103,23 @@ public class InvoicesGui extends ChangeableGui {
 
     private void updatePagination(int newOffset) {
 
-        if (newOffset < paginationTableGui.getOffset()) {
+        if (newOffset < paginationTableGui.getPrevOffset()) {
 
             nextPageToken = actualPageToken;
             actualPageToken = prevPageToken;
-        } else if (newOffset > paginationTableGui.getOffset()) {
+        } else if (newOffset > paginationTableGui.getPrevOffset()) {
 
             prevPageToken = actualPageToken;
             actualPageToken = nextPageToken;
+        } else {
+
+            actualPageToken = nextPageToken;
         }
+    }
+
+    private void handleSearch() {
+
+        paginationTableGui.handleLoadTableExceptions();
     }
 
     private Object[] convertToRow(Object rawMessage) {
@@ -323,7 +338,7 @@ public class InvoicesGui extends ChangeableGui {
         mainPanel.setAutoscrolls(false);
         mainPanel.setMinimumSize(new Dimension(478, 138));
         mainPanel.setOpaque(true);
-        mainPanel.setPreferredSize(new Dimension(1920, 980));
+        mainPanel.setPreferredSize(new Dimension(1920, 200));
         mainPanel.setRequestFocusEnabled(true);
         mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(24, 50, 40, 50), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         final JLabel label1 = new JLabel();
@@ -345,12 +360,12 @@ public class InvoicesGui extends ChangeableGui {
         ordersPanelPlaceholder.setOpaque(true);
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         gbc.gridwidth = 7;
         gbc.weightx = 1.0;
         gbc.weighty = 10.0;
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(8, 0, 0, 0);
         mainPanel.add(ordersPanelPlaceholder, gbc);
         ordersPanelPlaceholder.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(6, 0, 0, 0), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         final JToolBar toolBar1 = new JToolBar();
@@ -360,7 +375,7 @@ public class InvoicesGui extends ChangeableGui {
         toolBar1.setVisible(true);
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.gridwidth = 7;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
@@ -379,6 +394,28 @@ public class InvoicesGui extends ChangeableGui {
         saveOrdersButton = new JButton();
         saveOrdersButton.setText("Zapisz faktury zakupu w Subiekcie");
         toolBar1.add(saveOrdersButton);
+        final JToolBar toolBar2 = new JToolBar();
+        toolBar2.setBorderPainted(false);
+        toolBar2.setFloatable(false);
+        toolBar2.setFocusable(true);
+        toolBar2.setOpaque(false);
+        toolBar2.setToolTipText("Tytuł maila");
+        toolBar2.setVerifyInputWhenFocusTarget(false);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 6;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.insets = new Insets(24, 0, 0, 0);
+        mainPanel.add(toolBar2, gbc);
+        searchInput = new JTextField();
+        searchInput.setMinimumSize(new Dimension(100, 30));
+        searchInput.setOpaque(true);
+        searchInput.setPreferredSize(new Dimension(100, 30));
+        toolBar2.add(searchInput);
+        searchButton = new JButton();
+        searchButton.setText("Wyszukaj");
+        toolBar2.add(searchButton);
     }
 
     /**

@@ -36,7 +36,7 @@ public class Window {
         frame = new JFrame("Integracja faktur zakupu z Gmaila i Subiekt GT");
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(1000, 800);
+        frame.setSize(1000, 720);
         frame.setLocationRelativeTo(null);
 
         handleAuth();

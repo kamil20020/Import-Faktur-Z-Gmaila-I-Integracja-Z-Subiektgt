@@ -29,14 +29,33 @@ public class TemplateConverter {
 
     public static Integer convertToInteger(String value){
 
+        if(isEmpty(value)){
+
+            return null;
+        }
+
         value = value.replaceAll(",", "\\.")
             .replaceAll("\\s", "")
             .split("\\.")[0];
 
-        return Integer.valueOf(value);
+        try{
+
+            return Integer.valueOf(value);
+        }
+        catch (NumberFormatException e){
+
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public static BigDecimal convertToBigDecimal(String value){
+
+        if(isEmpty(value)){
+
+            return null;
+        }
 
         value = value
             .replaceAll("\\s", "")
@@ -51,7 +70,15 @@ public class TemplateConverter {
             value = removeFromStr('.', value, numberOfDotsOccurences - 1);
         }
 
-        return new BigDecimal(value);
+        try {
+            return new BigDecimal(value);
+        }
+        catch (NumberFormatException e){
+
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     private static String removeFromStr(char searchValue, String value, int numberOfRemoves){
@@ -84,6 +111,11 @@ public class TemplateConverter {
 
     public static LocalDate tryToParseLocalDate(String input){
 
+        if(isEmpty(input)){
+
+            return null;
+        }
+
         LocalDate gotDate = null;
 
         for (String format : toCheckDateFormats){
@@ -101,6 +133,11 @@ public class TemplateConverter {
 
     public static LocalDate tryToParseLocalDate(String format, String input) throws DateTimeParseException {
 
+        if(isEmpty(input)){
+
+            return null;
+        }
+
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);
 
         try{
@@ -113,6 +150,11 @@ public class TemplateConverter {
         }
 
         return null;
+    }
+
+    private static boolean isEmpty(String value){
+
+        return value == null || value.isEmpty();
     }
 
 }

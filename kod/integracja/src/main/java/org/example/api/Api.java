@@ -70,6 +70,11 @@ public abstract class Api {
 
             String value = titlesAndParams[i + 1];
 
+            if(value == null){
+
+                continue;
+            }
+
             value = URLEncoder.encode(value, StandardCharsets.UTF_8);
 
             stringBuilder.append(value);

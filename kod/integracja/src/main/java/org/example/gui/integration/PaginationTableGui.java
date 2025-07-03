@@ -43,6 +43,7 @@ public class PaginationTableGui extends JPanel {
     private final Map<Integer, Predicate<Object[]>> filters = new HashMap<>();
 
     private int offset = 0;
+    private int prevOffset = 0;
     private int pageSize = 10;
     private int totalNumberOfRows = 0;
 
@@ -76,12 +77,17 @@ public class PaginationTableGui extends JPanel {
     private void handlePreviousButton() {
 
         if (offset == 0) {
+
             return;
         }
+
+        prevOffset = offset;
 
         offset -= pageSize;
 
         handleLoadTableExceptions();
+
+        currentPageButton.setText(String.valueOf(getActualPage() + 1));
     }
 
     private void handleNextButton() {
@@ -90,9 +96,13 @@ public class PaginationTableGui extends JPanel {
             return;
         }
 
+        prevOffset = offset;
+
         offset += pageSize;
 
         handleLoadTableExceptions();
+
+        currentPageButton.setText(String.valueOf(getActualPage() + 1));
     }
 
     private void handlePageSizeSelectorChange() {
@@ -119,6 +129,11 @@ public class PaginationTableGui extends JPanel {
     public int getOffset() {
 
         return offset;
+    }
+
+    public int getPrevOffset() {
+
+        return prevOffset;
     }
 
     private void loadTable() throws IllegalAccessException {
@@ -290,8 +305,8 @@ public class PaginationTableGui extends JPanel {
     public void updateRowCol(int rowIndex, int colIndex, String firstFieldId, Object newValue) throws IllegalStateException {
 
         Optional<Object[]> foundRowOpt = data.stream()
-            .filter(dataRow -> Objects.equals(dataRow[0], firstFieldId))
-            .findFirst();
+                .filter(dataRow -> Objects.equals(dataRow[0], firstFieldId))
+                .findFirst();
 
         if (foundRowOpt.isEmpty()) {
 

@@ -88,27 +88,79 @@ public record Template(
         List<String> gotLines = pdfLinesDetails.lines().get(pageIndex);
         List<Float> linesYCords = pdfLinesDetails.linesYCords().get(pageIndex);
 
-        int invoiceItemsStartIndex = getLineStartIndex(gotLines, invoiceItems.startStr(), true);
+        int skipStart = invoiceItems.skipStart() != null ? invoiceItems.skipStart() : 0;
+
+        int invoiceItemsStartIndex = getLineStartIndex(gotLines, invoiceItems.startStr(), true) + skipStart;
+
+        int actualTemplateInvoiceIndex = 0;
+
+        TemplateInvoiceItem templateInvoiceItem = null;
 
         for(int i = invoiceItemsStartIndex; i < gotLines.size(); i++){
 
             String line = gotLines.get(i).stripLeading();
 
             if(line.startsWith(invoiceItems.endStr())){
-                break;
+                return;
             }
 
-            String[] words = line.split("\\s");
+            double lineYCord = linesYCords.get(i);
 
-            if(!TemplateInvoiceItem.isRowValid(words, invoiceItems.minLength())){
+            Optional<Integer> gotIndexOpt = getIndex(data, pageIndex, lineYCord);
+
+            if(gotIndexOpt.isPresent()){
+
+                Integer gotIndex = gotIndexOpt.get();
+
+                if(gotIndex > actualTemplateInvoiceIndex){
+
+                    templateInvoiceItem = extractTemplateInvoiceItem(data, pageIndex, lineYCord);
+
+                    templateInvoiceItems.add(templateInvoiceItem);
+
+                    actualTemplateInvoiceIndex++;
+
+                    continue;
+                }
+            }
+
+            if(templateInvoiceItem == null){
                 continue;
             }
 
-            double lineYCord = linesYCords.get(i) + invoiceItems.startOffset();
+            TemplateInvoiceItem newTemplateInvoiceItemData = extractTemplateInvoiceItem(data, pageIndex, lineYCord);
 
-            TemplateInvoiceItem templateInvoiceItem = extractTemplateInvoiceItem(data, pageIndex, lineYCord);
+            appendDataToTemplateInvoiceItem(templateInvoiceItem, newTemplateInvoiceItemData);
+        }
+    }
 
-            templateInvoiceItems.add(templateInvoiceItem);
+    private void appendDataToTemplateInvoiceItem(TemplateInvoiceItem destTemplateInvoiceItem, TemplateInvoiceItem newTemplateInvoiceItemData){
+
+        if(newTemplateInvoiceItemData.getCode() != null){
+
+            String actualName = destTemplateInvoiceItem.getName();
+
+            destTemplateInvoiceItem.setName(actualName + " " + newTemplateInvoiceItemData.getName());
+        }
+
+        if(destTemplateInvoiceItem.getCode() == null){
+
+            destTemplateInvoiceItem.setCode(newTemplateInvoiceItemData.getCode());
+        }
+
+        if(newTemplateInvoiceItemData.getPrice() != null){
+
+            destTemplateInvoiceItem.setPrice(newTemplateInvoiceItemData.getPrice());
+        }
+
+        if(newTemplateInvoiceItemData.getQuantity() != null){
+
+            destTemplateInvoiceItem.setQuantity(newTemplateInvoiceItemData.getQuantity());
+        }
+
+        if(newTemplateInvoiceItemData.getTax() != null){
+
+            destTemplateInvoiceItem.setTax(newTemplateInvoiceItemData.getTax());
         }
     }
 
@@ -149,6 +201,33 @@ public record Template(
         return TemplateInvoiceItem.extract(gotValues);
     }
 
+    private Optional<Integer> getIndex(byte[] data, int pageIndex, double lineYCord){
+
+        TemplateRowField firstTemplateRowField = invoiceItems.fields().get(0);
+
+        String value = extractWordFromLine(data, pageIndex, lineYCord, firstTemplateRowField);
+
+        if(value == null || value.isEmpty()){
+
+            return Optional.empty();
+        }
+
+        value = value.stripIndent();
+
+        try{
+
+            Integer gotIndex = Integer.valueOf(value);
+
+            return Optional.of(gotIndex);
+        }
+        catch (NumberFormatException e){
+
+            e.printStackTrace();
+        }
+
+        return Optional.empty();
+    }
+
     public String extractWordFromLine(byte[] data, int pageIndex, double lineYCord, TemplateRowField templateRowField){
 
         float minXCord = templateRowField.xMinCord();
@@ -156,7 +235,7 @@ public record Template(
 
         float width = maxXCord - minXCord;
 
-        String[] lines = extractWordsForField(data, pageIndex, minXCord, lineYCord - 1, width, invoiceItems.rowHeight());
+        String[] lines = extractWordsForField(data, pageIndex, minXCord, lineYCord, width, invoiceItems.rowHeight());
 
         if(lines.length == 0){
 

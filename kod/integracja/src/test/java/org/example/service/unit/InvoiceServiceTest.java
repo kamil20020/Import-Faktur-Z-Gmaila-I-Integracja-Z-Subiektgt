@@ -56,15 +56,15 @@ class InvoiceServiceTest {
         );
 
         //when
-        Mockito.when(gmailMessageService.getPage(anyInt(), any())).thenReturn(expectedMessagesPageResponse);
+        Mockito.when(gmailMessageService.getPage(anyInt(), any(), any())).thenReturn(expectedMessagesPageResponse);
 
-        MessagesPageResponse gotPage = invoiceService.getMessagesPage(expectedPageSize, expectedPageToken);
+        MessagesPageResponse gotPage = invoiceService.getMessagesPage(expectedPageSize, expectedPageToken, "");
 
         //then
         assertNotNull(gotPage);
         assertEquals(expectedMessagesPageResponse, gotPage);
 
-        Mockito.verify(gmailMessageService).getPage(expectedPageSize, expectedPageToken);
+        Mockito.verify(gmailMessageService).getPage(expectedPageSize, expectedPageToken, "");
     }
 
     @Test
@@ -134,11 +134,12 @@ class InvoiceServiceTest {
 
         //given
         String messageId = "message-id";
+        String attachmentId = "attachment-id";
         byte[] messageAttachmentData = "message-attachment-data".getBytes(StandardCharsets.UTF_8);
 
         Message message = Message.builder()
             .id(messageId)
-            .attachmentData(messageAttachmentData)
+            .attachmentId(attachmentId)
             .build();
 
         DataExtractedFromTemplate expectedDataExtractedFromTemplate = new DataExtractedFromTemplate(
@@ -159,6 +160,7 @@ class InvoiceServiceTest {
         //when
         Mockito.when(templateService.applyGoodTemplateForData(any())).thenReturn(expectedDataExtractedFromTemplate);
         Mockito.when(sferaOrderService.create(any(CreateOrderRequest.class))).thenReturn(expectedExternalId);
+        Mockito.when(gmailMessageService.getMessageAttachment(any(), any())).thenReturn(messageAttachmentData);
 
         try(
             MockedStatic<SferaOrderMapper> sferaOrderMapperMock = Mockito.mockStatic(SferaOrderMapper.class);
@@ -174,6 +176,7 @@ class InvoiceServiceTest {
 
         Mockito.verify(templateService).applyGoodTemplateForData(messageAttachmentData);
         Mockito.verify(sferaOrderService).create(expectedRequest);
+        Mockito.verify(gmailMessageService).getMessageAttachment(messageId, attachmentId);
 
         assertNotNull(message.getExternalId());
         assertEquals(expectedExternalId, message.getExternalId());
@@ -202,10 +205,12 @@ class InvoiceServiceTest {
         byte[] messageAttachmentData = "message-attachment-data".getBytes(StandardCharsets.UTF_8);
 
         Message message = Message.builder()
-            .attachmentData(messageAttachmentData)
+            .id("message-id")
+            .attachmentId("attachmend-id")
             .build();
 
         //when
+        Mockito.when(gmailMessageService.getMessageAttachment(any(), any())).thenReturn(messageAttachmentData);
         Mockito.when(templateService.applyGoodTemplateForData(any())).thenThrow(FileReadException.class);
 
         //then
@@ -214,6 +219,7 @@ class InvoiceServiceTest {
             () -> invoiceService.createInvoice(message)
         );
 
+        Mockito.verify(gmailMessageService).getMessageAttachment(message.getId(), message.getAttachmentId());
         Mockito.verify(templateService).applyGoodTemplateForData(messageAttachmentData);
     }
 

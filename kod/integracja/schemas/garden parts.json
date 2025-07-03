@@ -78,11 +78,16 @@
   },
   "invoiceItems": {
     "startStr": "Lp.",
-    "endStr": "Stawka VAT",
+    "skipStart": 1,
+    "endStr": "Stawka VA",
     "minLength": 11,
-    "rowHeight": 23,
-    "startOffset": 0,
+    "rowHeight": 15,
     "fields": [
+      {
+        "name": "index",
+        "xMinCord": 69,
+        "xMaxCord": 97
+      },
       {
         "name": "code",
         "xMinCord": 98,

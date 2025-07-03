@@ -23,13 +23,20 @@ public class GmailMessageApi extends GmailBearerAuthApi {
         super("/gmail/v1/users/me/messages", propertiesService, secureStorageService);
     }
 
-    public HttpResponse<String> getPage(Integer pageSize, String pageToken) throws IllegalStateException, UnloggedException {
+    public HttpResponse<String> getPage(Integer pageSize, String pageToken, String subject) throws IllegalStateException, UnloggedException {
+
+        String subjectParam = "";
+
+        if(subject != null && !subject.isEmpty()){
+
+            subjectParam = "subject:" + subject;
+        }
 
         HttpRequest.Builder httpRequestBuilder = HttpRequest.newBuilder()
             .GET()
             .uri(URI.create(API_PREFIX + getQueryParamsPostFix(
                 "maxResults", pageSize.toString(),
-                "q", "to:me has:attachment subject:faktura filename:pdf",
+                "q", "to:me has:attachment " + subjectParam + " filename:pdf",
                 "pageToken", pageToken
             )))
             .header("Content-Type", "application/json");

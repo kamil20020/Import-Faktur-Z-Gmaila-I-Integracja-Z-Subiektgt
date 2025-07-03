@@ -9,6 +9,7 @@ public record TemplateRow(
     Integer maxSize,
     List<TemplateRowField> fields,
     String startStr,
+    Integer skipStart,
     Integer minLength,
     float rowHeight,
     float startOffset,

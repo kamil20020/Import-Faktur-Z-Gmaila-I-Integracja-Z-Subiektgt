@@ -30,9 +30,9 @@ public class InvoiceService {
 
     private static final Logger log = LoggerFactory.getLogger(Api.class);
 
-    public MessagesPageResponse getMessagesPage(int pageSize, String pageToken) throws IllegalStateException{
+    public MessagesPageResponse getMessagesPage(int pageSize, String pageToken, String subject) throws IllegalStateException{
 
-        return gmailMessageService.getPage(pageSize, pageToken);
+        return gmailMessageService.getPage(pageSize, pageToken, subject);
     }
 
     public List<Message> loadInvoicesDetails(List<MessageHeader> messagesHeaders){
@@ -85,7 +85,10 @@ public class InvoiceService {
             throw new ConflictException("Istnieje już wybrana faktura zakupu w Subiekcie");
         }
 
-        byte[] messageData = message.getAttachmentData();
+        String messageId = message.getId();
+        String messageAttachmentId = message.getAttachmentId();
+
+        byte[] messageData = gmailMessageService.getMessageAttachment(messageId, messageAttachmentId);
 
         DataExtractedFromTemplate dataExtractedFromTemplate;
 

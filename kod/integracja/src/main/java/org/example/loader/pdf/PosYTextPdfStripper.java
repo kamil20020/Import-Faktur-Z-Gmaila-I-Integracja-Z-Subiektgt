@@ -39,11 +39,11 @@ public class PosYTextPdfStripper extends PDFTextStripper {
             int lastIndex = lineYCordsForPage.size() - 1;
             float lastYCord = lineYCordsForPage.get(lastIndex);
 
-            float actualYCord = firstTextPosition.getY();
+            float actualYCord = firstTextPosition.getY() - firstTextPosition.getHeight();
 
             if(actualYCord - lastYCord > 1){
 
-                lineYCordsForPage.add(firstTextPosition.getY());
+                lineYCordsForPage.add(firstTextPosition.getY() - firstTextPosition.getHeight());
 
                 linesForPage.add(text);
             }

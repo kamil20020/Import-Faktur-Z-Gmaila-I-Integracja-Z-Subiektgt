@@ -64,7 +64,13 @@ class Product extends SubiektObj{
 		return $p->doesExist();
 	}
 
-	protected function setGtObject(){				
+	protected function setGtObject(){
+
+		if($this->name == null){
+
+			$this->name = "";
+		}
+		
 		if(!$this->is_exists){
 			$new_prefix = SubiektGT::getInstance()->getConfig()->getNewProductPrefix();
 			
@@ -108,7 +114,7 @@ class Product extends SubiektObj{
 		}
 		//stawka vat
 		if(!empty($this->vat)){
-			$this->productGt->SprzedazVatId = $this->vat;
+			//$this->productGt->SprzedazVatId = $this->vat;
 		}
 		//masa
 		if(!empty($this->weight)){
@@ -140,6 +146,7 @@ class Product extends SubiektObj{
 		if(!empty($ean)){		
 			$this->productGt->KodyKreskowe->Podstawowy = $ean;
  		}
+
 		return true;
 	}
 
@@ -341,14 +348,7 @@ class Product extends SubiektObj{
 
 	public function add(){
 
-		if($this->vat == "8"){
-			
-			$this->productGt = $this->subiektGt->TowaryManager->DodajTowar();
-		}
-		else{
-
-			$this->productGt = $this->subiektGt->TowaryManager->DodajKomplet();
-		}
+		$this->productGt = $this->subiektGt->TowaryManager->DodajTowar();
 
 		$this->setGtObject();		
 		$this->productGt->Zapisz();

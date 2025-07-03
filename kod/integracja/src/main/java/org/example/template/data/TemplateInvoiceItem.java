@@ -4,6 +4,7 @@ import lombok.*;
 import org.example.template.TemplateRowField;
 
 import java.math.BigDecimal;
+import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,28 +45,80 @@ public class TemplateInvoiceItem {
 
     public static TemplateInvoiceItem extract(Map<String, String> gotValues){
 
-        String name = gotValues.get("name")
-            .stripIndent();
+        return TemplateInvoiceItem.builder()
+            .name(extractName(gotValues))
+            .code(extractCode(gotValues))
+            .price(extractPrice(gotValues))
+            .quantity(extractQuantity(gotValues))
+            .tax(extractTax(gotValues))
+            .build();
+    }
 
-        String code = gotValues.get("code")
+    private static String extractName(Map<String, String> gotValues){
+
+        String rawName = gotValues.get("name");
+
+        if(rawName == null){
+
+            return null;
+        }
+
+        return rawName
             .stripIndent();
+    }
+
+    private static String extractCode(Map<String, String> gotValues){
+
+        String rawCode = gotValues.get("code");
+
+        if(rawCode == null){
+
+            return null;
+        }
+
+        String code = rawCode.stripIndent();
+
+        String normalized = Normalizer.normalize(code, Normalizer.Form.NFD);
+
+        return normalized.replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+            .replaceAll("ł", "l")
+            .replaceAll("Ł", "L");
+    }
+
+    private static BigDecimal extractPrice(Map<String, String> gotValues){
 
         String rawPrice = gotValues.get("price");
-        BigDecimal price = TemplateConverter.convertToBigDecimal(rawPrice);
+
+        if(rawPrice == null){
+
+            return null;
+        }
+
+        return TemplateConverter.convertToBigDecimal(rawPrice);
+    }
+
+    private static Integer extractQuantity(Map<String, String> gotValues){
 
         String rawQuantity = gotValues.get("quantity");
-        Integer quantity = TemplateConverter.convertToInteger(rawQuantity);
+
+        if(rawQuantity == null){
+
+            return null;
+        }
+
+        return TemplateConverter.convertToInteger(rawQuantity);
+    }
+
+    private static BigDecimal extractTax(Map<String, String> gotValues){
 
         String rawTax = gotValues.get("tax");
-        BigDecimal tax = TemplateConverter.convertToBigDecimal(rawTax);
 
-        return TemplateInvoiceItem.builder()
-            .name(name)
-            .code(code)
-            .price(price)
-            .quantity(quantity)
-            .tax(tax)
-            .build();
+        if(rawTax == null){
+
+            return null;
+        }
+
+        return TemplateConverter.convertToBigDecimal(rawTax);
     }
 
     public BigDecimal getTotalPriceWithTax(boolean isInvoiceTaxOriented){

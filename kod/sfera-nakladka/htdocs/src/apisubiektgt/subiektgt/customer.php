@@ -4,6 +4,7 @@ namespace APISubiektGT\SubiektGT;
 use COM;
 use APISubiektGT\Logger;
 use APISubiektGT\MSSql;
+use APISubiektGT\Helper;
 use APISubiektGT\SubiektGT\SubiektObj;
 use Exception;
 

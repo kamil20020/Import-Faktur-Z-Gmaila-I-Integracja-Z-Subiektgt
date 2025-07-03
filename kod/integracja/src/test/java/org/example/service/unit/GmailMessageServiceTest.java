@@ -51,7 +51,7 @@ class GmailMessageServiceTest {
         );
 
         //when
-        Mockito.when(gmailMessageApi.getPage(any(), any())).thenReturn(expectedResponse);
+        Mockito.when(gmailMessageApi.getPage(any(), any(), any())).thenReturn(expectedResponse);
 
         try(
             MockedStatic<Api> apiMock = Mockito.mockStatic(Api.class);
@@ -59,7 +59,7 @@ class GmailMessageServiceTest {
 
             apiMock.when(() -> Api.extractBody(any(), any())).thenReturn(expectedPageResponse);
 
-            MessagesPageResponse gotPage = gmailMessageService.getPage(expectedPageSize, expectedToken);
+            MessagesPageResponse gotPage = gmailMessageService.getPage(expectedPageSize, expectedToken, "");
 
             //then
             assertNotNull(gotPage);
@@ -68,7 +68,7 @@ class GmailMessageServiceTest {
             apiMock.verify(() -> Api.extractBody(expectedResponse, MessagesPageResponse.class));
         }
 
-        Mockito.verify(gmailMessageApi).getPage(expectedPageSize, expectedToken);
+        Mockito.verify(gmailMessageApi).getPage(expectedPageSize, expectedToken, "");
     }
 
     @Test
@@ -104,18 +104,14 @@ class GmailMessageServiceTest {
         OffsetDateTime expectedConvertedDate = OffsetDateTime.now();
 
         //when
-        Mockito.when(gmailMessageApi.getMessageAttachment(any(), any())).thenReturn(expectedResponse);
 
         try(
-            MockedStatic<Api> apiMock = Mockito.mockStatic(Api.class);
             MockedStatic<GmailDateMapper> gmailDateMapperMock = Mockito.mockStatic(GmailDateMapper.class);
         ){
 
-            apiMock.when(() -> Api.extractBody(any(), eq(MessageContentPartBody.class))).thenReturn(expectedAttachmentResponse);
-
             gmailDateMapperMock.when(() -> GmailDateMapper.fromStr(any())).thenReturn(expectedConvertedDate);
 
-            Message gotMessage = gmailMessageService.getCompleteMessage(messageSummary);
+            Message gotMessage = gmailMessageService.getMessage(messageSummary);
 
             //then
             assertNotNull(gotMessage);
@@ -123,15 +119,10 @@ class GmailMessageServiceTest {
             assertEquals(expectedConvertedDate, gotMessage.getDate());
             assertEquals(messageSummary.subject(), gotMessage.getSubject());
             assertEquals(messageSummary.from(), gotMessage.getFrom());
-            assertNotNull(gotMessage.getAttachmentData());
-            assertArrayEquals(rawData, gotMessage.getAttachmentData());
-
-            apiMock.verify(() -> Api.extractBody(expectedResponse, MessageContentPartBody.class));
+            assertEquals(messageSummary.attachmentId(), gotMessage.getAttachmentId());
 
             gmailDateMapperMock.verify(() -> GmailDateMapper.fromStr(messageSummary.date()));
         }
-
-        Mockito.verify(gmailMessageApi).getMessageAttachment(messageSummary.id(), messageSummary.attachmentId());
     }
 
     @Test
@@ -165,7 +156,6 @@ class GmailMessageServiceTest {
 
         //when
         Mockito.when(gmailMessageApi.getMessageById(any())).thenReturn(expectedResponse);
-        Mockito.when(gmailMessageApi.getMessageAttachment(any(), any())).thenReturn(expectedResponse);
 
         try(
             MockedStatic<Api> apiMock = Mockito.mockStatic(Api.class);

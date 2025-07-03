@@ -84,6 +84,11 @@
     "startOffset": 0,
     "fields": [
       {
+        "name": "index",
+        "xMinCord": 80,
+        "xMaxCord": 121
+      },
+      {
         "name": "code",
         "xMinCord": 1010,
         "xMaxCord": 1200

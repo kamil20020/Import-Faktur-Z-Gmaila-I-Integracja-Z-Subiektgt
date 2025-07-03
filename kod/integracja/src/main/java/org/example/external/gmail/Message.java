@@ -19,6 +19,8 @@ public class Message {
     private OffsetDateTime date;
     private String subject;
 
+    private String attachmentId;
+
     @ToString.Exclude
     private byte[] attachmentData;
 

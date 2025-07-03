@@ -28,9 +28,9 @@ public class GmailMessageService {
 
     private static final ExecutorService executorService = Executors.newFixedThreadPool(8);
 
-    public MessagesPageResponse getPage(int pageSize, String pageToken) throws IllegalStateException{
+    public MessagesPageResponse getPage(int pageSize, String pageToken, String subject) throws IllegalStateException{
 
-        HttpResponse<String> gotResponse = gmailMessageApi.getPage(pageSize, pageToken);
+        HttpResponse<String> gotResponse = gmailMessageApi.getPage(pageSize, pageToken, subject);
 
         if(gotResponse.statusCode() != 200){
 
@@ -111,15 +111,13 @@ public class GmailMessageService {
 
         MessageSummary messageSummary = gotMessageDetails.getSummary();
 
-        return getCompleteMessage(messageSummary);
+        return getMessage(messageSummary);
     }
 
-    public Message getCompleteMessage(MessageSummary messageSummary){
+    public Message getMessage(MessageSummary messageSummary){
 
         String messageId = messageSummary.id();
         String attachmentId = messageSummary.attachmentId();
-
-        byte[] attachmentData = getMessageAttachment(messageId, attachmentId);
 
         String rawDate = messageSummary.date();
 
@@ -130,7 +128,7 @@ public class GmailMessageService {
             .from(messageSummary.from())
             .subject(messageSummary.subject())
             .date(date)
-            .attachmentData(attachmentData)
+            .attachmentId(attachmentId)
             .build();
     }
 
@@ -145,7 +143,7 @@ public class GmailMessageService {
 
         MessageContentPartBody gotAttachmentResponse = Api.extractBody(gotResponse, MessageContentPartBody.class);
 
-        String rawData = gotAttachmentResponse.data();
+        String rawData = gotAttachmentResponse.getData();
 
         rawData = rawData.replaceAll("\\s", "");
 

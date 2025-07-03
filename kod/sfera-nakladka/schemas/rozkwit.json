@@ -79,11 +79,17 @@
   },
   "invoiceItems": {
     "startStr": "Lp.",
+    "skipStart": 0,
     "endStr": "Stawka",
     "minLength": 7,
     "rowHeight": 20,
     "startOffset": 0,
     "fields": [
+      {
+        "name": "index",
+        "xMinCord": 43,
+        "xMaxCord": 75
+      },
       {
         "name": "code",
         "xMinCord": 80,
