@@ -201,9 +201,12 @@ public record Template(
 
                 String[] words = value.split(separator);
 
-                int index = templateRowField.index();
+                if(words.length >= 2){
 
-                value = words[index];
+                    int index = templateRowField.index();
+
+                    value = words[index];
+                }
             }
 
             gotValues.put(fieldName, value);

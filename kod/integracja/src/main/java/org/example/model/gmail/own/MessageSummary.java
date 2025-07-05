@@ -1,4 +1,6 @@
-package org.example.external.gmail;
+package org.example.model.gmail.own;
+
+import java.util.List;
 
 public record MessageSummary(
 
@@ -6,5 +8,5 @@ public record MessageSummary(
     String from,
     String date,
     String subject,
-    String attachmentId
+    List<String> attachmentsIds
 ){}

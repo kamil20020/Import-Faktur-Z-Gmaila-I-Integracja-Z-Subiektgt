@@ -1,8 +1,8 @@
 package org.example.mapper.sfera;
 
 import org.example.api.sfera.request.CreateOrderRequest;
-import org.example.external.sfera.generated.Customer;
-import org.example.external.sfera.generated.Product;
+import org.example.model.sfera.generated.Customer;
+import org.example.model.sfera.generated.Product;
 import org.example.template.data.DataExtractedFromTemplate;
 import org.example.template.data.TemplateCreator;
 import org.example.template.data.TemplateInvoiceItem;

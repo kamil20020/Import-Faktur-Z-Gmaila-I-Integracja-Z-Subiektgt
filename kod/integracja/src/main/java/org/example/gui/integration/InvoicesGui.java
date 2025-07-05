@@ -2,8 +2,9 @@ package org.example.gui.integration;
 
 import org.example.api.gmail.response.MessagesPageResponse;
 import org.example.exception.UnloggedException;
-import org.example.external.gmail.Message;
+import org.example.model.gmail.own.Message;
 import org.example.gui.ChangeableGui;
+import org.example.model.gmail.own.MessageAttachment;
 import org.example.service.InvoiceService;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +36,7 @@ public class InvoicesGui extends ChangeableGui {
     private JTextField searchInput;
     private JButton searchButton;
 
-    private List<Message> messagesPage = new ArrayList<>();
+    private List<MessageAttachment> messagesAttachmentsPage = new ArrayList<>();
 
     private String prevPageToken = "";
     private String actualPageToken = "";
@@ -45,8 +46,9 @@ public class InvoicesGui extends ChangeableGui {
 
     private Runnable handleLogout;
 
-    private static final int GMAIL_ID_COL_INDEX = 0;
-    private static final int SUBIEKT_ID_COL_INDEX = 1;
+    private static final int GMAIL_MESSAGE_AND_ATTACHMENT_ID_COL_INDEX = 0;
+    private static final int GMAIL_MESSAGE_ID_COL_INDEX = 1;
+    private static final int SUBIEKT_ID_COL_INDEX = 5;
 
     private static final String NOT_GIVEN_VALUE = "Brak";
 
@@ -61,7 +63,7 @@ public class InvoicesGui extends ChangeableGui {
         searchButton.addActionListener(e -> handleSearch());
         selectAllButton.addActionListener(e -> selectAll());
         unselectAllButton.addActionListener(e -> unselectAll());
-        saveOrdersButton.addActionListener(e -> saveMessages());
+        saveOrdersButton.addActionListener(e -> saveInvoices());
     }
 
     public void setHandleLogout(Runnable handleLogout) {
@@ -89,12 +91,12 @@ public class InvoicesGui extends ChangeableGui {
 
         nextPageToken = messagesPageResponse.nextPageToken();
 
-        messagesPage = invoiceService.loadInvoicesDetails(messagesPageResponse.messageHeaders());
+        messagesAttachmentsPage = invoiceService.loadInvoicesDetails(messagesPageResponse.messageHeaders());
 
         int totalNumberOfRows = messagesPageResponse.totalNumberOfElements();
 
         PaginationTableGui.PaginationTableData<Object> data = new PaginationTableGui.PaginationTableData(
-                messagesPage,
+                messagesAttachmentsPage,
                 totalNumberOfRows
         );
 
@@ -122,19 +124,23 @@ public class InvoicesGui extends ChangeableGui {
         paginationTableGui.handleLoadTableExceptions();
     }
 
-    private Object[] convertToRow(Object rawMessage) {
+    private Object[] convertToRow(Object rawMessageAttachment) {
 
-        Message message = (Message) rawMessage;
+        MessageAttachment messageAttachment = (MessageAttachment) rawMessageAttachment;
+
+        Message message = messageAttachment.getMessage();
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
         LocalDate date = message.getDate().toLocalDate();
 
         return new Object[]{
+                messageAttachment.getId().toString(),
                 message.getId(),
-                message.getExternalId() != null ? message.getExternalId() : NOT_GIVEN_VALUE,
                 message.getFrom(),
                 message.getSubject(),
+                messageAttachment.getIndex() + 1,
+                messageAttachment.getExternalId() != null ? messageAttachment.getExternalId() : NOT_GIVEN_VALUE,
                 dateTimeFormatter.format(date)
         };
     }
@@ -149,7 +155,7 @@ public class InvoicesGui extends ChangeableGui {
         paginationTableGui.unselectAll();
     }
 
-    private List<Message> getSelectedMessages() {
+    private List<MessageAttachment> getSelectedMessagesAttachments() {
 
         List<Object[]> selectedMessagesData = paginationTableGui.getSelectedData();
 
@@ -158,13 +164,13 @@ public class InvoicesGui extends ChangeableGui {
             return new ArrayList<>();
         }
 
-        List<String> selectedOrdersIds = selectedMessagesData.stream()
-                .map(selectedOrderData -> selectedOrderData[0].toString())
-                .collect(Collectors.toList());
+        List<String> selectedMessageAttachmentsIds = selectedMessagesData.stream()
+            .map(selectedOrderData -> selectedOrderData[GMAIL_MESSAGE_AND_ATTACHMENT_ID_COL_INDEX].toString())
+            .collect(Collectors.toList());
 
-        return messagesPage.stream()
-                .filter(order -> selectedOrdersIds.contains(order.getId()))
-                .collect(Collectors.toList());
+        return messagesAttachmentsPage.stream()
+            .filter(messageAttachment -> selectedMessageAttachmentsIds.contains(messageAttachment.getId().toString()))
+            .collect(Collectors.toList());
 
     }
 
@@ -173,17 +179,17 @@ public class InvoicesGui extends ChangeableGui {
         paginationTableGui.updateRowCol(rowIndex, colIndex, orderId, newValue);
     }
 
-    private void saveMessages() {
+    private void saveInvoices() {
 
-        List<Message> selectedMessages = getSelectedMessages();
+        List<MessageAttachment> selectedMessagesAttachments = getSelectedMessagesAttachments();
 
         int[] selectedRowsIndices = paginationTableGui.getSelectedRowIndices();
 
-        if (selectedMessages.isEmpty()) {
+        if (selectedMessagesAttachments.isEmpty()) {
 
             JOptionPane.showMessageDialog(
                     mainPanel,
-                    "Nie wybrano wiadomości email z Gmaila",
+                    "Nie wybrano załączników wiadomości email z Gmaila",
                     "Powiadomienie",
                     JOptionPane.INFORMATION_MESSAGE
             );
@@ -195,18 +201,19 @@ public class InvoicesGui extends ChangeableGui {
 
         new Thread(() -> {
 
-            Map<String, String> errors = invoiceService.createInvoices(selectedMessages);
+            Map<String, String> errors = invoiceService.createInvoices(selectedMessagesAttachments);
 
             SwingUtilities.invokeLater(() -> {
 
-                for (int i = 0; i < selectedMessages.size(); i++) {
+                for (int i = 0; i < selectedMessagesAttachments.size(); i++) {
 
-                    Message selectedMessage = selectedMessages.get(i);
+                    MessageAttachment selectedMessageAttachment = selectedMessagesAttachments.get(i);
 
                     int rowIndex = selectedRowsIndices[i];
 
-                    String invoiceId = selectedMessage.getId();
-                    String invoiceExternalId = selectedMessage.getExternalId();
+                    String invoiceId = selectedMessageAttachment.getId().toString();
+
+                    String invoiceExternalId = selectedMessageAttachment.getExternalId();
 
                     if (invoiceExternalId == null) {
                         continue;
@@ -219,7 +226,7 @@ public class InvoicesGui extends ChangeableGui {
 
                 JOptionPane.showMessageDialog(
                         mainPanel,
-                        "Zapisano " + (selectedMessages.size() - errors.size()) + " faktur zakupu w Subiekcie",
+                        "Zapisano " + (selectedMessagesAttachments.size() - errors.size()) + " faktur zakupu w Subiekcie",
                         "Powiadomienie",
                         JOptionPane.INFORMATION_MESSAGE
                 );
@@ -313,11 +320,13 @@ public class InvoicesGui extends ChangeableGui {
     private void createUIComponents() {
         // TODO: place custom component creation code here
 
-        String[] tableHeaders = {"Id wiadomości email", "Subiekt Id", "Adres email nadawcy", "Temat wiadomości", "Data"};
+        String[] tableHeaders = {"Id (wiadomość, załącznik)", "Id wiadomości", "Nadawca", "Temat", "Numer załącznika", "Subiekt Id załącznika", "Data"};
 
         paginationTableGui = new PaginationTableGui(tableHeaders, this::loadData, this::convertToRow);
 
-        paginationTableGui.setOnClickColumn(GMAIL_ID_COL_INDEX, this::handleRedirectToMessage);
+        paginationTableGui.setSkipColumns(new Integer[]{GMAIL_MESSAGE_AND_ATTACHMENT_ID_COL_INDEX, GMAIL_MESSAGE_ID_COL_INDEX});
+
+        paginationTableGui.setOnClickColumn(GMAIL_MESSAGE_ID_COL_INDEX, this::handleRedirectToMessage);
 
         ordersPanelPlaceholder = paginationTableGui.getMainPanel();
     }

@@ -6,8 +6,10 @@ import org.example.api.gmail.response.MessagesPageResponse;
 import org.example.api.sfera.request.CreateOrderRequest;
 import org.example.exception.ConflictException;
 import org.example.exception.FileReadException;
-import org.example.external.gmail.Message;
-import org.example.external.gmail.MessageHeader;
+import org.example.model.gmail.generated.MessageHeader;
+import org.example.model.gmail.own.Message;
+import org.example.model.gmail.own.MessageAttachment;
+import org.example.model.gmail.own.MessageAttachmentCombinedId;
 import org.example.mapper.sfera.SferaOrderMapper;
 import org.example.service.sfera.SferaOrderService;
 import org.example.template.data.DataExtractedFromTemplate;
@@ -15,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,35 +36,38 @@ public class InvoiceService {
         return gmailMessageService.getPage(pageSize, pageToken, subject);
     }
 
-    public List<Message> loadInvoicesDetails(List<MessageHeader> messagesHeaders){
+    public List<MessageAttachment> loadInvoicesDetails(List<MessageHeader> messagesHeaders){
 
         List<Message> gotMessages = gmailMessageService.extractMessages(messagesHeaders);
 
-        gotMessages
+        List<MessageAttachment> messagesAttachments = gmailMessageService.getMessagesAttachments(gotMessages);
+
+        messagesAttachments
             .forEach(this::loadInvoiceDetailsAfterGeneralLoad);
 
-        return gotMessages;
+        return messagesAttachments;
     }
 
-    public void loadInvoiceDetailsAfterGeneralLoad(Message message){
+    public void loadInvoiceDetailsAfterGeneralLoad(MessageAttachment messageAttachment){
 
-        String messageId = message.getId();
-        String messageExternalId = sferaOrderService.getSubiektIdByExternalId(messageId);
+        MessageAttachmentCombinedId combinedId = messageAttachment.getCombinedId();
 
-        message.setExternalId(messageExternalId);
+        String combinedIdStr = combinedId.toString();
+
+        String invoiceExternalIdStr = sferaOrderService.getSubiektIdByExternalId(combinedIdStr);
+
+        messageAttachment.setExternalId(invoiceExternalIdStr);
     }
 
-    public Map<String, String> createInvoices(List<Message> messages){
+    public Map<String, String> createInvoices(List<MessageAttachment> messageAttachments){
 
         Map<String, String> errors = new HashMap<>();
 
-        for (Message message : messages) {
-
-            String messageId = message.getId();
+        for (MessageAttachment messageAttachment : messageAttachments) {
 
             try {
 
-                createInvoice(message);
+                createInvoice(messageAttachment);
             }
             catch (IllegalStateException | ConflictException e) {
 
@@ -71,24 +75,27 @@ public class InvoiceService {
 
                 log.error(e.getMessage());
 
-                errors.put(messageId, e.getMessage());
+                String messageId = messageAttachment.getMessageId();
+                Integer index = messageAttachment.getIndex();
+
+                errors.put(messageId + ", " + (index + 1), e.getMessage());
             }
         }
 
         return errors;
     }
 
-    public void createInvoice(Message message) throws ConflictException, IllegalStateException {
+    public void createInvoice(MessageAttachment messageAttachment) throws ConflictException, IllegalStateException {
 
-        if(message.getExternalId() != null){
+        if(messageAttachment.getExternalId() != null){
 
             throw new ConflictException("Istnieje już wybrana faktura zakupu w Subiekcie");
         }
 
-        String messageId = message.getId();
-        String messageAttachmentId = message.getAttachmentId();
+        String messageId = messageAttachment.getMessageId();
+        String messageAttachmentId = messageAttachment.getId();
 
-        byte[] messageData = gmailMessageService.getMessageAttachment(messageId, messageAttachmentId);
+        byte[] messageData = gmailMessageService.getMessageAttachmentData(messageId, messageAttachmentId);
 
         DataExtractedFromTemplate dataExtractedFromTemplate;
 
@@ -103,11 +110,13 @@ public class InvoiceService {
             throw new IllegalStateException(e.getMessage());
         }
 
-        CreateOrderRequest request = SferaOrderMapper.map(dataExtractedFromTemplate, message.getId());
+        String messageAttachmentCombinedIdStr = messageAttachment.getCombinedId().toString();
+
+        CreateOrderRequest request = SferaOrderMapper.map(dataExtractedFromTemplate, messageAttachmentCombinedIdStr);
 
         String gotExternalId = sferaOrderService.create(request);
 
-        message.setExternalId(gotExternalId);
+        messageAttachment.setExternalId(gotExternalId);
     }
 
     public void redirectToMessage(String messageId){

@@ -5,18 +5,16 @@ import org.example.api.Api;
 import org.example.api.gmail.GmailMessageApi;
 import org.example.api.gmail.response.MessageDetails;
 import org.example.api.gmail.response.MessagesPageResponse;
-import org.example.external.gmail.Message;
-import org.example.external.gmail.MessageContentPartBody;
-import org.example.external.gmail.MessageHeader;
-import org.example.external.gmail.MessageSummary;
+import org.example.model.gmail.generated.MessageHeader;
+import org.example.model.gmail.own.Message;
+import org.example.model.gmail.own.MessageAttachment;
+import org.example.model.gmail.generated.MessageContentPartBody;
 import org.example.mapper.gmail.GmailDateMapper;
+import org.example.model.gmail.own.MessageSummary;
 import org.springframework.stereotype.Service;
 
 import java.net.http.HttpResponse;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.TextStyle;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -117,7 +115,7 @@ public class GmailMessageService {
     public Message getMessage(MessageSummary messageSummary){
 
         String messageId = messageSummary.id();
-        String attachmentId = messageSummary.attachmentId();
+        List<String> attachmentsIds = messageSummary.attachmentsIds();
 
         String rawDate = messageSummary.date();
 
@@ -128,11 +126,32 @@ public class GmailMessageService {
             .from(messageSummary.from())
             .subject(messageSummary.subject())
             .date(date)
-            .attachmentId(attachmentId)
+            .attachmentsIds(attachmentsIds)
             .build();
     }
 
-    public byte[] getMessageAttachment(String messageId, String attachmentId){
+    public List<MessageAttachment> getMessagesAttachments(List<Message> messages){
+
+        List<MessageAttachment> messageAttachments = new ArrayList<>();
+
+        for (Message message : messages) {
+
+            List<String> messageAttachmentsIds = message.getAttachmentsIds();
+
+            for (int messageAttachmentIndex = 0; messageAttachmentIndex < messageAttachmentsIds.size(); messageAttachmentIndex++) {
+
+                String messageAttachmentId = messageAttachmentsIds.get(messageAttachmentIndex);
+
+                MessageAttachment messageAttachment = new MessageAttachment(message, messageAttachmentId, messageAttachmentIndex);
+
+                messageAttachments.add(messageAttachment);
+            }
+        }
+
+        return messageAttachments;
+    }
+
+    public byte[] getMessageAttachmentData(String messageId, String attachmentId){
 
         HttpResponse<String> gotResponse = gmailMessageApi.getMessageAttachment(messageId, attachmentId);
 

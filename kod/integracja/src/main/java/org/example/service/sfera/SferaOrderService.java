@@ -8,7 +8,7 @@ import org.example.api.sfera.request.GetDocumentByExternalIdRequest;
 import org.example.api.sfera.response.CreatedDocumentResponse;
 import org.example.api.sfera.response.ErrorResponse;
 import org.example.api.sfera.response.GeneralResponse;
-import org.example.external.sfera.own.ResponseStatus;
+import org.example.model.sfera.own.ResponseStatus;
 import org.example.loader.JsonFileLoader;
 import org.springframework.stereotype.Service;
 

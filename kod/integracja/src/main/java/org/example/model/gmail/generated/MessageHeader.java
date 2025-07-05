@@ -1,4 +1,4 @@
-package org.example.external.gmail;
+package org.example.model.gmail.generated;
 
 public record MessageHeader(
 

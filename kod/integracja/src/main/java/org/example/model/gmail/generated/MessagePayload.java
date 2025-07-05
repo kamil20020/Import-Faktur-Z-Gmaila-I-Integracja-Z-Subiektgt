@@ -1,11 +1,11 @@
-package org.example.external.gmail;
+package org.example.model.gmail.generated;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -38,7 +38,9 @@ public record MessagePayload(
         return messagePayloadHeader.value();
     }
 
-    public String getAttachmentId(String fileExtension){
+    public List<String> getAttachmentsIds(String fileExtension){
+
+        List<String> attachmentsIds = new ArrayList<>();
 
         Integer fileExtensionLength = fileExtension.length();
 
@@ -61,10 +63,10 @@ public record MessagePayload(
                 continue;
             }
 
-            return attachmentId;
+            attachmentsIds.add(attachmentId);
         }
 
-        return null;
+        return attachmentsIds;
     }
 
 }

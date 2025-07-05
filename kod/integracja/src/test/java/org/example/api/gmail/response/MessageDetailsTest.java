@@ -1,6 +1,10 @@
 package org.example.api.gmail.response;
 
-import org.example.external.gmail.*;
+import org.example.model.gmail.generated.MessageContentPart;
+import org.example.model.gmail.generated.MessageContentPartBody;
+import org.example.model.gmail.generated.MessagePayload;
+import org.example.model.gmail.generated.MessagePayloadHeader;
+import org.example.model.gmail.own.MessageSummary;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,7 +21,7 @@ class MessageDetailsTest {
         String expectedFrom = "Author 123";
         String expectedDate = "21-08-2024";
         String expectedSubject = "Subject 123";
-        String expectedAttachmentId = "345";
+        List<String> expectedAttachmentsIds = List.of("345", "12");
 
         MessagePayloadHeader authorMessagePayloadHeader = new MessagePayloadHeader("From", expectedFrom);
         MessagePayloadHeader dateMessagePayloadHeader = new MessagePayloadHeader("Date", expectedDate);
@@ -25,10 +29,13 @@ class MessageDetailsTest {
 
         List<MessagePayloadHeader> messagePayloadHeaders = List.of(authorMessagePayloadHeader, dateMessagePayloadHeader, subjectMessagePayloadHeader);
 
-        MessageContentPartBody messageContentPartBody = new MessageContentPartBody(expectedAttachmentId, "data");
+        MessageContentPartBody messageContentPartBody = new MessageContentPartBody(expectedAttachmentsIds.get(0), "data");
         MessageContentPart messageContentPart = new MessageContentPart(null, "file.pdf", messageContentPartBody);
 
-        List<MessageContentPart> messageContentParts = List.of(messageContentPart);
+        MessageContentPartBody messageContentPartBody1 = new MessageContentPartBody(expectedAttachmentsIds.get(1), "data1");
+        MessageContentPart messageContentPart1 = new MessageContentPart(null, "file1.pdf", messageContentPartBody1);
+
+        List<MessageContentPart> messageContentParts = List.of(messageContentPart, messageContentPart1);
 
         MessagePayload messagePayload = new MessagePayload(messagePayloadHeaders, messageContentParts);
 
@@ -42,7 +49,13 @@ class MessageDetailsTest {
         assertEquals(expectedFrom, messageSummary.from());
         assertEquals(expectedDate, messageSummary.date());
         assertEquals(expectedSubject, messageSummary.subject());
-        assertEquals(expectedAttachmentId, messageSummary.attachmentId());
+
+        List<String> gotAttachmentsIds = messageSummary.attachmentsIds();
+
+        assertNotNull(gotAttachmentsIds);
+        assertFalse(gotAttachmentsIds.isEmpty());
+        assertEquals(expectedAttachmentsIds.size(), gotAttachmentsIds.size());
+        assertTrue(gotAttachmentsIds.containsAll(expectedAttachmentsIds));
     }
 
 }

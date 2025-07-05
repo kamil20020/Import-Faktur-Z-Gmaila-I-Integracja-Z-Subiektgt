@@ -1,0 +1,137 @@
+{
+  "isTaxOriented": false,
+  "place": {
+    "coords": {
+      "leftTop": {
+        "x": 398,
+        "y": 224
+      },
+      "rightDown": {
+        "x": 589,
+        "y": 252
+      }
+    }
+  },
+  "creationDate": {
+    "coords": {
+      "leftTop": {
+        "x": 1063,
+        "y": 145
+      },
+      "rightDown": {
+        "x": 1166,
+        "y": 175
+      }
+    }
+  },
+  "receiveDate": {
+    "coords": {
+      "leftTop": {
+        "x": 1060,
+        "y": 174
+      },
+      "rightDown": {
+        "x": 1164,
+        "y": 203
+      }
+    }
+  },
+  "title": {
+    "skipSpace": 2,
+    "coords": {
+      "leftTop": {
+        "x": 795,
+        "y": 104
+      },
+      "rightDown": {
+        "x": 1087,
+        "y": 138
+      }
+    }
+  },
+  "creator": {
+    "maxSize": 5,
+    "coords": {
+      "leftTop": {
+        "x": 69,
+        "y": 338
+      },
+      "rightDown": {
+        "x": 611,
+        "y": 470
+      }
+    },
+    "fields": [
+      {
+        "name": "name",
+        "xMinCord": 91,
+        "yMinCord": 178,
+        "xMaxCord": 332,
+        "yMaxCord": 290
+      },
+      {
+        "name": "street",
+        "xMinCord": 339,
+        "yMinCord": 202,
+        "xMaxCord": 588,
+        "yMaxCord": 231
+      },
+      {
+        "name": "city",
+        "xMinCord": 399,
+        "yMinCord": 225,
+        "xMaxCord": 588,
+        "yMaxCord": 251
+      },
+      {
+        "name": "nip",
+        "xMinCord": 381,
+        "yMinCord": 249,
+        "xMaxCord": 588,
+        "yMaxCord": 274
+      }
+    ]
+  },
+  "invoiceItems": {
+    "startStr": "netto",
+    "endStr": "według stawki VAT",
+    "minLength": 10,
+    "rowHeight": 32,
+    "startOffset": 0,
+    "fields": [
+      {
+        "name": "index",
+        "xMinCord": 80,
+        "xMaxCord": 121
+      },
+      {
+        "name": "code",
+        "xMinCord": 1010,
+        "xMaxCord": 1200
+      },
+      {
+        "name": "name",
+        "xMinCord": 121,
+        "xMaxCord": 401
+      },
+      {
+        "name": "price",
+        "xMinCord": 523,
+        "xMaxCord": 633
+      },
+      {
+        "name": "quantity",
+        "xMinCord": 397,
+        "xMaxCord": 481
+      },
+      {
+        "name": "tax",
+        "xMinCord": 635,
+        "xMaxCord": 683
+      }
+    ]
+  },
+  "totalPrice": {
+    "startStr": "Razem do zapłaty:"
+  }
+}

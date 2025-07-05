@@ -3,7 +3,7 @@ package org.example.api.gmail.response;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.example.external.gmail.MessageHeader;
+import org.example.model.gmail.generated.MessageHeader;
 
 import java.util.List;
 

@@ -1,5 +1,10 @@
-package org.example.external.gmail;
+package org.example.gmail;
 
+import org.example.model.gmail.generated.MessageContentPart;
+import org.example.model.gmail.generated.MessageContentPartBody;
+import org.example.model.gmail.generated.MessagePayload;
+import org.example.model.gmail.generated.MessagePayloadHeader;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -34,32 +39,35 @@ class MessagePayloadTest {
         assertEquals(expectedValue, gotValue);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {
-        ".pdf, attachment-345",
-        ".png,"
-    })
-    void shouldGetAttachmentId(String expectedSearchExtension, String expectedAttachmentId) {
+    @Test
+    void shouldGetAttachmentsIds() {
 
         //given
-        MessageContentPartBody messageContentPartBody = new MessageContentPartBody("attachment-345", "data");
-        MessageContentPartBody nullAttachmentIdMessageContentPartBody1 = new MessageContentPartBody(null, "data1");
+        List<String> expectedAttachmentsIds = List.of("attachment-345", "attachment-12");
+
+        MessageContentPartBody messageContentPartBody = new MessageContentPartBody(expectedAttachmentsIds.get(0), "data");
+        MessageContentPartBody messageContentPartBody1 = new MessageContentPartBody(expectedAttachmentsIds.get(1), "data1");
+        MessageContentPartBody nullAttachmentIdMessageContentPartBody1 = new MessageContentPartBody(null, "data2");
 
         MessageContentPart messageContentPart1 = new MessageContentPart("345", null, messageContentPartBody);
         MessageContentPart messageContentPart2 = new MessageContentPart("345", "file.pdf", null);
         MessageContentPart messageContentPart3 = new MessageContentPart("345", "filename.jpg", messageContentPartBody);
         MessageContentPart messageContentPart4 = new MessageContentPart("345", "file.pdf", nullAttachmentIdMessageContentPartBody1);
         MessageContentPart messageContentPart5 = new MessageContentPart("345", "file.pdf", messageContentPartBody);
+        MessageContentPart messageContentPart6 = new MessageContentPart("345", "file1.pdf", messageContentPartBody1);
 
-        List<MessageContentPart> messageContentParts = List.of(messageContentPart1, messageContentPart2, messageContentPart3, messageContentPart4, messageContentPart5);
+        List<MessageContentPart> messageContentParts = List.of(messageContentPart1, messageContentPart2, messageContentPart3, messageContentPart4, messageContentPart5, messageContentPart6);
 
         MessagePayload messagePayload = new MessagePayload(null, messageContentParts);
 
         //when
-        String gotAttachmentId = messagePayload.getAttachmentId(expectedSearchExtension);
+        List<String> gotAttachmentsIds = messagePayload.getAttachmentsIds("pdf");
 
         //then
-        assertEquals(expectedAttachmentId, gotAttachmentId);
+        assertNotNull(gotAttachmentsIds);
+        assertFalse(gotAttachmentsIds.isEmpty());
+        assertEquals(expectedAttachmentsIds.size(), gotAttachmentsIds.size());
+        assertTrue(gotAttachmentsIds.containsAll(expectedAttachmentsIds));
     }
 
 }

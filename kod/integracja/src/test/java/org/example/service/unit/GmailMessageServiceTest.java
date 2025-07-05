@@ -5,8 +5,14 @@ import org.example.api.Api;
 import org.example.api.gmail.GmailMessageApi;
 import org.example.api.gmail.response.MessageDetails;
 import org.example.api.gmail.response.MessagesPageResponse;
-import org.example.external.gmail.*;
+import org.example.model.gmail.generated.MessageContentPart;
+import org.example.model.gmail.generated.MessagePayload;
+import org.example.model.gmail.generated.MessagePayloadHeader;
+import org.example.model.gmail.own.Message;
+import org.example.model.gmail.generated.MessageContentPartBody;
 import org.example.mapper.gmail.GmailDateMapper;
+import org.example.model.gmail.own.MessageAttachment;
+import org.example.model.gmail.own.MessageSummary;
 import org.example.service.GmailMessageService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +24,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -78,33 +86,22 @@ class GmailMessageServiceTest {
     }
 
     @Test
-    public void shouldGetCompleteMessage(){
+    public void shouldGetMessage(){
 
         //given
-        byte[] rawData = "content".getBytes(StandardCharsets.UTF_8);
-        String base64Data = "Y29udGVudA";
+        List<String> attachmentsIds = List.of("123", "345");
 
         MessageSummary messageSummary = new MessageSummary(
             "id",
             "from",
             "date",
             "subject",
-            "attachment-id"
-        );
-
-        TestHttpResponse expectedResponse = TestHttpResponse.builder()
-            .statusCode(200)
-            .build();
-
-        MessageContentPartBody expectedAttachmentResponse = new MessageContentPartBody(
-            messageSummary.attachmentId(),
-            base64Data
+            attachmentsIds
         );
 
         OffsetDateTime expectedConvertedDate = OffsetDateTime.now();
 
         //when
-
         try(
             MockedStatic<GmailDateMapper> gmailDateMapperMock = Mockito.mockStatic(GmailDateMapper.class);
         ){
@@ -119,7 +116,13 @@ class GmailMessageServiceTest {
             assertEquals(expectedConvertedDate, gotMessage.getDate());
             assertEquals(messageSummary.subject(), gotMessage.getSubject());
             assertEquals(messageSummary.from(), gotMessage.getFrom());
-            assertEquals(messageSummary.attachmentId(), gotMessage.getAttachmentId());
+
+            List<String> gotAttachmentsIds = messageSummary.attachmentsIds();
+
+            assertNotNull(gotAttachmentsIds);
+            assertFalse(gotAttachmentsIds.isEmpty());
+            assertEquals(attachmentsIds.size(), gotAttachmentsIds.size());
+            assertTrue(gotAttachmentsIds.containsAll(attachmentsIds));
 
             gmailDateMapperMock.verify(() -> GmailDateMapper.fromStr(messageSummary.date()));
         }
@@ -176,7 +179,50 @@ class GmailMessageServiceTest {
     }
 
     @Test
-    void shouldGetMessageAttachment() {
+    public void shouldGetMessagesAttachments(){
+
+        //given
+        Message message = Message.builder()
+            .id("123")
+            .attachmentsIds(List.of("12", "13"))
+            .build();
+
+        Message message1 = Message.builder()
+            .id("12")
+            .attachmentsIds(List.of("22", "23"))
+            .build();
+
+        List<Message> messages = List.of(message, message1);
+
+        Integer numberOfMessagesAttachments = messages.stream()
+            .map(m -> m.getAttachmentsIds().size())
+            .reduce(0, (v1, v2) -> v1 + v2);
+
+        List<String> expectedMessagesAttachmentsIdsStrs = List.of("123,0", "123,1", "12,0", "12,1");
+
+                //when
+        List<MessageAttachment> gotMessagesAttachments = gmailMessageService.getMessagesAttachments(messages);
+
+        //then
+        assertNotNull(gotMessagesAttachments);
+        assertFalse(gotMessagesAttachments.isEmpty());
+        assertEquals(numberOfMessagesAttachments, gotMessagesAttachments.size());
+
+        for (int i = 0; i < expectedMessagesAttachmentsIdsStrs.size(); i++){
+
+            String expectedMessageAttachmentStr = expectedMessagesAttachmentsIdsStrs.get(i);
+
+            MessageAttachment gotMessageAttachment = gotMessagesAttachments.get(i);
+
+            String gotMessageAttachmentCombinedIdStr = gotMessageAttachment.getCombinedId().toString();
+
+            assertNotNull(gotMessageAttachmentCombinedIdStr);
+            assertEquals(expectedMessageAttachmentStr, gotMessageAttachmentCombinedIdStr);
+        }
+    }
+
+    @Test
+    void shouldGetMessageAttachmentData() {
 
         //given
         String expectedMessageId = "message-id";
@@ -203,7 +249,7 @@ class GmailMessageServiceTest {
 
             apiMock.when(() -> Api.extractBody(any(), any())).thenReturn(expectedAttachmentResponse);
 
-            byte[] gotData = gmailMessageService.getMessageAttachment(expectedMessageId, expectedAttachmentId);
+            byte[] gotData = gmailMessageService.getMessageAttachmentData(expectedMessageId, expectedAttachmentId);
 
             //then
             assertNotNull(gotData);

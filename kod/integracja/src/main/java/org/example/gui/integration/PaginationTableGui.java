@@ -302,6 +302,18 @@ public class PaginationTableGui extends JPanel {
         return selectedData;
     }
 
+    public void setSkipColumns(Integer[] skipColumns) {
+
+        for (Integer skipColumn : skipColumns) {
+
+            TableColumn tableColumn = table.getColumnModel().getColumn(skipColumn);
+
+            tableColumn.setWidth(0);
+            tableColumn.setMinWidth(0);
+            tableColumn.setMaxWidth(0);
+        }
+    }
+
     public void updateRowCol(int rowIndex, int colIndex, String firstFieldId, Object newValue) throws IllegalStateException {
 
         Optional<Object[]> foundRowOpt = data.stream()

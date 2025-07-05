@@ -1,4 +1,4 @@
-package org.example.external.sfera.own;
+package org.example.model.sfera.own;
 
 public enum ResponseStatus {
 

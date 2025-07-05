@@ -1,6 +1,6 @@
 package org.example.mapper.sfera;
 
-import org.example.external.sfera.generated.Product;
+import org.example.model.sfera.generated.Product;
 import org.example.template.data.TemplateInvoiceItem;
 
 import java.math.BigDecimal;

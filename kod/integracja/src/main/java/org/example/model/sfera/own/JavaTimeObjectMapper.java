@@ -1,11 +1,10 @@
-package org.example.external.sfera.own;
+package org.example.model.sfera.own;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 
 public class JavaTimeObjectMapper extends ObjectMapper {
 

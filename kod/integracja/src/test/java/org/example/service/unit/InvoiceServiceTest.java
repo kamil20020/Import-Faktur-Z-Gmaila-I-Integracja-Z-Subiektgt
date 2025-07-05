@@ -4,8 +4,10 @@ import org.example.api.gmail.response.MessagesPageResponse;
 import org.example.api.sfera.request.CreateOrderRequest;
 import org.example.exception.ConflictException;
 import org.example.exception.FileReadException;
-import org.example.external.gmail.Message;
-import org.example.external.gmail.MessageHeader;
+import org.example.model.gmail.own.Message;
+import org.example.model.gmail.own.MessageAttachment;
+import org.example.model.gmail.own.MessageAttachmentCombinedId;
+import org.example.model.gmail.generated.MessageHeader;
 import org.example.mapper.sfera.SferaOrderMapper;
 import org.example.service.GmailMessageService;
 import org.example.service.InvoiceService;
@@ -25,7 +27,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 class InvoiceServiceTest {
@@ -72,9 +73,17 @@ class InvoiceServiceTest {
 
         //given
         String messageId = "message-id";
+        Integer attachmentIndex = 1;
 
-        Message message = Message.builder()
-            .id(messageId)
+        MessageAttachmentCombinedId messageAttachmentCombinedId = MessageAttachmentCombinedId.builder()
+            .messageId(messageId)
+            .attachmentIndex(attachmentIndex)
+            .build();
+
+        String messageAttachmentIdStr = messageAttachmentCombinedId.toString();
+
+        MessageAttachment messageAttachment = MessageAttachment.builder()
+            .combinedId(messageAttachmentCombinedId)
             .build();
 
         String expectedExternalId = "external-id";
@@ -82,12 +91,12 @@ class InvoiceServiceTest {
         //when
         Mockito.when(sferaOrderService.getSubiektIdByExternalId(any())).thenReturn(expectedExternalId);
 
-        invoiceService.loadInvoiceDetailsAfterGeneralLoad(message);
+        invoiceService.loadInvoiceDetailsAfterGeneralLoad(messageAttachment);
 
         //then
-        assertEquals(expectedExternalId, message.getExternalId());
+        assertEquals(expectedExternalId, messageAttachment.getExternalId());
 
-        Mockito.verify(sferaOrderService).getSubiektIdByExternalId(messageId);
+        Mockito.verify(sferaOrderService).getSubiektIdByExternalId(messageAttachmentIdStr);
     }
 
     @Test
@@ -98,34 +107,40 @@ class InvoiceServiceTest {
 
         List<MessageHeader> messageHeaders = List.of(messageHeader);
 
-        Message expectedMessage1 = Message.builder()
-            .id("message-id-1")
+        Message message = new Message();
+
+        List<Message> messages = List.of(message);
+
+        MessageAttachment expectedMessageAttachment = MessageAttachment.builder()
+            .combinedId(new MessageAttachmentCombinedId("12", 1))
             .build();
 
-        Message expectedMessage2 = Message.builder()
-            .id("message-id-2")
+        MessageAttachment expectedMessageAttachment1 = MessageAttachment.builder()
+            .combinedId(new MessageAttachmentCombinedId("22", 2))
             .build();
 
-        List<Message> expectedMessages = List.of(expectedMessage1, expectedMessage2);
+        List<MessageAttachment> expectedMessagesAttachments = List.of(expectedMessageAttachment, expectedMessageAttachment1);
 
         //when
-        Mockito.when(gmailMessageService.extractMessages(any())).thenReturn(expectedMessages);
+        Mockito.when(gmailMessageService.extractMessages(any())).thenReturn(messages);
+        Mockito.when(gmailMessageService.getMessagesAttachments(any())).thenReturn(expectedMessagesAttachments);
 
-        List<Message> gotMessages = invoiceService.loadInvoicesDetails(messageHeaders);
+        List<MessageAttachment> gotMessagesAttachments = invoiceService.loadInvoicesDetails(messageHeaders);
 
         //then
-        assertNotNull(gotMessages);
-        assertFalse(gotMessages.isEmpty());
-        assertEquals(expectedMessages.size(), gotMessages.size());
-        assertTrue(gotMessages.containsAll(expectedMessages));
+        assertNotNull(gotMessagesAttachments);
+        assertFalse(gotMessagesAttachments.isEmpty());
+        assertEquals(expectedMessagesAttachments.size(), gotMessagesAttachments.size());
+        assertTrue(gotMessagesAttachments.containsAll(expectedMessagesAttachments));
 
         Mockito.verify(gmailMessageService).extractMessages(messageHeaders);
+        Mockito.verify(gmailMessageService).getMessagesAttachments(messages);
 
-        for(Message expectedMessage : expectedMessages){
+        for(MessageAttachment messageAttachment : expectedMessagesAttachments){
 
-            String expectedMessageId = expectedMessage.getId();
+            String expectedMessageAttachmentCombinedIdStr = messageAttachment.getCombinedId().toString();
 
-            Mockito.verify(sferaOrderService).getSubiektIdByExternalId(expectedMessageId);
+            Mockito.verify(sferaOrderService).getSubiektIdByExternalId(expectedMessageAttachmentCombinedIdStr);
         }
     }
 
@@ -134,13 +149,19 @@ class InvoiceServiceTest {
 
         //given
         String messageId = "message-id";
+        Integer attachmentIndex = 1;
         String attachmentId = "attachment-id";
+
         byte[] messageAttachmentData = "message-attachment-data".getBytes(StandardCharsets.UTF_8);
 
-        Message message = Message.builder()
-            .id(messageId)
-            .attachmentId(attachmentId)
+        MessageAttachmentCombinedId messageAttachmentCombinedId = new MessageAttachmentCombinedId(messageId, attachmentIndex);
+
+        MessageAttachment messageAttachment = MessageAttachment.builder()
+            .id(attachmentId)
+            .combinedId(messageAttachmentCombinedId)
             .build();
+
+        String messageAttachmentIdStr = messageAttachmentCombinedId.toString();
 
         DataExtractedFromTemplate expectedDataExtractedFromTemplate = new DataExtractedFromTemplate(
             null,
@@ -158,9 +179,9 @@ class InvoiceServiceTest {
         String expectedExternalId = "external-id";
 
         //when
+        Mockito.when(gmailMessageService.getMessageAttachmentData(any(), any())).thenReturn(messageAttachmentData);
         Mockito.when(templateService.applyGoodTemplateForData(any())).thenReturn(expectedDataExtractedFromTemplate);
         Mockito.when(sferaOrderService.create(any(CreateOrderRequest.class))).thenReturn(expectedExternalId);
-        Mockito.when(gmailMessageService.getMessageAttachment(any(), any())).thenReturn(messageAttachmentData);
 
         try(
             MockedStatic<SferaOrderMapper> sferaOrderMapperMock = Mockito.mockStatic(SferaOrderMapper.class);
@@ -168,25 +189,25 @@ class InvoiceServiceTest {
 
             sferaOrderMapperMock.when(() -> SferaOrderMapper.map(any(), any())).thenReturn(expectedRequest);
 
-            invoiceService.createInvoice(message);
+            invoiceService.createInvoice(messageAttachment);
 
             //then
-            sferaOrderMapperMock.verify(() -> SferaOrderMapper.map(expectedDataExtractedFromTemplate, messageId));
+            sferaOrderMapperMock.verify(() -> SferaOrderMapper.map(expectedDataExtractedFromTemplate, messageAttachmentIdStr));
         }
 
+        Mockito.verify(gmailMessageService).getMessageAttachmentData(messageId, attachmentId);
         Mockito.verify(templateService).applyGoodTemplateForData(messageAttachmentData);
         Mockito.verify(sferaOrderService).create(expectedRequest);
-        Mockito.verify(gmailMessageService).getMessageAttachment(messageId, attachmentId);
 
-        assertNotNull(message.getExternalId());
-        assertEquals(expectedExternalId, message.getExternalId());
+        assertNotNull(messageAttachment.getExternalId());
+        assertEquals(expectedExternalId, messageAttachment.getExternalId());
     }
 
     @Test
     void shouldNotCreateInvoiceWithExternalId() {
 
         //given
-        Message message = Message.builder()
+        MessageAttachment messageAttachment = MessageAttachment.builder()
             .externalId("external-id")
             .build();
 
@@ -194,7 +215,7 @@ class InvoiceServiceTest {
         //then
         assertThrows(
             ConflictException.class,
-                () -> invoiceService.createInvoice(message)
+            () -> invoiceService.createInvoice(messageAttachment)
         );
     }
 
@@ -204,22 +225,26 @@ class InvoiceServiceTest {
         //given
         byte[] messageAttachmentData = "message-attachment-data".getBytes(StandardCharsets.UTF_8);
 
-        Message message = Message.builder()
-            .id("message-id")
-            .attachmentId("attachmend-id")
+        String messageId = "message-id";
+        Integer attachmentIndex = 1;
+        String attachmentId = "attachment-id";
+
+        MessageAttachment messageAttachment = MessageAttachment.builder()
+            .id(attachmentId)
+            .combinedId(new MessageAttachmentCombinedId(messageId, attachmentIndex))
             .build();
 
         //when
-        Mockito.when(gmailMessageService.getMessageAttachment(any(), any())).thenReturn(messageAttachmentData);
+        Mockito.when(gmailMessageService.getMessageAttachmentData(any(), any())).thenReturn(messageAttachmentData);
         Mockito.when(templateService.applyGoodTemplateForData(any())).thenThrow(FileReadException.class);
 
         //then
         assertThrows(
             IllegalStateException.class,
-            () -> invoiceService.createInvoice(message)
+            () -> invoiceService.createInvoice(messageAttachment)
         );
 
-        Mockito.verify(gmailMessageService).getMessageAttachment(message.getId(), message.getAttachmentId());
+        Mockito.verify(gmailMessageService).getMessageAttachmentData(messageId, attachmentId);
         Mockito.verify(templateService).applyGoodTemplateForData(messageAttachmentData);
     }
 
@@ -227,29 +252,29 @@ class InvoiceServiceTest {
     void shouldCreateInvoices() {
 
         //given
-        Message message1 = Message.builder()
-            .id("message-id-1")
+        MessageAttachment expectedMessageAttachment = MessageAttachment.builder()
+            .combinedId(new MessageAttachmentCombinedId("12", 1))
             .build();
 
-        Message message2 = Message.builder()
-            .id("message-id-2")
+        MessageAttachment expectedMessageAttachment1 = MessageAttachment.builder()
+            .combinedId(new MessageAttachmentCombinedId("22", 2))
             .build();
 
-        List<Message> messages = List.of(message1, message2);
+        List<MessageAttachment> expectedMessagesAttachments = List.of(expectedMessageAttachment, expectedMessageAttachment1);
 
         //when
         try(
             MockedStatic<SferaOrderMapper> sferaOrderMapperMock = Mockito.mockStatic(SferaOrderMapper.class);
         ){
 
-            invoiceService.createInvoices(messages);
+            invoiceService.createInvoices(expectedMessagesAttachments);
 
             //then
-            for(Message message : messages){
+            for(MessageAttachment messageAttachment : expectedMessagesAttachments){
 
-                String messageId = message.getId();
+                String messageAttachmentCombinedIdStr = messageAttachment.getCombinedId().toString();
 
-                sferaOrderMapperMock.verify(() -> SferaOrderMapper.map(any(), eq(messageId)));
+                sferaOrderMapperMock.verify(() -> SferaOrderMapper.map(any(), eq(messageAttachmentCombinedIdStr)));
             }
         }
     }

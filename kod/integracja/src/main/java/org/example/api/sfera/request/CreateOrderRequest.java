@@ -1,20 +1,17 @@
 package org.example.api.sfera.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.external.sfera.generated.Customer;
-import org.example.external.sfera.generated.Product;
+import org.example.model.sfera.generated.Customer;
+import org.example.model.sfera.generated.Product;
 
 import javax.annotation.processing.Generated;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data

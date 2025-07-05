@@ -1,21 +1,17 @@
 package org.example.service.unit.sfera;
 
-import org.example.App;
 import org.example.TestHttpResponse;
 import org.example.api.Api;
 import org.example.api.sfera.SferaProductApi;
-import org.example.api.sfera.request.GeneralRequest;
 import org.example.api.sfera.request.GetProductByCodeAndEanRequest;
 import org.example.api.sfera.response.GeneralResponse;
-import org.example.external.sfera.own.ResponseStatus;
+import org.example.model.sfera.own.ResponseStatus;
 import org.example.service.sfera.SferaProductService;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;

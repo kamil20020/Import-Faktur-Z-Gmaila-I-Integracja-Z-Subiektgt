@@ -1,6 +1,6 @@
 package org.example.mapper.sfera;
 
-import org.example.external.sfera.generated.Customer;
+import org.example.model.sfera.generated.Customer;
 import org.example.template.data.TemplateCreator;
 import org.junit.jupiter.api.Test;
 
