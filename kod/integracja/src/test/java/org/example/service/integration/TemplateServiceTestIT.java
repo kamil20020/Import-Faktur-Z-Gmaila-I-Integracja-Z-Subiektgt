@@ -38,8 +38,8 @@ class TemplateServiceTestIT {
             .build();
 
         TemplateInvoiceItem expectedLastItem = TemplateInvoiceItem.builder()
-            .code("przesyłka")
-            .name("at - Opłata za przesyłkę")
+            .code("przesylka vat")
+            .name("Opłata za przesyłkę")
             .quantity(1)
             .price(new BigDecimal("19.00"))
             .tax(new BigDecimal("23.00"))
@@ -81,7 +81,7 @@ class TemplateServiceTestIT {
         //given
         TemplateInvoiceItem expectedFirstItem = TemplateInvoiceItem.builder()
             .code("11230071030")
-            .name("Bęben sprz. MS 230-250/021-025")
+            .name("Bęben sprz. MS 230-250/021-025 3/8\" Z7  pływający")
             .quantity(5)
             .price(new BigDecimal("77.24"))
             .tax(new BigDecimal("23"))
@@ -89,7 +89,7 @@ class TemplateServiceTestIT {
 
         TemplateInvoiceItem expectedSecondItem = TemplateInvoiceItem.builder()
             .code("11430071003")
-            .name("Bęben sprz. MS 231-251 .325\" Z7")
+            .name("Bęben sprz. MS 231-251 .325\" Z7 pływający")
             .quantity(4)
             .price(new BigDecimal("78.34"))
             .tax(new BigDecimal("23"))
@@ -139,7 +139,7 @@ class TemplateServiceTestIT {
         //given
         TemplateInvoiceItem expectedFirstItem = TemplateInvoiceItem.builder()
             .code("FDA50S-02101-2")
-            .name("NÓŻ KOSIARKI MASTER CUT")
+            .name("NÓŻ KOSIARKI MASTER CUT FD51, M50, M51 - 51CM WYRZUT, MULCZOWANIE")
             .quantity(2)
             .price(new BigDecimal("19.92"))
             .tax(new BigDecimal("23"))
@@ -147,7 +147,7 @@ class TemplateServiceTestIT {
 
         TemplateInvoiceItem expectedSecondItem = TemplateInvoiceItem.builder()
             .code("FDS43S-02101")
-            .name("NÓŻ KOSIARKI MASTER CUT")
+            .name("NÓŻ KOSIARKI MASTER CUT FD43PBS300 , FD43PLC123 41CM")
             .quantity(2)
             .price(new BigDecimal("19.92"))
             .tax(new BigDecimal("23"))
@@ -155,7 +155,7 @@ class TemplateServiceTestIT {
 
         TemplateInvoiceItem expectedLastItem = TemplateInvoiceItem.builder()
             .code("506-217")
-            .name("NÓŻ DO KOSIARKI JL50 M50 M51")
+            .name("NÓŻ DO KOSIARKI JL50 M50 M51 FD51 - ŁOPATA")
             .quantity(1)
             .price(new BigDecimal("45.96"))
             .tax(new BigDecimal("23"))

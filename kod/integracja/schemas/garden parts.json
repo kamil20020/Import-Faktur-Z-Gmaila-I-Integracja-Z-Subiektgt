@@ -90,13 +90,17 @@
       },
       {
         "name": "code",
-        "xMinCord": 98,
-        "xMaxCord": 158
+        "xMinCord": 97,
+        "xMaxCord": 810,
+        "separator": " - ",
+        "index": 0
       },
       {
         "name": "name",
-        "xMinCord": 165,
-        "xMaxCord": 810
+        "xMinCord": 97,
+        "xMaxCord": 810,
+        "separator": " - ",
+        "index": 1
       },
       {
         "name": "price",

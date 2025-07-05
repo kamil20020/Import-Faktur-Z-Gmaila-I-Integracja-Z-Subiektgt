@@ -102,7 +102,7 @@ public class TemplateConverter {
         return stringBuilder.toString();
     }
 
-    private static int getNumberOfOccurencesInStr(String searchStr, String value){
+    public static int getNumberOfOccurencesInStr(String searchStr, String value){
 
         int valueLengthWithoutSearchStrs = value.replaceAll(searchStr, "").length();
 

@@ -195,6 +195,17 @@ public record Template(
 
             String value = extractWordFromLine(data, pageIndex, lineYCord, templateRowField);
 
+            String separator = templateRowField.separator();
+
+            if(value != null && separator != null){
+
+                String[] words = value.split(separator);
+
+                int index = templateRowField.index();
+
+                value = words[index];
+            }
+
             gotValues.put(fieldName, value);
         }
 
