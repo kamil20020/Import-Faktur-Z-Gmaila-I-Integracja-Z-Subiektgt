@@ -50,29 +50,41 @@
     }
   },
   "creator": {
-    "maxSize": 5,
-    "coords": {
-      "leftTop": {
-        "x": 69,
-        "y": 338
-      },
-      "rightDown": {
-        "x": 611,
-        "y": 470
-      }
-    },
     "fields": [
       {
-        "name": "name"
+        "name": "name",
+        "xMinCord": 77,
+        "yMinCord": 340,
+        "xMaxCord": 601,
+        "yMaxCord": 387
       },
       {
-        "name": "street"
+        "name": "street",
+        "xMinCord": 74,
+        "yMinCord": 387,
+        "xMaxCord": 605,
+        "yMaxCord": 413
       },
       {
-        "name": "city"
+        "name": "city",
+        "xMinCord": 149,
+        "yMinCord": 413,
+        "xMaxCord": 599,
+        "yMaxCord": 435
       },
       {
-        "name": "nip"
+        "name": "post-code",
+        "xMinCord": 67,
+        "yMinCord": 411,
+        "xMaxCord": 150,
+        "yMaxCord": 434
+      },
+      {
+        "name": "nip",
+        "xMinCord": 122,
+        "yMinCord": 436,
+        "xMaxCord": 280,
+        "yMaxCord": 459
       }
     ]
   },

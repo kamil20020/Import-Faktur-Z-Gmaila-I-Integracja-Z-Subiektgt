@@ -63,16 +63,39 @@
     },
     "fields": [
       {
-        "name": "name"
+        "name": "name",
+        "xMinCord": 73,
+        "yMinCord": 310,
+        "xMaxCord": 601,
+        "yMaxCord": 336
       },
       {
-        "name": "street"
+        "name": "street",
+        "xMinCord": 73,
+        "yMinCord": 334,
+        "xMaxCord": 560,
+        "yMaxCord": 355
       },
       {
-        "name": "city"
+        "name": "city",
+        "xMinCord": 133,
+        "yMinCord": 354,
+        "xMaxCord": 592,
+        "yMaxCord": 373
       },
       {
-        "name": "nip"
+        "name": "post-code",
+        "xMinCord": 61,
+        "yMinCord": 351,
+        "xMaxCord": 135,
+        "yMaxCord": 372
+      },
+      {
+        "name": "nip",
+        "xMinCord": 132,
+        "yMinCord": 370,
+        "xMaxCord": 319,
+        "yMaxCord": 395
       }
     ]
   },
