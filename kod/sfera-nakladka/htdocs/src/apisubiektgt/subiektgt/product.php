@@ -103,18 +103,22 @@ class Product extends SubiektObj{
 		if(!empty($this->supplier_id)){
 			$this->productGt->DostawcaId = $this->supplier_id;
 		}
+
+		//cena kartotekowa z netto
+		$this->productGt->CenaKartotekowa = floatval($this->productDetail['unit_price_without_tax']);
+
 		//cena detaliczna
-		if($this->productGt->Ceny->Liczba>0){
-			$this->productGt->Ceny->Element(1)->Brutto = floatval($this->price);			
-		}
+		//if($this->productGt->Ceny->Liczba>0){
+		//	$this->productGt->Ceny->Element(1)->Brutto = floatval($this->price);			
+		//}
 		
 		//cena hurtowa
-		if($this->productGt->Ceny->Liczba>1 && $this->wholesale_price>0){
-			$this->productGt->Ceny->Element(2)->Netto = floatval($this->wholesale_price);			
-		}
+		//if($this->productGt->Ceny->Liczba>1 && $this->wholesale_price>0){
+		//	$this->productGt->Ceny->Element(2)->Netto = floatval($this->wholesale_price);			
+		//}
 		//stawka vat
 		if(!empty($this->vat)){
-			//$this->productGt->SprzedazVatId = $this->vat;
+			$this->productGt->SprzedazVatId = strval($this->vat);
 		}
 		//masa
 		if(!empty($this->weight)){

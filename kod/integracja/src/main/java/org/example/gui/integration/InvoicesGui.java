@@ -2,6 +2,7 @@ package org.example.gui.integration;
 
 import org.example.api.gmail.response.MessagesPageResponse;
 import org.example.exception.UnloggedException;
+import org.example.model.gmail.generated.MessageHeader;
 import org.example.model.gmail.own.Message;
 import org.example.gui.ChangeableGui;
 import org.example.model.gmail.own.MessageAttachment;
@@ -15,10 +16,8 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
@@ -38,9 +37,8 @@ public class InvoicesGui extends ChangeableGui {
 
     private List<MessageAttachment> messagesAttachmentsPage = new ArrayList<>();
 
-    private String prevPageToken = "";
-    private String actualPageToken = "";
-    private String nextPageToken = "";
+    private Integer actualPageTokenIndex = 0;
+    private List<String> pageTokens = new ArrayList<>();
 
     private final InvoiceService invoiceService;
 
@@ -64,6 +62,8 @@ public class InvoicesGui extends ChangeableGui {
         selectAllButton.addActionListener(e -> selectAll());
         unselectAllButton.addActionListener(e -> unselectAll());
         saveOrdersButton.addActionListener(e -> saveInvoices());
+
+        pageTokens.add(null);
     }
 
     public void setHandleLogout(Runnable handleLogout) {
@@ -75,48 +75,52 @@ public class InvoicesGui extends ChangeableGui {
 
         String subject = searchInput.getText();
 
-        updatePagination(offset);
+        String toSearchActualPageToken = updatePagination(offset);
 
         MessagesPageResponse messagesPageResponse;
 
         try {
 
-            messagesPageResponse = invoiceService.getMessagesPage(limit, actualPageToken, subject);
-        } catch (UnloggedException e) {
+            messagesPageResponse = invoiceService.getMessagesPage(limit, toSearchActualPageToken, subject);
+        }
+        catch (UnloggedException e) {
 
             handleLogout.run();
 
             return null;
         }
 
-        nextPageToken = messagesPageResponse.nextPageToken();
+        String nextPageToken = messagesPageResponse.nextPageToken();
+
+        if (!pageTokens.contains(nextPageToken)) {
+
+            pageTokens.add(nextPageToken);
+        }
 
         messagesAttachmentsPage = invoiceService.loadInvoicesDetails(messagesPageResponse.messageHeaders());
 
         int totalNumberOfRows = messagesPageResponse.totalNumberOfElements();
 
         PaginationTableGui.PaginationTableData<Object> data = new PaginationTableGui.PaginationTableData(
-                messagesAttachmentsPage,
-                totalNumberOfRows
+            messagesAttachmentsPage,
+            totalNumberOfRows
         );
 
         return data;
     }
 
-    private void updatePagination(int newOffset) {
+    private String updatePagination(int newOffset) {
 
         if (newOffset < paginationTableGui.getPrevOffset()) {
 
-            nextPageToken = actualPageToken;
-            actualPageToken = prevPageToken;
-        } else if (newOffset > paginationTableGui.getPrevOffset()) {
-
-            prevPageToken = actualPageToken;
-            actualPageToken = nextPageToken;
-        } else {
-
-            actualPageToken = nextPageToken;
+            actualPageTokenIndex--;
         }
+        else if (newOffset > paginationTableGui.getPrevOffset()) {
+
+            actualPageTokenIndex++;
+        }
+
+        return pageTokens.get(actualPageTokenIndex);
     }
 
     private void handleSearch() {
@@ -135,13 +139,13 @@ public class InvoicesGui extends ChangeableGui {
         LocalDate date = message.getDate().toLocalDate();
 
         return new Object[]{
-                messageAttachment.getId().toString(),
-                message.getId(),
-                message.getFrom(),
-                message.getSubject(),
-                messageAttachment.getIndex() + 1,
-                messageAttachment.getExternalId() != null ? messageAttachment.getExternalId() : NOT_GIVEN_VALUE,
-                dateTimeFormatter.format(date)
+            messageAttachment.getId(),
+            message.getId(),
+            message.getFrom(),
+            message.getSubject(),
+            messageAttachment.getIndex() + 1,
+            messageAttachment.getExternalId() != null ? messageAttachment.getExternalId() : NOT_GIVEN_VALUE,
+            dateTimeFormatter.format(date)
         };
     }
 
@@ -165,12 +169,12 @@ public class InvoicesGui extends ChangeableGui {
         }
 
         List<String> selectedMessageAttachmentsIds = selectedMessagesData.stream()
-            .map(selectedOrderData -> selectedOrderData[GMAIL_MESSAGE_AND_ATTACHMENT_ID_COL_INDEX].toString())
-            .collect(Collectors.toList());
+                .map(selectedOrderData -> selectedOrderData[GMAIL_MESSAGE_AND_ATTACHMENT_ID_COL_INDEX].toString())
+                .collect(Collectors.toList());
 
         return messagesAttachmentsPage.stream()
-            .filter(messageAttachment -> selectedMessageAttachmentsIds.contains(messageAttachment.getId().toString()))
-            .collect(Collectors.toList());
+                .filter(messageAttachment -> selectedMessageAttachmentsIds.contains(messageAttachment.getId().toString()))
+                .collect(Collectors.toList());
 
     }
 

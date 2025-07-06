@@ -2,6 +2,7 @@ package org.example.gui;
 
 import org.example.gui.integration.InvoicesGui;
 import org.example.gui.integration.LoginGui;
+import org.example.gui.integration.TemplateMenuService;
 import org.example.gui.manage_pdf.PdfViewerGui;
 import org.example.service.auth.AuthService;
 
@@ -21,8 +22,9 @@ public class Window {
     private final InvoicesGui invoicesGui;
 
     private final AuthService authService;
+    private final TemplateMenuService templateMenuService;
 
-    public Window(LoginGui loginGui, InvoicesGui invoicesGui, AuthService authService) {
+    public Window(LoginGui loginGui, InvoicesGui invoicesGui, AuthService authService, TemplateMenuService templateMenuService) {
 
         this.loginGui = loginGui;
         this.invoicesGui = invoicesGui;
@@ -30,6 +32,7 @@ public class Window {
         invoicesGui.setHandleLogout(this::handleLogout);
 
         this.authService = authService;
+        this.templateMenuService = templateMenuService;
 
         loadMainPanelLayoutConstraints();
 
@@ -73,12 +76,20 @@ public class Window {
 
         JMenu accountMenu = new JMenu("Konto");
 
-        JMenuItem accountMenuItem = new JMenuItem("Wyloguj");
-        accountMenuItem.addActionListener(e -> handleLogout());
+            JMenuItem accountMenuItem = new JMenuItem("Wyloguj");
+            accountMenuItem.addActionListener(e -> handleLogout());
 
         accountMenu.add(accountMenuItem);
 
+        JMenu schemasMenu = new JMenu("Szablony faktur");
+
+            JMenuItem schemasMenuItem = new JMenuItem("Dostępne schematy faktur");
+            schemasMenuItem.addActionListener(e -> templateMenuService.showAvaiableSchemas());
+
+        schemasMenu.add(schemasMenuItem);
+
         menuBar.add(accountMenu);
+        menuBar.add(schemasMenu);
 
         frame.setJMenuBar(menuBar);
     }

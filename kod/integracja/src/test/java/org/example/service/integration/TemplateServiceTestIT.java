@@ -119,7 +119,7 @@ class TemplateServiceTestIT {
             "Wrocław",
             date,
             date,
-            "Faktura VAT  779/2025 oryginał",
+            "Faktura VAT  779/2025",
             expectedTemplateCreator,
             null,
             false,

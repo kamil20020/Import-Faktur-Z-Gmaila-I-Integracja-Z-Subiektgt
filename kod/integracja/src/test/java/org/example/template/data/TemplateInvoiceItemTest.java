@@ -106,4 +106,25 @@ class TemplateInvoiceItemTest {
         assertEquals(expectedResult, gotResult);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {
+        "20, true, 16.2601626016",
+        "20, false, 20"
+    })
+    void shouldGetUnitPriceWithoutTax(BigDecimal unitPrice, boolean isInvoiceTax, BigDecimal expectedResult) {
+
+        //given
+        //when
+        TemplateInvoiceItem templateInvoiceItem = TemplateInvoiceItem.builder()
+            .price(unitPrice)
+            .tax(new BigDecimal("23"))
+            .build();
+
+        BigDecimal gotResult = templateInvoiceItem.getUnitPriceWithoutTax(isInvoiceTax);
+
+        //then
+        assertNotNull(gotResult);
+        assertEquals(expectedResult, gotResult);
+    }
+
 }

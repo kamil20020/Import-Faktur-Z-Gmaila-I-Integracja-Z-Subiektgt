@@ -18,7 +18,8 @@ import java.math.BigDecimal;
     "code",
     "ean",
     "name",
-    "price",
+    "total_price",
+    "unit_price_without_tax",
     "qty",
     "vat",
 })
@@ -34,8 +35,11 @@ public class Product {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("price")
-    private BigDecimal priceWithTax;
+    @JsonProperty("total_price")
+    private BigDecimal totalPriceWithTax;
+
+    @JsonProperty("unit_price_without_tax")
+    private BigDecimal unitPriceWithoutTax;
 
     @JsonProperty("qty")
     private Integer quantity;

@@ -58,6 +58,11 @@ public class TemplateService {
         companies = companyTemplateMappings.keySet();
     }
 
+    public Set<String> getSchemasNames(){
+
+        return companies;
+    }
+
     private static Template loadTemplateSchema(File file) throws FileReadException {
 
         return JsonFileLoader.loadFromFile(file, Template.class);

@@ -4,6 +4,7 @@ import lombok.*;
 import org.example.template.TemplateRowField;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.List;
@@ -144,6 +145,26 @@ public class TemplateInvoiceItem {
         BigDecimal taxValue = price.multiply(taxFraction);
 
         return price.add(taxValue);
+    }
+
+    public BigDecimal getUnitPriceWithoutTax(boolean isInvoiceTaxOriented){
+
+        if(!isInvoiceTaxOriented){
+
+            return price;
+        }
+
+        //brutto = netto + 0,23 * netto
+        //brutto = netto * (1 + 0,23)
+        //brutto / (1 + 0,23) = netto
+        //brutto / 1,23 = netto
+
+        BigDecimal hundred = BigDecimal.valueOf(100);
+        BigDecimal scaledTax = tax.divide(hundred);
+
+        BigDecimal denominator = BigDecimal.ONE.add(scaledTax);
+
+        return price.divide(denominator, 10, RoundingMode.HALF_UP);
     }
 
 }

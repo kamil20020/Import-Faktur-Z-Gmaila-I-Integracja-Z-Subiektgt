@@ -62,7 +62,7 @@ class Order extends SubiektObj {
 
 		$position = $this->orderGt->Pozycje->Dodaj($code);
 		$position->IloscJm = intval($product['qty']);				
-		$position->WartoscBruttoPoRabacie = floatval($product['price']); //floatval($product['price']) * intval($product['qty']);
+		$position->WartoscBruttoPoRabacie = floatval($product['total_price']); //floatval($product['price']) * intval($product['qty']);
 		if(floatval($product['price_before_discount'])>0){
 			$position->WartoscBruttoPrzedRabatem = $product['price_before_discount']; //floatval($product['price_before_discount']) * intval($product['qty']);
 		}
@@ -220,7 +220,7 @@ class Order extends SubiektObj {
 			$p_a = array('name'=> $positions[$p['ob_Id']]['name'],
 					   'code'=> $positions[$p['ob_Id']]['code'],
 					   'qty'=>$p['ob_Ilosc'],
-					   'price'=>$p['ob_WartBrutto'],
+					   'total_price'=>$p['ob_WartBrutto'],
 					   'type'=>$p['ob_TowRodzaj']);
 			$this->products[] = $p_a;
 		}

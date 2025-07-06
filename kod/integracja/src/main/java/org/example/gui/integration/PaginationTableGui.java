@@ -92,7 +92,7 @@ public class PaginationTableGui extends JPanel {
 
     private void handleNextButton() {
 
-        if (offset + pageSize >= totalNumberOfRows) {
+        if (offset + pageSize >= totalNumberOfRows || data.isEmpty()) {
             return;
         }
 
@@ -233,6 +233,8 @@ public class PaginationTableGui extends JPanel {
         int currentPage = getActualPage();
 
         currentPageButton.setText(String.valueOf(currentPage + 1));
+
+        prevOffset = offset;
 
         handleLoadTableExceptions();
     }
