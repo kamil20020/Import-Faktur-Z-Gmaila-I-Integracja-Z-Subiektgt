@@ -50,17 +50,6 @@
     }
   },
   "creator": {
-    "maxSize": 5,
-    "coords": {
-      "leftTop": {
-        "x": 69,
-        "y": 338
-      },
-      "rightDown": {
-        "x": 611,
-        "y": 470
-      }
-    },
     "fields": [
       {
         "name": "name",
@@ -84,6 +73,13 @@
         "yMaxCord": 251
       },
       {
+        "name": "post-code",
+        "xMinCord": 340,
+        "yMinCord": 227,
+        "xMaxCord": 402,
+        "yMaxCord": 500
+      },
+      {
         "name": "nip",
         "xMinCord": 381,
         "yMinCord": 249,
@@ -94,44 +90,45 @@
   },
   "invoiceItems": {
     "startStr": "netto",
-    "endStr": "według stawki VAT",
+    "endStr": "Forma płatności",
     "minLength": 10,
-    "rowHeight": 32,
+    "rowHeight": 20,
     "startOffset": 0,
     "fields": [
       {
         "name": "index",
-        "xMinCord": 80,
-        "xMaxCord": 121
+        "xMinCord": 48,
+        "xMaxCord": 113
       },
       {
         "name": "code",
-        "xMinCord": 1010,
-        "xMaxCord": 1200
+        "xMinCord": 111,
+        "xMaxCord": 251
       },
       {
         "name": "name",
-        "xMinCord": 121,
-        "xMaxCord": 401
+        "xMinCord": 248,
+        "xMaxCord": 608
       },
       {
         "name": "price",
-        "xMinCord": 523,
-        "xMaxCord": 633
+        "xMinCord": 956,
+        "xMaxCord": 1043
       },
       {
         "name": "quantity",
-        "xMinCord": 397,
-        "xMaxCord": 481
+        "xMinCord": 869,
+        "xMaxCord": 910
       },
       {
         "name": "tax",
-        "xMinCord": 635,
-        "xMaxCord": 683
+        "xMinCord": 1120,
+        "xMaxCord": 1152
       }
     ]
   },
   "totalPrice": {
-    "startStr": "Razem do zapłaty:"
+    "startStr": "Razem:",
+    "skipSpace": 3
   }
 }

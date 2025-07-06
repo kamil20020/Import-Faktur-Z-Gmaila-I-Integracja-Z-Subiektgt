@@ -17,6 +17,7 @@ import java.util.*;
 public class TemplateService {
 
     private static final Map<String, Template> companyTemplateMappings = new HashMap<>();
+    private static Set<String> companies = new HashSet<>();
 
     private static final Logger log = LoggerFactory.getLogger(Api.class);
 
@@ -53,6 +54,8 @@ public class TemplateService {
         }
 
         log.info("Loaded {} templates", companyTemplateMappings.size());
+
+        companies = companyTemplateMappings.keySet();
     }
 
     private static Template loadTemplateSchema(File file) throws FileReadException {
@@ -81,23 +84,20 @@ public class TemplateService {
 
     private Optional<Template> findTemplateForData(byte[] data){
 
-        for(Map.Entry<String, Template> companyTemplateMapping : companyTemplateMappings.entrySet()){
+        Optional<String> foundTemplateNameOpt = Template.search(data, companies);
 
-            String templateCompany = companyTemplateMapping.getKey();
+        if(foundTemplateNameOpt.isEmpty()){
 
-            boolean isGoodTemplate = Template.hasCompany(data, templateCompany);
-
-            if(isGoodTemplate){
-
-                log.info("Template {} was selected", templateCompany);
-
-                Template template = companyTemplateMapping.getValue();
-
-                return Optional.of(template);
-            }
+            return Optional.empty();
         }
 
-        return Optional.empty();
+        String foundTemplateName = foundTemplateNameOpt.get();
+
+        log.info("Template {} was selected", foundTemplateName);
+
+        Template foundTemplate = companyTemplateMappings.get(foundTemplateName);
+
+        return Optional.of(foundTemplate);
     }
 
     private DataExtractedFromTemplate applyTemplate(Template template, byte[] data) {

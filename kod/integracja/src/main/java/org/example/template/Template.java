@@ -23,7 +23,7 @@ public record Template(
     TemplateRow totalPrice
 ){
 
-    public static boolean hasCompany(byte[] data, String company){
+    public static Optional<String> search(byte[] data, Collection<String> values){
 
         PdfLinesDetails pdfLinesDetails = getLines(data);
 
@@ -34,30 +34,38 @@ public record Template(
             line = line
                 .toLowerCase();
 
-            if (line.contains(company)) {
+            for(String value : values){
 
-                return true;
+                if(line.contains(value)){
+
+                    return Optional.of(value);
+                }
             }
         }
 
-        return false;
+        return Optional.empty();
     }
 
     public TemplateCreator extractCreator(byte[] data){
 
-        String[] lines = getLinesForTemplateRow(data, creator);
-
-        Map<String, Integer> templateRowFieldsSkipSpaceMappings = new HashMap<>();
+        Map<String, String> templateRowFieldsValuesMappings = new HashMap<>();
 
         creator.fields()
             .forEach(templateRowField -> {
 
-                templateRowFieldsSkipSpaceMappings.put(templateRowField.name(), templateRowField.skipSpace());
+                float minX = templateRowField.xMinCord();
+                float minY = templateRowField.yMinCord();
+                float width = templateRowField.xMaxCord() - minX;
+                float height = templateRowField.yMaxCord() - minY;
+
+                String[] gotValues = extractWordsForField(data, 0, minX, minY, width, height);
+
+                String gotValue = String.join(" ", gotValues);
+
+                templateRowFieldsValuesMappings.put(templateRowField.name(), gotValue);
             });
 
-        Integer creatorMaxSize = creator.maxSize();
-
-        return TemplateCreator.extract(lines, templateRowFieldsSkipSpaceMappings, creatorMaxSize);
+        return TemplateCreator.extract(templateRowFieldsValuesMappings);
     }
 
     public LocalDate extractCreationDate(byte[] data){
@@ -132,6 +140,8 @@ public record Template(
 
             appendDataToTemplateInvoiceItem(templateInvoiceItem, newTemplateInvoiceItemData);
         }
+
+        System.out.println();
     }
 
     private void appendDataToTemplateInvoiceItem(TemplateInvoiceItem destTemplateInvoiceItem, TemplateInvoiceItem newTemplateInvoiceItemData){
@@ -249,7 +259,7 @@ public record Template(
 
         float width = maxXCord - minXCord;
 
-        String[] lines = extractWordsForField(data, pageIndex, minXCord, lineYCord, width, invoiceItems.rowHeight());
+        String[] lines = extractWordsForFieldWithConvertedY(data, pageIndex, minXCord, lineYCord, width, invoiceItems.rowHeight());
 
         if(lines.length == 0){
 
@@ -259,7 +269,14 @@ public record Template(
         return lines[0];
     }
 
-    private static String[] extractWordsForField(byte[] data, int pageIndex, double x, double yPt, double width, double height){
+    private static String[] extractWordsForField(byte[] data, int pageIndex, double x, double y, double width, double height){
+
+        double convertedY = TemplateCords.convertPxToPt(y);
+
+        return extractWordsForFieldWithConvertedY(data, pageIndex, x, convertedY, width, height);
+    }
+
+    private static String[] extractWordsForFieldWithConvertedY(byte[] data, int pageIndex, double x, double yPt, double width, double height){
 
         Rectangle2D.Double rect = new Rectangle2D.Double(
             TemplateCords.convertPxToPt(x),
@@ -308,9 +325,44 @@ public record Template(
 
         String gotLine = lines.get(totalPriceLineIndex);
 
-        String gotRawTotalPrice = gotLine.split(totalPriceSearchStr)[1];
+        String rawTotalPrice = gotLine.split(totalPriceSearchStr)[1];
 
-        return TemplateConverter.convertToBigDecimal(gotRawTotalPrice);
+        if(totalPrice.skipSpace() != null){
+
+            rawTotalPrice = extractTotalPriceFromCombinedStr(rawTotalPrice);
+        }
+
+        return TemplateConverter.convertToBigDecimal(rawTotalPrice);
+    }
+
+    private String extractTotalPriceFromCombinedStr(String value){
+
+        Integer skipSpace = totalPrice.skipSpace();
+
+        String[] words = value
+            .split("\\s");
+
+        int numberOfNotEmptyWords = 0;
+
+        int realRawTotalPriceIndex = 0;
+
+        for(; realRawTotalPriceIndex < words.length; realRawTotalPriceIndex++){
+
+            String word = words[realRawTotalPriceIndex];
+
+            if(word.isEmpty()){
+                continue;
+            }
+
+            numberOfNotEmptyWords++;
+
+            if(numberOfNotEmptyWords == skipSpace){
+
+                break;
+            }
+        }
+
+        return words[realRawTotalPriceIndex];
     }
 
     private static String[] getLinesForTemplateRow(byte[] data, TemplateRow templateRow){

@@ -191,6 +191,64 @@ class TemplateServiceTestIT {
         test("invoices/rozkwit.pdf", expectedFirstSecondLastItems, expectedData, expectedNumberOfItems);
     }
 
+    @Test
+    void testForCedrus() {
+
+        //given
+        TemplateInvoiceItem expectedFirstItem = TemplateInvoiceItem.builder()
+            .code("050021")
+            .name("Olej Cedrus 80W90 1L EAN: 5906434254918")
+            .quantity(1)
+            .price(new BigDecimal("14.15"))
+            .tax(new BigDecimal("23"))
+            .build();
+
+        TemplateInvoiceItem expectedSecondItem = TemplateInvoiceItem.builder()
+            .code("050022")
+            .name("Olej Cedrus 80W90 5L EAN: 5906434254925")
+            .quantity(1)
+            .price(new BigDecimal("66.66"))
+            .tax(new BigDecimal("23"))
+            .build();
+
+        TemplateInvoiceItem expectedLastItem = TemplateInvoiceItem.builder()
+            .code("REKL00276")
+            .name("Flaga CEDRUS EAN: 5908233360517")
+            .quantity(1)
+            .price(new BigDecimal("1.00"))
+            .tax(new BigDecimal("23"))
+            .build();
+
+        List<TemplateInvoiceItem> expectedFirstSecondLastItems = List.of(expectedFirstItem, expectedSecondItem, expectedLastItem);
+
+        LocalDate date = LocalDate.of(2025, 6, 30);
+
+        TemplateCreator expectedTemplateCreator = new TemplateCreator(
+            "CEDRUS SPÓŁKA AKCYJNA",
+            "Przemysłowa 1",
+            "95-060",
+            "Brzeziny",
+            "833-00-05-602"
+        );
+
+        DataExtractedFromTemplate expectedData = new DataExtractedFromTemplate(
+            "Brzeziny",
+            date,
+            date,
+            "FS-00005522/06/2025",
+            expectedTemplateCreator,
+            null,
+            false,
+            new BigDecimal("147.48")
+        );
+
+        Integer expectedNumberOfItems = 5;
+
+        //when
+        //then
+        test("invoices/cedrus.pdf", expectedFirstSecondLastItems, expectedData, expectedNumberOfItems);
+    }
+
     private void test(String invoiceFilePath, List<TemplateInvoiceItem> expectedFirstSecondLastItems, DataExtractedFromTemplate expectedData, Integer expectedNumberOfItems) {
 
         //given

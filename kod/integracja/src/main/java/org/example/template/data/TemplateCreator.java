@@ -11,25 +11,19 @@ public record TemplateCreator(
     String nip
 ){
 
-    public static TemplateCreator extract(String[] creatorLines, Map<String, Integer> fieldsSkipSpaceMappings, Integer creatorMaxSize){
+    public static TemplateCreator extract(Map<String, String> fieldsValuesMappings){
 
-//        Integer nameSkipSpace = fieldsSkipSpaceMappings.get("name");
-//        Integer streetSkipSpace = fieldsSkipSpaceMappings.get("street");
-//        Integer citySkipSpace = fieldsSkipSpaceMappings.get("city");
-        Integer nipSkipSpace = fieldsSkipSpaceMappings.get("nip");
+        String rawName = fieldsValuesMappings.get("name");
+        String rawStreet = fieldsValuesMappings.get("street");
+        String rawCity = fieldsValuesMappings.get("city");
+        String rawPostCode = fieldsValuesMappings.get("post-code");
+        String rawNip = fieldsValuesMappings.get("nip");
 
-        int nextIndex = 1;
-
-        if(doesNameHasMoreThanOneLine(creatorLines, creatorMaxSize)){
-
-            nextIndex = 2;
-        }
-
-        String name = extractCreatorName(creatorLines, creatorMaxSize);
-        String street = extractCreatorStreet(creatorLines, nextIndex);
-        String postCode = extractCreatorPostCode(creatorLines, nextIndex + 1);
-        String city = extractCreatorCity(creatorLines, nextIndex + 1);
-        String nip = extractCreatorNip(creatorLines, nextIndex + 2, nipSkipSpace);
+        String name = extractName(rawName);
+        String street = extractStreet(rawStreet);
+        String postCode = extractPostCode(rawPostCode);
+        String city = extractCity(rawCity);
+        String nip = extractNip(rawNip);
 
         return new TemplateCreator(
             name,
@@ -40,74 +34,59 @@ public record TemplateCreator(
         );
     }
 
-    private static boolean doesNameHasMoreThanOneLine(String[] creatorLines, Integer creatorMaxSize){
+    public static String extractName(String value){
 
-        return creatorLines.length == creatorMaxSize;
-    }
+        if(value == null){
 
-    public static String extractCreatorName(String[] creatorLines, Integer creatorMaxSize){
-
-        String gotName = null;
-
-        if(doesNameHasMoreThanOneLine(creatorLines, creatorMaxSize)){
-
-            gotName = creatorLines[0] + creatorLines[1];
-        }
-        else{
-
-            gotName = creatorLines[0];
+            return null;
         }
 
-        return gotName
+        return value
             .stripIndent();
     }
 
-    public static String extractCreatorStreet(String[] creatorLines, int index){
+    public static String extractStreet(String value){
 
-        return creatorLines[index]
+        if(value == null){
+
+            return null;
+        }
+
+        return value
             .stripIndent()
             .replaceAll("ul. ", "");
     }
 
-    public static String extractCreatorCity(String[] creatorLines, int index){
+    public static String extractCity(String value){
 
-        StringBuilder stringBuilder = new StringBuilder();
+        if(value == null){
 
-        String[] gotWords = creatorLines[index]
-            .stripIndent()
-            .replaceAll("ul. ", "")
-            .split("\\s");
-
-        for(int i = 1; i < gotWords.length; i++){
-
-            String value = gotWords[i];
-
-            stringBuilder.append(value);
-
-            if(i < gotWords.length - 1){
-
-                stringBuilder.append(" ");
-            }
+            return null;
         }
 
-        return stringBuilder.toString();
+        return value
+            .stripIndent();
     }
 
-    public static String extractCreatorPostCode(String[] creatorLines, int index){
+    public static String extractPostCode(String value){
 
-        return creatorLines[index]
-            .stripIndent()
-            .split("\\s")[0];
-    }
+        if(value == null){
 
-    public static String extractCreatorNip(String[] creatorLines, int index, Integer skipSpace){
-
-        if(skipSpace != null){
-
-            index += skipSpace;
+            return null;
         }
 
-        return creatorLines[index]
+        return value
+            .stripIndent();
+    }
+
+    public static String extractNip(String value){
+
+        if(value == null){
+
+            return null;
+        }
+
+        return value
             .replaceAll("NIP:", "")
             .replaceAll("PL", "")
             .stripIndent();
