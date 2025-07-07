@@ -50,17 +50,6 @@
     }
   },
   "creator": {
-    "maxSize": 6,
-    "coords": {
-      "leftTop": {
-        "x": 52,
-        "y": 80
-      },
-      "rightDown": {
-        "x": 384,
-        "y": 232
-      }
-    },
     "fields": [
       {
         "name": "name",
@@ -140,6 +129,15 @@
     ]
   },
   "totalPrice": {
-    "startStr": "Razem do zapłaty:"
+    "startStr": "Razem do zapłaty:",
+    "rowHeight": 32,
+    "coords": {
+      "leftTop": {
+        "x": 1011
+      },
+      "rightDown": {
+        "x": 1146
+      }
+    }
   }
 }

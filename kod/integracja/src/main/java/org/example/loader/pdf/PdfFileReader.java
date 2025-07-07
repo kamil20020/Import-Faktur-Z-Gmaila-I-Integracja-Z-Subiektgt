@@ -10,12 +10,37 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 public class PdfFileReader {
+
+    public static Optional<String> search(byte[] data, Collection<String> values, boolean shouldGetRealNewLines){
+
+        PdfLinesDetails pdfLinesDetails = getLinesFromFile(data, shouldGetRealNewLines);
+
+        List<String> lines = pdfLinesDetails.lines().get(0);
+
+        for(String line : lines) {
+
+            line = line
+                .toLowerCase();
+
+            for(String value : values){
+
+                if(line.contains(value)){
+
+                    return Optional.of(value);
+                }
+            }
+        }
+
+        return Optional.empty();
+    }
 
     public static void handlePdfFileDocument(File gotFile, Consumer<PDDocument> handlePdDocument) throws FileReadException {
 

@@ -13,9 +13,12 @@ import org.example.service.GmailMessageService;
 import org.example.service.InvoiceService;
 import org.example.service.TemplateService;
 import org.example.service.sfera.SferaOrderService;
+import org.example.template.Template;
 import org.example.template.data.DataExtractedFromTemplate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
@@ -24,6 +27,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -156,12 +160,19 @@ class InvoiceServiceTest {
 
         MessageAttachmentCombinedId messageAttachmentCombinedId = new MessageAttachmentCombinedId(messageId, attachmentIndex);
 
+        Message message = Message.builder()
+            .subject("subject")
+            .build();
+
         MessageAttachment messageAttachment = MessageAttachment.builder()
             .id(attachmentId)
             .combinedId(messageAttachmentCombinedId)
+            .message(message)
             .build();
 
         String messageAttachmentIdStr = messageAttachmentCombinedId.toString();
+
+        Template expectedTemplate = new Template(true, null, null, null, null, null, null, null);
 
         DataExtractedFromTemplate expectedDataExtractedFromTemplate = new DataExtractedFromTemplate(
             null,
@@ -180,7 +191,8 @@ class InvoiceServiceTest {
 
         //when
         Mockito.when(gmailMessageService.getMessageAttachmentData(any(), any())).thenReturn(messageAttachmentData);
-        Mockito.when(templateService.applyGoodTemplateForData(any())).thenReturn(expectedDataExtractedFromTemplate);
+        Mockito.when(templateService.findTemplate(message.getSubject())).thenReturn(Optional.of(expectedTemplate));
+        Mockito.when(templateService.applyTemplate(any(), any())).thenReturn(expectedDataExtractedFromTemplate);
         Mockito.when(sferaOrderService.create(any(CreateOrderRequest.class))).thenReturn(expectedExternalId);
 
         try(
@@ -196,7 +208,8 @@ class InvoiceServiceTest {
         }
 
         Mockito.verify(gmailMessageService).getMessageAttachmentData(messageId, attachmentId);
-        Mockito.verify(templateService).applyGoodTemplateForData(messageAttachmentData);
+        Mockito.verify(templateService).findTemplate(message.getSubject());
+        Mockito.verify(templateService).applyTemplate(expectedTemplate, messageAttachmentData);
         Mockito.verify(sferaOrderService).create(expectedRequest);
 
         assertNotNull(messageAttachment.getExternalId());
@@ -229,14 +242,16 @@ class InvoiceServiceTest {
         Integer attachmentIndex = 1;
         String attachmentId = "attachment-id";
 
+        Message message = new Message();
+
         MessageAttachment messageAttachment = MessageAttachment.builder()
             .id(attachmentId)
             .combinedId(new MessageAttachmentCombinedId(messageId, attachmentIndex))
+            .message(message)
             .build();
 
         //when
         Mockito.when(gmailMessageService.getMessageAttachmentData(any(), any())).thenReturn(messageAttachmentData);
-        Mockito.when(templateService.applyGoodTemplateForData(any())).thenThrow(FileReadException.class);
 
         //then
         assertThrows(
@@ -245,24 +260,33 @@ class InvoiceServiceTest {
         );
 
         Mockito.verify(gmailMessageService).getMessageAttachmentData(messageId, attachmentId);
-        Mockito.verify(templateService).applyGoodTemplateForData(messageAttachmentData);
     }
 
     @Test
     void shouldCreateInvoices() {
 
         //given
+        Message message = Message.builder()
+            .subject("subject")
+            .build();
+
         MessageAttachment expectedMessageAttachment = MessageAttachment.builder()
             .combinedId(new MessageAttachmentCombinedId("12", 1))
+            .message(message)
             .build();
 
         MessageAttachment expectedMessageAttachment1 = MessageAttachment.builder()
             .combinedId(new MessageAttachmentCombinedId("22", 2))
+            .message(message)
             .build();
+
+        Template expectedTemplate = new Template(true, null, null, null, null, null, null, null);
 
         List<MessageAttachment> expectedMessagesAttachments = List.of(expectedMessageAttachment, expectedMessageAttachment1);
 
         //when
+        Mockito.when(templateService.findTemplate(message.getSubject())).thenReturn(Optional.of(expectedTemplate));
+
         try(
             MockedStatic<SferaOrderMapper> sferaOrderMapperMock = Mockito.mockStatic(SferaOrderMapper.class);
         ){
@@ -277,6 +301,98 @@ class InvoiceServiceTest {
                 sferaOrderMapperMock.verify(() -> SferaOrderMapper.map(any(), eq(messageAttachmentCombinedIdStr)));
             }
         }
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+        "subject123",
+        "author123",
+        "content123",
+    })
+    public void shouldFindGoodTemplateForTexts(String gotContent){
+
+        //given
+        Template expectedTemplate = new Template(true, null, null, null, null, null, null, null);
+
+        byte[] expectedAttachmentData = "content".getBytes(StandardCharsets.UTF_8);
+
+        Message message = Message.builder()
+            .subject("subject123")
+            .from("author123")
+            .content("content123")
+            .build();
+
+        //when
+        Mockito.when(templateService.findTemplate(any())).thenReturn(Optional.empty());
+        Mockito.when(templateService.findTemplate(gotContent)).thenReturn(Optional.of(expectedTemplate));
+
+        Optional<Template> gotTemplateOpt = invoiceService.findGoodTemplate(expectedAttachmentData, message);
+
+        //then
+        assertNotNull(gotTemplateOpt);
+        assertTrue(gotTemplateOpt.isPresent());
+        assertEquals(expectedTemplate, gotTemplateOpt.get());
+
+        Mockito.verify(templateService).findTemplate(gotContent);
+    }
+
+    @Test
+    public void shouldFindGoodTemplateForFileContent(){
+
+        //given
+        Template expectedTemplate = new Template(true, null, null, null, null, null, null, null);
+
+        byte[] expectedAttachmentData = "content".getBytes(StandardCharsets.UTF_8);
+
+        Message message = Message.builder()
+            .subject("subject123")
+            .from("author123")
+            .content("content123")
+            .build();
+
+        //when
+        Mockito.when(templateService.findTemplate(any())).thenReturn(Optional.empty());
+        Mockito.when(templateService.findTemplateForData(any())).thenReturn(Optional.of(expectedTemplate));
+
+        Optional<Template> gotTemplateOpt = invoiceService.findGoodTemplate(expectedAttachmentData, message);
+
+        //then
+        assertNotNull(gotTemplateOpt);
+        assertTrue(gotTemplateOpt.isPresent());
+        assertEquals(expectedTemplate, gotTemplateOpt.get());
+
+        Mockito.verify(templateService).findTemplate(message.getSubject());
+        Mockito.verify(templateService).findTemplate(message.getFrom());
+        Mockito.verify(templateService).findTemplate(message.getContent());
+        Mockito.verify(templateService).findTemplateForData(expectedAttachmentData);
+    }
+
+    @Test
+    public void shouldFindTemplateWhenItDoesNotExist(){
+
+        //given
+        Message message = Message.builder()
+            .subject("subject123")
+            .from("author123")
+            .content("content123")
+            .build();
+
+        byte[] expectedAttachmentData = "content".getBytes(StandardCharsets.UTF_8);
+
+        //when
+        Mockito.when(templateService.findTemplate(any())).thenReturn(Optional.empty());
+        Mockito.when(templateService.findTemplateForData(any())).thenReturn(Optional.empty());
+
+        Optional<Template> gotTemplateOpt = invoiceService.findGoodTemplate(expectedAttachmentData, message);
+
+        //then
+        assertNotNull(gotTemplateOpt);
+        assertTrue(gotTemplateOpt.isEmpty());
+
+        Mockito.verify(templateService).findTemplate(message.getSubject());
+        Mockito.verify(templateService).findTemplate(message.getFrom());
+        Mockito.verify(templateService).findTemplate(message.getContent());
+        Mockito.verify(templateService).findTemplateForData(expectedAttachmentData);
     }
 
     @Test

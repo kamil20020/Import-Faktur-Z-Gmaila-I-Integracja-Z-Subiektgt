@@ -59,6 +59,7 @@ public class TemplateConverter {
 
         value = value
             .replaceAll("\\s", "")
+            .replaceAll("\\u00A0", "") // other space
             .replaceAll(",", "\\.")
             .replaceAll("%", "")
             .replaceAll("PLN", "");

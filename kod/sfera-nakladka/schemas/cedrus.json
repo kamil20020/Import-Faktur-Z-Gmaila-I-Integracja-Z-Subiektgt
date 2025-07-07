@@ -129,6 +129,14 @@
   },
   "totalPrice": {
     "startStr": "Razem:",
-    "skipSpace": 3
+    "rowHeight": 32,
+    "coords": {
+      "leftTop": {
+        "x": 989
+      },
+      "rightDown": {
+        "x": 1158
+      }
+    }
   }
 }

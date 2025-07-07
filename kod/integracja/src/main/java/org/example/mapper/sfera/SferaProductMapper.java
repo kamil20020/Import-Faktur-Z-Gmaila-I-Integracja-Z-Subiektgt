@@ -16,14 +16,11 @@ public interface SferaProductMapper {
 
         Integer quantity = templateInvoiceItem.getQuantity();
 
-        BigDecimal totalPriceWithTax = templateInvoiceItem.getTotalPriceWithTax(isInvoiceTaxOriented);
-
         BigDecimal unitPriceWithoutTax = templateInvoiceItem.getUnitPriceWithoutTax(isInvoiceTaxOriented);
 
         return Product.builder()
             .code(templateInvoiceItem.getCode())
             .name(templateInvoiceItem.getName())
-            .totalPriceWithTax(totalPriceWithTax)
             .unitPriceWithoutTax(unitPriceWithoutTax)
             .quantity(quantity)
             .tax(templateInvoiceItem.getTax())

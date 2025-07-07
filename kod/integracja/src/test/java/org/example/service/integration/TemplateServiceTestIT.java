@@ -2,6 +2,7 @@ package org.example.service.integration;
 
 import org.example.loader.FileReader;
 import org.example.service.TemplateService;
+import org.example.template.Template;
 import org.example.template.data.DataExtractedFromTemplate;
 import org.example.template.data.TemplateCreator;
 import org.example.template.data.TemplateInvoiceItem;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -249,6 +251,77 @@ class TemplateServiceTestIT {
         test("invoices/cedrus.pdf", expectedFirstSecondLastItems, expectedData, expectedNumberOfItems);
     }
 
+    @Test
+    void testForVictus() {
+
+        //given
+        TemplateInvoiceItem expectedFirstItem = TemplateInvoiceItem.builder()
+            .code("68589012E5")
+            .name("GLEBOGRYZARKA MH198RKS")
+            .quantity(1)
+            .price(new BigDecimal("1669.28"))
+            .tax(new BigDecimal("23"))
+            .build();
+
+        TemplateInvoiceItem expectedSecondItem = TemplateInvoiceItem.builder()
+            .code("63129008")
+            .name("EAN CODE 8026619070205 GŁOWICA ŻYŁKOWA LONGLIFE")
+            .quantity(20)
+            .price(new BigDecimal("44.79"))
+            .tax(new BigDecimal("23"))
+            .build();
+
+        TemplateInvoiceItem expectedLastItem = TemplateInvoiceItem.builder()
+            .code("99999004")
+            .name("Koszt przesyłki paleta TRANSPORT")
+            .quantity(1)
+            .price(new BigDecimal("80.00"))
+            .tax(new BigDecimal("23"))
+            .build();
+
+        List<TemplateInvoiceItem> expectedFirstSecondLastItems = List.of(expectedFirstItem, expectedSecondItem, expectedLastItem);
+
+        LocalDate date = LocalDate.of(2025, 5, 13);
+
+        TemplateCreator expectedTemplateCreator = new TemplateCreator(
+            "Victus-Emak Sp. z o.o.",
+            "Karpia 37",
+            "61-619",
+            "Poznań",
+            "9720985572"
+        );
+
+        DataExtractedFromTemplate expectedData = new DataExtractedFromTemplate(
+            "Poznań",
+            date,
+            date,
+            "FS250012564",
+            expectedTemplateCreator,
+            null,
+            false,
+            new BigDecimal("4022.19")
+        );
+
+        Integer expectedNumberOfItems = 5;
+
+        //when
+        //then
+        test("victus", "invoices/victus.pdf", expectedFirstSecondLastItems, expectedData, expectedNumberOfItems);
+    }
+
+    private void test(String templateName, String invoiceFilePath, List<TemplateInvoiceItem> expectedFirstSecondLastItems, DataExtractedFromTemplate expectedData, Integer expectedNumberOfItems) {
+
+        //given
+        byte[] data = FileReader.getDataFromFileInside(invoiceFilePath);
+
+        //when
+        Template foundTemplate = templateService.findTemplate(templateName).get();
+        DataExtractedFromTemplate dataExtractedFromTemplate = templateService.applyTemplate(foundTemplate, data);
+
+        //then
+        test(expectedFirstSecondLastItems, expectedData, expectedNumberOfItems, dataExtractedFromTemplate);
+    }
+
     private void test(String invoiceFilePath, List<TemplateInvoiceItem> expectedFirstSecondLastItems, DataExtractedFromTemplate expectedData, Integer expectedNumberOfItems) {
 
         //given
@@ -258,17 +331,22 @@ class TemplateServiceTestIT {
         DataExtractedFromTemplate dataExtractedFromTemplate = templateService.applyGoodTemplateForData(data);
 
         //then
-        assertEquals(expectedData.title(), dataExtractedFromTemplate.title());
-        assertEquals(expectedData.creationDate(), dataExtractedFromTemplate.creationDate());
-        assertEquals(expectedData.receiveDate(), dataExtractedFromTemplate.receiveDate());
-        assertEquals(expectedData.place(), dataExtractedFromTemplate.place());
-        assertEquals(expectedData.isTaxOriented(), dataExtractedFromTemplate.isTaxOriented());
-        assertEquals(expectedData.totalPrice(), dataExtractedFromTemplate.totalPrice());
-        assertEquals(expectedNumberOfItems, dataExtractedFromTemplate.invoiceItems().size());
+        test(expectedFirstSecondLastItems, expectedData, expectedNumberOfItems, dataExtractedFromTemplate);
+    }
 
-        TemplateInvoiceItem gotFirstTemplateInvoiceItem = dataExtractedFromTemplate.invoiceItems().get(0);
-        TemplateInvoiceItem gotSecondTemplateInvoiceItem = dataExtractedFromTemplate.invoiceItems().get(1);
-        TemplateInvoiceItem gotLastTemplateInvoiceItem = dataExtractedFromTemplate.invoiceItems().get(dataExtractedFromTemplate.invoiceItems().size() - 1);
+    private void test(List<TemplateInvoiceItem> expectedFirstSecondLastItems, DataExtractedFromTemplate expectedData, Integer expectedNumberOfItems, DataExtractedFromTemplate gotDataExtractedFromTemplate){
+
+        assertEquals(expectedData.title(), gotDataExtractedFromTemplate.title());
+        assertEquals(expectedData.creationDate(), gotDataExtractedFromTemplate.creationDate());
+        assertEquals(expectedData.receiveDate(), gotDataExtractedFromTemplate.receiveDate());
+        assertEquals(expectedData.place(), gotDataExtractedFromTemplate.place());
+        assertEquals(expectedData.isTaxOriented(), gotDataExtractedFromTemplate.isTaxOriented());
+        assertEquals(expectedData.totalPrice(), gotDataExtractedFromTemplate.totalPrice());
+        assertEquals(expectedNumberOfItems, gotDataExtractedFromTemplate.invoiceItems().size());
+
+        TemplateInvoiceItem gotFirstTemplateInvoiceItem = gotDataExtractedFromTemplate.invoiceItems().get(0);
+        TemplateInvoiceItem gotSecondTemplateInvoiceItem = gotDataExtractedFromTemplate.invoiceItems().get(1);
+        TemplateInvoiceItem gotLastTemplateInvoiceItem = gotDataExtractedFromTemplate.invoiceItems().get(gotDataExtractedFromTemplate.invoiceItems().size() - 1);
 
         assertEquals(expectedFirstSecondLastItems.get(0), gotFirstTemplateInvoiceItem);
         assertEquals(expectedFirstSecondLastItems.get(1), gotSecondTemplateInvoiceItem);

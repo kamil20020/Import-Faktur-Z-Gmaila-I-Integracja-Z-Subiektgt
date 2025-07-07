@@ -19,11 +19,16 @@ import java.util.Map;
 @NoArgsConstructor
 public class TemplateInvoiceItem {
 
-    private String code;
-    private String name;
+    private String code = "";
+    private String name = "";
     private BigDecimal price;
     private Integer quantity;
     private BigDecimal tax;
+
+    public boolean hasAllValues(){
+
+        return code != null && name != null && price != null && quantity != null && tax != null;
+    }
 
     public static boolean isRowValid(String[] invoiceLineWords, int minLength){
 

@@ -6,7 +6,10 @@ public record TemplateRow(
 
     TemplateRectCords coords,
     Integer skipSpace,
+    Integer skipLines,
     Integer maxSize,
+    boolean isHidden,
+    String defaultValue,
     List<TemplateRowField> fields,
     String startStr,
     Integer skipStart,

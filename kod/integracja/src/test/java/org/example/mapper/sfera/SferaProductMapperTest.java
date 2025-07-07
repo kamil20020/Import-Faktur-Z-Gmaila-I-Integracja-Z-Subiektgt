@@ -14,10 +14,10 @@ class SferaProductMapperTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-        "true, 80, 16.2601626016",
-        "false, 98.40, 20",
+        "true, 16.2601626016",
+        "false, 20",
     })
-    void shouldMapForOrder(boolean invoiceIsTax, BigDecimal expectedTotalPriceWithTax, BigDecimal expectedUnitPriceWithoutTax) {
+    void shouldMapForOrder(boolean invoiceIsTax, BigDecimal expectedUnitPriceWithoutTax) {
 
         //given
         TemplateInvoiceItem templateInvoiceItem = TemplateInvoiceItem.builder()
@@ -35,7 +35,6 @@ class SferaProductMapperTest {
         assertNotNull(product);
         assertEquals(templateInvoiceItem.getCode(), product.getCode());
         assertEquals(templateInvoiceItem.getName(), product.getName());
-        assertEquals(expectedTotalPriceWithTax, product.getTotalPriceWithTax());
         assertEquals(expectedUnitPriceWithoutTax, product.getUnitPriceWithoutTax());
         assertEquals(templateInvoiceItem.getQuantity(), product.getQuantity());
         assertEquals(templateInvoiceItem.getTax(), product.getTax());

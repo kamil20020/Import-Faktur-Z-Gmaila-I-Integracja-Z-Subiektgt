@@ -8,5 +8,6 @@ public record MessageSummary(
     String from,
     String date,
     String subject,
+//    String content,
     List<String> attachmentsIds
 ){}

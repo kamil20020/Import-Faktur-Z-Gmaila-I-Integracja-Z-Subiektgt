@@ -129,6 +129,15 @@
     ]
   },
   "totalPrice": {
-    "startStr": "Razem do zapłaty:"
+    "startStr": "Razem do zapłaty:",
+    "rowHeight": 32,
+    "coords": {
+      "leftTop": {
+        "x": 1011
+      },
+      "rightDown": {
+        "x": 1146
+      }
+    }
   }
 }

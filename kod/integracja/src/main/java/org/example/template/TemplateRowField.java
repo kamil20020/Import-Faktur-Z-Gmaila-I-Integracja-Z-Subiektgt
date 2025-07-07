@@ -7,7 +7,8 @@ public record TemplateRowField(
     float xMaxCord,
     Float yMinCord,
     Float yMaxCord,
-    Integer skipSpace,
+    Integer skipLines,
     Integer index,
-    String separator
+    String separator,
+    String defaultValue
 ){}

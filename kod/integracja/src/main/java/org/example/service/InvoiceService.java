@@ -12,14 +12,13 @@ import org.example.model.gmail.own.MessageAttachment;
 import org.example.model.gmail.own.MessageAttachmentCombinedId;
 import org.example.mapper.sfera.SferaOrderMapper;
 import org.example.service.sfera.SferaOrderService;
+import org.example.template.Template;
 import org.example.template.data.DataExtractedFromTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -95,20 +94,18 @@ public class InvoiceService {
         String messageId = messageAttachment.getMessageId();
         String messageAttachmentId = messageAttachment.getId();
 
-        byte[] messageData = gmailMessageService.getMessageAttachmentData(messageId, messageAttachmentId);
+        byte[] attachmentData = gmailMessageService.getMessageAttachmentData(messageId, messageAttachmentId);
 
-        DataExtractedFromTemplate dataExtractedFromTemplate;
+        Optional<Template> foundTemplateOpt = findGoodTemplate(attachmentData, messageAttachment.getMessage());
 
-        try{
+        if(foundTemplateOpt.isEmpty()){
 
-            dataExtractedFromTemplate = templateService.applyGoodTemplateForData(messageData);
+            throw new IllegalStateException("Nie udało się odnaleźć odpowiedniego szablonu faktury");
         }
-        catch (FileReadException e){
 
-            e.printStackTrace();
+        Template foundTemplate = foundTemplateOpt.get();
 
-            throw new IllegalStateException(e.getMessage());
-        }
+        DataExtractedFromTemplate dataExtractedFromTemplate = templateService.applyTemplate(foundTemplate, attachmentData);
 
         String messageAttachmentCombinedIdStr = messageAttachment.getCombinedId().toString();
 
@@ -117,6 +114,27 @@ public class InvoiceService {
         String gotExternalId = sferaOrderService.create(request);
 
         messageAttachment.setExternalId(gotExternalId);
+    }
+
+    public Optional<Template> findGoodTemplate(byte[] attachmentData, Message message) {
+
+        List<String> textsToCheck = new ArrayList<>();
+
+        textsToCheck.add(message.getSubject());
+        textsToCheck.add(message.getFrom());
+        textsToCheck.add(message.getContent());
+
+        for (String textToCheck : textsToCheck) {
+
+            Optional<Template> foundTemplate = templateService.findTemplate(textToCheck);
+
+            if (foundTemplate.isPresent()) {
+
+                return foundTemplate;
+            }
+        }
+
+        return templateService.findTemplateForData(attachmentData);
     }
 
     public void redirectToMessage(String messageId){

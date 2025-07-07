@@ -1,0 +1,115 @@
+{
+  "isTaxOriented": false,
+  "place": {
+    "isHidden": true,
+    "defaultValue": "Poznań"
+  },
+  "creationDate": {
+    "coords": {
+      "leftTop": {
+        "x": 521,
+        "y": 249
+      },
+      "rightDown": {
+        "x": 693,
+        "y": 277
+      }
+    }
+  },
+  "receiveDate": {
+    "coords": {
+      "leftTop": {
+        "x": 350,
+        "y": 245
+      },
+      "rightDown": {
+        "x": 522,
+        "y": 277
+      }
+    }
+  },
+  "title": {
+    "coords": {
+      "leftTop": {
+        "x": 28,
+        "y": 250
+      },
+      "rightDown": {
+        "x": 351,
+        "y": 276
+      }
+    }
+  },
+  "creator": {
+    "isHidden": true,
+    "fields": [
+      {
+        "name": "name",
+        "defaultValue": "Victus-Emak Sp. z o.o."
+      },
+      {
+        "name": "street",
+        "defaultValue": "Karpia 37"
+      },
+      {
+        "name": "city",
+        "defaultValue": "Poznań"
+      },
+      {
+        "name": "post-code",
+        "defaultValue": "61-619"
+      },
+      {
+        "name": "nip",
+        "defaultValue": "9720985572"
+      }
+    ]
+  },
+  "invoiceItems": {
+    "startStr": "Zamówienie sprzedaży",
+    "endStr": "Stawka VAT ",
+    "minLength": 11,
+    "rowHeight": 15,
+    "startOffset": 0,
+    "fields": [
+      {
+        "name": "code",
+        "xMinCord": 10,
+        "xMaxCord": 196
+      },
+      {
+        "name": "name",
+        "xMinCord": 201,
+        "xMaxCord": 459
+      },
+      {
+        "name": "price",
+        "xMinCord": 740,
+        "xMaxCord": 830
+      },
+      {
+        "name": "quantity",
+        "xMinCord": 503,
+        "xMaxCord": 569
+      },
+      {
+        "name": "tax",
+        "xMinCord": 925,
+        "xMaxCord": 954
+      }
+    ]
+  },
+  "totalPrice": {
+    "startStr": "Stawka VAT",
+    "skipLines": 1,
+    "rowHeight": 30,
+    "coords": {
+      "leftTop": {
+        "x": 1082
+      },
+      "rightDown": {
+        "x": 1173
+      }
+    }
+  }
+}
