@@ -86,7 +86,7 @@ class Product extends SubiektObj{
 				$this->productGt->Cechy->Dodaj($new_attribute);
 			}
 		}else{
-			$this->productGt->Nazwa =  substr("{$this->name}",0,50);
+			$this->productGt->Nazwa = substr("{$this->name}",0,50);
 		}
 		//Opis
 		if(!empty($this->description)){

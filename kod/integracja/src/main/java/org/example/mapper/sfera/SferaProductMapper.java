@@ -4,6 +4,7 @@ import org.example.model.sfera.generated.Product;
 import org.example.template.data.TemplateInvoiceItem;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public interface SferaProductMapper {
 

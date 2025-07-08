@@ -5,6 +5,7 @@ import org.example.api.Api;
 import org.example.api.gmail.GmailMessageApi;
 import org.example.api.gmail.response.MessageDetails;
 import org.example.api.gmail.response.MessagesPageResponse;
+import org.example.mapper.gmail.GmailDataMapper;
 import org.example.model.gmail.generated.MessageHeader;
 import org.example.model.gmail.own.Message;
 import org.example.model.gmail.own.MessageAttachment;
@@ -124,6 +125,7 @@ public class GmailMessageService {
         return Message.builder()
             .id(messageId)
             .from(messageSummary.from())
+            .content(messageSummary.content())
             .subject(messageSummary.subject())
             .date(date)
             .attachmentsIds(attachmentsIds)
@@ -164,16 +166,7 @@ public class GmailMessageService {
 
         String rawData = gotAttachmentResponse.getData();
 
-        rawData = rawData.replaceAll("\\s", "");
-
-        int padding = 4 - (rawData.length() % 4);
-
-        if (padding < 4) {
-
-            rawData += "=".repeat(padding);
-        }
-
-        return Base64.getUrlDecoder().decode(rawData);
+        return GmailDataMapper.decode(rawData);
     }
 
     public void redirectToMessage(String messageId){

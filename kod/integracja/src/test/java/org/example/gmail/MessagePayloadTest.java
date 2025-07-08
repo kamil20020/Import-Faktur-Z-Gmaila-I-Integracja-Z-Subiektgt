@@ -49,12 +49,12 @@ class MessagePayloadTest {
         MessageContentPartBody messageContentPartBody1 = new MessageContentPartBody(expectedAttachmentsIds.get(1), "data1");
         MessageContentPartBody nullAttachmentIdMessageContentPartBody1 = new MessageContentPartBody(null, "data2");
 
-        MessageContentPart messageContentPart1 = new MessageContentPart("345", null, messageContentPartBody);
-        MessageContentPart messageContentPart2 = new MessageContentPart("345", "file.pdf", null);
-        MessageContentPart messageContentPart3 = new MessageContentPart("345", "filename.jpg", messageContentPartBody);
-        MessageContentPart messageContentPart4 = new MessageContentPart("345", "file.pdf", nullAttachmentIdMessageContentPartBody1);
-        MessageContentPart messageContentPart5 = new MessageContentPart("345", "file.pdf", messageContentPartBody);
-        MessageContentPart messageContentPart6 = new MessageContentPart("345", "file1.pdf", messageContentPartBody1);
+        MessageContentPart messageContentPart1 = new MessageContentPart("345", null, "", messageContentPartBody, null);
+        MessageContentPart messageContentPart2 = new MessageContentPart("345", "file.pdf", "", null, null);
+        MessageContentPart messageContentPart3 = new MessageContentPart("345", "filename.jpg", "", messageContentPartBody, null);
+        MessageContentPart messageContentPart4 = new MessageContentPart("345", "file.pdf", "", nullAttachmentIdMessageContentPartBody1, null);
+        MessageContentPart messageContentPart5 = new MessageContentPart("345", "file.pdf", "", messageContentPartBody, null);
+        MessageContentPart messageContentPart6 = new MessageContentPart("345", "file1.pdf", "", messageContentPartBody1, null);
 
         List<MessageContentPart> messageContentParts = List.of(messageContentPart1, messageContentPart2, messageContentPart3, messageContentPart4, messageContentPart5, messageContentPart6);
 

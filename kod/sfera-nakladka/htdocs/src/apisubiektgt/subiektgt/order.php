@@ -62,15 +62,17 @@ class Order extends SubiektObj {
 
 		$position = $this->orderGt->Pozycje->Dodaj($code);
 
-		$position->IloscJm = intval($product['qty']);				
-		$position->CenaNettoPrzedRabatem = floatval($product['unit_price_without_tax']); //floatval($product['price']) * intval($product['qty']);
+		$quantity = intval($product['qty']);
+		$unit_price = floatval($product['unit_price_without_tax']);
+
+		$position->IloscJm = $quantity;
+
+		$position->WartoscNettoPoRabacie = $unit_price * $quantity; //floatval($product['price']) * intval($product['qty']);
 
 		if(floatval($product['price_before_discount'])>0){
 
 			$position->WartoscBruttoPrzedRabatem = $product['price_before_discount']; //floatval($product['price_before_discount']) * intval($product['qty']);
 		}
-
-		//var_dump($position);
 
 		//$position->TowarRodzaj = $product['type'];
 
@@ -81,7 +83,7 @@ class Order extends SubiektObj {
 	protected function setGtObject(){
 		$this->orderGt->Tytul = $this->reference;
 		//$this->orderGt->Uwagi  = $this->comments;	
-		//$this->orderGt->Rezerwacja = $this->reservation;		
+		//$this->orderGt->Rezerwacja = $this->reservation;
 		$this->orderGt->NumerOryginalny = $this->reference;
 		switch($this->pay_type){
 			case 'transfer' : 
@@ -98,7 +100,7 @@ class Order extends SubiektObj {
 					$this->orderGt->PlatnoscPrzelewKwota = floatval($this->amount);
 			break;
 		}
-		$this->orderGt->LiczonyOdCenBrutto = true;	
+		$this->orderGt->LiczonyOdCenBrutto = false;	
 
 		if($this->orderDetail['creation_date'] != null){
 

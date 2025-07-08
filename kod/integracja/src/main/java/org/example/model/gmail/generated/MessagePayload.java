@@ -3,10 +3,9 @@ package org.example.model.gmail.generated;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.example.mapper.gmail.GmailDataMapper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
@@ -21,6 +20,9 @@ public record MessagePayload(
     @JsonProperty("parts")
     List<MessageContentPart> messageContentParts
 ){
+
+    private static final String MESSAGE_CONTENT_PARENT_TYPE = "multipart/alternative";
+    private static final String MESSAGE_CONTENT_TYPE = "text/plain";
 
     public String getHeaderValue(String headerName){
 
@@ -67,6 +69,83 @@ public record MessagePayload(
         }
 
         return attachmentsIds;
+    }
+
+    public String getContent(){
+
+        for(MessageContentPart messageContentPart : messageContentParts){
+
+            String gotContent = getContent(messageContentPart);
+
+            if(gotContent != null){
+
+                return gotContent;
+            }
+        }
+
+        return null;
+    }
+
+    public String getContent(MessageContentPart parentPart){
+
+        if(parentPart == null) {
+
+            return null;
+        }
+
+        String gotContent = getMessageContentPartContent(parentPart);
+
+        if(gotContent != null){
+
+            return gotContent;
+        }
+
+        List<MessageContentPart> subParts = parentPart.parts();
+
+        if(subParts == null || subParts.isEmpty()){
+
+            return null;
+        }
+
+        for(MessageContentPart messageContentPart : subParts){
+
+            gotContent = getMessageContentPartContent(messageContentPart);
+
+            if(gotContent != null){
+
+                return gotContent;
+            }
+        }
+
+        return null;
+    }
+
+    private String getMessageContentPartContent(MessageContentPart messageContentPart){
+
+        String mimeType = messageContentPart.mimeType();
+
+        if(!Objects.equals(mimeType, MESSAGE_CONTENT_TYPE)) {
+
+            return null;
+        }
+
+        MessageContentPartBody body = messageContentPart.body();
+
+        if(body == null){
+
+            return null;
+        }
+
+        String gotEncodedContent = body.getData();
+
+        if(gotEncodedContent == null || gotEncodedContent.isEmpty()){
+
+            return null;
+        }
+
+        byte[] gotDecodedContent = GmailDataMapper.decode(gotEncodedContent);
+
+        return new String(gotDecodedContent);
     }
 
 }

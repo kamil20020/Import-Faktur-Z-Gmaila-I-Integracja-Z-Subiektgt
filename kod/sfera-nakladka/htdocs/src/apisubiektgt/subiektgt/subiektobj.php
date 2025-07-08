@@ -39,7 +39,7 @@ abstract class SubiektObj{
 
 	public function __construct($subiektGt, $objDetail = array()){
 		$this->readData($objDetail);
-		$this->subiektGt = $subiektGt;		
+		$this->subiektGt = $subiektGt;
 	}
 	
 	protected function readData($objDetail){

@@ -56,6 +56,7 @@ class SubiektGT
 		$this->subiektGt = $gt->Uruchom(0, 4);
 
 		$this->subiektGt->MagazynId = intval($this->cfg->getWarehouse());
+
 		return $this->subiektGt;
 	}
 

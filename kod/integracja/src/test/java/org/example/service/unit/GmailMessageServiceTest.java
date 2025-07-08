@@ -96,6 +96,7 @@ class GmailMessageServiceTest {
             "from",
             "date",
             "subject",
+            "",
             attachmentsIds
         );
 
@@ -145,7 +146,7 @@ class GmailMessageServiceTest {
         List<MessagePayloadHeader> messagePayloadHeaders = List.of(messagePayloadHeader, messagePayloadHeader1, messagePayloadHeader2);
 
         MessageContentPartBody messageContentPartBody = new MessageContentPartBody(null, "data");
-        MessageContentPart messageContentPart = new MessageContentPart(null, "file.pdf", messageContentPartBody);
+        MessageContentPart messageContentPart = new MessageContentPart(null, "file.pdf", "", messageContentPartBody, null);
 
         List<MessageContentPart> messageContentParts = List.of(messageContentPart);
 

@@ -30,10 +30,10 @@ class MessageDetailsTest {
         List<MessagePayloadHeader> messagePayloadHeaders = List.of(authorMessagePayloadHeader, dateMessagePayloadHeader, subjectMessagePayloadHeader);
 
         MessageContentPartBody messageContentPartBody = new MessageContentPartBody(expectedAttachmentsIds.get(0), "data");
-        MessageContentPart messageContentPart = new MessageContentPart(null, "file.pdf", messageContentPartBody);
+        MessageContentPart messageContentPart = new MessageContentPart(null, "file.pdf", "", messageContentPartBody, null);
 
         MessageContentPartBody messageContentPartBody1 = new MessageContentPartBody(expectedAttachmentsIds.get(1), "data1");
-        MessageContentPart messageContentPart1 = new MessageContentPart(null, "file1.pdf", messageContentPartBody1);
+        MessageContentPart messageContentPart1 = new MessageContentPart(null, "file1.pdf", "", messageContentPartBody1, null);
 
         List<MessageContentPart> messageContentParts = List.of(messageContentPart, messageContentPart1);
 

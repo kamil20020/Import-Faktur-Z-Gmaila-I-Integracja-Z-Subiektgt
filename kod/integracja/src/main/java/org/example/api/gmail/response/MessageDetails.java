@@ -31,6 +31,7 @@ public record MessageDetails(
             messagePayload.getHeaderValue("From"),
             messagePayload.getHeaderValue("Date"),
             messagePayload.getHeaderValue("Subject"),
+            messagePayload.getContent(),
             messagePayload.getAttachmentsIds(".pdf")
         );
     }
