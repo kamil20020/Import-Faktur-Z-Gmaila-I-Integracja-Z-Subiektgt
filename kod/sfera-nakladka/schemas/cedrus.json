@@ -74,10 +74,10 @@
       },
       {
         "name": "post-code",
-        "xMinCord": 340,
+        "xMinCord": 312,
         "yMinCord": 227,
-        "xMaxCord": 402,
-        "yMaxCord": 500
+        "xMaxCord": 399,
+        "yMaxCord": 250
       },
       {
         "name": "nip",

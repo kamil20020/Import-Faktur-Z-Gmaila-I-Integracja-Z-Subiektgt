@@ -154,6 +154,13 @@ class Product extends SubiektObj{
 		return true;
 	}
 
+	public function updatePrice($new_price){
+
+		$this->productGt->CenaKartotekowa = $new_price;
+
+		$this->productGt->Zapisz();
+	}
+
 	protected function getGtObject(){
 
 		if(!$this->productGt){

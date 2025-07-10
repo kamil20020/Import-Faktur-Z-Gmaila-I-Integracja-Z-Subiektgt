@@ -69,6 +69,8 @@ class Order extends SubiektObj {
 
 		$position->WartoscNettoPoRabacie = $unit_price * $quantity; //floatval($product['price']) * intval($product['qty']);
 
+		$p->updatePrice($unit_price);
+
 		if(floatval($product['price_before_discount'])>0){
 
 			$position->WartoscBruttoPrzedRabatem = $product['price_before_discount']; //floatval($product['price_before_discount']) * intval($product['qty']);
@@ -100,17 +102,28 @@ class Order extends SubiektObj {
 					$this->orderGt->PlatnoscPrzelewKwota = floatval($this->amount);
 			break;
 		}
-		$this->orderGt->LiczonyOdCenBrutto = false;	
+		$this->orderGt->LiczonyOdCenBrutto = false;
 
-		if($this->orderDetail['creation_date'] != null){
+		$creation_date = $this->orderDetail['creation_date'];
+		$receive_date = $this->orderDetail['delivery_date'];
 
-			$this->orderGt->DataWystawienia = $this->orderDetail['creation_date'];
+		if($creation_date != null){
+
+			$this->orderGt->DataWystawienia = $creation_date;
 		}
 
-		if($this->orderDetail['delivery_date'] != null){
+		if($receive_date != null){
 
-			$this->orderGt->DataZakonczeniaDostawy = $this->orderDetail['delivery_date'];
-			$this->orderGt->DataOtrzymania = $this->orderGt->DataZakonczeniaDostawy;
+			if($creation_date != null && $creation_date > $receive_date){
+
+				$this->orderGt->DataZakonczeniaDostawy = $creation_date;
+				$this->orderGt->DataOtrzymania = $creation_date;
+			}
+			else{
+
+				$this->orderGt->DataZakonczeniaDostawy = $receive_date;
+				$this->orderGt->DataOtrzymania = $receive_date;
+			}
 		}
 	}
 
