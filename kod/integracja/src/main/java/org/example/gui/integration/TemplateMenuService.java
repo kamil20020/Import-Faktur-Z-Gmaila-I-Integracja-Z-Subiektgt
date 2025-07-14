@@ -1,6 +1,8 @@
 package org.example.gui.integration;
 
-import lombok.RequiredArgsConstructor;
+import org.example.gui.ChangeableGui;
+import org.example.gui.add_schema.AddSchemaGui;
+import org.example.gui.pdf_viewer.PdfViewerGui;
 import org.example.service.TemplateService;
 import org.springframework.stereotype.Service;
 
@@ -8,69 +10,106 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.concurrent.Flow;
+import java.util.function.Consumer;
 
 @Service
-@RequiredArgsConstructor
 public class TemplateMenuService {
 
     private final TemplateService templateService;
+    private final AddSchemaGui addSchemaGui;
 
-    public void showAvaiableSchemas(){
+    private Dialog dialog;
+    private JPanel panel;
+    private GridBagConstraints gbc;
 
-        Collection<String> schemasNames = templateService.getSchemasNames();
+    public TemplateMenuService(TemplateService templateService, AddSchemaGui addSchemaGui){
+
+        this.templateService = templateService;
+        this.addSchemaGui = addSchemaGui;
+
+        init();
+    }
+
+    private void init(){
 
         GridBagLayout layout = new GridBagLayout();
 
-        GridBagConstraints gbc = new GridBagConstraints();
+        gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = GridBagConstraints.CENTER;
 
-        JPanel panel = new JPanel(layout);
-
-        String combinedNames = loadSchemasNamesStr(schemasNames);
-
-        JLabel namesLabel = new JLabel(combinedNames);
-        namesLabel.setFont(new Font("", Font.PLAIN, 14));
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        panel.add(namesLabel, gbc);
+        panel = new JPanel(layout);
 
         JScrollPane scrollPane = new JScrollPane(panel);
 
-        JDialog dialog = new JDialog((Frame) null, "Dostępne szablony faktur", false);
+        dialog = new JDialog((Frame) null, "Dostępne szablony faktur", false);
 
         dialog.setSize(400, 400);
         dialog.setLocationRelativeTo(panel);
 
         dialog.add(scrollPane);
+    }
+
+    public void handleAddSchema(Consumer<ChangeableGui> handleChangeGui){
+
+        handleChangeGui.accept(addSchemaGui);
+
+        addSchemaGui.handleSelectPdf();
+
+        System.out.println("Dodano szablon");
+    }
+
+    public void showAvaiableSchemas(){
+
+        refreshSchemas();
 
         dialog.setVisible(true);
     }
 
-    private String loadSchemasNamesStr(Collection<String> schemasNames){
+    private void refreshSchemas(){
 
-        StringBuilder stringBuilder = new StringBuilder("<html>");
+        panel.removeAll();
 
+        Collection<String> schemasNames = templateService.getSchemasNames();
         Iterator<String> schemasNamesIterator = schemasNames.iterator();
 
         for(int i = 0; i < schemasNames.size(); i++){
 
             String schemaName = schemasNamesIterator.next();
 
-            stringBuilder.append(i + 1);
-            stringBuilder.append(". ");
-            stringBuilder.append(schemaName);
-            stringBuilder.append("<br/>");
+            JLabel namesLabel = new JLabel(schemaName);
+            namesLabel.setFont(new Font("", Font.PLAIN, 14));
+
+            gbc.gridx = 0;
+            gbc.gridy = i;
+            gbc.weightx = 1;
+            gbc.weighty = 1;
+            panel.add(namesLabel, gbc);
+
+            JButton removeButton = new JButton("Usuń");
+            removeButton.addActionListener(e -> handleRemoveTemplate(schemaName));
+            gbc.gridx = 1;
+            gbc.gridy = i;
+            gbc.weightx = 1;
+            gbc.weighty = 1;
+            panel.add(removeButton, gbc);
         }
 
-        stringBuilder.append("</html>");
+        panel.repaint();
+    }
 
-        return stringBuilder.toString();
+    private void handleRemoveTemplate(String templateName){
+
+        templateService.remove(templateName);
+
+        refreshSchemas();
+
+        JOptionPane.showMessageDialog(
+            null,
+            "Usunięto szablon " + templateName,
+            "Powiadomienie",
+            JOptionPane.INFORMATION_MESSAGE
+        );
     }
 
 }

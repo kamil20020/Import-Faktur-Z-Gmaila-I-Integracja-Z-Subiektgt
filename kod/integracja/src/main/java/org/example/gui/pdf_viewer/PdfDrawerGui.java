@@ -1,4 +1,4 @@
-package org.example.gui.manage_pdf;
+package org.example.gui.pdf_viewer;
 
 import javax.swing.*;
 import java.awt.*;

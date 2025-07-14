@@ -1,4 +1,4 @@
-package org.example.gui.manage_pdf;
+package org.example.gui.pdf_viewer;
 
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.example.exception.FileReadException;
@@ -42,4 +42,5 @@ public class PdfFileRenderer {
 
         return pdfFileDetails;
     }
+
 }

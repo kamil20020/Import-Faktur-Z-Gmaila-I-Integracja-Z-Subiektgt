@@ -1,6 +1,7 @@
-package org.example.gui.manage_pdf;
+package org.example.gui.pdf_viewer;
 
 import org.example.gui.ChangeableGui;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Optional;
 
+@Component
 public class PdfViewerGui extends ChangeableGui implements KeyListener {
 
     private JPanel mainPanel;
@@ -43,17 +45,14 @@ public class PdfViewerGui extends ChangeableGui implements KeyListener {
         mainPanel.add(scrollPane, mainPanelLayoutConstrains);
         mainPanel.setFocusable(true);
         mainPanel.addKeyListener(this);
-
-        handleSelectPdfFile();
     }
 
-    private void handleSelectPdfFile() {
+    public void handleSelectPdfFile() {
 
         Optional<File> gotFileOpt = FileDialogHandler.getLoadFileDialogSelectedPath("Wybieranie faktury", "*.pdf");
 
         if (gotFileOpt.isEmpty()) {
-
-            System.exit(0);
+            return;
         }
 
         loadedPdfFile = gotFileOpt.get();
@@ -124,8 +123,7 @@ public class PdfViewerGui extends ChangeableGui implements KeyListener {
                 loadPage(page + 1);
             }
 
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
             if (page > 0) {
 
@@ -206,7 +204,7 @@ public class PdfViewerGui extends ChangeableGui implements KeyListener {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 2;
-        gbc.weightx = 1.0;
+        gbc.weightx = 10.0;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         mainPanel.add(drawPanel, gbc);

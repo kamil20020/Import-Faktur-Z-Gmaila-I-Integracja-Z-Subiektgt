@@ -1,7 +1,6 @@
-package org.example.gui.manage_pdf;
+package org.example.gui.pdf_viewer;
 
 import javax.swing.filechooser.FileSystemView;
-import javax.swing.text.html.Option;
 import java.awt.*;
 import java.io.File;
 import java.util.Optional;
@@ -52,4 +51,5 @@ public interface FileDialogHandler {
 
         return Optional.of(gotFile);
     }
+
 }

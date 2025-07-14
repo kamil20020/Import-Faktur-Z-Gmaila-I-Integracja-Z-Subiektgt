@@ -125,6 +125,26 @@ public class TemplateService {
         return Optional.of(foundTemplate);
     }
 
+    public boolean remove(String templateName){
+
+        Template removedTemplate = companyTemplateMappings.remove(templateName);
+
+        boolean didRemoveCompany = companies.remove(templateName);
+
+        boolean didRemoveTemplateFile = removeTemplateFile(templateName);
+
+        return removedTemplate != null && didRemoveCompany && didRemoveTemplateFile;
+    }
+
+    private boolean removeTemplateFile(String templateName){
+
+        String templateFilePath = TEMPLATES_SCHEMA_PATH + templateName + ".json";
+
+        File templateFile = new File(templateFilePath);
+
+        return templateFile.delete();
+    }
+
     public DataExtractedFromTemplate applyTemplate(Template template, byte[] data) {
 
         return new DataExtractedFromTemplate(

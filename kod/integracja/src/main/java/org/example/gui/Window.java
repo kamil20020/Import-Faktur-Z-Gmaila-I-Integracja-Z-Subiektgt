@@ -3,7 +3,6 @@ package org.example.gui;
 import org.example.gui.integration.InvoicesGui;
 import org.example.gui.integration.LoginGui;
 import org.example.gui.integration.TemplateMenuService;
-import org.example.gui.manage_pdf.PdfViewerGui;
 import org.example.service.auth.AuthService;
 
 import javax.swing.*;
@@ -39,7 +38,7 @@ public class Window {
         frame = new JFrame("Integracja faktur zakupu z Gmaila i Subiekt GT");
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(1000, 720);
+        frame.setSize(1380, 800);
         frame.setLocationRelativeTo(null);
 
         handleAuth();
@@ -74,21 +73,33 @@ public class Window {
 
         JMenuBar menuBar = new JMenuBar();
 
-        JMenu accountMenu = new JMenu("Konto");
+            JMenu accountMenu = new JMenu("Konto");
 
-            JMenuItem accountMenuItem = new JMenuItem("Wyloguj");
-            accountMenuItem.addActionListener(e -> handleLogout());
+                JMenuItem accountMenuItem = new JMenuItem("Wyloguj");
+                accountMenuItem.addActionListener(e -> handleLogout());
 
-        accountMenu.add(accountMenuItem);
+            accountMenu.add(accountMenuItem);
 
-        JMenu schemasMenu = new JMenu("Szablony faktur");
+            JMenu invoicesMenu = new JMenu("Faktury");
 
-            JMenuItem schemasMenuItem = new JMenuItem("Dostępne schematy faktur");
-            schemasMenuItem.addActionListener(e -> templateMenuService.showAvaiableSchemas());
+                JMenuItem invoicesListMenuItem = new JMenuItem("Lista faktur");
+                invoicesListMenuItem.addActionListener(e -> changeMainPanelContent(invoicesGui));
 
-        schemasMenu.add(schemasMenuItem);
+            invoicesMenu.add(invoicesListMenuItem);
+
+            JMenu schemasMenu = new JMenu("Szablony faktur");
+
+                JMenuItem addSchemaMenuItem = new JMenuItem("Dodaj szablon faktury");
+                addSchemaMenuItem.addActionListener(e -> templateMenuService.handleAddSchema(this::changeMainPanelContent));
+
+                JMenuItem schemasMenuItem = new JMenuItem("Dostępne schematy faktur");
+                schemasMenuItem.addActionListener(e -> templateMenuService.showAvaiableSchemas());
+
+            schemasMenu.add(addSchemaMenuItem);
+            schemasMenu.add(schemasMenuItem);
 
         menuBar.add(accountMenu);
+        menuBar.add(invoicesMenu);
         menuBar.add(schemasMenu);
 
         frame.setJMenuBar(menuBar);
