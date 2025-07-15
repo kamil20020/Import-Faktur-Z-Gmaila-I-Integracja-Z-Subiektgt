@@ -1,15 +1,18 @@
-package org.example.gui.add_schema.fields;
+package org.example.template.field;
 
-public enum SchemaFieldType {
+public enum TemplateRowFieldType {
 
     AREA("obszar", "(x1, y1), (x2, y2)"),
-    ONLY_X("poziomo", "(x1, x2)"),
-    ONLY_Y("pionowo", ("(y1, y2)"));
+    HORIZONTAL("poziomo", "(x1, x2)"),
+    VERTICAL("pionowo", "(y1, y2)"),
+    X("szerokość", "(x2 - x1)"),
+    Y("wysokość", "(y2 - y1)"),
+    NO_CORDS("brak współrzędnych", "brak");
 
     private final String name;
     private final String coords;
 
-    private SchemaFieldType(String name, String coords){
+    private TemplateRowFieldType(String name, String coords){
 
         this.name = name;
         this.coords = coords;

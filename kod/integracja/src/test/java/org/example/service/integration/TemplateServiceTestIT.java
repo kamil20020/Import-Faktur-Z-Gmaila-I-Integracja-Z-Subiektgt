@@ -1,11 +1,14 @@
 package org.example.service.integration;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.loader.FileReader;
 import org.example.service.TemplateService;
 import org.example.template.Template;
 import org.example.template.data.DataExtractedFromTemplate;
 import org.example.template.data.TemplateCreator;
 import org.example.template.data.TemplateInvoiceItem;
+import org.example.template.field.TemplateRowField;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -63,7 +66,7 @@ class TemplateServiceTestIT {
             "WARSZAWA",
             date,
             date,
-            "Faktura nr FV/02058/06/25",
+            "FV/02058/06/25",
             expectedTemplateCreator,
             null,
             false,

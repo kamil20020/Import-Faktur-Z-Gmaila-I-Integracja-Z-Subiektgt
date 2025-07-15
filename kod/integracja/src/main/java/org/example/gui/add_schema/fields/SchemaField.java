@@ -1,12 +1,14 @@
 package org.example.gui.add_schema.fields;
 
+import org.example.template.field.TemplateRowFieldType;
+
 public record SchemaField(
     String title,
-    SchemaFieldType schemaFieldType
+    TemplateRowFieldType templateRowFieldType
 ){
     public SchemaField(String title){
 
-        this(title, SchemaFieldType.AREA);
+        this(title, TemplateRowFieldType.AREA);
     }
 
 }

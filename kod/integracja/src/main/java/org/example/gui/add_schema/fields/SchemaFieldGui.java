@@ -1,6 +1,7 @@
 package org.example.gui.add_schema.fields;
 
 import org.example.gui.ChangeableGui;
+import org.example.template.field.TemplateRowFieldType;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -20,10 +21,10 @@ public class SchemaFieldGui extends ChangeableGui {
 
         $$$setupUI$$$();
 
-        SchemaFieldType schemaFieldType = schemaField.schemaFieldType();
+        TemplateRowFieldType templateRowFieldType = schemaField.templateRowFieldType();
 
-        String schemaFieldTypeName = schemaFieldType.getName();
-        String coords = schemaFieldType.getCoords();
+        String schemaFieldTypeName = templateRowFieldType.getName();
+        String coords = templateRowFieldType.getCoords();
 
         titleLabel.setText(schemaField.title() + " (" + schemaFieldTypeName + "):");
 

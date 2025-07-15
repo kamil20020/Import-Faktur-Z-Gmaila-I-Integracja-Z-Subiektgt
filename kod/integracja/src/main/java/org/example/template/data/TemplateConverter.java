@@ -139,6 +139,9 @@ public class TemplateConverter {
             return null;
         }
 
+        input = input
+            .replaceAll("\\s", "");
+
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);
 
         try{
@@ -156,6 +159,17 @@ public class TemplateConverter {
     private static boolean isEmpty(String value){
 
         return value == null || value.isEmpty();
+    }
+
+    public static String clearValue(String value){
+
+        if(isEmpty(value)){
+
+            return null;
+        }
+
+        return value
+            .stripIndent();
     }
 
 }

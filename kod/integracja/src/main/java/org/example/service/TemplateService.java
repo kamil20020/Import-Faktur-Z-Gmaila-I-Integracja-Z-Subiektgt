@@ -7,6 +7,7 @@ import org.example.loader.JsonFileLoader;
 import org.example.loader.pdf.PdfFileReader;
 import org.example.template.Template;
 import org.example.template.data.DataExtractedFromTemplate;
+import org.example.template.data.TemplateBasicData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -147,11 +148,13 @@ public class TemplateService {
 
     public DataExtractedFromTemplate applyTemplate(Template template, byte[] data) {
 
+        TemplateBasicData templateBasicData = template.extractBasicData(data);
+
         return new DataExtractedFromTemplate(
-            template.extractPlace(data),
-            template.extractCreationDate(data),
-            template.extractReceiveDate(data),
-            template.extractTitle(data),
+            templateBasicData.getPlace(),
+            templateBasicData.getCreationDate(),
+            templateBasicData.getReceiveDate(),
+            templateBasicData.getTitle(),
             template.extractCreator(data),
             template.extractInvoiceItems(data),
             template.isTaxOriented(),

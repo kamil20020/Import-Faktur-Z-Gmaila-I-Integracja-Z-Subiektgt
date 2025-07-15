@@ -12,24 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TemplateInvoiceItemTest {
 
-    @ParameterizedTest
-    @CsvSource(value = {
-        "2, true",
-        "3, false",
-    })
-    void shouldGetIsRowValid(int minLength, boolean expectedResult) {
-
-        //given
-
-        //when
-        String[] row = new String[]{"1", "bb"};
-
-        boolean gotResult = TemplateInvoiceItem.isRowValid(row, minLength);
-
-        //then
-        assertEquals(expectedResult, gotResult);
-    }
-
     @Test
     void shouldExtract() {
 

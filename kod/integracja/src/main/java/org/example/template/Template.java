@@ -2,26 +2,26 @@ package org.example.template;
 
 import org.example.loader.pdf.PdfFileReader;
 import org.example.loader.pdf.PdfLinesDetails;
+import org.example.template.data.TemplateBasicData;
 import org.example.template.data.TemplateConverter;
 import org.example.template.data.TemplateCreator;
 import org.example.template.data.TemplateInvoiceItem;
+import org.example.template.row.HeightTemplateRow;
+import org.example.template.row.TemplateRow;
+import org.example.template.field.AreaTemplateRowField;
+import org.example.template.field.HorizontalTemplateRowField;
 
 import java.awt.geom.Rectangle2D;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public record Template(
 
     boolean isTaxOriented,
-    TemplateRow place,
-    TemplateRow creationDate,
-    TemplateRow receiveDate,
-    TemplateRow title,
+    TemplateRow basicInfo,
     TemplateRow creator,
-    TemplateRow invoiceItems,
-    TemplateRow totalPrice
+    HeightTemplateRow invoiceItems,
+    HeightTemplateRow totalPrice
 ){
 
     public static Optional<String> searchInFile(byte[] data, Collection<String> values){
@@ -62,54 +62,16 @@ public record Template(
 
     public TemplateCreator extractCreator(byte[] data){
 
-        if(creator.isHidden()){
+        Map<String, String> values = getValuesFromTemplateRow(data, creator, 0);
 
-            return extractCreatorForHiddenTextValues();
-        }
-
-        return extractCreatorForTextValues(data);
+        return TemplateCreator.extract(values);
     }
 
-    private TemplateCreator extractCreatorForTextValues(byte[] data){
+    public TemplateBasicData extractBasicData(byte[] data){
 
-        Map<String, String> templateRowFieldsValuesMappings = new HashMap<>();
+        Map<String, String> values = getValuesFromTemplateRow(data, basicInfo, 0);
 
-        creator.fields()
-            .forEach(templateRowField -> {
-
-                float minX = templateRowField.xMinCord();
-                float minY = templateRowField.yMinCord();
-                float width = templateRowField.xMaxCord() - minX;
-                float height = templateRowField.yMaxCord() - minY;
-
-                String[] gotValues = extractWordsForField(data, 0, minX, minY, width, height);
-
-                String gotValue = String.join(" ", gotValues);
-
-                templateRowFieldsValuesMappings.put(templateRowField.name(), gotValue);
-            });
-
-        return TemplateCreator.extract(templateRowFieldsValuesMappings);
-    }
-
-    private TemplateCreator extractCreatorForHiddenTextValues(){
-
-        Map<String, String> templateRowFieldsValuesMappings = new HashMap<>();
-
-        creator.fields()
-            .forEach(templateRowField -> {
-
-                templateRowFieldsValuesMappings.put(templateRowField.name(), templateRowField.defaultValue());
-        });
-
-        return TemplateCreator.extract(templateRowFieldsValuesMappings);
-    }
-
-    public LocalDate extractCreationDate(byte[] data){
-
-        String[] lines = getLinesForTemplateRow(data, creationDate);
-
-        return TemplateConverter.tryToParseLocalDate(lines[0].strip());
+        return TemplateBasicData.extract(values);
     }
 
     public List<TemplateInvoiceItem> extractInvoiceItems(byte[] data) {
@@ -122,83 +84,53 @@ public record Template(
 
         for(int pageIndex = 0; pageIndex < numberOfPages; pageIndex++){
 
-            extractInvoiceLinesForPage(data, pdfLinesDetails, pageIndex, templateInvoiceItems);
+            extractInvoiceLinesForPage(data, pageIndex, templateInvoiceItems);
         }
 
         return templateInvoiceItems;
     }
 
-    private void extractInvoiceLinesForPage(byte[] data, PdfLinesDetails pdfLinesDetails, int pageIndex, List<TemplateInvoiceItem> templateInvoiceItems){
-
-        List<String> gotLines = pdfLinesDetails.lines().get(pageIndex);
-        List<Float> linesYCords = pdfLinesDetails.linesYCords().get(pageIndex);
-
-        int skipStart = invoiceItems.skipStart() != null ? invoiceItems.skipStart() : 0;
-
-        int invoiceItemsStartIndex = getLineStartIndex(gotLines, invoiceItems.startStr(), true) + skipStart;
+    private void extractInvoiceLinesForPage(byte[] data, int pageIndex, List<TemplateInvoiceItem> templateInvoiceItems){
 
         if(doesInvoiceItemsHaveIndices()){
 
-            extractTemplateInvoiceItemsWithIndices(data, pageIndex, gotLines, linesYCords, invoiceItemsStartIndex, templateInvoiceItems);
+            extractTemplateInvoiceItemsWithIndices(data, pageIndex, templateInvoiceItems);
         }
         else{
 
-            extractTemplateInvoiceItemsWithoutIndices(data, pageIndex, gotLines, linesYCords, invoiceItemsStartIndex, templateInvoiceItems);
+            extractTemplateInvoiceItemsWithoutIndices(data, pageIndex, templateInvoiceItems);
         }
-    }
-
-    private int getLineStartIndex(List<String> gotLines, String searchText, boolean shouldAppendOne){
-
-        int invoiceItemsStartIndex = 0;
-
-        for (String line : gotLines){
-
-            if(line.startsWith(searchText)){
-                break;
-            }
-
-            invoiceItemsStartIndex++;
-        }
-
-        if(shouldAppendOne){
-
-            invoiceItemsStartIndex++;
-        }
-
-        return invoiceItemsStartIndex;
     }
 
     private boolean doesInvoiceItemsHaveIndices(){
 
-        return invoiceItems.fields().stream()
-            .anyMatch(field -> Objects.equals(field.name(), "index"));
+        return invoiceItems.getFields().stream()
+            .anyMatch(field -> Objects.equals(field.getName(), "index"));
     }
 
-    private void extractTemplateInvoiceItemsWithIndices(byte[] data, int pageIndex, List<String> gotLines, List<Float> linesYCords, int invoiceItemsStartIndex, List<TemplateInvoiceItem> templateInvoiceItems){
+    private void extractTemplateInvoiceItemsWithIndices(byte[] data, int pageIndex, List<TemplateInvoiceItem> templateInvoiceItems) {
+
+        List<Map<String, String>> gotValues = getValuesFromHeightTemplateRow(data, invoiceItems, pageIndex);
 
         int actualTemplateInvoiceIndex = 0;
 
         TemplateInvoiceItem templateInvoiceItem = null;
 
-        for(int i = invoiceItemsStartIndex; i < gotLines.size(); i++){
+        for(Map<String, String> gotValuesRow : gotValues){
 
-            String line = gotLines.get(i).stripLeading();
-
-            if(line.startsWith(invoiceItems.endStr())){
-                return;
+            if(!gotValuesRow.containsKey("index")){
+                continue;
             }
 
-            double lineYCord = linesYCords.get(i);
+            String gotRawIndex = gotValuesRow.get("index");
 
-            Optional<Integer> gotIndexOpt = getTemplateInvoiceItemIndex(data, pageIndex, lineYCord);
+            Integer gotIndex = TemplateConverter.convertToInteger(gotRawIndex);
 
-            if(gotIndexOpt.isPresent()){
-
-                Integer gotIndex = gotIndexOpt.get();
+            if(gotIndex != null){
 
                 if(gotIndex > actualTemplateInvoiceIndex){
 
-                    templateInvoiceItem = extractTemplateInvoiceItemValues(data, pageIndex, lineYCord);
+                    templateInvoiceItem = TemplateInvoiceItem.extract(gotValuesRow);
 
                     templateInvoiceItems.add(templateInvoiceItem);
 
@@ -212,27 +144,22 @@ public record Template(
                 continue;
             }
 
-            TemplateInvoiceItem newTemplateInvoiceItemData = extractTemplateInvoiceItemValues(data, pageIndex, lineYCord);
+
+            TemplateInvoiceItem newTemplateInvoiceItemData = TemplateInvoiceItem.extract(gotValuesRow);
 
             appendDataToTemplateInvoiceItem(templateInvoiceItem, newTemplateInvoiceItemData);
         }
     }
 
-    private void extractTemplateInvoiceItemsWithoutIndices(byte[] data, int pageIndex, List<String> gotLines, List<Float> linesYCords, int invoiceItemsStartIndex, List<TemplateInvoiceItem> templateInvoiceItems){
+    private void extractTemplateInvoiceItemsWithoutIndices(byte[] data, int pageIndex, List<TemplateInvoiceItem> templateInvoiceItems){
+
+        List<Map<String, String>> gotValues = getValuesFromHeightTemplateRow(data, invoiceItems, pageIndex);
 
         TemplateInvoiceItem templateInvoiceItem = new TemplateInvoiceItem();
 
-        for(int i = invoiceItemsStartIndex; i < gotLines.size(); i++){
+        for(Map<String, String> gotValuesRow : gotValues){
 
-            String line = gotLines.get(i).stripLeading();
-
-            if(line.startsWith(invoiceItems.endStr())){
-                return;
-            }
-
-            double lineYCord = linesYCords.get(i);
-
-            TemplateInvoiceItem newTemplateInvoiceItem = extractTemplateInvoiceItemValues(data, pageIndex, lineYCord);
+            TemplateInvoiceItem newTemplateInvoiceItem = TemplateInvoiceItem.extract(gotValuesRow);
 
             appendDataToTemplateInvoiceItem(templateInvoiceItem, newTemplateInvoiceItem);
 
@@ -243,33 +170,6 @@ public record Template(
                 templateInvoiceItem = new TemplateInvoiceItem();
             }
         }
-    }
-
-    private Optional<Integer> getTemplateInvoiceItemIndex(byte[] data, int pageIndex, double lineYCord){
-
-        TemplateRowField firstTemplateRowField = invoiceItems.fields().get(0);
-
-        String value = extractWordFromLine(data, pageIndex, lineYCord, firstTemplateRowField);
-
-        if(value == null || value.isEmpty()){
-
-            return Optional.empty();
-        }
-
-        value = value.stripIndent();
-
-        try{
-
-            Integer gotIndex = Integer.valueOf(value);
-
-            return Optional.of(gotIndex);
-        }
-        catch (NumberFormatException e){
-
-            e.printStackTrace();
-        }
-
-        return Optional.empty();
     }
 
     private void appendDataToTemplateInvoiceItem(TemplateInvoiceItem destTemplateInvoiceItem, TemplateInvoiceItem newTemplateInvoiceItemData){
@@ -304,101 +204,7 @@ public record Template(
         }
     }
 
-    private TemplateInvoiceItem extractTemplateInvoiceItemValues(byte[] data, int pageIndex, double lineYCord){
-
-        Map<String, String> gotValues = new HashMap<>();
-
-        for(TemplateRowField templateRowField : invoiceItems.fields()){
-
-            String fieldName = templateRowField.name();
-
-            String value = extractWordFromLine(data, pageIndex, lineYCord, templateRowField);
-
-            String separator = templateRowField.separator();
-
-            if(value != null && separator != null){
-
-                String[] words = value.split(separator);
-
-                if(words.length >= 2){
-
-                    int index = templateRowField.index();
-
-                    value = words[index];
-                }
-            }
-
-            gotValues.put(fieldName, value);
-        }
-
-        return TemplateInvoiceItem.extract(gotValues);
-    }
-
-    public String extractWordFromLine(byte[] data, int pageIndex, double lineYCord, TemplateRowField templateRowField){
-
-        float minXCord = templateRowField.xMinCord();
-        float maxXCord = templateRowField.xMaxCord();
-
-        float width = maxXCord - minXCord;
-
-        String[] lines = extractWordsForFieldWithConvertedY(data, pageIndex, minXCord, lineYCord, width, invoiceItems.rowHeight());
-
-        if(lines.length == 0){
-
-            return "";
-        }
-
-        return lines[0];
-    }
-
-    private static String[] extractWordsForField(byte[] data, int pageIndex, double x, double y, double width, double height){
-
-        double convertedY = TemplateCords.convertPxToPt(y);
-
-        return extractWordsForFieldWithConvertedY(data, pageIndex, x, convertedY, width, height);
-    }
-
-    private static String[] extractWordsForFieldWithConvertedY(byte[] data, int pageIndex, double x, double yPt, double width, double height){
-
-        Rectangle2D.Double rect = new Rectangle2D.Double(
-            TemplateCords.convertPxToPt(x),
-            yPt,
-            TemplateCords.convertPxToPt(width),
-            TemplateCords.convertPxToPt(height)
-        );
-
-        return PdfFileReader.getLinesInRectFromFile(data, pageIndex, rect, true);
-    }
-
-    public LocalDate extractReceiveDate(byte[] data){
-
-        String[] lines = getLinesForTemplateRow(data, receiveDate);
-
-        return TemplateConverter.tryToParseLocalDate(lines[0].strip());
-    }
-
-    public String extractTitle(byte[] data){
-
-        String[] lines = getLinesForTemplateRow(data, title);
-
-        return lines[0].stripIndent();
-    }
-
-    public String extractPlace(byte[] data){
-
-        if(place.isHidden()){
-
-            return place.defaultValue();
-        }
-
-        String[] lines = getLinesForTemplateRow(data, place);
-
-        return lines[0].stripIndent();
-    }
-
     public BigDecimal extractTotalPrice(byte[] data){
-
-        String totalPriceSearchStr = totalPrice.startStr();
 
         PdfLinesDetails pdfLinesDetails = getLines(data);
 
@@ -406,52 +212,59 @@ public record Template(
 
         int lastPageIndex = numberOfPages - 1;
 
-        List<String> lines = pdfLinesDetails.lines().get(lastPageIndex);
-        List<Float> linesYCords = pdfLinesDetails.linesYCords().get(lastPageIndex);
+        Map<String, String> gotValues = getValuesFromHeightTemplateRow(data, totalPrice, lastPageIndex).get(0);
 
-        int totalPriceLineIndex = getLineStartIndex(lines, totalPriceSearchStr, false);
+        String gotRawPrice = gotValues.get("value");
 
-        if(totalPrice.skipLines() != null){
-
-            totalPriceLineIndex += totalPrice.skipLines();
-        }
-
-        TemplateRectCords cords = totalPrice.coords();
-
-        double minX = cords.leftTop().x();
-        double maxX = cords.rightDown().x();
-
-        double width = maxX - minX;
-
-        double lineHeight = totalPrice.rowHeight();
-        double lineHeightConverted = TemplateCords.convertPxToPt(lineHeight);
-
-        double minY = linesYCords.get(totalPriceLineIndex);
-
-        String[] gotValues = extractWordsForFieldWithConvertedY(data, lastPageIndex, minX,  minY, width, lineHeightConverted);
-
-        if(gotValues == null || gotValues.length == 0){
-
-            return null;
-        }
-
-        String rawPrice = String.join("", gotValues);
-
-        return TemplateConverter.convertToBigDecimal(rawPrice);
+        return TemplateConverter.convertToBigDecimal(gotRawPrice);
     }
 
-    private static String[] getLinesForTemplateRow(byte[] data, TemplateRow templateRow){
+    private static Map<String, String> getValuesFromTemplateRow(byte[] data, TemplateRow templateRow, int pageIndex) throws IllegalStateException{
 
-        if(templateRow == null){
+       return templateRow.getValues((templateRowField) -> getLinesFromTemplateRowField(data, templateRowField, pageIndex));
+    }
+
+    private static List<Map<String, String>> getValuesFromHeightTemplateRow(byte[] data, HeightTemplateRow heightTemplateRow, int pageIndex) throws IllegalStateException{
+
+        PdfLinesDetails gotLinesDetails = getLines(data);
+
+        List<String> gotLines = gotLinesDetails.lines().get(pageIndex);
+        List<Float> yCoords = gotLinesDetails.linesYCords().get(pageIndex);
+
+        return heightTemplateRow.getValues(
+            gotLines,
+            yCoords,
+            (templateRowField, minY, maxY) -> getLinesFromTemplateRowField(data, templateRowField, minY, maxY, pageIndex)
+        );
+    }
+
+    private static String[] getLinesFromTemplateRowField(byte[] data, HorizontalTemplateRowField horizontalTemplateRowField, float yMin, float yMax, int pageIndex) throws IllegalStateException{
+
+        if(horizontalTemplateRowField == null){
 
             return new String[0];
         }
 
-        Rectangle2D.Double rect = templateRow.coords().getRect();
+        Rectangle2D.Double rect = horizontalTemplateRowField.getRect(yMin, yMax);
 
-        String[] gotLines = PdfFileReader.getLinesInRectFromFile(data, 0, rect, true);
+        return getLinesFromRect(data, rect, pageIndex);
+    }
 
-        return gotLines;
+    private static String[] getLinesFromTemplateRowField(byte[] data, AreaTemplateRowField areaTemplateRowField, int pageIndex) throws IllegalStateException{
+
+        if(areaTemplateRowField == null){
+
+            return new String[0];
+        }
+
+        Rectangle2D.Double rect = areaTemplateRowField.getRect();
+
+        return getLinesFromRect(data, rect, pageIndex);
+    }
+
+    private static String[] getLinesFromRect(byte[] data, Rectangle2D.Double rect, int pageIndex){
+
+        return PdfFileReader.getLinesInRectFromFile(data, pageIndex, rect, true);
     }
 
     private static PdfLinesDetails getLines(byte[] data){

@@ -1,13 +1,10 @@
 package org.example.template.data;
 
 import lombok.*;
-import org.example.template.TemplateRowField;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.Normalizer;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Builder
@@ -28,25 +25,6 @@ public class TemplateInvoiceItem {
     public boolean hasAllValues(){
 
         return code != null && name != null && price != null && quantity != null && tax != null;
-    }
-
-    public static boolean isRowValid(String[] invoiceLineWords, int minLength){
-
-        if(invoiceLineWords.length < minLength){
-
-            return false;
-        }
-
-        try{
-
-            Integer.valueOf(invoiceLineWords[0]);
-        }
-        catch(NumberFormatException e){
-
-            return false;
-        }
-
-        return true;
     }
 
     public static TemplateInvoiceItem extract(Map<String, String> gotValues){

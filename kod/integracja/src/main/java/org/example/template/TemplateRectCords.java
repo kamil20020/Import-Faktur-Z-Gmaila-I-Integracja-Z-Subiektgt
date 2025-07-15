@@ -2,20 +2,21 @@ package org.example.template;
 
 import java.awt.geom.Rectangle2D;
 
-public record TemplateRectCords(
+public class TemplateRectCords {
 
-    TemplateCords leftTop,
-    TemplateCords rightDown
-){
+    private TemplateRectCords(){
 
-    public Rectangle2D.Double getRect(){
 
-        double width = rightDown.x() - leftTop.x();
-        double height = rightDown.y() - leftTop.y();
+    }
+
+    public static Rectangle2D.Double getRect(float minX, float minY, float maxX, float maxY){
+
+        double width = maxX - minX;
+        double height = maxY - minY;
 
         return new Rectangle2D.Double(
-            TemplateCords.convertPxToPt(leftTop.x()),
-            TemplateCords.convertPxToPt(leftTop.y()),
+            TemplateCords.convertPxToPt(minX),
+            TemplateCords.convertPxToPt(minY),
             TemplateCords.convertPxToPt(width),
             TemplateCords.convertPxToPt(height)
         );

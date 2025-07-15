@@ -2,7 +2,7 @@ package org.example.gui.add_schema.fields.concrete;
 
 import org.example.gui.ChangeableGui;
 import org.example.gui.add_schema.fields.SchemaField;
-import org.example.gui.add_schema.fields.SchemaFieldType;
+import org.example.template.field.TemplateRowFieldType;
 import org.example.gui.add_schema.fields.SchemaFieldsGui;
 
 import javax.swing.*;
@@ -22,7 +22,7 @@ public class SchemaFinalPriceGui extends ChangeableGui {
         // TODO: place custom component creation code here
 
         List<SchemaField> schemaFields = List.of(
-            new SchemaField("Kwota", SchemaFieldType.ONLY_X)
+            new SchemaField("Kwota", TemplateRowFieldType.HORIZONTAL)
         );
 
         SchemaFieldsGui schemaFieldsGui = new SchemaFieldsGui("Cena końcowa", schemaFields);

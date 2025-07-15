@@ -163,9 +163,13 @@ public class PdfViewerGui extends ChangeableGui implements KeyListener {
         frame.setSize(1274, 1000);
         frame.setLocationRelativeTo(null);
 
-        frame.add(new PdfViewerGui().getMainPanel());
+        PdfViewerGui pdfViewerGui = new PdfViewerGui();
+
+        frame.add(pdfViewerGui.getMainPanel());
 
         frame.setVisible(true);
+
+        pdfViewerGui.handleSelectPdfFile();
     }
 
     /**

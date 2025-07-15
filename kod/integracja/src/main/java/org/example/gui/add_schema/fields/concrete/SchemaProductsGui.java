@@ -2,7 +2,7 @@ package org.example.gui.add_schema.fields.concrete;
 
 import org.example.gui.ChangeableGui;
 import org.example.gui.add_schema.fields.SchemaField;
-import org.example.gui.add_schema.fields.SchemaFieldType;
+import org.example.template.field.TemplateRowFieldType;
 import org.example.gui.add_schema.fields.SchemaFieldsGui;
 
 import javax.swing.*;
@@ -22,13 +22,13 @@ public class SchemaProductsGui extends ChangeableGui {
         // TODO: place custom component creation code here
 
         List<SchemaField> schemaFields = List.of(
-            new SchemaField("Wysokość", SchemaFieldType.ONLY_Y),
-            new SchemaField("Indeks", SchemaFieldType.ONLY_X),
-            new SchemaField("Symbol", SchemaFieldType.ONLY_X),
-            new SchemaField("Nazwa", SchemaFieldType.ONLY_X),
-            new SchemaField("Cena netto", SchemaFieldType.ONLY_X),
-            new SchemaField("Ilość", SchemaFieldType.ONLY_X),
-            new SchemaField("Podatek (%)", SchemaFieldType.ONLY_X)
+            new SchemaField("Wysokość", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("Indeks", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("Symbol", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("Nazwa", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("Cena netto", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("Ilość", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("Podatek (%)", TemplateRowFieldType.HORIZONTAL)
         );
 
         SchemaFieldsGui schemaFieldsGui = new SchemaFieldsGui("Dane o produktach", schemaFields);
