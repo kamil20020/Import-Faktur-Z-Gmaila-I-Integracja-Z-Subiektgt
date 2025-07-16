@@ -64,7 +64,7 @@ public class AddSchemaManagementGui extends ChangeableGui {
         createUIComponents();
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
-        mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(24, 0, 24, 0), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(24, 0, 0, 0), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$(null, Font.BOLD, 22, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);
@@ -88,6 +88,7 @@ public class AddSchemaManagementGui extends ChangeableGui {
         dataPanel = new JPanel();
         dataPanel.setLayout(new GridBagLayout());
         scrollPane1.setViewportView(dataPanel);
+        dataPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -122,7 +123,7 @@ public class AddSchemaManagementGui extends ChangeableGui {
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 0, 20, 0);
+        gbc.insets = new Insets(10, 0, 26, 0);
         dataPanel.add(saveButton, gbc);
     }
 

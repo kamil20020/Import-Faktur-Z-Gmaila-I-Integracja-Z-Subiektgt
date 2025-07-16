@@ -85,6 +85,7 @@ public class SchemaFieldsGui extends ChangeableGui {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
+        gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         mainPanel.add(fieldsPanel, gbc);
     }

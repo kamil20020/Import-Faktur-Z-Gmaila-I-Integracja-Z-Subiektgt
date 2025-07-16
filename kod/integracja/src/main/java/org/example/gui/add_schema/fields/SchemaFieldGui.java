@@ -8,19 +8,27 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 import java.util.Locale;
 
 public class SchemaFieldGui extends ChangeableGui {
 
     private JPanel mainPanel;
+
     private JLabel titleLabel;
+
+    private JLabel cordsTitleLabel;
     private JLabel cordsLabel;
     private JButton selectPositionButton;
+
     private JCheckBox fieldIsHiddenCheckbox;
+    private JLabel defaultValueLabel;
     private JTextField defaultValueInput;
-    private JLabel cordsTitleLabel;
+
     private JCheckBox fieldRequiresSeparateCheckbox;
+    private JLabel separatorLabel;
     private JTextField separatorInput;
+    private JLabel separateIndexLabel;
     private JFormattedTextField separateIndexInput;
 
     public SchemaFieldGui(SchemaField schemaField) {
@@ -35,6 +43,79 @@ public class SchemaFieldGui extends ChangeableGui {
         titleLabel.setText(schemaField.title());
         cordsTitleLabel.setText(schemaFieldTypeName);
         cordsLabel.setText(coords);
+
+        fieldIsHiddenCheckbox.addItemListener(l -> handleCheckboxEvent(
+                l,
+                fieldIsHiddenCheckbox,
+                this::handleSelectFieldIsHidden,
+                this::handleCancelFieldIsHidden
+        ));
+
+        fieldRequiresSeparateCheckbox.addItemListener(l -> handleCheckboxEvent(
+                l,
+                fieldRequiresSeparateCheckbox,
+                this::handleSelectIsRequiredSeparate,
+                this::handleCancelIsRequiredSeparate
+        ));
+    }
+
+    private void handleCheckboxEvent(ItemEvent event, Object expectedSource, Runnable onSelect, Runnable onCancel) {
+
+        Object source = event.getSource();
+
+        if (source != expectedSource) {
+            return;
+        }
+
+        boolean isSelected = event.getStateChange() == ItemEvent.SELECTED;
+
+        if (isSelected) {
+
+            onSelect.run();
+        } else {
+
+            onCancel.run();
+        }
+    }
+
+    private void handleSelectFieldIsHidden() {
+
+        cordsTitleLabel.setVisible(false);
+        cordsLabel.setVisible(false);
+        selectPositionButton.setVisible(false);
+
+        fieldRequiresSeparateCheckbox.setVisible(false);
+
+        defaultValueLabel.setVisible(true);
+        defaultValueInput.setVisible(true);
+    }
+
+    private void handleCancelFieldIsHidden() {
+
+        cordsTitleLabel.setVisible(true);
+        cordsLabel.setVisible(true);
+        selectPositionButton.setVisible(true);
+
+        fieldRequiresSeparateCheckbox.setVisible(true);
+
+        defaultValueLabel.setVisible(false);
+        defaultValueInput.setVisible(false);
+    }
+
+    private void handleSelectIsRequiredSeparate() {
+
+        separatorLabel.setVisible(true);
+        separatorInput.setVisible(true);
+        separateIndexLabel.setVisible(true);
+        separateIndexInput.setVisible(true);
+    }
+
+    private void handleCancelIsRequiredSeparate() {
+
+        separatorLabel.setVisible(false);
+        separatorInput.setVisible(false);
+        separateIndexLabel.setVisible(false);
+        separateIndexInput.setVisible(false);
     }
 
     @Override
@@ -63,64 +144,45 @@ public class SchemaFieldGui extends ChangeableGui {
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
         mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(32, 0, 0, 0), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
-        titleLabel = new JLabel();
-        Font titleLabelFont = this.$$$getFont$$$(null, -1, 14, titleLabel.getFont());
-        if (titleLabelFont != null) titleLabel.setFont(titleLabelFont);
-        titleLabel.setText("Label");
+        fieldIsHiddenCheckbox = new JCheckBox();
+        fieldIsHiddenCheckbox.setText("Pole jest ukryte");
         GridBagConstraints gbc;
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 4;
-        gbc.anchor = GridBagConstraints.WEST;
-        mainPanel.add(titleLabel, gbc);
-        fieldIsHiddenCheckbox = new JCheckBox();
-        fieldIsHiddenCheckbox.setText("Pole jest ukryte");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridy = 2;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 0, 0, 0);
         mainPanel.add(fieldIsHiddenCheckbox, gbc);
         selectPositionButton = new JButton();
-        selectPositionButton.setText("Wybór współrzędnych");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 2;
-        gbc.insets = new Insets(20, 10, 0, 0);
-        mainPanel.add(selectPositionButton, gbc);
-        defaultValueInput = new JTextField();
+        selectPositionButton.setHorizontalAlignment(0);
+        selectPositionButton.setText("Współrzędne");
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 10, 0, 0);
-        mainPanel.add(defaultValueInput, gbc);
-        final JLabel label1 = new JLabel();
-        label1.setText("Domyślna wartość");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(20, 20, 0, 0);
-        mainPanel.add(label1, gbc);
+        mainPanel.add(selectPositionButton, gbc);
         cordsLabel = new JLabel();
         Font cordsLabelFont = this.$$$getFont$$$(null, Font.PLAIN, -1, cordsLabel.getFont());
         if (cordsLabelFont != null) cordsLabel.setFont(cordsLabelFont);
         cordsLabel.setText("(0, 0), (0, 0)");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
         gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.VERTICAL;
         gbc.insets = new Insets(20, 20, 0, 0);
         mainPanel.add(cordsLabel, gbc);
         cordsTitleLabel = new JLabel();
         cordsTitleLabel.setText("Label");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 0, 0, 0);
         mainPanel.add(cordsTitleLabel, gbc);
         fieldRequiresSeparateCheckbox = new JCheckBox();
@@ -128,41 +190,92 @@ public class SchemaFieldGui extends ChangeableGui {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 0, 0, 0);
         mainPanel.add(fieldRequiresSeparateCheckbox, gbc);
-        final JLabel label2 = new JLabel();
-        label2.setText("Separator");
+        separatorLabel = new JLabel();
+        separatorLabel.setEnabled(true);
+        separatorLabel.setText("Separator");
+        separatorLabel.setVisible(false);
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 20, 0, 0);
-        mainPanel.add(label2, gbc);
+        mainPanel.add(separatorLabel, gbc);
         separatorInput = new JTextField();
+        separatorInput.setEditable(true);
+        separatorInput.setEnabled(true);
+        separatorInput.setVisible(false);
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 10, 0, 0);
         mainPanel.add(separatorInput, gbc);
-        final JLabel label3 = new JLabel();
-        label3.setText("Pozycja");
+        separateIndexLabel = new JLabel();
+        separateIndexLabel.setEnabled(true);
+        separateIndexLabel.setText("Pozycja");
+        separateIndexLabel.setVisible(false);
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 4;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 20, 0, 0);
-        mainPanel.add(label3, gbc);
+        mainPanel.add(separateIndexLabel, gbc);
         separateIndexInput = new JFormattedTextField();
+        separateIndexInput.setEditable(true);
+        separateIndexInput.setEnabled(true);
+        separateIndexInput.setMinimumSize(new Dimension(100, 30));
+        separateIndexInput.setVisible(false);
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 4;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 10, 0, 0);
         mainPanel.add(separateIndexInput, gbc);
+        titleLabel = new JLabel();
+        Font titleLabelFont = this.$$$getFont$$$(null, -1, 14, titleLabel.getFont());
+        if (titleLabelFont != null) titleLabel.setFont(titleLabelFont);
+        titleLabel.setText("Label");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 3;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        mainPanel.add(titleLabel, gbc);
+        defaultValueInput = new JTextField();
+        defaultValueInput.setEnabled(true);
+        defaultValueInput.setMargin(new Insets(2, 0, 2, 0));
+        defaultValueInput.setMinimumSize(new Dimension(100, 30));
+        defaultValueInput.setOpaque(true);
+        defaultValueInput.setPreferredSize(new Dimension(100, 30));
+        defaultValueInput.setVisible(false);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(20, 10, 0, 0);
+        mainPanel.add(defaultValueInput, gbc);
+        defaultValueLabel = new JLabel();
+        defaultValueLabel.setEnabled(true);
+        defaultValueLabel.setOpaque(false);
+        defaultValueLabel.setText("Domyślna wartość");
+        defaultValueLabel.setVisible(false);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(20, 20, 0, 0);
+        mainPanel.add(defaultValueLabel, gbc);
     }
 
     /**

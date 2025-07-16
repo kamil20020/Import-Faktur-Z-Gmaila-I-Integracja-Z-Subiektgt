@@ -9,20 +9,10 @@
       <size top="32" left="0" bottom="0" right="0"/>
     </border>
     <children>
-      <component id="f9030" class="javax.swing.JLabel" binding="titleLabel">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
-        </constraints>
-        <properties>
-          <font size="14"/>
-          <text value="Label"/>
-        </properties>
-      </component>
       <component id="7371d" class="javax.swing.JCheckBox" binding="fieldIsHiddenCheckbox">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag top="20" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="20" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
           <text value="Pole jest ukryte"/>
@@ -30,35 +20,18 @@
       </component>
       <component id="8e3e1" class="javax.swing.JButton" binding="selectPositionButton">
         <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag top="20" left="10" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="20" left="10" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
-          <text value="Wybór współrzędnych"/>
-        </properties>
-      </component>
-      <component id="90892" class="javax.swing.JTextField" binding="defaultValueInput">
-        <constraints>
-          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-          <gridbag top="20" left="10" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="e9fbd" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag top="20" left="20" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
-        </constraints>
-        <properties>
-          <text value="Domyślna wartość"/>
+          <horizontalAlignment value="0"/>
+          <text value="Współrzędne"/>
         </properties>
       </component>
       <component id="51df4" class="javax.swing.JLabel" binding="cordsLabel">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag top="20" left="20" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag top="20" left="20" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
           <font style="0"/>
@@ -67,8 +40,8 @@
       </component>
       <component id="a86d9" class="javax.swing.JLabel" binding="cordsTitleLabel">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag top="20" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="20" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
           <text value="Label"/>
@@ -76,48 +49,99 @@
       </component>
       <component id="b1f27" class="javax.swing.JCheckBox" binding="fieldRequiresSeparateCheckbox">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag top="20" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="20" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
           <text value="Pole wymaga odzielenia"/>
         </properties>
       </component>
-      <component id="1b64c" class="javax.swing.JLabel">
+      <component id="1b64c" class="javax.swing.JLabel" binding="separatorLabel">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag top="20" left="20" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="20" left="20" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <enabled value="true"/>
           <text value="Separator"/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="a8d7f" class="javax.swing.JTextField" binding="separatorInput">
         <constraints>
-          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
-          <gridbag top="20" left="10" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="247f0" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag top="20" left="20" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+          <gridbag top="20" left="10" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <editable value="true"/>
+          <enabled value="true"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="247f0" class="javax.swing.JLabel" binding="separateIndexLabel">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="20" left="20" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <enabled value="true"/>
           <text value="Pozycja"/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="8b7fc" class="javax.swing.JFormattedTextField" binding="separateIndexInput">
         <constraints>
-          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
-          <gridbag top="20" left="10" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+          <gridbag top="20" left="10" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
         </constraints>
-        <properties/>
+        <properties>
+          <editable value="true"/>
+          <enabled value="true"/>
+          <minimumSize width="100" height="30"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="f9030" class="javax.swing.JLabel" binding="titleLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <font size="14"/>
+          <text value="Label"/>
+        </properties>
+      </component>
+      <component id="90892" class="javax.swing.JTextField" binding="defaultValueInput">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag top="20" left="10" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <enabled value="true"/>
+          <margin top="2" left="0" bottom="2" right="0"/>
+          <minimumSize width="100" height="30"/>
+          <opaque value="true"/>
+          <preferredSize width="100" height="30"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="e9fbd" class="javax.swing.JLabel" binding="defaultValueLabel">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="20" left="20" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <enabled value="true"/>
+          <opaque value="false"/>
+          <text value="Domyślna wartość"/>
+          <visible value="false"/>
+        </properties>
       </component>
     </children>
   </grid>
