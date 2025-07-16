@@ -86,7 +86,7 @@ class TemplateServiceTestIT {
         //given
         TemplateInvoiceItem expectedFirstItem = TemplateInvoiceItem.builder()
             .code("11230071030")
-            .name("Bęben sprz. MS 230-250/021-025 3/8\" Z7  pływający")
+            .name("Bęben sprz. MS 230-250/021-025  3/8\" Z7  pływający")
             .quantity(5)
             .price(new BigDecimal("77.24"))
             .tax(new BigDecimal("23"))

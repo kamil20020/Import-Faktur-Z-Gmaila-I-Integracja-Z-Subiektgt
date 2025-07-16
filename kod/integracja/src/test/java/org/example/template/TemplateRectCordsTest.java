@@ -15,26 +15,20 @@ class TemplateRectCordsTest {
     void shouldGetRect() {
 
         //given
-//        TemplateRectCords templateRectCords = new TemplateRectCords(
-//            new TemplateCords(10, 20),
-//            new TemplateCords(100, 120)
-//        );
-//
-//        //when
-//        Rectangle2D.Double gotRect = templateRectCords.getRect();
-//
-//        //then
-//        assertNotNull(gotRect);
-//        assertEquals(4.8d, gotRect.x);
-//        assertEquals(9.6d, gotRect.y);
-//
-//        double gotWidth = parseDouble(gotRect.width);
-//        double gotHeight = parseDouble(gotRect.height);
-//
-//        assertEquals(43.2d, gotWidth);
-//        assertEquals(48d, gotHeight);
 
-        throw new IllegalStateException("Not tested yet");
+        //when
+        Rectangle2D.Double gotRect = TemplateRectCords.getRect(10, 20, 100, 120);
+
+        //then
+        assertNotNull(gotRect);
+        assertEquals(4.8d, gotRect.x);
+        assertEquals(9.6d, gotRect.y);
+
+        double gotWidth = parseDouble(gotRect.width);
+        double gotHeight = parseDouble(gotRect.height);
+
+        assertEquals(43.2d, gotWidth);
+        assertEquals(48d, gotHeight);
     }
 
     private static double parseDouble(double value){

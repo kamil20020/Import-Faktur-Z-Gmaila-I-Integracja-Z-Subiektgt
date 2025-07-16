@@ -15,4 +15,9 @@ public class TemplateCords{
         return px * SCALE;
     }
 
+    public static double convertPtToPx(double pt){
+
+        return pt / SCALE;
+    }
+
 }

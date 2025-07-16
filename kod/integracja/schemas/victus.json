@@ -26,7 +26,7 @@
         "yMaxCord": 277
       },
       {
-        "title": "title",
+        "name": "title",
         "type": "AREA",
         "xMinCord": 28,
         "yMinCord": 250,
@@ -73,8 +73,9 @@
   "invoiceItems": {
     "type": "HORIZONTAL",
     "startStr": "Zamówienie sprzedaży",
+    "skipStart": 1,
     "endStr": "Stawka VAT ",
-    "rowHeight": 15,
+    "rowHeight": 18,
     "fields": [
       {
         "name": "code",
@@ -112,13 +113,14 @@
     "type": "HORIZONTAL",
     "startStr": "Stawka VAT",
     "skipStart": 1,
-    "rowHeight": 30,
+    "endStr": "Słownie",
+    "rowHeight": 15,
     "fields": [
       {
         "name": "value",
         "type": "HORIZONTAL",
-        "xMinCord": 1082,
-        "xMaxCord": 1173
+        "xMinCord": 1093,
+        "xMaxCord": 1192
       }
     ]
   }

@@ -1,6 +1,7 @@
 package org.example.template.field;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.*;
@@ -23,7 +24,10 @@ public class TemplateRowField{
 
     private String name;
     private String type;
+
+    @JsonProperty(value = "isHidden")
     private boolean isHidden;
+
     private String defaultValue;
     private Integer index;
     private String separator;

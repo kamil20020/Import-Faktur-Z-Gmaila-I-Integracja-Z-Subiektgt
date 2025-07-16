@@ -9,7 +9,7 @@ public class TemplateRectCords {
 
     }
 
-    public static Rectangle2D.Double getRect(float minX, float minY, float maxX, float maxY){
+    public static Rectangle2D.Double getRect(double minX, double minY, double maxX, double maxY){
 
         double width = maxX - minX;
         double height = maxY - minY;

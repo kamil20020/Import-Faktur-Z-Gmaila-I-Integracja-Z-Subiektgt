@@ -15,16 +15,16 @@ import java.awt.geom.Rectangle2D;
 public class AreaTemplateRowField extends TemplateRowField{
 
     @JsonProperty("xMinCord")
-    private Float xMinCord;
+    private float xMinCord;
 
     @JsonProperty("xMaxCord")
-    private Float xMaxCord;
+    private float xMaxCord;
 
     @JsonProperty("yMinCord")
-    private Float yMinCord;
+    private float yMinCord;
 
     @JsonProperty("yMaxCord")
-    private Float yMaxCord;
+    private float yMaxCord;
 
     @Override
     public boolean equals(Object o) {

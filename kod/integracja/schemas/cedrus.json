@@ -28,7 +28,7 @@
         "yMaxCord": 203
       },
       {
-        "title": "title",
+        "name": "title",
         "type": "AREA",
         "xMinCord": 795,
         "yMinCord": 104,
@@ -85,8 +85,9 @@
   "invoiceItems": {
     "type": "HORIZONTAL",
     "startStr": "netto",
+    "skipStart": 1,
     "endStr": "Forma płatności",
-    "rowHeight": 20,
+    "rowHeight": 28,
     "fields": [
       {
         "name": "index",
@@ -129,6 +130,7 @@
   "totalPrice": {
     "type": "HORIZONTAL",
     "startStr": "Razem:",
+    "endStr": "W tym",
     "rowHeight": 32,
     "fields": [
       {

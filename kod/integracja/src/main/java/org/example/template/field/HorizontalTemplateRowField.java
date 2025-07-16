@@ -14,10 +14,10 @@ import java.awt.geom.Rectangle2D;
 public class HorizontalTemplateRowField extends TemplateRowField{
 
     @JsonProperty("xMinCord")
-    private Float xMinCord;
+    private float xMinCord;
 
     @JsonProperty("xMaxCord")
-    private Float xMaxCord;
+    private float xMaxCord;
 
     @Override
     public boolean equals(Object o) {
@@ -58,7 +58,7 @@ public class HorizontalTemplateRowField extends TemplateRowField{
         return result;
     }
 
-    public Rectangle2D.Double getRect(float yMin, float yMax){
+    public Rectangle2D.Double getRect(double yMin, double yMax){
 
         return TemplateRectCords.getRect(xMinCord, yMin, xMaxCord, yMax);
     }

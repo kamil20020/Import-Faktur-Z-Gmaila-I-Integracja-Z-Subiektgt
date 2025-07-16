@@ -1,6 +1,7 @@
 package org.example.template.row;
 
 import lombok.*;
+import org.example.template.TemplateCords;
 import org.example.template.field.HorizontalTemplateRowField;
 import org.example.template.field.TemplateRowField;
 import org.example.template.TriFunction;
@@ -19,7 +20,7 @@ public class HeightTemplateRow extends TemplateRow{
     private Integer skipStart;
     private String startStr;
     private String endStr;
-    private Float rowHeight;
+    private float rowHeight;
 
     @Override
     public boolean equals(Object o) {
@@ -55,7 +56,7 @@ public class HeightTemplateRow extends TemplateRow{
             return false;
         }
 
-        return rowHeight != null ? rowHeight.equals(that.rowHeight) : that.rowHeight == null;
+        return Float.compare(rowHeight, this.rowHeight) == 0;
     }
 
     @Override
@@ -66,16 +67,22 @@ public class HeightTemplateRow extends TemplateRow{
         result = 31 * result + (skipStart != null ? skipStart.hashCode() : 0);
         result = 31 * result + (startStr != null ? startStr.hashCode() : 0);
         result = 31 * result + (endStr != null ? endStr.hashCode() : 0);
-        result = 31 * result + (rowHeight != null ? rowHeight.hashCode() : 0);
+        result = 31 * result + Float.hashCode(rowHeight);
 
         return result;
     }
 
-    public List<Map<String, String>> getValues(List<String> gotLines, List<Float> linesYCords, TriFunction<HorizontalTemplateRowField, Float, Float, String[]> extractValues){
+    public List<Map<String, String>> getValues(List<String> gotLines, List<Float> linesYCords, TriFunction<HorizontalTemplateRowField, Double, Double, String[]> extractValues){
 
-        int lineStartIndex = getLineStartIndex(gotLines, startStr, true);
+        int lineStartIndex = getLineStartIndex(gotLines, startStr);
 
-        float startY = linesYCords.get(lineStartIndex);
+        if(skipStart != null){
+
+            lineStartIndex += skipStart;
+        }
+
+        double startY = linesYCords.get(lineStartIndex);
+        startY = TemplateCords.convertPtToPx(startY);
 
         List<Map<String, String>> values = new ArrayList<>();
 
@@ -85,6 +92,11 @@ public class HeightTemplateRow extends TemplateRow{
 
             if(endStr != null && line.startsWith(endStr)){
                 break;
+            }
+
+            if(line.startsWith("Razem")){
+
+                System.out.println();
             }
 
             Map<String, String> gotValuesRow = getValuesRow(extractValues, startY);
@@ -97,7 +109,7 @@ public class HeightTemplateRow extends TemplateRow{
         return values;
     }
 
-    private static int getLineStartIndex(List<String> gotLines, String searchText, boolean shouldAppendOne){
+    private static int getLineStartIndex(List<String> gotLines, String searchText){
 
         int invoiceItemsStartIndex = 0;
 
@@ -110,15 +122,10 @@ public class HeightTemplateRow extends TemplateRow{
             invoiceItemsStartIndex++;
         }
 
-        if(shouldAppendOne){
-
-            invoiceItemsStartIndex++;
-        }
-
         return invoiceItemsStartIndex;
     }
 
-    private Map<String, String> getValuesRow(TriFunction<HorizontalTemplateRowField, Float, Float, String[]> extractValues, float startY) {
+    private Map<String, String> getValuesRow(TriFunction<HorizontalTemplateRowField, Double, Double, String[]> extractValues, double startY) {
 
         Map<String, String> values = new HashMap<>();
 
@@ -127,7 +134,7 @@ public class HeightTemplateRow extends TemplateRow{
             return values;
         }
 
-        float endY = startY + rowHeight;
+        double endY = startY + rowHeight;
 
         for(TemplateRowField field : fields){
 

@@ -28,12 +28,12 @@
         "yMaxCord": 234
       },
       {
-        "title": "title",
+        "name": "title",
         "type": "AREA",
-        "xMinCord": 411,
-        "yMinCord": 483,
-        "xMaxCord": 740,
-        "yMaxCord": 533
+        "xMinCord": 77,
+        "yMinCord": 480,
+        "xMaxCord": 742,
+        "yMaxCord": 540
       }
     ]
   },
@@ -86,7 +86,7 @@
     "type": "HORIZONTAL",
     "startStr": "netto",
     "endStr": "według stawki VAT",
-    "rowHeight": 32,
+    "rowHeight": 30,
     "fields": [
       {
         "name": "index",
@@ -129,13 +129,14 @@
   "totalPrice": {
     "type": "HORIZONTAL",
     "startStr": "Razem do zapłaty:",
+    "endStr": "Słownie:",
     "rowHeight": 40,
     "fields": [
       {
         "name": "value",
         "type": "HORIZONTAL",
-        "xMinCord": 832,
-        "xMaxCord": 1198
+        "xMinCord": 845,
+        "xMaxCord": 1206
       }
     ]
   }

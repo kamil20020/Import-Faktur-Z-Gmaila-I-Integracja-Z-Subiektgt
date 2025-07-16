@@ -87,7 +87,7 @@
     "startStr": "Lp.",
     "skipStart": 1,
     "endStr": "Stawka VA",
-    "rowHeight": 15,
+    "rowHeight": 22,
     "fields": [
       {
         "name": "index",
@@ -134,6 +134,7 @@
   "totalPrice": {
     "type": "HORIZONTAL",
     "startStr": "Suma:",
+    "skipStart": 1,
     "endStr": "Słownie",
     "rowHeight": 32,
     "fields": [

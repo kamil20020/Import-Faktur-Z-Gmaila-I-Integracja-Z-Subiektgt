@@ -42,13 +42,22 @@ public class TemplateRow{
 
         for(TemplateRowField field : fields){
 
+            String fieldName = field.getName();
+
+            if(field.isHidden()){
+
+                String defaultValue = field.getDefaultValue();
+
+                values.put(fieldName, defaultValue);
+
+                continue;
+            }
+
             AreaTemplateRowField areaField = (AreaTemplateRowField) field;
 
             String[] gotValues = extractValues.apply(areaField);
 
             String extractedValue = areaField.extract(gotValues);
-
-            String fieldName = field.getName();
 
             values.put(fieldName, extractedValue);
         }

@@ -140,7 +140,7 @@ public class TemplateConverter {
         }
 
         input = input
-            .replaceAll("\\s", "");
+            .stripIndent();
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);
 

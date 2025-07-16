@@ -174,7 +174,9 @@ public record Template(
 
     private void appendDataToTemplateInvoiceItem(TemplateInvoiceItem destTemplateInvoiceItem, TemplateInvoiceItem newTemplateInvoiceItemData){
 
-        if(!newTemplateInvoiceItemData.getName().isEmpty()){
+        String newName = newTemplateInvoiceItemData.getName();
+
+        if(newName != null && !newName.isEmpty()){
 
             String actualName = destTemplateInvoiceItem.getName();
 
@@ -183,7 +185,9 @@ public record Template(
             destTemplateInvoiceItem.setName(actualName + separator + newTemplateInvoiceItemData.getName());
         }
 
-        if(destTemplateInvoiceItem.getCode().isEmpty()){
+        String newCode = newTemplateInvoiceItemData.getCode();
+
+        if(newCode != null && !newCode.isEmpty()){
 
             destTemplateInvoiceItem.setCode(newTemplateInvoiceItemData.getCode());
         }
@@ -238,7 +242,7 @@ public record Template(
         );
     }
 
-    private static String[] getLinesFromTemplateRowField(byte[] data, HorizontalTemplateRowField horizontalTemplateRowField, float yMin, float yMax, int pageIndex) throws IllegalStateException{
+    private static String[] getLinesFromTemplateRowField(byte[] data, HorizontalTemplateRowField horizontalTemplateRowField, double yMin, double yMax, int pageIndex) throws IllegalStateException{
 
         if(horizontalTemplateRowField == null){
 
