@@ -10,7 +10,6 @@ import java.awt.geom.Rectangle2D;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class HorizontalTemplateRowField extends TemplateRowField{
 
     @JsonProperty("xMinCord")
@@ -58,9 +57,32 @@ public class HorizontalTemplateRowField extends TemplateRowField{
         return result;
     }
 
-    public Rectangle2D.Double getRect(double yMin, double yMax){
+    public Rectangle2D.Double getRect(double yMin, double yMax) {
 
         return TemplateRectCords.getRect(xMinCord, yMin, xMaxCord, yMax);
     }
 
+    @Override
+    public void handleRect(Rectangle2D.Float rect) throws IllegalStateException {
+
+        xMinCord = rect.x;
+        xMaxCord = rect.x + rect.width;
+    }
+
+    @Override
+    public String toString() {
+
+        return "HorizontalTemplateRowField{" +
+                "XMinCord=" + getXMinCord() +
+                ", XMaxCord=" + getXMaxCord() +
+                ", xMinCord=" + xMinCord +
+                ", xMaxCord=" + xMaxCord +
+                ", name='" + getName() + '\'' +
+                ", type='" + getType() + '\'' +
+                ", hidden=" + isHidden() +
+                ", defaultValue='" + getDefaultValue() + '\'' +
+                ", index=" + getIndex() +
+                ", separator='" + getSeparator() + '\'' +
+                '}';
+    }
 }

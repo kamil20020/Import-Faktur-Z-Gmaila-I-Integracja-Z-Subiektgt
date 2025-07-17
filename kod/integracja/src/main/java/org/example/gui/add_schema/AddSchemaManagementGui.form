@@ -35,7 +35,7 @@
               <size top="0" left="0" bottom="0" right="0"/>
             </border>
             <children>
-              <grid id="acebc" binding="creatorPanel" custom-create="true" layout-manager="GridBagLayout">
+			  <grid id="3ce8c" binding="basicInfoPanel" custom-create="true" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="0.0"/>
@@ -44,7 +44,7 @@
                 <border type="none"/>
                 <children/>
               </grid>
-              <grid id="3ce8c" binding="basicInfoPanel" custom-create="true" layout-manager="GridBagLayout">
+              <grid id="acebc" binding="creatorPanel" custom-create="true" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="0.0"/>

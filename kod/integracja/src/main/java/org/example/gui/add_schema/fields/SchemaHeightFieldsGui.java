@@ -3,6 +3,9 @@ package org.example.gui.add_schema.fields;
 import org.example.gui.add_schema.SchemaFieldsGuiAbstract;
 import org.example.gui.add_schema.field.SchemaField;
 import org.example.gui.add_schema.field.SchemaFieldGui;
+import org.example.template.field.HorizontalTemplateRowField;
+import org.example.template.field.TemplateRowFieldType;
+import org.example.template.row.HeightTemplateRow;
 import org.example.template.row.TemplateRow;
 import org.example.template.row.TemplateRowType;
 
@@ -14,13 +17,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-public class SchemaFieldsGui extends SchemaFieldsGuiAbstract {
+public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
 
     private JPanel mainPanel;
     private JLabel titleLabel;
     private JPanel fieldsPanel;
 
-    public SchemaFieldsGui(String title, List<SchemaField> schemaFields, Consumer<SchemaFieldGui> onSelect) {
+    public SchemaHeightFieldsGui(String title, List<SchemaField> schemaFields, Consumer<SchemaFieldGui> onSelect) {
 
         super(title, schemaFields, onSelect);
 
@@ -36,10 +39,14 @@ public class SchemaFieldsGui extends SchemaFieldsGuiAbstract {
     @Override
     public TemplateRow getData() {
 
-        return TemplateRow.builder()
-            .type(TemplateRowType.AREA.name())
-            .fields(getRowsFields())
-            .build();
+        return new HeightTemplateRow(
+            TemplateRowType.HORIZONTAL.name(),
+            getRowsFields(),
+            0,
+            "",
+            "",
+            10
+        );
     }
 
     @Override

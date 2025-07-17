@@ -4,10 +4,17 @@ import org.example.gui.ChangeableGui;;
 import org.example.gui.Window;
 import org.example.gui.integration.InvoicesGui;
 import org.example.gui.pdf_viewer.PdfViewerGui;
+import org.example.loader.FileReader;
+import org.example.loader.pdf.PdfFileReader;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Optional;
 
 @Component
 public class AddSchemaGui extends ChangeableGui {
@@ -19,9 +26,9 @@ public class AddSchemaGui extends ChangeableGui {
     private final PdfViewerGui pdfViewerGui;
     private final AddSchemaManagementGui addSchemaManagementGui;
 
-    public AddSchemaGui(PdfViewerGui pdfViewerGui, AddSchemaManagementGui addSchemaManagementGui) {
+    public AddSchemaGui(AddSchemaManagementGui addSchemaManagementGui) {
 
-        this.pdfViewerGui = pdfViewerGui;
+        this.pdfViewerGui = new PdfViewerGui(addSchemaManagementGui::handleOnSelect);
         this.addSchemaManagementGui = addSchemaManagementGui;
 
         $$$setupUI$$$();
@@ -29,7 +36,24 @@ public class AddSchemaGui extends ChangeableGui {
 
     public void handleSelectPdf() {
 
-        pdfViewerGui.handleSelectPdfFile();
+        Optional<File> gotFileOpt = pdfViewerGui.handleSelectPdfFile();
+
+        if (gotFileOpt.isEmpty()) {
+            return;
+        }
+
+        File gotFile = gotFileOpt.get();
+
+        byte[] fileData = null;
+
+        try {
+            fileData = Files.readAllBytes(gotFile.toPath());
+
+            addSchemaManagementGui.setFileData(fileData);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
     }
 
     @Override

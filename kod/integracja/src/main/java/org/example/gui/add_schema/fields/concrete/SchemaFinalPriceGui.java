@@ -1,16 +1,24 @@
 package org.example.gui.add_schema.fields.concrete;
 
-import org.example.gui.ChangeableGui;
-import org.example.gui.add_schema.fields.SchemaField;
+import org.example.gui.add_schema.SchemaFieldsGuiAbstract;
+import org.example.gui.add_schema.field.SchemaField;
+import org.example.gui.add_schema.field.SchemaFieldGui;
+import org.example.gui.add_schema.fields.SchemaHeightFieldsGui;
 import org.example.template.field.TemplateRowFieldType;
 import org.example.gui.add_schema.fields.SchemaFieldsGui;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.function.Consumer;
 
-public class SchemaFinalPriceGui extends ChangeableGui {
+public class SchemaFinalPriceGui extends ConcreteSchemaGui {
 
     private JPanel mainPanel;
+
+    public SchemaFinalPriceGui(Consumer<SchemaFieldGui> onSelect) {
+
+        super(onSelect);
+    }
 
     @Override
     public JPanel getMainPanel() {
@@ -22,10 +30,10 @@ public class SchemaFinalPriceGui extends ChangeableGui {
         // TODO: place custom component creation code here
 
         List<SchemaField> schemaFields = List.of(
-            new SchemaField("Kwota", TemplateRowFieldType.HORIZONTAL)
+            new SchemaField("value", "Kwota", TemplateRowFieldType.HORIZONTAL)
         );
 
-        SchemaFieldsGui schemaFieldsGui = new SchemaFieldsGui("Cena końcowa", schemaFields);
+        schemaFieldsGui = new SchemaHeightFieldsGui("Cena końcowa", schemaFields, onSelect);
 
         mainPanel = schemaFieldsGui.getMainPanel();
     }

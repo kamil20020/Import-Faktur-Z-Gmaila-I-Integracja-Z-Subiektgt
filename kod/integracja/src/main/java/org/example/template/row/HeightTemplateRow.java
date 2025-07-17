@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
+@Setter
 @ToString
 public class HeightTemplateRow extends TemplateRow{
 
@@ -21,6 +21,16 @@ public class HeightTemplateRow extends TemplateRow{
     private String startStr;
     private String endStr;
     private float rowHeight;
+
+    public HeightTemplateRow(String type, List<TemplateRowField> fields, Integer skipStart, String startStr, String endStr, float rowHeight) {
+
+        super(type, fields);
+
+        this.skipStart = skipStart;
+        this.startStr = startStr;
+        this.endStr = endStr;
+        this.rowHeight = rowHeight;
+    }
 
     @Override
     public boolean equals(Object o) {

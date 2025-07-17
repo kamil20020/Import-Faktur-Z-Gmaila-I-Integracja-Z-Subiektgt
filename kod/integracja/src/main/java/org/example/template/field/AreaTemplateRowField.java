@@ -11,7 +11,6 @@ import java.awt.geom.Rectangle2D;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class AreaTemplateRowField extends TemplateRowField{
 
     @JsonProperty("xMinCord")
@@ -78,5 +77,30 @@ public class AreaTemplateRowField extends TemplateRowField{
         return TemplateRectCords.getRect(xMinCord, yMinCord, xMaxCord, yMaxCord);
     }
 
+    @Override
+    public void handleRect(Rectangle2D.Float rect) throws IllegalStateException {
+
+        xMinCord = rect.x;
+        yMinCord = rect.y;
+        xMaxCord = rect.x + rect.width;
+        yMaxCord = rect.y + rect.height;
+    }
+
+    @Override
+    public String toString() {
+
+        return "AreaTemplateRowField{" +
+                "xMinCord=" + xMinCord +
+                ", xMaxCord=" + xMaxCord +
+                ", yMinCord=" + yMinCord +
+                ", yMaxCord=" + yMaxCord +
+                ", name='" + getName() + '\'' +
+                ", type='" + getType() + '\'' +
+                ", hidden=" + isHidden() +
+                ", defaultValue='" + getDefaultValue() + '\'' +
+                ", separator='" + getSeparator() + '\'' +
+                ", index=" + getIndex() +
+                '}';
+    }
 }
 

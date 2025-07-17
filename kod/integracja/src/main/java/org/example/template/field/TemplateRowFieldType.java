@@ -1,5 +1,8 @@
 package org.example.template.field;
 
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+
 public enum TemplateRowFieldType {
 
     AREA("Obszar", "(x1, y1), (x2, y2)"),
@@ -21,6 +24,21 @@ public enum TemplateRowFieldType {
     public String getName(){
 
         return name;
+    }
+
+    public static String getCoords(TemplateRowFieldType type, Rectangle2D.Float rect){
+
+        int xMin = (int) rect.x;
+        int yMin = (int) rect.y;
+        int xMax = (int) (rect.x + rect.width);
+        int yMax = (int) (rect.y + rect.height);
+
+        return "(" + switch (type){
+
+            case HORIZONTAL -> xMin + ", " + xMax;
+            case AREA -> xMin + ", " + yMin + ", " + xMax + ", " + yMax;
+            default -> NO_CORDS.name;
+        } + ")";
     }
 
     public String getCoords(){

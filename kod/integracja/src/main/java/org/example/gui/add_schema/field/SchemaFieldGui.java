@@ -1,15 +1,20 @@
-package org.example.gui.add_schema.fields;
+package org.example.gui.add_schema.field;
 
 import org.example.gui.ChangeableGui;
+import org.example.template.field.TemplateRowField;
+import org.example.template.field.TemplateRowFieldSimpleFactory;
 import org.example.template.field.TemplateRowFieldType;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.util.Locale;
+import java.util.function.Consumer;
 
 public class SchemaFieldGui extends ChangeableGui {
 
@@ -31,14 +36,22 @@ public class SchemaFieldGui extends ChangeableGui {
     private JLabel separateIndexLabel;
     private JFormattedTextField separateIndexInput;
 
-    public SchemaFieldGui(SchemaField schemaField) {
+    private final Consumer<SchemaFieldGui> onSelect;
+    private final TemplateRowFieldType firstType;
+
+    private TemplateRowFieldType type;
+    private TemplateRowField data;
+
+    public SchemaFieldGui(SchemaField schemaField, Consumer<SchemaFieldGui> onSelect) {
+
+        this.onSelect = onSelect;
+        this.firstType = schemaField.templateRowFieldType();
+        this.type = firstType;
 
         $$$setupUI$$$();
 
-        TemplateRowFieldType templateRowFieldType = schemaField.templateRowFieldType();
-
-        String schemaFieldTypeName = templateRowFieldType.getName();
-        String coords = templateRowFieldType.getCoords();
+        String schemaFieldTypeName = type.getName();
+        String coords = type.getCoords();
 
         titleLabel.setText(schemaField.title());
         cordsTitleLabel.setText(schemaFieldTypeName);
@@ -57,6 +70,23 @@ public class SchemaFieldGui extends ChangeableGui {
                 this::handleSelectIsRequiredSeparate,
                 this::handleCancelIsRequiredSeparate
         ));
+
+        selectPositionButton.addActionListener(l -> handleSelect());
+
+        defaultValueInput.getDocument().addDocumentListener(
+                getHandleChangeTextFieldValueListener(defaultValueInput, this::handleChangeDefaultValue)
+        );
+
+        separatorInput.getDocument().addDocumentListener(
+                getHandleChangeTextFieldValueListener(separatorInput, this::handleChangeSeparateValue)
+        );
+
+        separateIndexInput.getDocument().addDocumentListener(
+                getHandleChangeTextFieldValueListener(separateIndexInput, this::handleChangeIndexValue)
+        );
+
+        data = TemplateRowFieldSimpleFactory.create(type);
+        data.setName(schemaField.id());
     }
 
     private void handleCheckboxEvent(ItemEvent event, Object expectedSource, Runnable onSelect, Runnable onCancel) {
@@ -80,6 +110,12 @@ public class SchemaFieldGui extends ChangeableGui {
 
     private void handleSelectFieldIsHidden() {
 
+        data.setHidden(true);
+        data.setSeparator(null);
+        data.setIndex(null);
+
+        updateFieldWithType(TemplateRowFieldType.NO_CORDS);
+
         cordsTitleLabel.setVisible(false);
         cordsLabel.setVisible(false);
         selectPositionButton.setVisible(false);
@@ -91,6 +127,11 @@ public class SchemaFieldGui extends ChangeableGui {
     }
 
     private void handleCancelFieldIsHidden() {
+
+        data.setHidden(false);
+        data.setDefaultValue(null);
+
+        updateFieldWithType(firstType);
 
         cordsTitleLabel.setVisible(true);
         cordsLabel.setVisible(true);
@@ -112,10 +153,120 @@ public class SchemaFieldGui extends ChangeableGui {
 
     private void handleCancelIsRequiredSeparate() {
 
+        data.setSeparator(null);
+        data.setIndex(null);
+
         separatorLabel.setVisible(false);
         separatorInput.setVisible(false);
         separateIndexLabel.setVisible(false);
         separateIndexInput.setVisible(false);
+    }
+
+    private void updateFieldWithType(TemplateRowFieldType type) {
+
+        TemplateRowField newData = TemplateRowFieldSimpleFactory.create(type);
+        newData.copy(data);
+    }
+
+    private DocumentListener getHandleChangeTextFieldValueListener(JTextField input, Consumer<String> handleChangeValue) {
+
+        return new DocumentListener() {
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+
+                String newValue = input.getText();
+
+                handleChangeValue.accept(newValue);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+                String newValue = input.getText();
+
+                handleChangeValue.accept(newValue);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+                String newValue = input.getText();
+
+                handleChangeValue.accept(newValue);
+            }
+        };
+    }
+
+    private void handleChangeDefaultValue(String newValue) {
+
+        data.setDefaultValue(newValue);
+    }
+
+    private void handleChangeSeparateValue(String newValue) {
+
+        data.setSeparator(newValue);
+    }
+
+    private void handleChangeIndexValue(String newValue) {
+
+        if (newValue == null || newValue.isBlank()) {
+
+            data.setIndex(null);
+
+            return;
+        }
+
+        Integer newIndex = null;
+
+        String actualIndexStr = null;
+
+        try {
+            newIndex = Integer.valueOf(newValue);
+
+            if (newIndex < 0) {
+
+                newIndex = 0;
+            }
+
+            actualIndexStr = newIndex.toString();
+
+            data.setIndex(newIndex);
+        } catch (NumberFormatException e) {
+
+            Integer actualIndex = data.getIndex();
+
+            if (actualIndex != null) {
+
+                actualIndexStr = actualIndex.toString();
+            }
+        }
+
+        String finalActualIndexStr = actualIndexStr;
+
+        SwingUtilities.invokeLater(() -> {
+
+            separateIndexInput.setText(finalActualIndexStr);
+        });
+    }
+
+    public void updateCords(Rectangle.Float rect) {
+
+        data.handleRect(rect);
+
+        String cordsStr = TemplateRowFieldType.getCoords(type, rect);
+
+        cordsLabel.setText(cordsStr);
+    }
+
+    public void handleSelect() {
+
+        onSelect.accept(this);
+    }
+
+    public TemplateRowField getData() {
+
+        return data;
     }
 
     @Override
@@ -162,7 +313,7 @@ public class SchemaFieldGui extends ChangeableGui {
         gbc.gridy = 1;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(20, 10, 0, 0);
+        gbc.insets = new Insets(20, 20, 0, 0);
         mainPanel.add(selectPositionButton, gbc);
         cordsLabel = new JLabel();
         Font cordsLabelFont = this.$$$getFont$$$(null, Font.PLAIN, -1, cordsLabel.getFont());
@@ -214,7 +365,7 @@ public class SchemaFieldGui extends ChangeableGui {
         gbc.gridy = 3;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(20, 10, 0, 0);
+        gbc.insets = new Insets(20, 20, 0, 0);
         mainPanel.add(separatorInput, gbc);
         separateIndexLabel = new JLabel();
         separateIndexLabel.setEnabled(true);
@@ -237,7 +388,7 @@ public class SchemaFieldGui extends ChangeableGui {
         gbc.gridy = 4;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(20, 10, 0, 0);
+        gbc.insets = new Insets(20, 20, 0, 0);
         mainPanel.add(separateIndexInput, gbc);
         titleLabel = new JLabel();
         Font titleLabelFont = this.$$$getFont$$$(null, -1, 14, titleLabel.getFont());
@@ -252,7 +403,7 @@ public class SchemaFieldGui extends ChangeableGui {
         mainPanel.add(titleLabel, gbc);
         defaultValueInput = new JTextField();
         defaultValueInput.setEnabled(true);
-        defaultValueInput.setMargin(new Insets(2, 0, 2, 0));
+        defaultValueInput.setMargin(new Insets(2, 6, 2, 6));
         defaultValueInput.setMinimumSize(new Dimension(100, 30));
         defaultValueInput.setOpaque(true);
         defaultValueInput.setPreferredSize(new Dimension(100, 30));
@@ -262,7 +413,7 @@ public class SchemaFieldGui extends ChangeableGui {
         gbc.gridy = 2;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(20, 10, 0, 0);
+        gbc.insets = new Insets(20, 20, 0, 0);
         mainPanel.add(defaultValueInput, gbc);
         defaultValueLabel = new JLabel();
         defaultValueLabel.setEnabled(true);

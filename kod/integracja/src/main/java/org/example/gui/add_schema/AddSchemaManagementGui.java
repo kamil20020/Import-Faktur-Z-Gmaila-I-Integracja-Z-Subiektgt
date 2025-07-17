@@ -1,10 +1,12 @@
 package org.example.gui.add_schema;
 
 import org.example.gui.ChangeableGui;
-import org.example.gui.add_schema.fields.concrete.SchemaBasicInfoGui;
-import org.example.gui.add_schema.fields.concrete.SchemaCreatorGui;
-import org.example.gui.add_schema.fields.concrete.SchemaFinalPriceGui;
-import org.example.gui.add_schema.fields.concrete.SchemaProductsGui;
+import org.example.gui.add_schema.field.SchemaFieldGui;
+import org.example.gui.add_schema.fields.concrete.*;
+import org.example.service.TemplateService;
+import org.example.template.Template;
+import org.example.template.data.DataExtractedFromTemplate;
+import org.example.template.row.HeightTemplateRow;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -12,23 +14,44 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 @Component
 public class AddSchemaManagementGui extends ChangeableGui {
 
     private JPanel mainPanel;
-    private JButton loadButton;
-    private JButton saveButton;
+
+    private JPanel dataPanel;
     private JPanel creatorPanel;
     private JPanel basicInfoPanel;
     private JPanel productsPanel;
     private JPanel totalPricePanel;
-    private JPanel dataPanel;
 
-    public AddSchemaManagementGui() {
+    private JButton loadButton;
+    private JButton saveButton;
+
+    private SchemaFieldGui selectedFieldGui;
+
+    private ConcreteSchemaGui schemaCreatorGui;
+    private ConcreteSchemaGui schemaBasicInfoGui;
+    private ConcreteSchemaGui schemaProductsGui;
+    private ConcreteSchemaGui schemaFinalPriceGui;
+
+    private Template createdTemplate = null;
+    private byte[] fileData = null;
+
+    private final TemplateService templateService;
+
+    public AddSchemaManagementGui(TemplateService templateService) {
+
+        this.templateService = templateService;
 
         $$$setupUI$$$();
+
+        loadButton.addActionListener(l -> handleLoadData());
     }
 
     @Override
@@ -37,19 +60,57 @@ public class AddSchemaManagementGui extends ChangeableGui {
         return mainPanel;
     }
 
+    public void handleOnSelect(Rectangle2D.Float rect) {
+
+        if (selectedFieldGui == null) {
+            return;
+        }
+
+        selectedFieldGui.updateCords(rect);
+    }
+
+    public void handleOnSelectField(SchemaFieldGui selectedFieldGui) {
+
+        this.selectedFieldGui = selectedFieldGui;
+    }
+
+    private void handleLoadData() {
+
+        if (fileData == null) {
+            return;
+        }
+
+        createdTemplate = new Template(
+                false,
+                schemaBasicInfoGui.getData(),
+                schemaCreatorGui.getData(),
+                (HeightTemplateRow) schemaProductsGui.getData(),
+                (HeightTemplateRow) schemaFinalPriceGui.getData()
+        );
+
+        DataExtractedFromTemplate data = templateService.applyTemplate(createdTemplate, fileData);
+
+        System.out.println(data);
+    }
+
+    public void setFileData(byte[] data) {
+
+        this.fileData = data;
+    }
+
     private void createUIComponents() {
         // TODO: place custom component creation code here
 
-        SchemaCreatorGui schemaCreatorGui = new SchemaCreatorGui();
-        creatorPanel = schemaCreatorGui.getMainPanel();
-
-        SchemaBasicInfoGui schemaBasicInfoGui = new SchemaBasicInfoGui();
+        schemaBasicInfoGui = new SchemaBasicInfoGui(this::handleOnSelectField);
         basicInfoPanel = schemaBasicInfoGui.getMainPanel();
 
-        SchemaProductsGui schemaProductsGui = new SchemaProductsGui();
+        schemaCreatorGui = new SchemaCreatorGui(this::handleOnSelectField);
+        creatorPanel = schemaCreatorGui.getMainPanel();
+
+        schemaProductsGui = new SchemaProductsGui(this::handleOnSelectField);
         productsPanel = schemaProductsGui.getMainPanel();
 
-        SchemaFinalPriceGui schemaFinalPriceGui = new SchemaFinalPriceGui();
+        schemaFinalPriceGui = new SchemaFinalPriceGui(this::handleOnSelectField);
         totalPricePanel = schemaFinalPriceGui.getMainPanel();
     }
 
@@ -93,12 +154,12 @@ public class AddSchemaManagementGui extends ChangeableGui {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.BOTH;
-        dataPanel.add(creatorPanel, gbc);
+        dataPanel.add(basicInfoPanel, gbc);
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.BOTH;
-        dataPanel.add(basicInfoPanel, gbc);
+        dataPanel.add(creatorPanel, gbc);
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 2;

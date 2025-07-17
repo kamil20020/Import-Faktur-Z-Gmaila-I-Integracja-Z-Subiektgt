@@ -1,16 +1,24 @@
 package org.example.gui.add_schema.fields.concrete;
 
-import org.example.gui.ChangeableGui;
-import org.example.gui.add_schema.fields.SchemaField;
+import org.example.gui.add_schema.SchemaFieldsGuiAbstract;
+import org.example.gui.add_schema.field.SchemaField;
+import org.example.gui.add_schema.field.SchemaFieldGui;
+import org.example.gui.add_schema.fields.SchemaHeightFieldsGui;
 import org.example.template.field.TemplateRowFieldType;
 import org.example.gui.add_schema.fields.SchemaFieldsGui;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.function.Consumer;
 
-public class SchemaProductsGui extends ChangeableGui {
+public class SchemaProductsGui extends ConcreteSchemaGui {
 
     private JPanel mainPanel;
+
+    public SchemaProductsGui(Consumer<SchemaFieldGui> onSelect) {
+
+        super(onSelect);
+    }
 
     @Override
     public JPanel getMainPanel() {
@@ -22,16 +30,16 @@ public class SchemaProductsGui extends ChangeableGui {
         // TODO: place custom component creation code here
 
         List<SchemaField> schemaFields = List.of(
-            new SchemaField("Wysokość", TemplateRowFieldType.HORIZONTAL),
-            new SchemaField("Indeks", TemplateRowFieldType.HORIZONTAL),
-            new SchemaField("Symbol", TemplateRowFieldType.HORIZONTAL),
-            new SchemaField("Nazwa", TemplateRowFieldType.HORIZONTAL),
-            new SchemaField("Cena netto", TemplateRowFieldType.HORIZONTAL),
-            new SchemaField("Ilość", TemplateRowFieldType.HORIZONTAL),
-            new SchemaField("Podatek (%)", TemplateRowFieldType.HORIZONTAL)
+//            new SchemaField("Wysokość", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("index", "Indeks", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("code", "Symbol", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("name", "Nazwa", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("price", "Cena netto", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("quantity", "Ilość", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("tax", "Podatek (%)", TemplateRowFieldType.HORIZONTAL)
         );
 
-        SchemaFieldsGui schemaFieldsGui = new SchemaFieldsGui("Dane o produktach", schemaFields);
+        schemaFieldsGui = new SchemaHeightFieldsGui("Dane o produktach", schemaFields, onSelect);
 
         mainPanel = schemaFieldsGui.getMainPanel();
     }

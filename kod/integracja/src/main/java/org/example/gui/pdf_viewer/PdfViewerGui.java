@@ -6,11 +6,12 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Optional;
+import java.util.function.Consumer;
 
-@Component
 public class PdfViewerGui extends ChangeableGui implements KeyListener {
 
     private JPanel mainPanel;
@@ -26,9 +27,11 @@ public class PdfViewerGui extends ChangeableGui implements KeyListener {
     private int page = 0;
     private int numberOfPages = 1;
 
-    public PdfViewerGui() {
+    public PdfViewerGui(Consumer<Rectangle2D.Float> onSelect) {
 
         loadMainPanelLayoutConstraints();
+
+        drawPanel = new PdfDrawerGui(onSelect);
 
         $$$setupUI$$$();
 
@@ -47,17 +50,24 @@ public class PdfViewerGui extends ChangeableGui implements KeyListener {
         mainPanel.addKeyListener(this);
     }
 
-    public void handleSelectPdfFile() {
+    public PdfViewerGui() {
+
+        this(null);
+    }
+
+    public Optional<File> handleSelectPdfFile() {
 
         Optional<File> gotFileOpt = FileDialogHandler.getLoadFileDialogSelectedPath("Wybieranie faktury", "*.pdf");
 
         if (gotFileOpt.isEmpty()) {
-            return;
+            return gotFileOpt;
         }
 
         loadedPdfFile = gotFileOpt.get();
 
         loadPage(page);
+
+        return gotFileOpt;
     }
 
     private void loadPage(int searchPage) {
@@ -151,8 +161,6 @@ public class PdfViewerGui extends ChangeableGui implements KeyListener {
     private void createUIComponents() {
 
         //TODO: place custom component creation code here
-
-        drawPanel = new PdfDrawerGui();
     }
 
     public static void main(String[] args) {
