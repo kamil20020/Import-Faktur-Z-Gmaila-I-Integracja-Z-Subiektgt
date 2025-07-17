@@ -3,8 +3,6 @@ package org.example.gui.add_schema.fields;
 import org.example.gui.add_schema.SchemaFieldsGuiAbstract;
 import org.example.gui.add_schema.field.SchemaField;
 import org.example.gui.add_schema.field.SchemaFieldGui;
-import org.example.template.field.HorizontalTemplateRowField;
-import org.example.template.field.TemplateRowFieldType;
 import org.example.template.row.HeightTemplateRow;
 import org.example.template.row.TemplateRow;
 import org.example.template.row.TemplateRowType;
@@ -22,6 +20,10 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
     private JPanel mainPanel;
     private JLabel titleLabel;
     private JPanel fieldsPanel;
+    private JTextField startStrInput;
+    private JTextField endStrInput;
+    private JFormattedTextField rowHeightInput;
+    private JFormattedTextField skipStartInput;
 
     public SchemaHeightFieldsGui(String title, List<SchemaField> schemaFields, Consumer<SchemaFieldGui> onSelect) {
 
@@ -40,12 +42,12 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
     public TemplateRow getData() {
 
         return new HeightTemplateRow(
-            TemplateRowType.HORIZONTAL.name(),
-            getRowsFields(),
-            0,
-            "",
-            "",
-            10
+                TemplateRowType.HORIZONTAL.name(),
+                getRowsFields(),
+                0,
+                "",
+                "",
+                10
         );
     }
 
@@ -79,16 +81,93 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridwidth = 2;
         gbc.insets = new Insets(40, 0, 0, 0);
         mainPanel.add(titleLabel, gbc);
+        final JLabel label1 = new JLabel();
+        label1.setText("Zaczyna się po linii");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(20, 0, 0, 0);
+        mainPanel.add(label1, gbc);
+        endStrInput = new JTextField();
+        endStrInput.setMinimumSize(new Dimension(120, 30));
+        endStrInput.setPreferredSize(new Dimension(120, 30));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(20, 20, 0, 0);
+        mainPanel.add(endStrInput, gbc);
+        final JLabel label2 = new JLabel();
+        label2.setText("Kończy się przy linii");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(20, 0, 0, 0);
+        mainPanel.add(label2, gbc);
+        final JLabel label3 = new JLabel();
+        label3.setText("Wysokość linii");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(20, 0, 0, 0);
+        mainPanel.add(label3, gbc);
+        rowHeightInput = new JFormattedTextField();
+        rowHeightInput.setMinimumSize(new Dimension(120, 30));
+        rowHeightInput.setPreferredSize(new Dimension(120, 30));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(20, 20, 0, 0);
+        mainPanel.add(rowHeightInput, gbc);
+        final JLabel label4 = new JLabel();
+        label4.setText("Liczba linii do pominięcia");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(20, 0, 0, 0);
+        mainPanel.add(label4, gbc);
+        skipStartInput = new JFormattedTextField();
+        skipStartInput.setMinimumSize(new Dimension(120, 30));
+        skipStartInput.setPreferredSize(new Dimension(120, 30));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(20, 20, 0, 0);
+        mainPanel.add(skipStartInput, gbc);
+        startStrInput = new JTextField();
+        startStrInput.setMinimumSize(new Dimension(120, 30));
+        startStrInput.setPreferredSize(new Dimension(120, 30));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(20, 20, 0, 0);
+        mainPanel.add(startStrInput, gbc);
         fieldsPanel = new JPanel();
         fieldsPanel.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
+        gbc.gridwidth = 2;
         gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         mainPanel.add(fieldsPanel, gbc);
     }
 

@@ -32,22 +32,24 @@
             <constraints/>
             <properties/>
             <border type="empty">
-              <size top="0" left="0" bottom="0" right="0"/>
+              <size top="20" left="20" bottom="20" right="20"/>
             </border>
             <children>
-			  <grid id="3ce8c" binding="basicInfoPanel" custom-create="true" layout-manager="GridBagLayout">
+              <grid id="3ce8c" binding="basicInfoPanel" custom-create="true" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
                 </constraints>
                 <properties/>
-                <border type="none"/>
+                <border type="none">
+                  <size top="20" left="20" bottom="20" right="20"/>
+                </border>
                 <children/>
               </grid>
               <grid id="acebc" binding="creatorPanel" custom-create="true" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -56,7 +58,7 @@
               <grid id="b7a94" binding="productsPanel" custom-create="true" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -65,7 +67,7 @@
               <grid id="963b9" binding="totalPricePanel" custom-create="true" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>

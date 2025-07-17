@@ -302,7 +302,7 @@ public class SchemaFieldGui extends ChangeableGui {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(20, 0, 0, 0);
         mainPanel.add(fieldIsHiddenCheckbox, gbc);
         selectPositionButton = new JButton();
@@ -333,7 +333,7 @@ public class SchemaFieldGui extends ChangeableGui {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(20, 0, 0, 0);
         mainPanel.add(cordsTitleLabel, gbc);
         fieldRequiresSeparateCheckbox = new JCheckBox();
@@ -342,7 +342,7 @@ public class SchemaFieldGui extends ChangeableGui {
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(20, 0, 0, 0);
         mainPanel.add(fieldRequiresSeparateCheckbox, gbc);
         separatorLabel = new JLabel();
@@ -399,7 +399,7 @@ public class SchemaFieldGui extends ChangeableGui {
         gbc.gridy = 0;
         gbc.gridwidth = 3;
         gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.WEST;
         mainPanel.add(titleLabel, gbc);
         defaultValueInput = new JTextField();
         defaultValueInput.setEnabled(true);

@@ -55,7 +55,8 @@ public abstract class SchemaFieldsGuiAbstract extends ChangeableGui {
             mainPanelLayoutConstrains.gridx = 0;
             mainPanelLayoutConstrains.gridy = i;
             mainPanelLayoutConstrains.weightx = 1;
-            mainPanelLayoutConstrains.weighty = 1;
+            mainPanelLayoutConstrains.weighty = 0;
+            mainPanelLayoutConstrains.fill = GridBagConstraints.HORIZONTAL;
 
             SchemaFieldGui schemaFieldGui = new SchemaFieldGui(schemaField, onSelect);
 

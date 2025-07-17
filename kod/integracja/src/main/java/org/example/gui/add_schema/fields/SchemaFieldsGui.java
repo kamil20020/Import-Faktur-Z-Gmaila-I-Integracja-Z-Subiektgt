@@ -37,9 +37,9 @@ public class SchemaFieldsGui extends SchemaFieldsGuiAbstract {
     public TemplateRow getData() {
 
         return TemplateRow.builder()
-            .type(TemplateRowType.AREA.name())
-            .fields(getRowsFields())
-            .build();
+                .type(TemplateRowType.AREA.name())
+                .fields(getRowsFields())
+                .build();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class SchemaFieldsGui extends SchemaFieldsGuiAbstract {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         mainPanel.add(fieldsPanel, gbc);
     }
 

@@ -7,6 +7,7 @@ import org.example.gui.add_schema.fields.SchemaFieldsGui;
 import org.example.template.field.TemplateRowFieldType;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 import java.util.function.Consumer;
 

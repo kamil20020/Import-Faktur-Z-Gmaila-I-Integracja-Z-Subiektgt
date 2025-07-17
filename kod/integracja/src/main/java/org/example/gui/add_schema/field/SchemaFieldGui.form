@@ -11,7 +11,7 @@
     <children>
       <component id="7371d" class="javax.swing.JCheckBox" binding="fieldIsHiddenCheckbox">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag top="20" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
@@ -40,7 +40,7 @@
       </component>
       <component id="a86d9" class="javax.swing.JLabel" binding="cordsTitleLabel">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag top="20" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
@@ -49,7 +49,7 @@
       </component>
       <component id="b1f27" class="javax.swing.JCheckBox" binding="fieldRequiresSeparateCheckbox">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag top="20" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
@@ -107,7 +107,7 @@
       </component>
       <component id="f9030" class="javax.swing.JLabel" binding="titleLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
