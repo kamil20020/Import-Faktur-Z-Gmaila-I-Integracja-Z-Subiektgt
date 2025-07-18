@@ -28,6 +28,7 @@ public class AddSchemaManagementGui extends ChangeableGui {
     private JPanel basicInfoPanel;
     private JPanel productsPanel;
     private JPanel totalPricePanel;
+    private JPanel payDatePanel;
 
     private JButton loadButton;
     private JButton saveButton;
@@ -39,8 +40,8 @@ public class AddSchemaManagementGui extends ChangeableGui {
     private ConcreteSchemaGui schemaBasicInfoGui;
     private ConcreteSchemaGui schemaProductsGui;
     private ConcreteSchemaGui schemaFinalPriceGui;
+    private ConcreteSchemaGui schemaPayDateGui;
 
-    private Template createdTemplate = null;
     private byte[] fileData = null;
 
     private final TemplateService templateService;
@@ -52,6 +53,7 @@ public class AddSchemaManagementGui extends ChangeableGui {
         $$$setupUI$$$();
 
         loadButton.addActionListener(l -> handleLoadData());
+        saveButton.addActionListener(l -> handleSave());
     }
 
     @Override
@@ -80,19 +82,55 @@ public class AddSchemaManagementGui extends ChangeableGui {
             return;
         }
 
-        createdTemplate = new Template(
-                false,
-                schemaBasicInfoGui.getData(),
-                schemaCreatorGui.getData(),
-                (HeightTemplateRow) schemaProductsGui.getData(),
-                (HeightTemplateRow) schemaFinalPriceGui.getData()
-        );
+        Template createdTemplate = createTemplate();
 
         DataExtractedFromTemplate data = templateService.applyTemplate(createdTemplate, fileData);
 
         System.out.println(data);
 
         showExtractedData(data);
+    }
+
+    private Template createTemplate() {
+
+        return new Template(
+                false,
+                schemaBasicInfoGui.getData(),
+                schemaCreatorGui.getData(),
+                (HeightTemplateRow) schemaProductsGui.getData(),
+                (HeightTemplateRow) schemaFinalPriceGui.getData(),
+                (HeightTemplateRow) schemaPayDateGui.getData()
+        );
+    }
+
+    private void handleSave() {
+
+        Template createdTemplate = createTemplate();
+
+        String templateName = templateNameInput.getText();
+
+        try {
+            templateService.addTemplate(templateName, createdTemplate);
+        } catch (RuntimeException e) {
+
+            e.printStackTrace();
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage(),
+                    "Powiadomienie o błędzie",
+                    JOptionPane.ERROR_MESSAGE
+            );
+
+            return;
+        }
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Utworzono szablon " + templateName,
+                "Powiadomienie",
+                JOptionPane.INFORMATION_MESSAGE
+        );
     }
 
     private void showExtractedData(DataExtractedFromTemplate data) {
@@ -132,6 +170,9 @@ public class AddSchemaManagementGui extends ChangeableGui {
 
         schemaFinalPriceGui = new SchemaFinalPriceGui(this::handleOnSelectField);
         totalPricePanel = schemaFinalPriceGui.getMainPanel();
+
+        schemaPayDateGui = new SchemaPayDateGui(this::handleOnSelectField);
+        payDatePanel = schemaPayDateGui.getMainPanel();
     }
 
     /**
@@ -204,7 +245,7 @@ public class AddSchemaManagementGui extends ChangeableGui {
         loadButton.setText("Przetestuj szablon");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(40, 0, 0, 0);
@@ -213,7 +254,7 @@ public class AddSchemaManagementGui extends ChangeableGui {
         saveButton.setText("Zapisz szablon");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 6;
+        gbc.gridy = 7;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 0, 26, 0);
@@ -238,6 +279,12 @@ public class AddSchemaManagementGui extends ChangeableGui {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(20, 10, 0, 0);
         dataPanel.add(templateNameInput, gbc);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        dataPanel.add(payDatePanel, gbc);
     }
 
     /**

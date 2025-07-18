@@ -1,6 +1,6 @@
 package org.example.gui.schema.add.fields;
 
-import org.example.gui.IntegerDocumentListener;
+import org.example.gui.doccument_listener.IntegerDocumentListener;
 import org.example.gui.schema.add.SchemaFieldsGuiAbstract;
 import org.example.gui.schema.add.field.SchemaField;
 import org.example.gui.schema.add.field.SchemaFieldGui;

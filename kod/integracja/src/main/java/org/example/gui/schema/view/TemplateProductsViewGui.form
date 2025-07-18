@@ -17,7 +17,10 @@
         <children>
           <component id="817d7" class="javax.swing.JTable" binding="productsTable" custom-create="true">
             <constraints/>
-            <properties/>
+            <properties>
+              <preferredScrollableViewportSize width="400" height="400"/>
+              <rowHeight value="32"/>
+            </properties>
           </component>
         </children>
       </scrollpane>

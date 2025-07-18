@@ -1,115 +1,127 @@
 {
   "isTaxOriented": false,
-  "place": {
-    "isHidden": true,
-    "defaultValue": "Poznań"
-  },
-  "creationDate": {
-    "coords": {
-      "leftTop": {
-        "x": 521,
-        "y": 249
+  "basicInfo": {
+    "type": "AREA",
+    "fields": [
+      {
+        "name": "place",
+        "type": "NO_CORDS",
+        "isHidden": true,
+        "defaultValue": "Poznań"
       },
-      "rightDown": {
-        "x": 693,
-        "y": 277
-      }
-    }
-  },
-  "receiveDate": {
-    "coords": {
-      "leftTop": {
-        "x": 350,
-        "y": 245
+      {
+        "name": "creationDate",
+        "type": "AREA",
+        "xMinCord": 521,
+        "yMinCord": 249,
+        "xMaxCord": 693,
+        "yMaxCord": 277
       },
-      "rightDown": {
-        "x": 522,
-        "y": 277
-      }
-    }
-  },
-  "title": {
-    "coords": {
-      "leftTop": {
-        "x": 28,
-        "y": 250
+      {
+        "name": "receiveDate",
+        "type": "AREA",
+        "xMinCord": 350,
+        "yMinCord": 245,
+        "xMaxCord": 522,
+        "yMaxCord": 277
       },
-      "rightDown": {
-        "x": 351,
-        "y": 276
+      {
+        "name": "title",
+        "type": "AREA",
+        "xMinCord": 28,
+        "yMinCord": 250,
+        "xMaxCord": 351,
+        "yMaxCord": 276
       }
-    }
+    ]
   },
   "creator": {
-    "isHidden": true,
+    "type": "AREA",
     "fields": [
       {
         "name": "name",
+        "type": "NO_CORDS",
+        "isHidden": true,
         "defaultValue": "Victus-Emak Sp. z o.o."
       },
       {
         "name": "street",
+        "type": "NO_CORDS",
+        "isHidden": true,
         "defaultValue": "Karpia 37"
       },
       {
         "name": "city",
+        "type": "NO_CORDS",
+        "isHidden": true,
         "defaultValue": "Poznań"
       },
       {
         "name": "post-code",
+        "type": "NO_CORDS",
+        "isHidden": true,
         "defaultValue": "61-619"
       },
       {
         "name": "nip",
+        "type": "NO_CORDS",
+        "isHidden": true,
         "defaultValue": "9720985572"
       }
     ]
   },
   "invoiceItems": {
+    "type": "HORIZONTAL",
     "startStr": "Zamówienie sprzedaży",
+    "skipStart": 1,
     "endStr": "Stawka VAT ",
-    "minLength": 11,
-    "rowHeight": 15,
-    "startOffset": 0,
+    "rowHeight": 18,
     "fields": [
       {
         "name": "code",
+        "type": "HORIZONTAL",
         "xMinCord": 10,
         "xMaxCord": 196
       },
       {
         "name": "name",
+        "type": "HORIZONTAL",
         "xMinCord": 201,
         "xMaxCord": 459
       },
       {
         "name": "price",
+        "type": "HORIZONTAL",
         "xMinCord": 740,
         "xMaxCord": 830
       },
       {
         "name": "quantity",
+        "type": "HORIZONTAL",
         "xMinCord": 503,
         "xMaxCord": 569
       },
       {
         "name": "tax",
+        "type": "HORIZONTAL",
         "xMinCord": 925,
         "xMaxCord": 954
       }
     ]
   },
   "totalPrice": {
+    "type": "HORIZONTAL",
     "startStr": "Stawka VAT",
-    "skipLines": 1,
-    "rowHeight": 30,
-    "coords": {
-      "leftTop": {
-        "x": 1082
-      },
-      "rightDown": {
-        "x": 1173
+    "skipStart": 1,
+    "endStr": "Słownie",
+    "rowHeight": 15,
+    "fields": [
+      {
+        "name": "value",
+        "type": "HORIZONTAL",
+        "xMinCord": 1093,
+        "xMaxCord": 1192
       }
-    }
+    ]
   }
 }

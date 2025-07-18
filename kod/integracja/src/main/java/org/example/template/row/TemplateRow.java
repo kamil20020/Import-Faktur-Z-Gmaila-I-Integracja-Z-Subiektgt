@@ -1,5 +1,6 @@
 package org.example.template.row;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -29,8 +30,10 @@ import java.util.function.Function;
 public class TemplateRow{
 
     private String type;
+
     protected List<TemplateRowField> fields;
 
+    @JsonIgnore
     public Map<String, String> getValues(Function<AreaTemplateRowField, String[]> extractValues){
 
         Map<String, String> values = new HashMap<>();

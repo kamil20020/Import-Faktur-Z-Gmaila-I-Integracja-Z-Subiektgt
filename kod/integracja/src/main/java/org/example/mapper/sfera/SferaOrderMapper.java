@@ -34,7 +34,8 @@ public interface SferaOrderMapper {
             products,
             dataExtractedFromTemplate.creationDate(),
             dataExtractedFromTemplate.receiveDate(),
-            dataExtractedFromTemplate.place()
+            dataExtractedFromTemplate.place(),
+            dataExtractedFromTemplate.payDate()
         );
     }
 

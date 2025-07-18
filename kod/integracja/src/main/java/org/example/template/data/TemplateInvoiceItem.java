@@ -57,7 +57,12 @@ public class TemplateInvoiceItem {
 
         if(rawCode == null){
 
-            return null;
+            rawCode = extractName(gotValues);
+
+            if(rawCode == null){
+
+                return null;
+            }
         }
 
         String code = rawCode.stripIndent();

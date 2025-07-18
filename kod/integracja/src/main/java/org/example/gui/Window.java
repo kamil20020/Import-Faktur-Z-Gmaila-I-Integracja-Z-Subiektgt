@@ -2,7 +2,7 @@ package org.example.gui;
 
 import org.example.gui.integration.InvoicesGui;
 import org.example.gui.integration.LoginGui;
-import org.example.gui.integration.TemplateMenuService;
+import org.example.gui.schema.TemplateMenuService;
 import org.example.service.auth.AuthService;
 
 import javax.swing.*;

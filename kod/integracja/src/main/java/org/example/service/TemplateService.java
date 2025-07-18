@@ -1,6 +1,8 @@
 package org.example.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.api.Api;
+import org.example.exception.ConflictException;
 import org.example.exception.FileReadException;
 import org.example.loader.FileReader;
 import org.example.loader.JsonFileLoader;
@@ -13,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -24,6 +28,8 @@ public class TemplateService {
     private static final Logger log = LoggerFactory.getLogger(Api.class);
 
     private static final String TEMPLATES_SCHEMA_PATH = "schemas/";
+
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     static {
 
@@ -126,6 +132,44 @@ public class TemplateService {
         return Optional.of(foundTemplate);
     }
 
+    public void addTemplate(String templateName, Template template) throws ConflictException, IllegalStateException{
+
+        addTemplateFile(templateName, template);
+
+        companyTemplateMappings.put(templateName, template);
+        companies = companyTemplateMappings.keySet();
+    }
+
+    private void addTemplateFile(String templateName, Template template) throws ConflictException {
+
+        String templateFilePath = getTemplateFilePath(templateName);
+
+        File templateFile = new File(templateFilePath);
+
+        if(templateFile.exists()){
+
+            throw new ConflictException("Istnieje już szablon o takiej nazwie " + templateName);
+        }
+
+        try {
+
+            boolean didCreateTemplateFile = templateFile.createNewFile();
+
+            if(!didCreateTemplateFile){
+
+                throw new IOException();
+            }
+
+            objectMapper.writeValue(templateFile, template);
+        }
+        catch (IOException e) {
+
+            e.printStackTrace();
+
+            throw new IllegalStateException("Nie udało się zapisać szablonu " + templateName + " do pliku " + templateFilePath);
+        }
+    }
+
     public boolean remove(String templateName){
 
         Template removedTemplate = companyTemplateMappings.remove(templateName);
@@ -139,11 +183,16 @@ public class TemplateService {
 
     private boolean removeTemplateFile(String templateName){
 
-        String templateFilePath = TEMPLATES_SCHEMA_PATH + templateName + ".json";
+        String templateFilePath = getTemplateFilePath(templateName);
 
         File templateFile = new File(templateFilePath);
 
         return templateFile.delete();
+    }
+
+    private String getTemplateFilePath(String templateName){
+
+        return TEMPLATES_SCHEMA_PATH + templateName + ".json";
     }
 
     public DataExtractedFromTemplate applyTemplate(Template template, byte[] data) {
@@ -158,7 +207,8 @@ public class TemplateService {
             template.extractCreator(data),
             template.extractInvoiceItems(data),
             template.isTaxOriented(),
-            template.extractTotalPrice(data)
+            template.extractTotalPrice(data),
+            template.extractPayDate(data)
         );
     }
 

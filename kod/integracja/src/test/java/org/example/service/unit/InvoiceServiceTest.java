@@ -172,7 +172,7 @@ class InvoiceServiceTest {
 
         String messageAttachmentIdStr = messageAttachmentCombinedId.toString();
 
-        Template expectedTemplate = new Template(true, null, null, null, null);
+        Template expectedTemplate = new Template(true, null, null, null, null, null);
 
         DataExtractedFromTemplate expectedDataExtractedFromTemplate = new DataExtractedFromTemplate(
             null,
@@ -182,6 +182,7 @@ class InvoiceServiceTest {
             null,
             null,
             true,
+            null,
             null
         );
 
@@ -280,7 +281,7 @@ class InvoiceServiceTest {
             .message(message)
             .build();
 
-        Template expectedTemplate = new Template(true, null, null, null, null);
+        Template expectedTemplate = new Template(true, null, null, null, null, null);
 
         List<MessageAttachment> expectedMessagesAttachments = List.of(expectedMessageAttachment, expectedMessageAttachment1);
 
@@ -312,7 +313,7 @@ class InvoiceServiceTest {
     public void shouldFindGoodTemplateForTexts(String gotContent){
 
         //given
-        Template expectedTemplate = new Template(true, null, null, null, null);
+        Template expectedTemplate = new Template(true, null, null, null, null, null);
 
         byte[] expectedAttachmentData = "content".getBytes(StandardCharsets.UTF_8);
 
@@ -340,7 +341,7 @@ class InvoiceServiceTest {
     public void shouldFindGoodTemplateForFileContent(){
 
         //given
-        Template expectedTemplate = new Template(true, null, null, null, null);
+        Template expectedTemplate = new Template(true, null, null, null, null, null);
 
         byte[] expectedAttachmentData = "content".getBytes(StandardCharsets.UTF_8);
 

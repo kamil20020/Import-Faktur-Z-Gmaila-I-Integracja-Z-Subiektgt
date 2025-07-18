@@ -13,6 +13,7 @@ import org.example.template.field.HorizontalTemplateRowField;
 
 import java.awt.geom.Rectangle2D;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.*;
 
 public record Template(
@@ -21,7 +22,8 @@ public record Template(
     TemplateRow basicInfo,
     TemplateRow creator,
     HeightTemplateRow invoiceItems,
-    HeightTemplateRow totalPrice
+    HeightTemplateRow totalPrice,
+    HeightTemplateRow payDate
 ){
 
     public static Optional<String> searchInFile(byte[] data, Collection<String> values){
@@ -210,24 +212,48 @@ public record Template(
 
     public BigDecimal extractTotalPrice(byte[] data){
 
+        Map<String, String> gotValues = extractValueFromEnd(data, totalPrice);
+
+        if(gotValues == null || gotValues.isEmpty()){
+
+            return null;
+        }
+
+        String gotRawPrice = gotValues.get("value");
+
+        return TemplateConverter.convertToBigDecimal(gotRawPrice);
+    }
+
+    public LocalDate extractPayDate(byte[] data){
+
+        Map<String, String> gotValues = extractValueFromEnd(data, payDate);
+
+        if(gotValues == null || gotValues.isEmpty()){
+
+            return null;
+        }
+
+        String gotRawPrice = gotValues.get("value");
+
+        return TemplateConverter.tryToParseLocalDate(gotRawPrice);
+    }
+
+    private Map<String, String> extractValueFromEnd(byte[] data, HeightTemplateRow heightTemplateRow){
+
         PdfLinesDetails pdfLinesDetails = getLines(data);
 
         int numberOfPages = pdfLinesDetails.numberOfPages();
 
         int lastPageIndex = numberOfPages - 1;
 
-        List<Map<String, String>> gotValuesList = getValuesFromHeightTemplateRow(data, totalPrice, lastPageIndex);
+        List<Map<String, String>> gotValuesList = getValuesFromHeightTemplateRow(data, heightTemplateRow, lastPageIndex);
 
         if(gotValuesList == null || gotValuesList.isEmpty()){
 
             return null;
         }
 
-        Map<String, String> gotValues = gotValuesList.get(0);
-
-        String gotRawPrice = gotValues.get("value");
-
-        return TemplateConverter.convertToBigDecimal(gotRawPrice);
+        return gotValuesList.get(0);
     }
 
     private static Map<String, String> getValuesFromTemplateRow(byte[] data, TemplateRow templateRow, int pageIndex) throws IllegalStateException{

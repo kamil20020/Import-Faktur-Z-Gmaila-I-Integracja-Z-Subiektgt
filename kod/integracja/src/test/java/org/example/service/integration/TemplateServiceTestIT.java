@@ -70,7 +70,8 @@ class TemplateServiceTestIT {
             expectedTemplateCreator,
             null,
             false,
-            new BigDecimal("1265.46")
+            new BigDecimal("1265.46"),
+            null
         );
 
         Integer expectedNumberOfItems = 8;
@@ -128,7 +129,8 @@ class TemplateServiceTestIT {
             expectedTemplateCreator,
             null,
             false,
-            new BigDecimal("38899.02")
+            new BigDecimal("38899.02"),
+            null
         );
 
         Integer expectedNumberOfItems = 53;
@@ -186,7 +188,8 @@ class TemplateServiceTestIT {
             expectedTemplateCreator,
             null,
             false,
-            new BigDecimal("201.57")
+            new BigDecimal("201.57"),
+            null
         );
 
         Integer expectedNumberOfItems = 4;
@@ -244,7 +247,8 @@ class TemplateServiceTestIT {
             expectedTemplateCreator,
             null,
             false,
-            new BigDecimal("147.48")
+            new BigDecimal("147.48"),
+            null
         );
 
         Integer expectedNumberOfItems = 5;
@@ -302,7 +306,8 @@ class TemplateServiceTestIT {
             expectedTemplateCreator,
             null,
             false,
-            new BigDecimal("4022.19")
+            new BigDecimal("4022.19"),
+            null
         );
 
         Integer expectedNumberOfItems = 5;

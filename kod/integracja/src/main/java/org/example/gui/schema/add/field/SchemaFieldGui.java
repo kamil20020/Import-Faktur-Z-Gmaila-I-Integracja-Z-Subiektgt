@@ -1,16 +1,14 @@
 package org.example.gui.schema.add.field;
 
 import org.example.gui.ChangeableGui;
-import org.example.gui.IntegerDocumentListener;
-import org.example.gui.StringOnChangeDocumentListener;
+import org.example.gui.doccument_listener.IntegerDocumentListener;
+import org.example.gui.doccument_listener.StringOnChangeDocumentListener;
 import org.example.template.field.TemplateRowField;
 import org.example.template.field.TemplateRowFieldSimpleFactory;
 import org.example.template.field.TemplateRowFieldType;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;

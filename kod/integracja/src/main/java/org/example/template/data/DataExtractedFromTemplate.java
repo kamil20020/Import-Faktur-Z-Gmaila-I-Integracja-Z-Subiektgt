@@ -13,5 +13,6 @@ public record DataExtractedFromTemplate(
     TemplateCreator creator,
     List<TemplateInvoiceItem> invoiceItems,
     boolean isTaxOriented,
-    BigDecimal totalPrice
+    BigDecimal totalPrice,
+    LocalDate payDate
 ){}

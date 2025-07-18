@@ -1,5 +1,6 @@
 package org.example.template.field;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.example.template.TemplateRectCords;
@@ -57,6 +58,7 @@ public class HorizontalTemplateRowField extends TemplateRowField{
         return result;
     }
 
+    @JsonIgnore
     public Rectangle2D.Double getRect(double yMin, double yMax) {
 
         return TemplateRectCords.getRect(xMinCord, yMin, xMaxCord, yMax);

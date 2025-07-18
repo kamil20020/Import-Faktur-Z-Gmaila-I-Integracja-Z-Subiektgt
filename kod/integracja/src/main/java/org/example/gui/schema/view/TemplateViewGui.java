@@ -30,6 +30,7 @@ public class TemplateViewGui extends ChangeableGui {
     private JLabel nipValueLabel;
     private JLabel totalPriceValueLabel;
     private JPanel dataPanel;
+    private JLabel payDateValueLabel;
 
     private TemplateProductsViewGui templateProductsViewGui;
 
@@ -50,6 +51,9 @@ public class TemplateViewGui extends ChangeableGui {
 
         String totalPriceStr = handleToString(data.totalPrice());
         totalPriceValueLabel.setText(totalPriceStr);
+
+        String payDateStr = handleToString(data.payDate());
+        payDateValueLabel.setText(payDateStr);
     }
 
     private void updateBasicData(DataExtractedFromTemplate data) {
@@ -260,7 +264,8 @@ public class TemplateViewGui extends ChangeableGui {
         gbc.gridy = 13;
         gbc.gridwidth = 2;
         gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 0, 0, 0);
         dataPanel.add(productsPanel, gbc);
         placeValueLabel = new JLabel();
@@ -363,6 +368,34 @@ public class TemplateViewGui extends ChangeableGui {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(0, 60, 0, 0);
         dataPanel.add(label15, gbc);
+        final JLabel label16 = new JLabel();
+        Font label16Font = this.$$$getFont$$$(null, -1, 16, label16.getFont());
+        if (label16Font != null) label16.setFont(label16Font);
+        label16.setText("Termin płatności");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 16;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.insets = new Insets(20, 0, 0, 0);
+        dataPanel.add(label16, gbc);
+        final JLabel label17 = new JLabel();
+        label17.setText("Data");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 17;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(20, 60, 0, 0);
+        dataPanel.add(label17, gbc);
+        payDateValueLabel = new JLabel();
+        payDateValueLabel.setText("Label");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 17;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(20, 0, 0, 0);
+        dataPanel.add(payDateValueLabel, gbc);
     }
 
     /**

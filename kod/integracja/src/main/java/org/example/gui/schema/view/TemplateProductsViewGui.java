@@ -101,6 +101,8 @@ public class TemplateProductsViewGui extends ChangeableGui {
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(20, 0, 0, 0);
         mainPanel.add(scrollPane1, gbc);
+        productsTable.setPreferredScrollableViewportSize(new Dimension(400, 400));
+        productsTable.setRowHeight(32);
         scrollPane1.setViewportView(productsTable);
     }
 

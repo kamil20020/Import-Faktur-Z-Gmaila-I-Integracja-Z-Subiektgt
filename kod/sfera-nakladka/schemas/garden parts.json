@@ -1,65 +1,56 @@
 {
   "isTaxOriented": false,
-  "place": {
-    "coords": {
-      "leftTop": {
-        "x": 133,
-        "y": 352
+  "basicInfo": {
+    "type": "AREA",
+    "fields": [
+      {
+        "name": "place",
+        "type": "AREA",
+        "xMinCord": 133,
+        "yMinCord": 352,
+        "xMaxCord": 226,
+        "yMaxCord": 373
       },
-      "rightDown": {
-        "x": 226,
-        "y": 373
-      }
-    }
-  },
-  "creationDate": {
-    "coords": {
-      "leftTop": {
-        "x": 1080,
-        "y": 179
+      {
+        "name": "creationDate",
+        "type": "AREA",
+        "xMinCord": 958,
+        "yMinCord": 173,
+        "xMaxCord": 1164,
+        "yMaxCord": 195
       },
-      "rightDown": {
-        "x": 1164,
-        "y": 193
-      }
-    }
-  },
-  "receiveDate": {
-    "coords": {
-      "leftTop": {
-        "x": 1077,
-        "y": 192
+      {
+        "name": "receiveDate",
+        "type": "AREA",
+        "xMinCord": 1077,
+        "yMinCord": 192,
+        "xMaxCord": 1169,
+        "yMaxCord": 209
       },
-      "rightDown": {
-        "x": 1169,
-        "y": 209
+      {
+        "name": "title",
+        "type": "AREA",
+        "xMinCord": 188,
+        "yMinCord": 174,
+        "xMaxCord": 551,
+        "yMaxCord": 228
       }
-    }
-  },
-  "title": {
-    "skipSpace": 2,
-    "coords": {
-      "leftTop": {
-        "x": 66,
-        "y": 179
-      },
-      "rightDown": {
-        "x": 400,
-        "y": 213
-      }
-    }
+    ]
   },
   "creator": {
+    "type": "AREA",
     "fields": [
       {
         "name": "name",
-        "xMinCord": 73,
-        "yMinCord": 310,
-        "xMaxCord": 601,
+        "type": "AREA",
+        "xMinCord": 76,
+        "yMinCord": 313,
+        "xMaxCord": 592,
         "yMaxCord": 336
       },
       {
         "name": "street",
+        "type": "AREA",
         "xMinCord": 73,
         "yMinCord": 334,
         "xMaxCord": 560,
@@ -67,6 +58,7 @@
       },
       {
         "name": "city",
+        "type": "AREA",
         "xMinCord": 133,
         "yMinCord": 354,
         "xMaxCord": 592,
@@ -74,6 +66,7 @@
       },
       {
         "name": "post-code",
+        "type": "AREA",
         "xMinCord": 61,
         "yMinCord": 351,
         "xMaxCord": 135,
@@ -81,6 +74,7 @@
       },
       {
         "name": "nip",
+        "type": "AREA",
         "xMinCord": 132,
         "yMinCord": 370,
         "xMaxCord": 319,
@@ -89,19 +83,21 @@
     ]
   },
   "invoiceItems": {
+    "type": "HORIZONTAL",
     "startStr": "Lp.",
     "skipStart": 1,
     "endStr": "Stawka VA",
-    "minLength": 11,
-    "rowHeight": 15,
+    "rowHeight": 22,
     "fields": [
       {
         "name": "index",
+        "type": "HORIZONTAL",
         "xMinCord": 69,
         "xMaxCord": 97
       },
       {
         "name": "code",
+        "type": "HORIZONTAL",
         "xMinCord": 97,
         "xMaxCord": 810,
         "separator": " - ",
@@ -109,6 +105,7 @@
       },
       {
         "name": "name",
+        "type": "HORIZONTAL",
         "xMinCord": 98,
         "xMaxCord": 810,
         "separator": " - ",
@@ -116,31 +113,37 @@
       },
       {
         "name": "price",
+        "type": "HORIZONTAL",
         "xMinCord": 910,
         "xMaxCord": 1012
       },
       {
         "name": "quantity",
+        "type": "HORIZONTAL",
         "xMinCord": 809,
         "xMaxCord": 854
       },
       {
         "name": "tax",
+        "type": "HORIZONTAL",
         "xMinCord": 1117,
         "xMaxCord": 1154
       }
     ]
   },
   "totalPrice": {
-    "startStr": "Do zapłaty :",
+    "type": "HORIZONTAL",
+    "startStr": "Suma:",
+    "skipStart": 1,
+    "endStr": "Słownie",
     "rowHeight": 32,
-    "coords": {
-      "leftTop": {
-        "x": 359
-      },
-      "rightDown": {
-        "x": 1011
+    "fields": [
+      {
+        "name": "value",
+        "type": "HORIZONTAL",
+        "xMinCord": 359,
+        "xMaxCord": 1011
       }
-    }
+    ]
   }
 }

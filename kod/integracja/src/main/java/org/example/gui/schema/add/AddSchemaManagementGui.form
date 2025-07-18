@@ -75,7 +75,7 @@
               </grid>
               <component id="fa59c" class="javax.swing.JButton" binding="loadButton">
                 <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                   <gridbag top="40" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
                 </constraints>
                 <properties>
@@ -84,7 +84,7 @@
               </component>
               <component id="25312" class="javax.swing.JButton" binding="saveButton">
                 <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                   <gridbag top="10" left="0" bottom="26" right="0" weightx="0.0" weighty="0.0"/>
                 </constraints>
                 <properties>
@@ -113,6 +113,15 @@
                   <text value=""/>
                 </properties>
               </component>
+              <grid id="51c84" binding="payDatePanel" custom-create="true" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
             </children>
           </grid>
         </children>

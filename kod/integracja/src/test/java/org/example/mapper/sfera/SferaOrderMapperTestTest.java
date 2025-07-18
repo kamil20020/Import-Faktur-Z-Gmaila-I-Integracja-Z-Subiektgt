@@ -47,7 +47,8 @@ class SferaOrderMapperTestTest {
             templateCreator,
             templateInvoiceItems,
             true,
-            new BigDecimal("22.38")
+            new BigDecimal("22.38"),
+            null
         );
 
         Customer expectedCustomer = new Customer();

@@ -1,5 +1,6 @@
 package org.example.template.row;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.example.template.TemplateCords;
 import org.example.template.field.HorizontalTemplateRowField;
@@ -82,9 +83,15 @@ public class HeightTemplateRow extends TemplateRow{
         return result;
     }
 
+    @JsonIgnore
     public List<Map<String, String>> getValues(List<String> gotLines, List<Float> linesYCords, TriFunction<HorizontalTemplateRowField, Double, Double, String[]> extractValues){
 
         int lineStartIndex = getLineStartIndex(gotLines, startStr);
+
+        if(lineStartIndex >= gotLines.size() - 1){
+
+            return null;
+        }
 
         if(skipStart != null){
 
@@ -114,6 +121,7 @@ public class HeightTemplateRow extends TemplateRow{
         return values;
     }
 
+    @JsonIgnore
     private static int getLineStartIndex(List<String> gotLines, String searchText){
 
         int invoiceItemsStartIndex = 0;
@@ -130,6 +138,7 @@ public class HeightTemplateRow extends TemplateRow{
         return invoiceItemsStartIndex;
     }
 
+    @JsonIgnore
     private Map<String, String> getValuesRow(TriFunction<HorizontalTemplateRowField, Double, Double, String[]> extractValues, double startY) {
 
         Map<String, String> values = new HashMap<>();

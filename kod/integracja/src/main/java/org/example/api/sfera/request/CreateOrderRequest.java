@@ -25,6 +25,8 @@ import java.util.List;
     "amount",
     "customer",
     "products",
+    "pay_type",
+    "pay_date"
 })
 @Generated("jsonschema2pojo")
 public class CreateOrderRequest{
@@ -62,10 +64,16 @@ public class CreateOrderRequest{
     @JsonProperty("creation_place")
     private String creationPlace;
 
+    @JsonProperty("pay_date")
+    private LocalDate payDate;
+
     @JsonProperty("create_product_if_not_exists")
     private Boolean shouldCreateProductIfNotExists = true;
 
-    public CreateOrderRequest(String reference, String externalId, BigDecimal amount, Customer customer, List<Product> products, LocalDate creationDate, LocalDate deliveryDate, String creationPlace) {
+    @JsonProperty("pay_type")
+    private String payType = "credit";
+
+    public CreateOrderRequest(String reference, String externalId, BigDecimal amount, Customer customer, List<Product> products, LocalDate creationDate, LocalDate deliveryDate, String creationPlace, LocalDate payDate) {
 
         this.reference = reference;
         this.externalId = externalId;
@@ -75,6 +83,7 @@ public class CreateOrderRequest{
         this.creationDate = creationDate;
         this.deliveryDate = deliveryDate;
         this.creationPlace = creationPlace;
+        this.payDate = payDate;
     }
 
 }

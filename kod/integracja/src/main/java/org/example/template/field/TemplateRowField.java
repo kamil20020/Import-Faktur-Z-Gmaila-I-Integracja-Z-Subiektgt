@@ -1,9 +1,6 @@
 package org.example.template.field;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import java.awt.*;
@@ -26,6 +23,7 @@ import java.awt.geom.Rectangle2D;
 public class TemplateRowField{
 
     private String name;
+
     private String type;
 
     @JsonProperty(value = "isHidden")
@@ -35,6 +33,7 @@ public class TemplateRowField{
     private Integer index;
     private String separator;
 
+    @JsonIgnore
     public void copy(TemplateRowField field){
 
         this.name = field.name;
@@ -45,6 +44,7 @@ public class TemplateRowField{
         this.separator = field.separator;
     }
 
+    @JsonIgnore
     public String extract(String[] values){
 
         if(isHidden){
@@ -67,6 +67,7 @@ public class TemplateRowField{
         return extractWithIndex(value);
     }
 
+    @JsonIgnore
     private String extractWithIndex(String value){
 
         if(separator == null || separator.isEmpty()){
@@ -88,6 +89,7 @@ public class TemplateRowField{
         return gotValue;
     }
 
+    @JsonIgnore
     public void handleRect(Rectangle2D.Float rect) throws IllegalStateException{
 
         throw new IllegalStateException("Standard template row field doesnt support cords");
