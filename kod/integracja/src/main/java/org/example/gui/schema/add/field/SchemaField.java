@@ -1,4 +1,4 @@
-package org.example.gui.add_schema.field;
+package org.example.gui.schema.add.field;
 
 import org.example.template.field.TemplateRowFieldType;
 

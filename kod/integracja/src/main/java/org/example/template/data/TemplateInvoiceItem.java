@@ -109,6 +109,11 @@ public class TemplateInvoiceItem {
 
         BigDecimal unitPriceWithTax = getUnitPriceWithTax(isInvoiceTaxOriented);
 
+        if(unitPriceWithTax == null || quantity == null){
+
+            return null;
+        }
+
         BigDecimal quantityConverted = BigDecimal.valueOf(quantity);
 
         return quantityConverted.multiply(unitPriceWithTax);
@@ -121,6 +126,11 @@ public class TemplateInvoiceItem {
             return price;
         }
 
+        if(price == null || tax == null){
+
+            return null;
+        }
+
         BigDecimal hundred = BigDecimal.valueOf(100);
 
         BigDecimal taxFraction = tax.divide(hundred);
@@ -130,11 +140,31 @@ public class TemplateInvoiceItem {
         return price.add(taxValue);
     }
 
+    public BigDecimal getTotalPriceWithoutTax(boolean isInvoiceTaxOriented){
+
+        BigDecimal unitPriceWithoutTax = getUnitPriceWithoutTax(isInvoiceTaxOriented);
+
+        if(unitPriceWithoutTax == null || quantity == null){
+
+            return null;
+        }
+
+        BigDecimal quantityConverted = BigDecimal.valueOf(quantity);
+
+        return quantityConverted.multiply(unitPriceWithoutTax);
+    }
+
+
     public BigDecimal getUnitPriceWithoutTax(boolean isInvoiceTaxOriented){
 
         if(!isInvoiceTaxOriented){
 
             return price;
+        }
+
+        if(price == null || tax == null){
+
+            return null;
         }
 
         //brutto = netto + 0,23 * netto

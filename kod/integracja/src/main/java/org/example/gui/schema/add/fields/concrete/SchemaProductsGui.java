@@ -1,13 +1,12 @@
-package org.example.gui.add_schema.fields.concrete;
+package org.example.gui.schema.add.fields.concrete;
 
-import org.example.gui.add_schema.SchemaFieldsGuiAbstract;
-import org.example.gui.add_schema.field.SchemaField;
-import org.example.gui.add_schema.field.SchemaFieldGui;
-import org.example.gui.add_schema.fields.SchemaHeightFieldsGui;
+import org.example.gui.schema.add.field.SchemaField;
+import org.example.gui.schema.add.field.SchemaFieldGui;
+import org.example.gui.schema.add.fields.SchemaHeightFieldsGui;
 import org.example.template.field.TemplateRowFieldType;
-import org.example.gui.add_schema.fields.SchemaFieldsGui;
 
 import javax.swing.*;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 

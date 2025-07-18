@@ -1,21 +1,19 @@
-package org.example.gui.add_schema.fields.concrete;
+package org.example.gui.schema.add.fields.concrete;
 
-import org.example.gui.add_schema.SchemaFieldsGuiAbstract;
-import org.example.gui.add_schema.field.SchemaField;
-import org.example.gui.add_schema.field.SchemaFieldGui;
-import org.example.gui.add_schema.fields.SchemaHeightFieldsGui;
+import org.example.gui.schema.add.field.SchemaField;
+import org.example.gui.schema.add.field.SchemaFieldGui;
+import org.example.gui.schema.add.fields.SchemaFieldsGui;
 import org.example.template.field.TemplateRowFieldType;
-import org.example.gui.add_schema.fields.SchemaFieldsGui;
 
 import javax.swing.*;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class SchemaFinalPriceGui extends ConcreteSchemaGui {
+public class SchemaBasicInfoGui extends ConcreteSchemaGui {
 
     private JPanel mainPanel;
 
-    public SchemaFinalPriceGui(Consumer<SchemaFieldGui> onSelect) {
+    public SchemaBasicInfoGui(Consumer<SchemaFieldGui> onSelect) {
 
         super(onSelect);
     }
@@ -30,10 +28,13 @@ public class SchemaFinalPriceGui extends ConcreteSchemaGui {
         // TODO: place custom component creation code here
 
         List<SchemaField> schemaFields = List.of(
-            new SchemaField("value", "Kwota", TemplateRowFieldType.HORIZONTAL)
+            new SchemaField("place", "Miejsce wystawienia", TemplateRowFieldType.AREA),
+            new SchemaField("receiveDate", "Data zakończenia dostawy", TemplateRowFieldType.AREA),
+            new SchemaField("creationDate", "Data wystawienia", TemplateRowFieldType.AREA),
+            new SchemaField("title", "Tytuł", TemplateRowFieldType.AREA)
         );
 
-        schemaFieldsGui = new SchemaHeightFieldsGui("Cena końcowa", schemaFields, onSelect);
+        schemaFieldsGui = new SchemaFieldsGui("Podstawowe informacje", schemaFields, onSelect);
 
         mainPanel = schemaFieldsGui.getMainPanel();
     }

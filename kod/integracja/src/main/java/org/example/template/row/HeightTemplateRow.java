@@ -104,11 +104,6 @@ public class HeightTemplateRow extends TemplateRow{
                 break;
             }
 
-            if(line.startsWith("Razem")){
-
-                System.out.println();
-            }
-
             Map<String, String> gotValuesRow = getValuesRow(extractValues, startY);
 
             values.add(gotValuesRow);

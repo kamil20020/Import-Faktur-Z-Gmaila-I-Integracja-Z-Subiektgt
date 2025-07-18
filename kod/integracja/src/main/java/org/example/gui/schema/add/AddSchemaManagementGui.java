@@ -1,8 +1,9 @@
-package org.example.gui.add_schema;
+package org.example.gui.schema.add;
 
 import org.example.gui.ChangeableGui;
-import org.example.gui.add_schema.field.SchemaFieldGui;
-import org.example.gui.add_schema.fields.concrete.*;
+import org.example.gui.schema.add.field.SchemaFieldGui;
+import org.example.gui.schema.add.fields.concrete.*;
+import org.example.gui.schema.view.TemplateViewGui;
 import org.example.service.TemplateService;
 import org.example.template.Template;
 import org.example.template.data.DataExtractedFromTemplate;
@@ -15,8 +16,6 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 @Component
@@ -32,6 +31,7 @@ public class AddSchemaManagementGui extends ChangeableGui {
 
     private JButton loadButton;
     private JButton saveButton;
+    private JTextField templateNameInput;
 
     private SchemaFieldGui selectedFieldGui;
 
@@ -91,6 +91,26 @@ public class AddSchemaManagementGui extends ChangeableGui {
         DataExtractedFromTemplate data = templateService.applyTemplate(createdTemplate, fileData);
 
         System.out.println(data);
+
+        showExtractedData(data);
+    }
+
+    private void showExtractedData(DataExtractedFromTemplate data) {
+
+        TemplateViewGui templateViewGui = new TemplateViewGui();
+
+        String templateName = templateNameInput.getText();
+
+        templateViewGui.setData(templateName, data);
+
+        JDialog dialog = new JDialog((Frame) null, "Wydobyte dane", true);
+
+        dialog.add(templateViewGui.getMainPanel());
+
+        dialog.setSize(700, 760);
+        dialog.setLocationRelativeTo(null);
+
+        dialog.setVisible(true);
     }
 
     public void setFileData(byte[] data) {
@@ -135,16 +155,18 @@ public class AddSchemaManagementGui extends ChangeableGui {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 3;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         mainPanel.add(label1, gbc);
         final JScrollPane scrollPane1 = new JScrollPane();
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
+        gbc.gridwidth = 3;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(20, 0, 0, 0);
         mainPanel.add(scrollPane1, gbc);
         dataPanel = new JPanel();
         dataPanel.setLayout(new GridBagLayout());
@@ -152,33 +174,38 @@ public class AddSchemaManagementGui extends ChangeableGui {
         dataPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         dataPanel.add(basicInfoPanel, gbc);
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         dataPanel.add(creatorPanel, gbc);
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         dataPanel.add(productsPanel, gbc);
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         dataPanel.add(totalPricePanel, gbc);
         loadButton = new JButton();
-        loadButton.setText("Pobierz wartości z pliku");
+        loadButton.setText("Przetestuj szablon");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
+        gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(40, 0, 0, 0);
         dataPanel.add(loadButton, gbc);
@@ -186,10 +213,31 @@ public class AddSchemaManagementGui extends ChangeableGui {
         saveButton.setText("Zapisz szablon");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
+        gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 0, 26, 0);
         dataPanel.add(saveButton, gbc);
+        final JLabel label2 = new JLabel();
+        label2.setText("Nazwa szablonu");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.insets = new Insets(20, 0, 0, 10);
+        dataPanel.add(label2, gbc);
+        templateNameInput = new JTextField();
+        templateNameInput.setMinimumSize(new Dimension(120, 30));
+        templateNameInput.setPreferredSize(new Dimension(120, 30));
+        templateNameInput.setText("");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(20, 10, 0, 0);
+        dataPanel.add(templateNameInput, gbc);
     }
 
     /**

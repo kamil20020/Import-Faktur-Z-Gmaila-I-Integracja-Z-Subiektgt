@@ -1,8 +1,8 @@
-package org.example.gui.add_schema.fields;
+package org.example.gui.schema.add.fields;
 
-import org.example.gui.add_schema.SchemaFieldsGuiAbstract;
-import org.example.gui.add_schema.field.SchemaField;
-import org.example.gui.add_schema.field.SchemaFieldGui;
+import org.example.gui.schema.add.SchemaFieldsGuiAbstract;
+import org.example.gui.schema.add.field.SchemaField;
+import org.example.gui.schema.add.field.SchemaFieldGui;
 import org.example.template.row.TemplateRow;
 import org.example.template.row.TemplateRowType;
 

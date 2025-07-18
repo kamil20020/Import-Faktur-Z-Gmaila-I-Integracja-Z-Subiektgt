@@ -1,6 +1,8 @@
-package org.example.gui.add_schema.field;
+package org.example.gui.schema.add.field;
 
 import org.example.gui.ChangeableGui;
+import org.example.gui.IntegerDocumentListener;
+import org.example.gui.StringOnChangeDocumentListener;
 import org.example.template.field.TemplateRowField;
 import org.example.template.field.TemplateRowFieldSimpleFactory;
 import org.example.template.field.TemplateRowFieldType;
@@ -74,15 +76,15 @@ public class SchemaFieldGui extends ChangeableGui {
         selectPositionButton.addActionListener(l -> handleSelect());
 
         defaultValueInput.getDocument().addDocumentListener(
-                getHandleChangeTextFieldValueListener(defaultValueInput, this::handleChangeDefaultValue)
+            new StringOnChangeDocumentListener(defaultValueInput, this::handleChangeDefaultValue)
         );
 
         separatorInput.getDocument().addDocumentListener(
-                getHandleChangeTextFieldValueListener(separatorInput, this::handleChangeSeparateValue)
+            new StringOnChangeDocumentListener(separatorInput, this::handleChangeSeparateValue)
         );
 
         separateIndexInput.getDocument().addDocumentListener(
-                getHandleChangeTextFieldValueListener(separateIndexInput, this::handleChangeIndexValue)
+            new IntegerDocumentListener(separateIndexInput, this::handleChangeIndexValue)
         );
 
         data = TemplateRowFieldSimpleFactory.create(type);
@@ -168,36 +170,6 @@ public class SchemaFieldGui extends ChangeableGui {
         newData.copy(data);
     }
 
-    private DocumentListener getHandleChangeTextFieldValueListener(JTextField input, Consumer<String> handleChangeValue) {
-
-        return new DocumentListener() {
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-
-                String newValue = input.getText();
-
-                handleChangeValue.accept(newValue);
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-                String newValue = input.getText();
-
-                handleChangeValue.accept(newValue);
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-                String newValue = input.getText();
-
-                handleChangeValue.accept(newValue);
-            }
-        };
-    }
-
     private void handleChangeDefaultValue(String newValue) {
 
         data.setDefaultValue(newValue);
@@ -208,46 +180,9 @@ public class SchemaFieldGui extends ChangeableGui {
         data.setSeparator(newValue);
     }
 
-    private void handleChangeIndexValue(String newValue) {
+    private void handleChangeIndexValue(Integer newValue) {
 
-        if (newValue == null || newValue.isBlank()) {
-
-            data.setIndex(null);
-
-            return;
-        }
-
-        Integer newIndex = null;
-
-        String actualIndexStr = null;
-
-        try {
-            newIndex = Integer.valueOf(newValue);
-
-            if (newIndex < 0) {
-
-                newIndex = 0;
-            }
-
-            actualIndexStr = newIndex.toString();
-
-            data.setIndex(newIndex);
-        } catch (NumberFormatException e) {
-
-            Integer actualIndex = data.getIndex();
-
-            if (actualIndex != null) {
-
-                actualIndexStr = actualIndex.toString();
-            }
-        }
-
-        String finalActualIndexStr = actualIndexStr;
-
-        SwingUtilities.invokeLater(() -> {
-
-            separateIndexInput.setText(finalActualIndexStr);
-        });
+        data.setIndex(newValue);
     }
 
     public void updateCords(Rectangle.Float rect) {
@@ -307,7 +242,7 @@ public class SchemaFieldGui extends ChangeableGui {
         mainPanel.add(fieldIsHiddenCheckbox, gbc);
         selectPositionButton = new JButton();
         selectPositionButton.setHorizontalAlignment(0);
-        selectPositionButton.setText("Współrzędne");
+        selectPositionButton.setText("Wybieranie obszaru");
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 1;

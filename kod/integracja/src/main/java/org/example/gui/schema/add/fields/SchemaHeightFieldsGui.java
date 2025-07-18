@@ -1,8 +1,9 @@
-package org.example.gui.add_schema.fields;
+package org.example.gui.schema.add.fields;
 
-import org.example.gui.add_schema.SchemaFieldsGuiAbstract;
-import org.example.gui.add_schema.field.SchemaField;
-import org.example.gui.add_schema.field.SchemaFieldGui;
+import org.example.gui.IntegerDocumentListener;
+import org.example.gui.schema.add.SchemaFieldsGuiAbstract;
+import org.example.gui.schema.add.field.SchemaField;
+import org.example.gui.schema.add.field.SchemaFieldGui;
 import org.example.template.row.HeightTemplateRow;
 import org.example.template.row.TemplateRow;
 import org.example.template.row.TemplateRowType;
@@ -24,6 +25,7 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
     private JTextField endStrInput;
     private JFormattedTextField rowHeightInput;
     private JFormattedTextField skipStartInput;
+    private JButton clearSelectionButton;
 
     public SchemaHeightFieldsGui(String title, List<SchemaField> schemaFields, Consumer<SchemaFieldGui> onSelect) {
 
@@ -36,19 +38,58 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
         titleLabel.setText(title);
 
         super.loadFields(fieldsPanel);
+
+        rowHeightInput.getDocument().addDocumentListener(
+                new IntegerDocumentListener(rowHeightInput, value -> {
+                })
+        );
+
+        skipStartInput.getDocument().addDocumentListener(
+                new IntegerDocumentListener(skipStartInput, value -> {
+                })
+        );
+
+        clearSelectionButton.addActionListener(l -> onSelect.accept(null));
     }
 
     @Override
     public TemplateRow getData() {
 
+        Integer skipStart = getSkipStart();
+        float rowHeight = getRowHeight();
+
         return new HeightTemplateRow(
                 TemplateRowType.HORIZONTAL.name(),
                 getRowsFields(),
-                0,
-                "",
-                "",
-                10
+                skipStart,
+                startStrInput.getText(),
+                endStrInput.getText(),
+                rowHeight
         );
+    }
+
+    private Integer getSkipStart() {
+
+        String skipStartStr = skipStartInput.getText();
+
+        if (skipStartStr == null || skipStartStr.isEmpty()) {
+
+            return null;
+        }
+
+        return Integer.valueOf(skipStartStr);
+    }
+
+    private float getRowHeight() {
+
+        String rowHeightStr = rowHeightInput.getText();
+
+        if (rowHeightStr == null || rowHeightStr.isEmpty()) {
+
+            return 10;
+        }
+
+        return Float.parseFloat(rowHeightStr);
     }
 
     @Override
@@ -81,7 +122,7 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 3;
         gbc.insets = new Insets(40, 0, 0, 0);
         mainPanel.add(titleLabel, gbc);
         final JLabel label1 = new JLabel();
@@ -99,6 +140,7 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 3;
+        gbc.gridwidth = 2;
         gbc.weightx = 1.0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(20, 20, 0, 0);
@@ -146,6 +188,7 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 5;
+        gbc.gridwidth = 2;
         gbc.weightx = 1.0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(20, 20, 0, 0);
@@ -156,6 +199,7 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 2;
+        gbc.gridwidth = 2;
         gbc.weightx = 1.0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(20, 20, 0, 0);
@@ -165,10 +209,19 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 3;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         mainPanel.add(fieldsPanel, gbc);
+        clearSelectionButton = new JButton();
+        clearSelectionButton.setText("Czyszczenie zaznaczenia");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 4;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(20, 20, 0, 0);
+        mainPanel.add(clearSelectionButton, gbc);
     }
 
     /**

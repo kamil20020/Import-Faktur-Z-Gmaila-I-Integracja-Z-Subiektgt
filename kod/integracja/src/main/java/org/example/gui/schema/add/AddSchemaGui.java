@@ -1,11 +1,7 @@
-package org.example.gui.add_schema;
+package org.example.gui.schema.add;
 
 import org.example.gui.ChangeableGui;;
-import org.example.gui.Window;
-import org.example.gui.integration.InvoicesGui;
 import org.example.gui.pdf_viewer.PdfViewerGui;
-import org.example.loader.FileReader;
-import org.example.loader.pdf.PdfFileReader;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -13,7 +9,6 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Optional;
 
 @Component

@@ -216,7 +216,14 @@ public record Template(
 
         int lastPageIndex = numberOfPages - 1;
 
-        Map<String, String> gotValues = getValuesFromHeightTemplateRow(data, totalPrice, lastPageIndex).get(0);
+        List<Map<String, String>> gotValuesList = getValuesFromHeightTemplateRow(data, totalPrice, lastPageIndex);
+
+        if(gotValuesList == null || gotValuesList.isEmpty()){
+
+            return null;
+        }
+
+        Map<String, String> gotValues = gotValuesList.get(0);
 
         String gotRawPrice = gotValues.get("value");
 

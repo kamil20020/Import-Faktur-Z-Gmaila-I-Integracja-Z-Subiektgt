@@ -1,8 +1,7 @@
 package org.example.gui.integration;
 
 import org.example.gui.ChangeableGui;
-import org.example.gui.add_schema.AddSchemaGui;
-import org.example.gui.pdf_viewer.PdfViewerGui;
+import org.example.gui.schema.add.AddSchemaGui;
 import org.example.service.TemplateService;
 import org.springframework.stereotype.Service;
 
