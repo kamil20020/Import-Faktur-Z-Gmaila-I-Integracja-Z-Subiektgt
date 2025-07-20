@@ -82,8 +82,7 @@ public class InvoicesGui extends ChangeableGui {
         try {
 
             messagesPageResponse = invoiceService.getMessagesPage(limit, toSearchActualPageToken, subject);
-        }
-        catch (UnloggedException e) {
+        } catch (UnloggedException e) {
 
             handleLogout.run();
 
@@ -102,8 +101,8 @@ public class InvoicesGui extends ChangeableGui {
         int totalNumberOfRows = messagesPageResponse.totalNumberOfElements();
 
         PaginationTableGui.PaginationTableData<Object> data = new PaginationTableGui.PaginationTableData(
-            messagesAttachmentsPage,
-            totalNumberOfRows
+                messagesAttachmentsPage,
+                totalNumberOfRows
         );
 
         return data;
@@ -114,8 +113,7 @@ public class InvoicesGui extends ChangeableGui {
         if (newOffset < paginationTableGui.getPrevOffset()) {
 
             actualPageTokenIndex--;
-        }
-        else if (newOffset > paginationTableGui.getPrevOffset()) {
+        } else if (newOffset > paginationTableGui.getPrevOffset()) {
 
             actualPageTokenIndex++;
         }
@@ -139,13 +137,13 @@ public class InvoicesGui extends ChangeableGui {
         LocalDate date = message.getDate().toLocalDate();
 
         return new Object[]{
-            messageAttachment.getId(),
-            message.getId(),
-            message.getFrom(),
-            message.getSubject(),
-            messageAttachment.getIndex() + 1,
-            messageAttachment.getExternalId() != null ? messageAttachment.getExternalId() : NOT_GIVEN_VALUE,
-            dateTimeFormatter.format(date)
+                messageAttachment.getId(),
+                message.getId(),
+                message.getFrom(),
+                message.getSubject(),
+                messageAttachment.getIndex() + 1,
+                messageAttachment.getExternalId() != null ? messageAttachment.getExternalId() : NOT_GIVEN_VALUE,
+                dateTimeFormatter.format(date)
         };
     }
 
@@ -184,6 +182,10 @@ public class InvoicesGui extends ChangeableGui {
     }
 
     private void saveInvoices() {
+
+        if (paginationTableGui.isLoading()) {
+            return;
+        }
 
         List<MessageAttachment> selectedMessagesAttachments = getSelectedMessagesAttachments();
 

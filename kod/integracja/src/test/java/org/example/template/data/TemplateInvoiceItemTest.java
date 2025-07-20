@@ -201,10 +201,14 @@ class TemplateInvoiceItemTest {
         //given
         TemplateInvoiceItem item = TemplateInvoiceItem.builder()
             .name("name 123")
-            .code("code 123")
-            .price(new BigDecimal("26.48"))
             .quantity(12)
             .tax(new BigDecimal("23"))
+            .build();
+
+        TemplateInvoiceItem toChangeItem = TemplateInvoiceItem.builder()
+            .name(item.getName())
+            .quantity(item.getQuantity())
+            .tax(item.getTax())
             .build();
 
         TemplateInvoiceItem newData = TemplateInvoiceItem.builder()
@@ -216,14 +220,14 @@ class TemplateInvoiceItemTest {
             .build();
 
         //when
-        item.appendData(newData);
+        toChangeItem.appendData(newData);
 
         //then
-        assertEquals("name 123 4", item.getName());
-        assertEquals(newData.getCode(), item.getCode());
-        assertEquals(newData.getPrice(), item.getPrice());
-        assertEquals(newData.getQuantity(), item.getQuantity());
-        assertEquals(newData.getTax(), item.getTax());
+        assertEquals("name 123 4", toChangeItem.getName());
+        assertEquals(newData.getCode(), toChangeItem.getCode());
+        assertEquals(newData.getPrice(), toChangeItem.getPrice());
+        assertEquals(item.getQuantity(), toChangeItem.getQuantity());
+        assertEquals(item.getTax(), toChangeItem.getTax());
     }
 
     @Test

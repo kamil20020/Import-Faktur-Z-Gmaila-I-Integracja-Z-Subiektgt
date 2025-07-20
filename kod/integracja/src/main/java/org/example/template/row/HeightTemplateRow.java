@@ -86,9 +86,14 @@ public class HeightTemplateRow extends TemplateRow{
     @JsonIgnore
     public List<Map<String, String>> getValues(List<String> gotLines, List<Float> linesYCords, TriFunction<HorizontalTemplateRowField, Double, Double, String[]> extractValues){
 
+        if(gotLines == null || gotLines.isEmpty()){
+
+            return null;
+        }
+
         int lineStartIndex = getLineStartIndex(gotLines, startStr);
 
-        if(lineStartIndex >= gotLines.size() - 1){
+        if(lineStartIndex < 0 || lineStartIndex > gotLines.size() - 1){
 
             return null;
         }
@@ -122,7 +127,7 @@ public class HeightTemplateRow extends TemplateRow{
     }
 
     @JsonIgnore
-    private static int getLineStartIndex(List<String> gotLines, String searchText){
+    public static int getLineStartIndex(List<String> gotLines, String searchText){
 
         int invoiceItemsStartIndex = 0;
 
@@ -139,7 +144,7 @@ public class HeightTemplateRow extends TemplateRow{
     }
 
     @JsonIgnore
-    private Map<String, String> getValuesRow(TriFunction<HorizontalTemplateRowField, Double, Double, String[]> extractValues, double startY) {
+    public Map<String, String> getValuesRow(TriFunction<HorizontalTemplateRowField, Double, Double, String[]> extractValues, double startY) {
 
         Map<String, String> values = new HashMap<>();
 

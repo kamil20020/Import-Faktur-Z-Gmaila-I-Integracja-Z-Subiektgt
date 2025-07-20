@@ -47,6 +47,8 @@ public class PaginationTableGui extends JPanel {
     private int pageSize = 10;
     private int totalNumberOfRows = 0;
 
+    private volatile boolean isLoading = false;
+
     public PaginationTableGui(
             String[] tableHeaders,
             BiFunction<Integer, Integer, PaginationTableData> loadData,
@@ -138,6 +140,8 @@ public class PaginationTableGui extends JPanel {
 
     private void loadTable() throws IllegalAccessException {
 
+        isLoading = true;
+
         new Thread(() -> {
 
             PaginationTableData<Object> gotRawTableData = loadData.apply(offset, pageSize);
@@ -157,6 +161,8 @@ public class PaginationTableGui extends JPanel {
 
                 mainPanel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             });
+
+            isLoading = false;
 
         }).start();
     }
@@ -362,6 +368,11 @@ public class PaginationTableGui extends JPanel {
                 handleClick.accept(gotValue);
             }
         });
+    }
+
+    public boolean isLoading() {
+
+        return isLoading;
     }
 
     private void createUIComponents() {
