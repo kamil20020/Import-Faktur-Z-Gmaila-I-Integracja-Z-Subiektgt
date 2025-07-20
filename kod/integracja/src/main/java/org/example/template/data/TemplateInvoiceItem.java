@@ -22,12 +22,17 @@ public class TemplateInvoiceItem {
     private Integer quantity;
     private BigDecimal tax;
 
-    public boolean hasAllValues(){
+    public boolean hasAllValuesWithoutCode(){
 
-        return code != null && name != null && price != null && quantity != null && tax != null;
+        return name != null && price != null && quantity != null && tax != null;
     }
 
     public static TemplateInvoiceItem extract(Map<String, String> gotValues){
+
+        if(gotValues == null || gotValues.isEmpty()){
+
+            return new TemplateInvoiceItem();
+        }
 
         return TemplateInvoiceItem.builder()
             .name(extractName(gotValues))
@@ -57,12 +62,7 @@ public class TemplateInvoiceItem {
 
         if(rawCode == null){
 
-            rawCode = extractName(gotValues);
-
-            if(rawCode == null){
-
-                return null;
-            }
+            return null;
         }
 
         String code = rawCode.stripIndent();
@@ -183,6 +183,47 @@ public class TemplateInvoiceItem {
         BigDecimal denominator = BigDecimal.ONE.add(scaledTax);
 
         return price.divide(denominator, 10, RoundingMode.HALF_UP);
+    }
+
+    public void appendData(TemplateInvoiceItem newTemplateInvoiceItemData){
+
+        if(newTemplateInvoiceItemData == null){
+            return;
+        }
+
+        String newName = newTemplateInvoiceItemData.getName();
+
+        if(newName != null && !newName.isEmpty()){
+
+            String separator = name.isEmpty() ? "" : " ";
+
+            name = name + separator + newTemplateInvoiceItemData.getName();
+        }
+
+        if(code == null || code.isEmpty()){
+
+            code = newTemplateInvoiceItemData.getCode();
+
+            if(code == null){
+
+                code = "";
+            }
+        }
+
+        if(price == null){
+
+            price = newTemplateInvoiceItemData.getPrice();
+        }
+
+        if(quantity == null){
+
+            quantity = newTemplateInvoiceItemData.getQuantity();
+        }
+
+        if(tax == null){
+
+            tax = newTemplateInvoiceItemData.getTax();
+        }
     }
 
 }

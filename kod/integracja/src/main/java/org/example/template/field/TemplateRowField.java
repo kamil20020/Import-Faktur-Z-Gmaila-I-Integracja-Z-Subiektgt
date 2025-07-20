@@ -72,13 +72,13 @@ public class TemplateRowField{
 
         if(separator == null || separator.isEmpty()){
 
-            throw new IllegalArgumentException("Separator of template row field is required when index is given" + name);
+            throw new IllegalArgumentException("Separator of template row field is required when index is given " + name);
         }
 
         String[] values = value
             .split(separator);
 
-        if(index > values.length - 1){
+        if(index < 0 || index > values.length - 1){
 
             return null;
         }

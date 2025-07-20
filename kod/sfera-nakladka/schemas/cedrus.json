@@ -140,5 +140,20 @@
         "xMaxCord": 1158
       }
     ]
+  },
+  "payDate": {
+    "type": "HORIZONTAL",
+    "startStr": "Forma płatności",
+    "endStr": "W tym",
+    "skipStart": 1,
+    "rowHeight": 20,
+    "fields": [
+      {
+        "name": "value",
+        "type": "HORIZONTAL",
+        "xMinCord": 253,
+        "xMaxCord": 402
+      }
+    ]
   }
 }

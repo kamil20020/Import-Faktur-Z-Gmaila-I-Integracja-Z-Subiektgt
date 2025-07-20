@@ -123,5 +123,20 @@
         "xMaxCord": 1192
       }
     ]
+  },
+  "payDate": {
+    "type": "HORIZONTAL",
+    "startStr": "Warunki płatności",
+    "endStr": "Bank",
+    "skipStart": 1,
+    "rowHeight": 26,
+    "fields": [
+      {
+        "name": "value",
+        "type": "HORIZONTAL",
+        "xMinCord": 356,
+        "xMaxCord": 687
+      }
+    ]
   }
 }

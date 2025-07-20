@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TemplateCreatorTest {
 
     @Test
-    void shouldExtractW() {
+    void shouldExtract() {
 
         //given
         Map<String, String> templateRowFieldsValuesMappings = new HashMap<>();
@@ -121,6 +121,38 @@ class TemplateCreatorTest {
         //then
         assertNotNull(gotNip);
         assertEquals(expectedNip, gotNip);
+    }
+
+    @Test
+    void shouldExtractWithNoValues() {
+
+        //given
+        //when
+        TemplateCreator gotData = TemplateCreator.extract(null);
+
+        //then
+        assertNotNull(gotData);
+        assertNull(gotData.name());
+        assertNull(gotData.city());
+        assertNull(gotData.street());
+        assertNull(gotData.postCode());
+        assertNull(gotData.nip());
+    }
+
+    @Test
+    void shouldExtractWithEmptyValues() {
+
+        //given
+        //when
+        TemplateCreator gotData = TemplateCreator.extract(new HashMap<>());
+
+        //then
+        assertNotNull(gotData);
+        assertNull(gotData.name());
+        assertNull(gotData.city());
+        assertNull(gotData.street());
+        assertNull(gotData.postCode());
+        assertNull(gotData.nip());
     }
 
 }

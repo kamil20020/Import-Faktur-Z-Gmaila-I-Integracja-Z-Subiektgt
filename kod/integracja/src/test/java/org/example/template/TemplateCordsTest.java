@@ -19,4 +19,17 @@ class TemplateCordsTest {
         assertEquals(11.04d, gotResult);
     }
 
+    @Test
+    public void shouldConvertPtToPx(){
+
+        //given
+        double ptValue = 11.04d;
+
+        //when
+        double gotResult = TemplateCords.convertPtToPx(ptValue);
+
+        //then
+        assertEquals(23d, gotResult);
+    }
+
 }

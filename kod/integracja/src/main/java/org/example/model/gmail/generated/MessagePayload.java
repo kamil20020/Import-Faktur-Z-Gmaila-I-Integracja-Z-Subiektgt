@@ -86,7 +86,7 @@ public record MessagePayload(
         return null;
     }
 
-    public String getContent(MessageContentPart parentPart){
+    public static String getContent(MessageContentPart parentPart){
 
         if(parentPart == null) {
 
@@ -120,7 +120,12 @@ public record MessagePayload(
         return null;
     }
 
-    private String getMessageContentPartContent(MessageContentPart messageContentPart){
+    public static String getMessageContentPartContent(MessageContentPart messageContentPart){
+
+        if(messageContentPart == null){
+
+            return null;
+        }
 
         String mimeType = messageContentPart.mimeType();
 

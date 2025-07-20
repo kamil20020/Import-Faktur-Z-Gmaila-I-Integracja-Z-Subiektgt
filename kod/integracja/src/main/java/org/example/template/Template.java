@@ -33,12 +33,12 @@ public record Template(
 
     public static Optional<String> searchInContent(String content, Collection<String> values){
 
-        if(content == null || content.isEmpty()){
+        if(content == null || content.isEmpty() || values == null || values.isEmpty()){
 
             return Optional.empty();
         }
 
-        String[] lines = content.split("\\s");
+        String[] lines = content.split("\\n");
 
         if(lines.length == 0){
 
@@ -149,7 +149,7 @@ public record Template(
 
             TemplateInvoiceItem newTemplateInvoiceItemData = TemplateInvoiceItem.extract(gotValuesRow);
 
-            appendDataToTemplateInvoiceItem(templateInvoiceItem, newTemplateInvoiceItemData);
+            templateInvoiceItem.appendData(newTemplateInvoiceItemData);
         }
     }
 
@@ -163,50 +163,21 @@ public record Template(
 
             TemplateInvoiceItem newTemplateInvoiceItem = TemplateInvoiceItem.extract(gotValuesRow);
 
-            appendDataToTemplateInvoiceItem(templateInvoiceItem, newTemplateInvoiceItem);
+            templateInvoiceItem.appendData(newTemplateInvoiceItem);
 
-            if(templateInvoiceItem.hasAllValues()) {
+            if(templateInvoiceItem.hasAllValuesWithoutCode()) {
 
                 templateInvoiceItems.add(templateInvoiceItem);
 
                 templateInvoiceItem = new TemplateInvoiceItem();
+
+                if(templateInvoiceItem.getCode() == null || templateInvoiceItem.getCode().isEmpty()){
+
+                    String templateName = templateInvoiceItem.getName();
+
+                    templateInvoiceItem.setCode(templateName);
+                }
             }
-        }
-    }
-
-    private void appendDataToTemplateInvoiceItem(TemplateInvoiceItem destTemplateInvoiceItem, TemplateInvoiceItem newTemplateInvoiceItemData){
-
-        String newName = newTemplateInvoiceItemData.getName();
-
-        if(newName != null && !newName.isEmpty()){
-
-            String actualName = destTemplateInvoiceItem.getName();
-
-            String separator = actualName.isEmpty() ? "" : " ";
-
-            destTemplateInvoiceItem.setName(actualName + separator + newTemplateInvoiceItemData.getName());
-        }
-
-        String newCode = newTemplateInvoiceItemData.getCode();
-
-        if(newCode != null && !newCode.isEmpty()){
-
-            destTemplateInvoiceItem.setCode(newTemplateInvoiceItemData.getCode());
-        }
-
-        if(newTemplateInvoiceItemData.getPrice() != null){
-
-            destTemplateInvoiceItem.setPrice(newTemplateInvoiceItemData.getPrice());
-        }
-
-        if(newTemplateInvoiceItemData.getQuantity() != null){
-
-            destTemplateInvoiceItem.setQuantity(newTemplateInvoiceItemData.getQuantity());
-        }
-
-        if(newTemplateInvoiceItemData.getTax() != null){
-
-            destTemplateInvoiceItem.setTax(newTemplateInvoiceItemData.getTax());
         }
     }
 

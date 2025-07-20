@@ -145,5 +145,20 @@
         "xMaxCord": 1011
       }
     ]
+  },
+  "payDate": {
+    "type": "HORIZONTAL",
+    "startStr": "Pozostało do zapłaty",
+    "endStr": "Numer BDO",
+    "skipStart": 2,
+    "rowHeight": 20,
+    "fields": [
+      {
+        "name": "value",
+        "type": "HORIZONTAL",
+        "xMinCord": 400,
+        "xMaxCord": 509
+      }
+    ]
   }
 }

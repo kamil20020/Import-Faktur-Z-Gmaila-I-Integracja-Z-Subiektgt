@@ -30,4 +30,5 @@ public record MessageContentPart(
 
     @JsonProperty("parts")
     List<MessageContentPart> parts
+
 ){}

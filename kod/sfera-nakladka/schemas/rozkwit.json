@@ -140,5 +140,20 @@
         "xMaxCord": 1146
       }
     ]
+  },
+  "payDate": {
+    "type": "HORIZONTAL",
+    "startStr": "Numer rachunku",
+    "endStr": "Nabywca przyjmuje do wiadomości",
+    "skipStart": 1,
+    "rowHeight": 36,
+    "fields": [
+      {
+        "name": "value",
+        "type": "HORIZONTAL",
+        "xMinCord": 578,
+        "xMaxCord": 763
+      }
+    ]
   }
 }

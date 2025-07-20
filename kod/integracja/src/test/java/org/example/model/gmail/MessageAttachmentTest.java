@@ -17,7 +17,7 @@ class MessageAttachmentTest {
         "\"external-id\", external-id",
         ","
     })
-    void shouldSetExternalIdWithCites(String inputExternalId, String expectedExternalId) {
+    void shouldSetExternalId(String inputExternalId, String expectedExternalId) {
 
         //given
         MessageAttachment messageAttachment = new MessageAttachment();

@@ -22,6 +22,11 @@ public class TemplateBasicData {
 
     public static TemplateBasicData extract(Map<String, String> gotValues){
 
+        if(gotValues == null || gotValues.isEmpty()){
+
+            return new TemplateBasicData();
+        }
+
         return TemplateBasicData.builder()
             .place(extractPlace(gotValues))
             .creationDate(extractCreationDate(gotValues))

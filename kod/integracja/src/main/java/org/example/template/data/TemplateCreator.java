@@ -13,6 +13,11 @@ public record TemplateCreator(
 
     public static TemplateCreator extract(Map<String, String> fieldsValuesMappings){
 
+        if(fieldsValuesMappings == null || fieldsValuesMappings.isEmpty()){
+
+            return new TemplateCreator(null, null, null, null, null);
+        }
+
         String rawName = fieldsValuesMappings.get("name");
         String rawStreet = fieldsValuesMappings.get("street");
         String rawCity = fieldsValuesMappings.get("city");

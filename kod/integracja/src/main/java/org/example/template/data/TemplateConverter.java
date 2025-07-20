@@ -64,7 +64,7 @@ public class TemplateConverter {
             .replaceAll("%", "")
             .replaceAll("PLN", "");
 
-        int numberOfDotsOccurences = getNumberOfOccurencesInStr("\\.", value);
+        int numberOfDotsOccurences = getNumberOfOccurencesInStr(".", value);
 
         if(numberOfDotsOccurences > 1){
 
@@ -105,9 +105,36 @@ public class TemplateConverter {
 
     public static int getNumberOfOccurencesInStr(String searchStr, String value){
 
-        int valueLengthWithoutSearchStrs = value.replaceAll(searchStr, "").length();
+        if(value == null || searchStr == null || searchStr.length() > value.length()){
 
-        return value.length() - valueLengthWithoutSearchStrs;
+            return 0;
+        }
+
+        int occurs = 0;
+
+        for(int i = 0; i < value.length() - searchStr.length() + 1; i++){
+
+            int wordCharsOccurs = 0;
+
+            for(char searchC : searchStr.toCharArray()){
+
+                char valueC = value.charAt(i);
+
+                if(valueC != searchC){
+                    break;
+                }
+
+                wordCharsOccurs++;
+                i++;
+            }
+
+            if(wordCharsOccurs == searchStr.length()){
+
+                occurs++;
+            }
+        }
+
+        return occurs;
     }
 
     public static LocalDate tryToParseLocalDate(String input){

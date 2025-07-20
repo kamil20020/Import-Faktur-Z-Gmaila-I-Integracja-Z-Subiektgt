@@ -95,4 +95,62 @@ class TemplateConverterTest {
         assertEquals(2024, gotDate.getYear());
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {
+        "2.2, ., 1",
+        ".2.2.3., ., 4",
+        "., ., 1",
+        "22, ., 0",
+        ", , 0",
+        "2, , 0",
+        ", ., 0",
+        "2.2, ',', 0"
+    })
+    public void shouldGetNumberOfOccurencesInStr(String value, String searchStr, int expectedNumberOfOccurs){
+
+        //given
+        //when
+        int gotResult = TemplateConverter.getNumberOfOccurencesInStr(searchStr, value);
+
+        //then
+        assertEquals(expectedNumberOfOccurs, gotResult);
+    }
+
+    @Test
+    public void shouldClearValue(){
+
+        //given
+        String value = "   aa  b c ";
+        String expectedValue = "aa  b c";
+
+        //when
+        String gotValue = TemplateConverter.clearValue(value);
+
+        //then
+        assertNotNull(gotValue);
+        assertEquals(expectedValue, gotValue);
+    }
+
+    @Test
+    public void shouldClearValueForNoValue(){
+
+        //given
+        //when
+        String gotValue = TemplateConverter.clearValue(null);
+
+        //then
+        assertNull(gotValue);
+    }
+
+    @Test
+    public void shouldClearValueForEmptyValue(){
+
+        //given
+        //when
+        String gotValue = TemplateConverter.clearValue("");
+
+        //then
+        assertNull(gotValue);
+    }
+
 }
