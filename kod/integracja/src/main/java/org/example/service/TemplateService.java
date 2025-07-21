@@ -52,7 +52,8 @@ public class TemplateService {
         for(File schemaFile : schemaFiles){
 
             String schemaFileName = schemaFile.getName()
-                .replaceAll("\\.json", "");
+                .replaceAll("\\.json", "")
+                .toLowerCase();
 
             Template template = loadTemplateSchema(schemaFile);
 
@@ -134,6 +135,15 @@ public class TemplateService {
 
     public void addTemplate(String templateName, Template template) throws ConflictException, IllegalStateException{
 
+        if(templateName == null){
+
+            templateName = "szablon";
+        }
+        else{
+
+            templateName = templateName.toLowerCase();
+        }
+
         addTemplateFile(templateName, template);
 
         companyTemplateMappings.put(templateName, template);
@@ -171,6 +181,13 @@ public class TemplateService {
     }
 
     public boolean remove(String templateName){
+
+        if(templateName == null){
+
+            return false;
+        }
+
+        templateName = templateName.toLowerCase();
 
         Template removedTemplate = companyTemplateMappings.remove(templateName);
 

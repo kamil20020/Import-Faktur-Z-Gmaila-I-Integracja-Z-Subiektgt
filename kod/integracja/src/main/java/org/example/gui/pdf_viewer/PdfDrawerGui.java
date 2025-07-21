@@ -101,12 +101,18 @@ public class PdfDrawerGui extends JPanel implements MouseListener, MouseMotionLi
 
     private void handleShowSelectedArea(){
 
-        String leftTopCords = "A = (" + rectLeftTopX + ", " + rectLeftTopY + ")";
-        String rightDownCords = "B = (" + rectRightDownX + ", " + rectRightDownY + ")";
+        int width = rectRightDownX - rectLeftTopX;
+        int height = rectRightDownY - rectLeftTopY;
+
+        String widthStr = "Szerokość = " + width;
+        String heightStr = "\nWysokość = " + height;
+
+        String leftTopCords = "\nDolny lewy róg = (" + rectLeftTopX + ", " + rectLeftTopY + ")";
+        String rightDownCords = "\nGórny prawy róg = (" + rectRightDownX + ", " + rectRightDownY + ")";
 
         JOptionPane.showMessageDialog(
             null,
-            leftTopCords + ", " + rightDownCords,
+            widthStr + heightStr + leftTopCords + rightDownCords,
             "Powiadomienie",
             JOptionPane.INFORMATION_MESSAGE
         );
