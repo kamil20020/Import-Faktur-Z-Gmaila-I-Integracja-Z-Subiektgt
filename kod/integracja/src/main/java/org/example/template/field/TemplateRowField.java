@@ -95,4 +95,9 @@ public class TemplateRowField{
         throw new IllegalStateException("Standard template row field doesnt support cords");
     }
 
+    public boolean isValid(){
+
+        return defaultValue != null && !defaultValue.isEmpty();
+    }
+
 }

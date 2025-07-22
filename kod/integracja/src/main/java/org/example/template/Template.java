@@ -107,7 +107,14 @@ public record Template(
     private boolean doesInvoiceItemsHaveIndices(){
 
         return invoiceItems.getFields().stream()
-            .anyMatch(field -> Objects.equals(field.getName(), "index"));
+            .anyMatch(field -> {
+
+                String fieldName = field.getName();
+
+                boolean areNamesEqual = Objects.equals(fieldName, "index");
+
+                return areNamesEqual && field.isValid();
+            });
     }
 
     private void extractTemplateInvoiceItemsWithIndices(byte[] data, int pageIndex, List<TemplateInvoiceItem> templateInvoiceItems) {

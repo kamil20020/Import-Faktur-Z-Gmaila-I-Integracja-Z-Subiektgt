@@ -88,6 +88,12 @@ public class AreaTemplateRowField extends TemplateRowField{
         yMaxCord = rect.y + rect.height;
     }
 
+    public boolean isValid(){
+
+        return xMinCord >= 0 && xMaxCord >= 0 && yMinCord >= 0 && yMinCord != 0 &&
+            xMinCord != xMaxCord && yMinCord != yMaxCord;
+    }
+
     @Override
     public String toString() {
 

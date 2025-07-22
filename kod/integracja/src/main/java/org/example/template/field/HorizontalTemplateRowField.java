@@ -71,6 +71,12 @@ public class HorizontalTemplateRowField extends TemplateRowField{
         xMaxCord = rect.x + rect.width;
     }
 
+    public boolean isValid(){
+
+        return xMinCord >= 0 && xMaxCord >= 0 &&
+            xMinCord != xMaxCord;
+    }
+
     @Override
     public String toString() {
 
