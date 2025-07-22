@@ -31,7 +31,7 @@ public class SchemaBasicInfoGui extends ConcreteSchemaGui {
             new SchemaField("place", "Miejsce wystawienia", TemplateRowFieldType.AREA),
             new SchemaField("receiveDate", "Data zakończenia dostawy", TemplateRowFieldType.AREA),
             new SchemaField("creationDate", "Data wystawienia", TemplateRowFieldType.AREA),
-            new SchemaField("title", "Tytuł", TemplateRowFieldType.AREA)
+            new SchemaField("title", "Numer faktury", TemplateRowFieldType.AREA)
         );
 
         schemaFieldsGui = new SchemaFieldsGui("Podstawowe informacje", schemaFields, onSelect);

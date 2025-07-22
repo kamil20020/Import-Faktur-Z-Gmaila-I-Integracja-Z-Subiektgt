@@ -28,7 +28,7 @@ public class SchemaFinalPriceGui extends ConcreteSchemaGui {
         // TODO: place custom component creation code here
 
         List<SchemaField> schemaFields = List.of(
-            new SchemaField("value", "Kwota", TemplateRowFieldType.HORIZONTAL)
+            new SchemaField("value", "Kwota netto", TemplateRowFieldType.HORIZONTAL)
         );
 
         schemaFieldsGui = new SchemaHeightFieldsGui("Cena końcowa", schemaFields, onSelect);

@@ -28,14 +28,14 @@ public class SchemaCreatorGui extends ConcreteSchemaGui {
         // TODO: place custom component creation code here
 
         List<SchemaField> schemaFields = List.of(
-                new SchemaField("name", "Nazwa", TemplateRowFieldType.AREA),
+                new SchemaField("name", "Nazwa firmy", TemplateRowFieldType.AREA),
                 new SchemaField("street", "Ulica", TemplateRowFieldType.AREA),
                 new SchemaField("post-code", "Kod pocztowy", TemplateRowFieldType.AREA),
                 new SchemaField("city", "Miasto", TemplateRowFieldType.AREA),
                 new SchemaField("nip", "Nip", TemplateRowFieldType.AREA)
         );
 
-        schemaFieldsGui = new SchemaFieldsGui("Dane nadawcy", schemaFields, onSelect);
+        schemaFieldsGui = new SchemaFieldsGui("Dane sprzedawcy", schemaFields, onSelect);
 
         mainPanel = schemaFieldsGui.getMainPanel();
     }

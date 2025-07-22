@@ -30,8 +30,8 @@ public class SchemaProductsGui extends ConcreteSchemaGui {
 
         List<SchemaField> schemaFields = List.of(
 //            new SchemaField("Wysokość", TemplateRowFieldType.HORIZONTAL),
-            new SchemaField("index", "Indeks", TemplateRowFieldType.HORIZONTAL),
-            new SchemaField("code", "Symbol", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("index", "Numer (1,2,3 itp.)", TemplateRowFieldType.HORIZONTAL),
+            new SchemaField("code", "Kod producenta", TemplateRowFieldType.HORIZONTAL),
             new SchemaField("name", "Nazwa", TemplateRowFieldType.HORIZONTAL),
             new SchemaField("price", "Cena netto", TemplateRowFieldType.HORIZONTAL),
             new SchemaField("quantity", "Ilość", TemplateRowFieldType.HORIZONTAL),
