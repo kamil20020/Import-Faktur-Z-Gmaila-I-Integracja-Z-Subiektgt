@@ -48,3 +48,145 @@ Aby móc korzystać z aplikacji, konieczne jest dodanie użytkownika do listy u�
     - Php (nakładka na sferę).
 * Apache PDFBox,
 * Git.
+
+## Przed uruchomieniem aplikacji
+
+### Wymagane narzędzia
+
+#### Java
+
+Do uruchomienia aplikacji potrzebne będzie zainstalowanie środowiska uruchomieniowego Javy (JRE) w wersji 17 albo późniejszej, gdyż moja aplikacja została napisana w Javie.
+
+#### Sfera
+
+Jak już wcześniej wspomniałem, aplikacja ta wykorzystuje Sferę, dlatego aby móc użytkować aplikację, niezbędne jest aktywowanie wtyczki Sfera w SubiektGT. Jest to wymagane mimo, iż aplikacja korzysta ze Sfery poprzez nakładkę.
+
+### Instalacja
+
+Dla aplikacji stworzyłem instalator `Integracja-Gmail-SubiektGt-Sfera.exe`, dzięki któremu można w prosty sposób zainstalować wszystkie wymagane składniki do działania aplikacji.
+
+Na początku potrzebne jest podanie lokalizacji instalacji:
+<p align="center">
+    <img src="screenshoty/instalator.png">
+<p>
+
+Następnie można zmienić domyślną nazwę foldera z aplikacją w menu start:
+<p align="center">
+    <img src="screenshoty/instalator-1.png">
+<p>
+
+Poźniej można potwierdzić ustawienia i kliknąć instaluj:
+<p align="center">
+    <img src="screenshoty/instalator-2.png">
+<p>
+
+Po pomyślnym zainstalowaniu aplikacji powinno pojawić się takie okno:
+<p align="center">
+    <img src="screenshoty/instalator-3.png">
+<p>
+
+Dodatkowo powinien być utworzony na pulpicie plik uruchomieniowy aplikacji `Uruchom Integracja Gmail i Subiekt GT ze Sferą`. Za pomocą tego pliku możliwe jest proste uruchomienie aplikacji.
+
+Aplikację też można odinstalować poprzez uruchomienie pliku `unins000.exe` w folderze, w którym została zainstalowana aplikacja. Ewentualnie program raczej będzie mógł być usunięty z poziomu listy programów do usunięcia.
+
+## Po uruchomieniu aplikacji
+
+Po pierwszym uruchomieniu aplikacji powinno pojawić się następujące okno:
+<p align="center">
+    <img src="screenshoty/logowanie.png">
+<p>
+
+Aby aplikacja działała poprawnie, należy skonfigurować nakładkę na Sferę.
+
+### Konfiguracja nakładki na Sferę
+
+Należy m.in. podać nazwę bazy danych wykorzystywanej przez SubiektGT oraz nazwę użytkownika w SubiektGT.
+
+#### Metoda 1
+
+Nakładkę na Sferę można skonfigurować poprzez plik `htdocs/config/api-subiekt-gt.ini` znajdujący się w ścieżce zainstalowanego programu.
+Wygląda on mniej więcej tak.
+```
+server = "adres serwera bazy danych Subiekta"
+
+dbuser = "login do bazy danych"
+
+dbpassword = "haslo do bazy danych"
+
+database = "nazwa bazy danych"
+
+id_person = "Imię i nazwisko osoby na fakturze"
+
+operator = "Użytkownik Subiekta np. Szef"
+
+operator_password = "Hasło użytkownika Subiekta"
+
+```
+
+Podano parametry, które prawdopodobnie trzeba będzie skonfigurować.
+
+#### Metoda 2
+
+Drugim sposobem jest skorzystanie ze strony dostarczanej przez autora nakładki na Sferę `http://localhost/public/setup/`.
+<p align="center">
+    <img src="screenshoty/sfera.png">
+<p>
+
+Wystarczy uzupełnienie tych parametrów, które podano w metodzie 1.
+
+Po skonfigurowaniu parametrów należy kliknąć przycisk Zapisz konfigurację i dzięki temu zostanie uzupełniony plik z metody 1.
+
+Po tym kroku można już przejść do aplikacji integracja.
+
+Następnym krokiem jest połączenie aplikacji z Allegro.
+
+### Połącznie aplikacji z Gmail
+
+Kolejnym krokiem jest zalogowanie się na konto Gmail, aby aplikacja mogła pobierać wiadomości z tego konta.
+
+Po naciśnięciu logowanie do aplikacji powinno nastąpić przekierowanie do przeglądarki z wyborem konta Gmail albo zalogowanie się na jakieś konto:
+<p align="center">
+    <img src="screenshoty/logowanie-1.png">
+<p>
+
+Po wyborze konta albo zalogowaniu się na jakieś konto powinno się pojawić następujące okno:
+<p align="center">
+    <img src="screenshoty/logowanie-2.png">
+<p>
+
+Zgadza się, aplikacja nie została jeszcze zweryfikowana :D. Jeśli moja aplikacja nie wygląda na oszusto, to
+polecam przejść dalej.
+
+Powinno się pojawić okno, w którym przedstawione są uprawnienia jakie uzyska moja aplikacja do wybranego konta Gmail.
+<p align="center">
+    <img src="screenshoty/logowanie-3.png">
+<p>
+
+Jeśli moja aplikacja budzi zaufanie, to ostatnim krokiem jest zatwierdzenie dostępu aplikacji do wybranego konta Gmail.
+
+Po pomyślnym zalogowaniu powinna się pojawić strona z następującym napisem:
+<p align="center">
+    <img src="screenshoty/logowanie-4.png">
+<p>
+
+Teraz polecam przejście do aplikacji integracja.
+
+Po tych krokach powinno się pojawić już okno z wiadomościami z konta Gmail:
+<p align="center">
+    <img src="screenshoty/logowanie-5.png">
+<p>
+
+Aplikacja po tych krokach jest już w pełni funkcjonalna.
+
+## Po zalogowaniu i skonfigurowaniu aplikacji
+
+### Wylogowanie
+
+Po zalogowaniu się na niewłaściwe konto można skorzystać z opcji wylogowania się poprzez wejście w menu Konto:
+<p align="center">
+    <img src="screenshoty/wylogowanie.png">
+<p>
+
+Po tym kroku będzie można ponownie połączyć aplikację, lecz tym razem np. z innym kontem Gmail.
+
+### Szablony
