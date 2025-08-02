@@ -47,6 +47,8 @@ Aby móc korzystać z aplikacji, konieczne jest dodanie użytkownika do listy u�
     - COM,
     - Php (nakładka na sferę).
 * Apache PDFBox,
+* JUnit,
+* Mockito,
 * Git.
 
 ## Przed uruchomieniem aplikacji
@@ -154,7 +156,7 @@ Po wyborze konta albo zalogowaniu się na jakieś konto powinno się pojawić na
     <img src="screenshoty/logowanie-2.png">
 <p>
 
-Zgadza się, aplikacja nie została jeszcze zweryfikowana :D. Jeśli moja aplikacja nie wygląda na oszusto, to
+Zgadza się, aplikacja nie została jeszcze zweryfikowana :D. Jeśli moja aplikacja nie wygląda na oszustwo, to
 polecam przejść dalej.
 
 Powinno się pojawić okno, w którym przedstawione są uprawnienia jakie uzyska moja aplikacja do wybranego konta Gmail.
