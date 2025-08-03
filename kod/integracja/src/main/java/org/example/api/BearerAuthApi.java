@@ -81,7 +81,9 @@ public abstract class BearerAuthApi extends Api{
 
         HttpResponse<String> gotResponse = super.send(httpRequestBuilder);
 
-        if (gotResponse.statusCode() == 401) {
+		int responseStatusCode = gotResponse.statusCode();
+
+        if (responseStatusCode == 401 || responseStatusCode == 400) {
 
             log.info("401 - Expired access token");
 

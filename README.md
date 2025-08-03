@@ -192,3 +192,91 @@ Po zalogowaniu się na niewłaściwe konto można skorzystać z opcji wylogowani
 Po tym kroku będzie można ponownie połączyć aplikację, lecz tym razem np. z innym kontem Gmail.
 
 ### Szablony
+
+#### Wstęp
+
+Aplikacja integracja odczytuje dane z faktur zapisanych w formie plików pdf z Gmaila poprzez zastosowanie szablonów faktur. Założono, że dla każdej firmy sprzedającego jest osobny szablon, gdyż zazwyczaj firmy mają różne formaty faktur. Mając szablon dla danej firmy i fakturę wystawioną przez tę firmę, to możliwe będzie odczytanie danych z takiej faktury. Zatem, aby poprawnie odczytać dane z faktury i następnie utworzyć fakturę zakupu w SubiektGT, dla faktury tej powinien istnieć w aplikacji integracja szablon faktury, który jest zgodny z tą fakturą.
+
+Szablony zapisywane są jako pliki typu .json. Szablon zawiera przede wszystkim informacje o tym, w którym miejsu na fakturze pdf znajdują się kolejne dane, które mają być odczytane. Przykładami takich danych są miejce wystawienia faktury, czy końcowa cena. Dodatkowo szablony mają nazwy, które są istotne w przypadku wybierania odpowiedniego szablonu do otrzymanego pliku pdf zawierającego fakturę. Nazwa szablonu jest sprawdzana w dwóch miejscach:
+1. Wiadomość e-mail:
+    1. Tytuł,
+    2. Adres e-mail osoby wysyłającej fakturę,
+    3. Zawartość.
+2. Tekst faktury w pliku pdf.
+
+Na początku sprawdzana jest wiadomość e-mail, a później tekst faktury w pliku pdf. Podobnie jest w przypadku tytułu wiadomości e-mail itp. Gdy udało się dopasować szablon faktury do wybranej faktury w formie pliku pdf, to będzie można dodać w Subiekcie odpowiednią fakturę zakupu.
+
+#### Lista szablonów
+
+W aplikacji integracja utworzone szablony można przeglądać w oknie "Dostępne schematy faktur" dostępnym w górnym menu pod tytułem "Szablony faktur":
+<p align="center">
+    <img src="screenshoty/szablony.png">
+<p>
+
+Powinna się pojawić lista z szablonami faktur:
+<p align="center">
+    <img src="screenshoty/szablony-1.png">
+<p>
+
+Z poziomu tego okna można dodatkowo usunąć niektóre szablony.
+
+#### Dodawanie szablonu
+
+Dodawanie szablonu polega na wyborze przykładowej faktury zapisanej w pliku pdf i następnie zaznaczeniu, w których miejscach w pliku pdf znajdują się niektóre dane np. data wystawienia faktury, czy cena końcowa.
+
+Dodawanie szablonu jest możliwe poprzez wejście w opcję "Dodaj szablon faktury" dostępną w górnym menu pod tytułem "Szablony faktur":
+<p align="center">
+    <img src="screenshoty/szablony.png">
+<p>
+
+Po wybraniu tej opcji powinno się pojawić okno wyboru przykładowej faktury zapisanej w pliku pdf:
+<p align="center">
+    <img src="screenshoty/szablon.png">
+<p>
+
+Po wybraniu pliku pdf z fakturą, faktura ta powinna zostać wczytana w aplikacji:
+<p align="center">
+    <img src="screenshoty/szablon-1.png">
+<p>
+
+Po tych krokach możliwe już będzie skonfigurowanie szablonu faktury i późniejsze zapisanie go w aplikacji.
+
+Na początku należy wybrać nazwę szablonu faktury. Dobranie tej nazwy jest ważne, aby sprawnie udało się dobrać szablon faktury do otrzymanej faktury zapisanej w pliku pdf.
+
+Następnie proponuję uzupełnienie pozostałych pól. W większości przypadków ich uzupełnienie będzie polegało na kliknięciu przycisku "Wybieranie obszaru" przy polu, które ma być ustawione oraz następnie zaznaczenie na pliku pdf z fakturą odpowiedniego miejscaŁ
+<p align="center">
+    <img src="screenshoty/szablon-2.png">
+<p>
+
+Do tego celu należy kliknąć w wybranym miejscu na fakturze w pdf lewy przycisk myszy. Wtencyas pojawi się czerwony prostokąt, który będzie się zwiększał z każdym ruchem myszki. Zapisanie obszaru można zapewnić poprzez drugie kliknięcie lewego przycisku myszy:
+
+
+Dodatkowo po wyborze obszaru powinno się pojawić okno z wybranymi współrzędnymi, szerokością i wysokością tego obszaru.
+
+Pola do uzupełnienia są pogrupowane:
+* Podstawowe informacje np. data wystawienia faktury,
+* Dane osoby wystawiającej fakturę np. nazwa firmy,
+* Dane o produktach np. ich ceny,
+* Cena końcowa w netto,
+* Termin płatności.
+
+Są dwa rodzaje grup pól:
+* Zawierające znane położenie w pionie i poziomie np. podstawowe informacje,
+* Zawierające znane położenie jedynie w poziomie np. cena końcowa.
+
+W pierwszym przypadku wystarczy wybór odpowiednich obszarów:
+<p align="center">
+    <img src="screenshoty/szablon-3.png">  
+<p>
+
+Niestety w drugim przypadku jest trochę ciężej:
+<p align="center">
+    <img src="screenshoty/szablon-4.png">
+<p>
+
+Założono, że pozycja pionowa może się różnić, np. dla większej liczby produktów cena końcowa może być trochę niżej. Dodatkowo dla tegp typu grupy wszystkie parametry znajdują się na tej samej wysokości. Jednak może istnieć wiele zestawów parametrów np. wiele produktów. W tym przypadku opróć wybrania obszarów dla kolejnych pól należy jeszcze uzupełnić inne pola. Przede wszystkim należy podać początek linii, który będzie brany pod uwagę jako punkt odniesienia dla pól z grupy, od którego miejsca zaczynają się szukane pola. Początkowa linia może się znajdować w tej samej linii co szukane pole albo wyżej. Liczbę linii wyżej niż szukane pole można ustawić poprzez parametr "Liczba linii do pominięcia". Brane są pod uwagę jedynie linie, które nie są puste. Kolejnym parametrem jest początek linii, na której kończy się ustawiane pole. Ostatnim parametrem jest wysokość linii dla poszukiwanego pola. Pole to proponuję ustawić poprzez naciśnięcie przycisku "Czyszczenie zaznaczenia", aby nie nadpisać poprzednio wybranych pól, następnie wybrać obszar na pdfe i odczytać otrzymaną wysokość oraz uzupełnić parametr wysokość linii.
+
+Pola mogą b
+
+
+
