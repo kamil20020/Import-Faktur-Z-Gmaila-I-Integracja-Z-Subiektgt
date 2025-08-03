@@ -308,3 +308,29 @@ Powinno pojawić się okno z wczytami albo i nie danymi:
 Jeśli wszystkie dane udało się wczytać, to wystarczy już zapisanie szablonu poprzez kliknięcie w przycisk "Zapisz szablon". Szablon zostanie zapisany z nazwą, która została podana. Od tej pory szablon będzie również obecny w liście szablonów.
 
 ### Faktury
+
+Do widoku z fakturami z Gmail możliwe jest przede wszystkim przejście poprzez opcję "Lista faktur" w menu "Faktury":
+<p align="center">
+    <img src="screenshoty/faktury.png">
+<p>
+
+Ewentualnie po uruchomieniu aplikacji integracja odrazu będzie widoczny widok z fakturami.
+
+Przykładowy widok faktur:
+<p align="center">
+    <img src="screenshoty/faktury-1.png">
+<p>
+
+Strony z fakturami można zmieniać poprzez strzałki przy numerze strony. Dodatkowo możliwe jest zmienienie liczby pobieranych wiadomości dla jednej strony.
+
+Wyszukiwane są na początku wiadomości e-mail z Gmaila, które zawierają szukany tekst np. domyślnie jest to tekst Faktura. Sprawdzane jest, czy tekst ten jest zawarty w tytule, zawartości wiadomości, czy w załączniku. Dodatkowo pobierane są te wiadomości, które zawierają załączniki pdf oraz ich autorem jest ktoś inny, niż wykorzystane konto Gmail do zalogowania się do aplikacji integracja.
+
+Jednak problem pojawia się w przypadku istnienia wielu załączników zawierających pliki pdf w danej wiadomości Gmail. Z tego powodu w aplikacji integracja osobną pozycją w tabeli jest załącznik, a nie wiadomość. Załącznik jest identyfikowany numerem załącznika w danej wiadomości e-mail.
+
+Innym ważnym parametrem w wierszu tabeli jest Subiekt Id załącznika. Pole to wskazuje na Symbol faktury zakupu zapisanej w subiekcie. Jeśli w Subiekcie nie istnieje jeszcze faktura zakupu dla danego załącznika, to wtenczas pole to będzie miało wartość brak. Warto dodać, że w rzeczywistości wartość brak będzie również wtedy, gdy faktura zakupu została dodana nie przez aplikację integracja. Aplikacja integracja ma informacje o tym, czy dla danego załącznika utworzono fakturę zakupu poprzez polę Uwagi w danej fakturze zakupu w SubiektGT. Pole to jest ustawiane jako "identyfikator załącznika,numer załącznika". Warto dodać, że numer załącznika jest liczony od 0, a nie od 1.
+
+Innymi danymi obecnymi w wierszach tabeli są nadawca wiadomości, temat wiadomości oraz data wysłania wiadomości.
+
+Aby zapisać dane faktury zakupu w Subiekcie, należy na początku zaznaczyć wybrane załączniki w tabeli poprzez zaznaczenie myszką odpowiednich pozycji. Do zaznaczenia kilku opcji można też użyć wybierania pozycji wraz z trzymaniem klawisza Ctrl. Można również zaznaczyć wszystkie pozycje na liście poprzez kliknięcie w przycisk "Zaznacz wszystkie dane". Ewentualnie można tez dane odznaczyć poprzez przycisk "Odznacz wszystkie dane".
+
+Po zaznaczeniu wybranych załączników, które mają być zapisane jako faktury zakupu w SubiektGT, wystarczy już kliknąć przycisk "Zapisz faktury zakupu w Subiekcie". W przypadku udanej operacji powinien pojawić się komunikat potwierdzający utworzenie faktur zakupu oraz dodatkowo będzie podana liczba dodanych faktur zakupu. Z kolei jeśli nie udało się dodać pewnych faktur, wtenczas zostanie wyświetlony komunikat o błędzie, dla których załączników operacja się nie udała.
