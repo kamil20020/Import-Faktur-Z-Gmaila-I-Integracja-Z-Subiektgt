@@ -243,13 +243,12 @@ Po tych krokach możliwe już będzie skonfigurowanie szablonu faktury i późni
 
 Na początku należy wybrać nazwę szablonu faktury. Dobranie tej nazwy jest ważne, aby sprawnie udało się dobrać szablon faktury do otrzymanej faktury zapisanej w pliku pdf.
 
-Następnie proponuję uzupełnienie pozostałych pól. W większości przypadków ich uzupełnienie będzie polegało na kliknięciu przycisku "Wybieranie obszaru" przy polu, które ma być ustawione oraz następnie zaznaczenie na pliku pdf z fakturą odpowiedniego miejscaŁ
+Następnie proponuję uzupełnienie pozostałych pól. W większości przypadków ich uzupełnienie będzie polegało na kliknięciu przycisku "Wybieranie obszaru" przy polu, które ma być ustawione oraz następnie zaznaczenie na pliku pdf z fakturą odpowiedniego miejsca:
 <p align="center">
     <img src="screenshoty/szablon-2.png">
 <p>
 
 Do tego celu należy kliknąć w wybranym miejscu na fakturze w pdf lewy przycisk myszy. Wtencyas pojawi się czerwony prostokąt, który będzie się zwiększał z każdym ruchem myszki. Zapisanie obszaru można zapewnić poprzez drugie kliknięcie lewego przycisku myszy:
-
 
 Dodatkowo po wyborze obszaru powinno się pojawić okno z wybranymi współrzędnymi, szerokością i wysokością tego obszaru.
 
@@ -276,7 +275,36 @@ Niestety w drugim przypadku jest trochę ciężej:
 
 Założono, że pozycja pionowa może się różnić, np. dla większej liczby produktów cena końcowa może być trochę niżej. Dodatkowo dla tegp typu grupy wszystkie parametry znajdują się na tej samej wysokości. Jednak może istnieć wiele zestawów parametrów np. wiele produktów. W tym przypadku opróć wybrania obszarów dla kolejnych pól należy jeszcze uzupełnić inne pola. Przede wszystkim należy podać początek linii, który będzie brany pod uwagę jako punkt odniesienia dla pól z grupy, od którego miejsca zaczynają się szukane pola. Początkowa linia może się znajdować w tej samej linii co szukane pole albo wyżej. Liczbę linii wyżej niż szukane pole można ustawić poprzez parametr "Liczba linii do pominięcia". Brane są pod uwagę jedynie linie, które nie są puste. Kolejnym parametrem jest początek linii, na której kończy się ustawiane pole. Ostatnim parametrem jest wysokość linii dla poszukiwanego pola. Pole to proponuję ustawić poprzez naciśnięcie przycisku "Czyszczenie zaznaczenia", aby nie nadpisać poprzednio wybranych pól, następnie wybrać obszar na pdfe i odczytać otrzymaną wysokość oraz uzupełnić parametr wysokość linii.
 
-Pola mogą b
+Wypełniane pola mogą mieć również kilka typów:
+1. Zawierające położenie w pionie i poziomie np. miejsce wystawienia faktury,
+2. Zawierające położenie w poziomie np. kwota końcowa,
+3. Wartości, których nie ma w pliku pdf oraz te, które nie są w fakturze tekstem, lecz np. obrazkiem,
+4. Wartości wymagające odzielenia.
 
+Pierwsze i drugie typy pól są ustalane według ich grupy. Trzeci typ jest możliwy do uzyskania poprzez zaznaczenie opcji "Pole jest ukryte":
+<p align="center">
+    <img src="screenshoty/szablon-5.png">
+<p>
 
+W tym przypadku wystarczy uzupełnienie domyślnej wartości.
 
+Ostatni typ przyade się, gdy np. w jednej kolumnie znajdują się wartości z osobnych pól, które są oddzielone jakimś znakiem. Aby ustawić takie pole wystarczy zaznaczenie opcji "Pole wymaga oddzielenia":
+<p align="center">
+    <img src="screenshoty/szablon-6.png">
+<p>
+
+Przykładem są miejsce wystawienia faktury oraz data zakończenia dostawy oddzielone znakiem "-".
+
+Po uzupełnieniu wszystkich pól albo na bieżąco można sprawdzić, jakie dane są poprawnie odczytywane z faktury. Do tegp celu można posłużyć się przyciskiem "Przetestuj szablon":
+<p align="center">
+    <img src="screenshoty/szablon-7.png">
+<p>
+
+Powinno pojawić się okno z wczytami albo i nie danymi:
+<p align="center">
+    <img src="screenshoty/szablon-8.png">
+<p>
+
+Jeśli wszystkie dane udało się wczytać, to wystarczy już zapisanie szablonu poprzez kliknięcie w przycisk "Zapisz szablon". Szablon zostanie zapisany z nazwą, która została podana. Od tej pory szablon będzie również obecny w liście szablonów.
+
+### Faktury
