@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-public class SchemaFieldsGui extends SchemaFieldsGuiAbstract {
+public class SchemaFieldsGui extends SchemaFieldsGuiAbstract<TemplateRow> {
 
     private JPanel mainPanel;
     private JLabel titleLabel;

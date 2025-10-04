@@ -89,10 +89,25 @@ public class TemplateRowField{
         return gotValue;
     }
 
+    public boolean hasCords(){
+
+        return false;
+    }
+
+    public String getCordsMessage(){
+
+        return "Brak współrzędnych";
+    }
+
     @JsonIgnore
     public void handleRect(Rectangle2D.Float rect) throws IllegalStateException{
 
         throw new IllegalStateException("Standard template row field doesnt support cords");
+    }
+
+    public Rectangle2D.Double getRect(){
+
+        return null;
     }
 
     public boolean isValid(){

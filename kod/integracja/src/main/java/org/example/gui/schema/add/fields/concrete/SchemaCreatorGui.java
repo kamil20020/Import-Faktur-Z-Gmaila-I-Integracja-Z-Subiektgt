@@ -4,12 +4,13 @@ import org.example.gui.schema.add.field.SchemaField;
 import org.example.gui.schema.add.field.SchemaFieldGui;
 import org.example.gui.schema.add.fields.SchemaFieldsGui;
 import org.example.template.field.TemplateRowFieldType;
+import org.example.template.row.TemplateRow;
 
 import javax.swing.*;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class SchemaCreatorGui extends ConcreteSchemaGui {
+public class SchemaCreatorGui extends ConcreteSchemaGui<TemplateRow> {
 
     private JPanel mainPanel;
 

@@ -12,11 +12,12 @@ import java.io.File;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-public class PdfViewerGui extends ChangeableGui implements KeyListener {
+public class PdfViewerGui extends ChangeableGui {
 
     private JPanel mainPanel;
     private JLabel pdfFileContent;
     private JPanel drawPanel;
+    private JButton button1;
 
     private final JLayeredPane layeredPane;
 
@@ -38,16 +39,16 @@ public class PdfViewerGui extends ChangeableGui implements KeyListener {
         layeredPane = new JLayeredPane();
         layeredPane.setLayout(null);
 
+        layeredPane.add(button1, JLayeredPane.DEFAULT_LAYER);
         layeredPane.add(pdfFileContent, JLayeredPane.DEFAULT_LAYER);
         layeredPane.add(drawPanel, JLayeredPane.PALETTE_LAYER); // wyższa warstwa
 
         JScrollPane scrollPane = new JScrollPane(layeredPane);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(32);
 
         mainPanel.removeAll();
         mainPanel.setLayout(new GridBagLayout());
         mainPanel.add(scrollPane, mainPanelLayoutConstrains);
-        mainPanel.setFocusable(true);
-        mainPanel.addKeyListener(this);
     }
 
     public PdfViewerGui() {
@@ -113,42 +114,31 @@ public class PdfViewerGui extends ChangeableGui implements KeyListener {
         mainPanelLayoutConstrains.weighty = 1;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
+    public void changeToPrevPage() {
 
         if (!didLoadedPdfFile()) {
             return;
         }
 
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        if (page > 0) {
 
-            if (page < numberOfPages - 1) {
-
-                loadPage(page + 1);
-            }
-
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-
-            if (page > 0) {
-
-                loadPage(page - 1);
-            }
+            loadPage(page - 1);
         }
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
+    public void changeToNextPage() {
 
+        if (!didLoadedPdfFile()) {
+            return;
+        }
 
+        if (page < numberOfPages - 1) {
+
+            loadPage(page + 1);
+        }
     }
 
-    private boolean didLoadedPdfFile() {
+    public boolean didLoadedPdfFile() {
 
         return loadedPdfFile != null;
     }
@@ -215,11 +205,19 @@ public class PdfViewerGui extends ChangeableGui implements KeyListener {
         drawPanel.setVisible(true);
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
         gbc.weightx = 10.0;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         mainPanel.add(drawPanel, gbc);
+        button1 = new JButton();
+        button1.setText("Button");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        mainPanel.add(button1, gbc);
     }
 
     /**

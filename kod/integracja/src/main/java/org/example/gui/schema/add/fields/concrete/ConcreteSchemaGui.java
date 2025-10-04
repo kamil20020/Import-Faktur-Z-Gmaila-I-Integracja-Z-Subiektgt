@@ -7,9 +7,9 @@ import org.example.template.row.TemplateRow;
 
 import java.util.function.Consumer;
 
-public abstract class ConcreteSchemaGui extends ChangeableGui {
+public abstract class ConcreteSchemaGui<T extends TemplateRow> extends ChangeableGui {
 
-    protected SchemaFieldsGuiAbstract schemaFieldsGui;
+    protected SchemaFieldsGuiAbstract<T> schemaFieldsGui;
     protected final Consumer<SchemaFieldGui> onSelect;
 
     public ConcreteSchemaGui(Consumer<SchemaFieldGui> onSelect){
@@ -25,6 +25,15 @@ public abstract class ConcreteSchemaGui extends ChangeableGui {
         }
 
         return schemaFieldsGui.getData();
+    }
+
+    public void setData(T data){
+
+        if(data == null){
+            return;
+        }
+
+        schemaFieldsGui.setData(data);
     }
 
 }

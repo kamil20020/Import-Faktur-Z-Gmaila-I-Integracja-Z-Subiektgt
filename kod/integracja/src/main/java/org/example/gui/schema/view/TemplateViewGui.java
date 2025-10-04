@@ -31,6 +31,7 @@ public class TemplateViewGui extends ChangeableGui {
     private JLabel totalPriceValueLabel;
     private JPanel dataPanel;
     private JLabel payDateValueLabel;
+    private JScrollPane scrollPane;
 
     private TemplateProductsViewGui templateProductsViewGui;
 
@@ -39,6 +40,8 @@ public class TemplateViewGui extends ChangeableGui {
         if (data == null) {
             return;
         }
+
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
 
         templateNameValueLabel.setText(templateTitle);
 
@@ -121,7 +124,7 @@ public class TemplateViewGui extends ChangeableGui {
         createUIComponents();
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
-        final JScrollPane scrollPane1 = new JScrollPane();
+        scrollPane = new JScrollPane();
         GridBagConstraints gbc;
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -129,10 +132,10 @@ public class TemplateViewGui extends ChangeableGui {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
-        mainPanel.add(scrollPane1, gbc);
+        mainPanel.add(scrollPane, gbc);
         dataPanel = new JPanel();
         dataPanel.setLayout(new GridBagLayout());
-        scrollPane1.setViewportView(dataPanel);
+        scrollPane.setViewportView(dataPanel);
         dataPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(60, 32, 60, 32), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         final JLabel label1 = new JLabel();
         label1.setText("Miejsce wystawienia");

@@ -95,8 +95,12 @@ public class Window {
                 JMenuItem schemasMenuItem = new JMenuItem("Dostępne schematy faktur");
                 schemasMenuItem.addActionListener(e -> templateMenuService.showAvaiableSchemas());
 
+                JMenuItem testSchemasMenuItem = new JMenuItem("Przetestuj schematy faktur");
+                testSchemasMenuItem.addActionListener(e -> templateMenuService.testTemplates());
+
             schemasMenu.add(addSchemaMenuItem);
             schemasMenu.add(schemasMenuItem);
+            schemasMenu.add(testSchemasMenuItem);
 
         menuBar.add(accountMenu);
         menuBar.add(invoicesMenu);

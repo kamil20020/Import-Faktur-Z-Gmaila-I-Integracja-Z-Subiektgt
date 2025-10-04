@@ -25,7 +25,7 @@ public class TemplateService {
     private static final Map<String, Template> companyTemplateMappings = new HashMap<>();
     private static Set<String> companies = new HashSet<>();
 
-    private static final Logger log = LoggerFactory.getLogger(Api.class);
+    private static final Logger log = LoggerFactory.getLogger(TemplateService.class);
 
     private static final String TEMPLATES_SCHEMA_PATH = "schemas/";
 
@@ -107,7 +107,7 @@ public class TemplateService {
 
         String foundTemplateName = foundTemplateNameOpt.get();
 
-        return handleFoundTemplate(foundTemplateName);
+        return getTemplate(foundTemplateName);
     }
 
     public Optional<Template> findTemplateForData(byte[] data){
@@ -121,16 +121,21 @@ public class TemplateService {
 
         String foundTemplateName = foundTemplateNameOpt.get();
 
-        return handleFoundTemplate(foundTemplateName);
+        return getTemplate(foundTemplateName);
     }
 
-    private Optional<Template> handleFoundTemplate(String foundTemplateName){
+    public boolean hasTemplate(String templateName){
+
+        return getTemplate(templateName).isPresent();
+    }
+
+    public Optional<Template> getTemplate(String foundTemplateName){
 
         log.info("Template {} was selected", foundTemplateName);
 
         Template foundTemplate = companyTemplateMappings.get(foundTemplateName);
 
-        return Optional.of(foundTemplate);
+        return Optional.ofNullable(foundTemplate);
     }
 
     public void addTemplate(String templateName, Template template) throws ConflictException, IllegalStateException{
@@ -158,7 +163,7 @@ public class TemplateService {
 
         if(templateFile.exists()){
 
-            throw new ConflictException("Istnieje już szablon o takiej nazwie " + templateName);
+            templateFile.delete();
         }
 
         try {

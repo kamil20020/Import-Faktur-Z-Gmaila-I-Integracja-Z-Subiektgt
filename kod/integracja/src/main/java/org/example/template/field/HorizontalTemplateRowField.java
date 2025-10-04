@@ -58,6 +58,34 @@ public class HorizontalTemplateRowField extends TemplateRowField{
         return result;
     }
 
+    @Override
+    public boolean hasCords() {
+
+        return true;
+    }
+
+    @Override
+    public String getCordsMessage() {
+
+        Rectangle2D.Double rect = getRect();
+
+        Rectangle2D.Float convertedRect = new Rectangle2D.Float(
+                (float) rect.x,
+                (float) rect.y,
+                (float) rect.width,
+                (float) rect.height
+        );
+
+        return TemplateRowFieldType.getCoords(TemplateRowFieldType.HORIZONTAL, convertedRect);
+    }
+
+    @Override
+    @JsonIgnore
+    public Rectangle2D.Double getRect() {
+
+        return TemplateRectCords.getRect(xMinCord, 0, xMaxCord, 0);
+    }
+
     @JsonIgnore
     public Rectangle2D.Double getRect(double yMin, double yMax) {
 

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
+public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract<HeightTemplateRow> {
 
     private JPanel mainPanel;
     private JLabel titleLabel;
@@ -25,7 +25,6 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
     private JTextField endStrInput;
     private JFormattedTextField rowHeightInput;
     private JFormattedTextField skipStartInput;
-    private JButton clearSelectionButton;
 
     public SchemaHeightFieldsGui(String title, List<SchemaField> schemaFields, Consumer<SchemaFieldGui> onSelect) {
 
@@ -48,8 +47,6 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
                 new IntegerDocumentListener(skipStartInput, value -> {
                 })
         );
-
-        clearSelectionButton.addActionListener(l -> onSelect.accept(null));
     }
 
     @Override
@@ -66,6 +63,17 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
                 endStrInput.getText(),
                 rowHeight
         );
+    }
+
+    @Override
+    public void setData(HeightTemplateRow data) {
+
+        super.setData(data);
+
+        startStrInput.setText(data.getStartStr());
+        endStrInput.setText(data.getEndStr());
+        rowHeightInput.setValue(data.getRowHeight());
+        skipStartInput.setValue(data.getSkipStart());
     }
 
     private Integer getSkipStart() {
@@ -213,15 +221,6 @@ public class SchemaHeightFieldsGui extends SchemaFieldsGuiAbstract {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         mainPanel.add(fieldsPanel, gbc);
-        clearSelectionButton = new JButton();
-        clearSelectionButton.setText("Czyszczenie zaznaczenia");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 4;
-        gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(20, 20, 0, 0);
-        mainPanel.add(clearSelectionButton, gbc);
     }
 
     /**

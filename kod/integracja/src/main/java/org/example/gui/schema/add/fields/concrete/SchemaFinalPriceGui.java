@@ -4,12 +4,13 @@ import org.example.gui.schema.add.field.SchemaField;
 import org.example.gui.schema.add.field.SchemaFieldGui;
 import org.example.gui.schema.add.fields.SchemaHeightFieldsGui;
 import org.example.template.field.TemplateRowFieldType;
+import org.example.template.row.HeightTemplateRow;
 
 import javax.swing.*;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class SchemaFinalPriceGui extends ConcreteSchemaGui {
+public class SchemaFinalPriceGui extends ConcreteSchemaGui<HeightTemplateRow> {
 
     private JPanel mainPanel;
 

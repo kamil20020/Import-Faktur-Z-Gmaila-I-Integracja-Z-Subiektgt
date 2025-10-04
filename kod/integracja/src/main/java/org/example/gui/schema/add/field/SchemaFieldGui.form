@@ -24,6 +24,7 @@
           <gridbag top="20" left="20" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <focusable value="true"/>
           <horizontalAlignment value="0"/>
           <text value="Wybieranie obszaru"/>
         </properties>

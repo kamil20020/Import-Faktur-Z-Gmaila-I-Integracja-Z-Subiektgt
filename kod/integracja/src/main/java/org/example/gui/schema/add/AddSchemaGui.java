@@ -17,6 +17,8 @@ public class AddSchemaGui extends ChangeableGui {
     private JPanel mainPanel;
     private JPanel pdfViewerPanel;
     private JPanel managementPanel;
+    private JButton prevPageButton;
+    private JButton nextPageButton;
 
     private final PdfViewerGui pdfViewerGui;
     private final AddSchemaManagementGui addSchemaManagementGui;
@@ -27,6 +29,9 @@ public class AddSchemaGui extends ChangeableGui {
         this.addSchemaManagementGui = addSchemaManagementGui;
 
         $$$setupUI$$$();
+
+        prevPageButton.addActionListener(l -> pdfViewerGui.changeToPrevPage());
+        nextPageButton.addActionListener(l -> pdfViewerGui.changeToNextPage());
     }
 
     public void handleSelectPdf() {
@@ -79,17 +84,37 @@ public class AddSchemaGui extends ChangeableGui {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 3;
         gbc.weightx = 8.0;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         mainPanel.add(pdfViewerPanel, gbc);
         gbc = new GridBagConstraints();
-        gbc.gridx = 1;
+        gbc.gridx = 3;
         gbc.gridy = 0;
+        gbc.gridheight = 2;
         gbc.weightx = 3.0;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         mainPanel.add(managementPanel, gbc);
+        nextPageButton = new JButton();
+        nextPageButton.setText(">");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(20, 10, 20, 0);
+        mainPanel.add(nextPageButton, gbc);
+        prevPageButton = new JButton();
+        prevPageButton.setText("<");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.insets = new Insets(20, 0, 20, 10);
+        mainPanel.add(prevPageButton, gbc);
     }
 
     /**

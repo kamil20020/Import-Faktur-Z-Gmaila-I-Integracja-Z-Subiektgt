@@ -37,7 +37,7 @@ public class FileReader {
         return getDataFormPath(foundResourcePath);
     }
 
-    private static byte[] getDataFormPath(Path path) throws FileReadException{
+    public static byte[] getDataFormPath(Path path) throws FileReadException{
 
         try {
 

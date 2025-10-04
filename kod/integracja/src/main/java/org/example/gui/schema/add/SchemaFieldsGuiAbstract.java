@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public abstract class SchemaFieldsGuiAbstract extends ChangeableGui {
+public abstract class SchemaFieldsGuiAbstract<T extends TemplateRow> extends ChangeableGui {
 
     private JPanel panel;
 
@@ -31,6 +31,19 @@ public abstract class SchemaFieldsGuiAbstract extends ChangeableGui {
     }
 
     public abstract TemplateRow getData();
+
+    public void setData(T data){
+
+        List<TemplateRowField> fieldsData = data.getFields();
+
+        for(int i = 0; i < schemaFields.size(); i++){
+
+            SchemaFieldGui schemaFieldGui = schemaFieldsGuiList.get(i);
+            TemplateRowField dataRowField = fieldsData.get(i);
+
+            schemaFieldGui.setData(dataRowField);
+        }
+    }
 
     public List<TemplateRowField> getRowsFields(){
 

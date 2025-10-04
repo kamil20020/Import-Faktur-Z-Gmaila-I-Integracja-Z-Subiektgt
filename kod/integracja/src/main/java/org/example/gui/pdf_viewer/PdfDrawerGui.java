@@ -57,6 +57,12 @@ public class PdfDrawerGui extends JPanel implements MouseListener, MouseMotionLi
     @Override
     public void mousePressed(MouseEvent e) {
 
+        int buttonCode = e.getButton();
+
+        if(buttonCode != 1){
+            return;
+        }
+
         if(!isCreatingRect){
 
             rectLeftTopX = e.getX();
@@ -69,9 +75,13 @@ public class PdfDrawerGui extends JPanel implements MouseListener, MouseMotionLi
     @Override
     public void mouseReleased(MouseEvent e) {
 
-        if(!isCreatingRect){
+        int buttonCode = e.getButton();
 
-            handleShowSelectedArea();
+        if(buttonCode != 1){
+            return;
+        }
+
+        if(!isCreatingRect){
 
             if(onSelect != null){
 
@@ -79,6 +89,8 @@ public class PdfDrawerGui extends JPanel implements MouseListener, MouseMotionLi
 
                 onSelect.accept(rect);
             }
+
+            handleShowSelectedArea();
 
             rectLeftTopX = 0;
             rectLeftTopY = 0;

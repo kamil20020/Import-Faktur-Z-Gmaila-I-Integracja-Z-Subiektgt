@@ -13,10 +13,11 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ItemEvent;
+import java.awt.geom.Rectangle2D;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-public class SchemaFieldGui extends ChangeableGui {
+public class SchemaFieldGui<T extends TemplateRowField> extends ChangeableGui {
 
     private JPanel mainPanel;
 
@@ -74,15 +75,15 @@ public class SchemaFieldGui extends ChangeableGui {
         selectPositionButton.addActionListener(l -> handleSelect());
 
         defaultValueInput.getDocument().addDocumentListener(
-            new StringOnChangeDocumentListener(defaultValueInput, this::handleChangeDefaultValue)
+                new StringOnChangeDocumentListener(defaultValueInput, this::handleChangeDefaultValue)
         );
 
         separatorInput.getDocument().addDocumentListener(
-            new StringOnChangeDocumentListener(separatorInput, this::handleChangeSeparateValue)
+                new StringOnChangeDocumentListener(separatorInput, this::handleChangeSeparateValue)
         );
 
         separateIndexInput.getDocument().addDocumentListener(
-            new IntegerDocumentListener(separateIndexInput, this::handleChangeIndexValue)
+                new IntegerDocumentListener(separateIndexInput, this::handleChangeIndexValue)
         );
 
         data = TemplateRowFieldSimpleFactory.create(type);
@@ -202,6 +203,31 @@ public class SchemaFieldGui extends ChangeableGui {
         return data;
     }
 
+    public void setData(TemplateRowField newData) {
+
+        data = newData;
+
+        if (data.isHidden()) {
+
+            handleSelectFieldIsHidden();
+            defaultValueInput.setText(data.getDefaultValue());
+        }
+
+        fieldIsHiddenCheckbox.setSelected(data.isHidden());
+
+        if (data.getIndex() != null) {
+
+            handleSelectIsRequiredSeparate();
+
+            separateIndexInput.setValue(newData.getIndex());
+            separatorInput.setText(data.getSeparator());
+        }
+
+        String message = data.getCordsMessage();
+
+        cordsLabel.setText(message);
+    }
+
     @Override
     public JPanel getMainPanel() {
 
@@ -239,6 +265,7 @@ public class SchemaFieldGui extends ChangeableGui {
         gbc.insets = new Insets(20, 0, 0, 0);
         mainPanel.add(fieldIsHiddenCheckbox, gbc);
         selectPositionButton = new JButton();
+        selectPositionButton.setFocusable(true);
         selectPositionButton.setHorizontalAlignment(0);
         selectPositionButton.setText("Wybieranie obszaru");
         gbc = new GridBagConstraints();

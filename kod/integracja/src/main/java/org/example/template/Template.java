@@ -1,5 +1,6 @@
 package org.example.template;
 
+import org.example.api.Api;
 import org.example.loader.pdf.PdfFileReader;
 import org.example.loader.pdf.PdfLinesDetails;
 import org.example.template.data.TemplateBasicData;
@@ -10,6 +11,8 @@ import org.example.template.row.HeightTemplateRow;
 import org.example.template.row.TemplateRow;
 import org.example.template.field.AreaTemplateRowField;
 import org.example.template.field.HorizontalTemplateRowField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.geom.Rectangle2D;
 import java.math.BigDecimal;
@@ -25,6 +28,8 @@ public record Template(
     HeightTemplateRow totalPrice,
     HeightTemplateRow payDate
 ){
+
+    private static final Logger log = LoggerFactory.getLogger(Template.class);
 
     public static Optional<String> searchInFile(byte[] data, Collection<String> values){
 
@@ -66,14 +71,22 @@ public record Template(
 
         Map<String, String> values = getValuesFromTemplateRow(data, creator, 0);
 
-        return TemplateCreator.extract(values);
+        TemplateCreator gotCreator = TemplateCreator.extract(values);
+
+        log.info("Wczytano sprzedawcę {}", gotCreator);
+
+        return gotCreator;
     }
 
     public TemplateBasicData extractBasicData(byte[] data){
 
         Map<String, String> values = getValuesFromTemplateRow(data, basicInfo, 0);
 
-        return TemplateBasicData.extract(values);
+        TemplateBasicData gotBasicData = TemplateBasicData.extract(values);
+
+        log.info("Wczytano podstawowe dane {}", gotBasicData);
+
+        return gotBasicData;
     }
 
     public List<TemplateInvoiceItem> extractInvoiceItems(byte[] data) {
@@ -88,6 +101,8 @@ public record Template(
 
             extractInvoiceLinesForPage(data, pageIndex, templateInvoiceItems);
         }
+
+        log.info("Wczytano produkty {}", templateInvoiceItems);
 
         return templateInvoiceItems;
     }
@@ -120,6 +135,10 @@ public record Template(
     private void extractTemplateInvoiceItemsWithIndices(byte[] data, int pageIndex, List<TemplateInvoiceItem> templateInvoiceItems) {
 
         List<Map<String, String>> gotValues = getValuesFromHeightTemplateRow(data, invoiceItems, pageIndex);
+
+        if(gotValues == null || gotValues.isEmpty()){
+            return;
+        }
 
         int actualTemplateInvoiceIndex = 0;
 
@@ -164,6 +183,10 @@ public record Template(
 
         List<Map<String, String>> gotValues = getValuesFromHeightTemplateRow(data, invoiceItems, pageIndex);
 
+        if(gotValues == null){
+            return;
+        }
+
         TemplateInvoiceItem templateInvoiceItem = new TemplateInvoiceItem();
 
         for(Map<String, String> gotValuesRow : gotValues){
@@ -199,7 +222,11 @@ public record Template(
 
         String gotRawPrice = gotValues.get("value");
 
-        return TemplateConverter.convertToBigDecimal(gotRawPrice);
+        BigDecimal gotPrice = TemplateConverter.convertToBigDecimal(gotRawPrice);
+
+        log.info("Wczytano cenę {}", gotPrice);
+
+        return gotPrice;
     }
 
     public LocalDate extractPayDate(byte[] data){
@@ -211,9 +238,13 @@ public record Template(
             return null;
         }
 
-        String gotRawPrice = gotValues.get("value");
+        String gotRawDate = gotValues.get("value");
 
-        return TemplateConverter.tryToParseLocalDate(gotRawPrice);
+        LocalDate gotDate = TemplateConverter.tryToParseLocalDate(gotRawDate);
+
+        log.info("Wczytano datę płatności {}", gotDate);
+
+        return gotDate;
     }
 
     private Map<String, String> extractValueFromEnd(byte[] data, HeightTemplateRow heightTemplateRow){

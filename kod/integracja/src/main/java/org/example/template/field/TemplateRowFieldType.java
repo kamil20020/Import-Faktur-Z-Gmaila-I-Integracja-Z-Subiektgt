@@ -28,6 +28,11 @@ public enum TemplateRowFieldType {
 
     public static String getCoords(TemplateRowFieldType type, Rectangle2D.Float rect){
 
+        if(rect == null){
+
+            return NO_CORDS.name;
+        }
+
         int xMin = (int) rect.x;
         int yMin = (int) rect.y;
         int xMax = (int) (rect.x + rect.width);

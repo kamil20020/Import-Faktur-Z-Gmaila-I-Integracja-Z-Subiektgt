@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.example.gui.schema.add.fields.SchemaHeightFieldsGui">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="500" height="415"/>
+      <xy x="20" y="20" width="515" height="415"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -111,15 +111,6 @@
         <border type="none"/>
         <children/>
       </grid>
-      <component id="effeb" class="javax.swing.JButton" binding="clearSelectionButton">
-        <constraints>
-          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <gridbag top="20" left="20" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
-        </constraints>
-        <properties>
-          <text value="Czyszczenie zaznaczenia"/>
-        </properties>
-      </component>
     </children>
   </grid>
 </form>

@@ -1,14 +1,26 @@
 package org.example.gui.schema;
 
+import org.example.api.Api;
 import org.example.gui.ChangeableGui;
+import org.example.gui.pdf_viewer.FileDialogHandler;
 import org.example.gui.schema.add.AddSchemaGui;
+import org.example.gui.schema.add.AddSchemaManagementGui;
+import org.example.loader.FileReader;
+import org.example.loader.pdf.PdfFileReader;
 import org.example.service.TemplateService;
+import org.example.template.Template;
+import org.example.template.data.DataExtractedFromTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 @Service
@@ -20,6 +32,8 @@ public class TemplateMenuService {
     private Dialog dialog;
     private JPanel panel;
     private GridBagConstraints gbc;
+
+    private static final Logger log = LoggerFactory.getLogger(Api.class);
 
     public TemplateMenuService(TemplateService templateService, AddSchemaGui addSchemaGui){
 
@@ -63,6 +77,33 @@ public class TemplateMenuService {
         refreshSchemas();
 
         dialog.setVisible(true);
+    }
+
+    public void testTemplates(){
+
+        Optional<File> gotFileOpt = FileDialogHandler.getLoadFileDialogSelectedPath("Wybieranie faktury", "*.pdf");
+
+        if (gotFileOpt.isEmpty()) {
+            return;
+        }
+
+        File gotFile = gotFileOpt.get();
+        Path path = gotFile.toPath();
+
+        byte[] fileData = FileReader.getDataFormPath(path);
+
+        Optional<Template> foundTemplate = templateService.findTemplateForData(fileData);
+
+        if(foundTemplate.isEmpty()){
+
+            log.info("Template was not found");
+
+            return;
+        }
+
+        DataExtractedFromTemplate gotData = templateService.applyGoodTemplateForData(fileData);
+
+        AddSchemaManagementGui.showExtractedData(gotData.title(), gotData);
     }
 
     private void refreshSchemas(){
