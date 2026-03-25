@@ -2,7 +2,7 @@ Set WshShell = CreateObject("WScript.Shell")
 Set Wmi = GetObject("winmgmts:\\.\root\CIMV2")
 
 ' Uruchom PHP bez konsoli
-WshShell.Run "php\php.exe -c php\php.ini-production -S 127.0.0.1:80 -t htdocs", 0, False
+WshShell.Run "php\php.exe -c php\php.ini-production -S 127.0.0.1:82 -t htdocs", 0, False
 
 WScript.Sleep 1000
 

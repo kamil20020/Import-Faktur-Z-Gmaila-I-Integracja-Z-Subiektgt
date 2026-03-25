@@ -4,6 +4,7 @@ import jakarta.mail.MessagingException;
 import org.example.api.gmail.general.GmailBasicAuthApi;
 import org.example.api.sfera.SferaApi;
 import org.example.service.LogService;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
@@ -21,7 +22,10 @@ public class App {
 
         SpringApplicationBuilder builder = new SpringApplicationBuilder(App.class);
 
-        builder.headless(false).run(args);
+        builder
+            .web(WebApplicationType.SERVLET)
+            .headless(false)
+            .run(args);
 
         System.out.println("Hello World! :D");
 
